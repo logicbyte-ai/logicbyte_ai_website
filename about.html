@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Logic Byte is a Singapore AI imaging company founded by Dr. Doorgesh Sharma Jokhun, PhD. Building OptiFlow from peer-reviewed research to production deployment."/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://logicbyte.ai/about.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Logic Byte"/>
+<meta property="og:url" content="https://logicbyte.ai/about.html"/>
+<meta property="og:title" content="About — Logic Byte"/>
+<meta property="og:description" content="Logic Byte is a Singapore AI imaging company founded by Dr. Doorgesh Sharma Jokhun, PhD. Building OptiFlow from peer-reviewed research to production deployment."/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="About — Logic Byte"/>
+<meta name="twitter:description" content="Logic Byte is a Singapore AI imaging company founded by Dr. Doorgesh Sharma Jokhun, PhD. Building OptiFlow from peer-reviewed research to production deployment."/>
+<title>About — Logic Byte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0B1628;
+    --navy2:  #112040;
+    --navy3:  #1A3260;
+    --teal:   #1DB89A;
+    --teal2:  #16997F;
+    --teal3:  #0EDBB8;
+    --teal-glow: rgba(29,184,154,0.15);
+    --teal-glow2: rgba(29,184,154,0.06);
+    --gold:   #d4af37;
+    --white:  #FFFFFF;
+    --muted:  #8BA0B8;
+    --text:   #C8D8E8;
+    --border: rgba(29,184,154,0.18);
+    --border2: rgba(255,255,255,0.07);
+    --serif:  'Syne', system-ui, sans-serif;
+    --display: 'Outfit', system-ui, sans-serif;
+    --sans:   'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .optiflow-badge {
+    font-size: 1em; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--teal);
+    white-space: nowrap;
+    font-family: var(--sans);
+  }
+  .optiflow-badge::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 1px;
+    background: var(--teal);
+    opacity: 0.8;
+    margin-right: 0.2em;
+    vertical-align: middle;
+  }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 68px;
+    background: rgba(11,22,40,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border2);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none;
+  }
+  .nav-logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 1.2rem; font-weight: 700;
+    color: #d4af37; letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a.active { color: var(--teal); }
+  .nav-ctas { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-cta-soft {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .nav-cta-soft:hover { border-color: var(--teal); color: var(--white); transform: translateY(-1px); }
+  .nav-cta {
+    background: var(--teal); color: var(--navy);
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--teal3); transform: translateY(-1px); }
+
+  /* ─── PAGE HERO ─── */
+  .page-hero {
+    padding: 148px 5vw 80px;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 90% 0%, rgba(29,184,154,0.07), transparent 60%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem;
+  }
+  .eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
+  .eyebrow span {
+    font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500;
+  }
+  .page-hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.2;
+    max-width: 680px; margin-bottom: 1.4rem;
+  }
+  .page-hero h1 em { font-style: normal; color: var(--teal); font-weight: 800; }
+  .page-hero-lead {
+    font-size: 1.1rem; color: var(--muted); max-width: 560px;
+    line-height: 1.8; font-weight: 300;
+  }
+
+  /* ─── STORY ─── */
+  .story {
+    padding: 0 5vw 100px;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 5vw;
+    align-items: start;
+  }
+  .story-nav {
+    position: sticky; top: 88px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .story-nav-item {
+    font-size: 0.82rem; color: var(--muted); padding: 0.6rem 0;
+    border-left: 2px solid var(--border2);
+    padding-left: 1rem; cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .story-nav-item:hover, .story-nav-item.active {
+    color: var(--teal); border-color: var(--teal);
+  }
+
+  .story-content { display: flex; flex-direction: column; gap: 5rem; }
+
+  .story-block { scroll-margin-top: 100px; }
+  .story-year {
+    font-family: var(--display); font-size: 3rem; font-weight: 800;
+    color: var(--border); letter-spacing: -0.03em;
+    line-height: 1; margin-bottom: 0.2rem;
+    user-select: none;
+  }
+  .story-block h2 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.15; margin-bottom: 1.2rem;
+  }
+  .story-block h2 em { font-style: normal; color: var(--teal); font-weight: 800; }
+  .story-block p {
+    font-size: 1rem; color: var(--text); line-height: 1.85;
+    margin-bottom: 1.2rem; font-weight: 300;
+  }
+  .story-block p:last-child { margin-bottom: 0; }
+  .story-block p strong { color: var(--white); font-weight: 500; }
+
+  /* Timeline capability list */
+  .capability-timeline {
+    display: flex; flex-direction: column; gap: 0.8rem;
+    margin: 1.8rem 0;
+  }
+  .cap-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    background: var(--navy2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    transition: border-color 0.2s;
+  }
+  .cap-item:hover { border-color: var(--border); }
+  .cap-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .cap-text { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+  .cap-text strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 0.1rem; }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 3px solid var(--teal);
+    padding: 1.2rem 1.8rem;
+    margin: 2rem 0;
+    background: var(--teal-glow2);
+    border-radius: 0 10px 10px 0;
+  }
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: 1.2rem; color: var(--white);
+    line-height: 1.6; font-style: italic;
+    margin: 0;
+  }
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 0 80px;
+  }
+
+  /* ─── FOUNDER ─── */
+  .founder-section {
+    padding: 0 5vw 100px;
+  }
+  .founder-inner {
+    background: var(--navy2);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid; grid-template-columns: 340px 1fr;
+  }
+  .founder-photo-col {
+    position: relative; background: var(--navy3);
+    overflow: hidden;
+  }
+  .founder-photo {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    display: block; min-height: 500px;
+    filter: grayscale(15%);
+    transition: filter 0.4s;
+  }
+  .founder-photo:hover { filter: grayscale(0%); }
+  .founder-photo-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(to top, var(--navy3), transparent);
+    pointer-events: none;
+  }
+  .founder-text-col { padding: 3rem 3.5rem; }
+  .founder-tag {
+    display: inline-block;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); border: 1px solid var(--border);
+    padding: 0.25rem 0.7rem; border-radius: 100px;
+    margin-bottom: 1.2rem;
+  }
+  .founder-name {
+    font-family: var(--display); font-size: 2rem;
+    color: var(--white); margin-bottom: 0.3rem; line-height: 1.2;
+  }
+  .founder-title {
+    font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .founder-bio {
+    font-size: 0.95rem; color: var(--text);
+    line-height: 1.85; font-weight: 300; margin-bottom: 1.2rem;
+  }
+  .founder-bio strong { color: var(--white); font-weight: 500; }
+  .founder-creds {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem;
+  }
+  .cred {
+    font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 100px;
+    background: var(--navy3); border: 1px solid var(--border2);
+    color: var(--text);
+  }
+  .founder-links {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem;
+  }
+  .founder-link {
+    display: flex; align-items: center; gap: 0.45rem;
+    font-size: 0.78rem; color: var(--muted);
+    padding: 0.35rem 0.9rem; border-radius: 100px;
+    border: 1px solid var(--border2); text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .founder-link:hover {
+    border-color: var(--teal); color: var(--teal);
+    background: var(--teal-glow2);
+  }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    text-align: center; padding: 100px 5vw;
+    background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
+    border-top: 1px solid var(--border2);
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(29,184,154,0.07), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-band h2 {
+    font-family: var(--display); font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--white); margin-bottom: 0.8rem;
+  }
+  .cta-band p { color: var(--muted); font-size: 1rem; margin-bottom: 2.2rem; font-weight: 300; }
+  .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    background: var(--teal3); transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(29,184,154,0.25);
+  }
+  .btn-secondary {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--white); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem 5vw 2rem;
+    border-top: 1px solid var(--border2);
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+  }
+  .footer-logo {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; margin-bottom: 0.4rem;
+  }
+  .footer-logo-text {
+    font-family: var(--serif); font-size: 1.05rem; color: #d4af37;
+  }
+  .footer-tagline { font-size: 0.8rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    grid-column: 1/-1; border-top: 1px solid var(--border2); padding-top: 1.2rem;
+    display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted);
+  }
+  .footer-bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom a:hover { color: var(--white); }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .story { grid-template-columns: 1fr; }
+    .story-nav { display: none; }
+    .founder-inner { grid-template-columns: 1fr; }
+    .founder-photo { min-height: 320px; }
+    .founder-text-col { padding: 2rem; }
+    footer { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+
+  /* ─── MOBILE NAV ─── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 40px; height: 40px;
+    background: transparent; border: 1px solid var(--border2);
+    border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 18px; height: 1.5px;
+    background: var(--text); border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .nav-drawer {
+    display: none; position: fixed;
+    top: 68px; left: 0; right: 0; bottom: 0;
+    background: rgba(11,22,40,0.98); backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 1.5rem 6vw 2.5rem;
+    z-index: 99; overflow-y: auto;
+    border-top: 1px solid var(--border2);
+  }
+  .nav-drawer.open { display: flex; }
+
+  /* Top-level list */
+  .drawer-links { list-style: none; flex: 1; }
+  .drawer-links > li > a {
+    display: block; font-size: 1.05rem; font-weight: 400;
+    color: var(--text); text-decoration: none;
+    padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
+    letter-spacing: 0.02em; transition: color 0.15s, padding-left 0.15s;
+  }
+  .drawer-links > li:first-child > a { border-top: 1px solid var(--border2); }
+  .drawer-links > li > a:hover { color: var(--white); padding-left: 0.4rem; }
+  .drawer-links > li > a.active { color: var(--teal); }
+
+  /* Expandable group */
+  .drawer-group { border-bottom: 1px solid var(--border2); }
+  .drawer-group-header {
+    display: flex; align-items: center;
+  }
+  .drawer-group-link {
+    flex: 1; font-size: 1.05rem; font-weight: 400;
+    color: var(--text); text-decoration: none;
+    padding: 0.9rem 0; letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .drawer-group-link:hover { color: var(--white); }
+  .drawer-group-link.active { color: var(--teal); }
+  .drawer-group-toggle {
+    flex-shrink: 0; background: none; border: none;
+    padding: 0.9rem 0 0.9rem 1.2rem; cursor: pointer;
+    display: flex; align-items: center; color: var(--muted);
+    transition: color 0.15s;
+  }
+  .drawer-group-toggle:hover { color: var(--text); }
+  .drawer-group-arrow {
+    transition: transform 0.25s ease;
+  }
+  .drawer-group.open .drawer-group-arrow { transform: rotate(90deg); }
+
+  /* Sub-links */
+  .drawer-sub { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
+  .drawer-group.open .drawer-sub { max-height: 300px; }
+  .drawer-sub li a {
+    display: block; font-size: 0.9rem; color: var(--muted);
+    text-decoration: none; padding: 0.6rem 0 0.6rem 1.1rem;
+    border-bottom: 1px solid var(--border2);
+    transition: color 0.15s, padding-left 0.15s;
+  }
+  .drawer-sub li:last-child a { border-bottom: none; }
+  .drawer-sub li a:hover { color: var(--white); padding-left: 1.4rem; }
+  .drawer-sub li a.active { color: var(--teal); }
+
+  /* CTA buttons */
+  .drawer-ctas { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 2rem; }
+  .drawer-cta-primary {
+    display: block; text-align: center;
+    background: var(--teal); color: var(--navy);
+    padding: 0.85rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 500; text-decoration: none;
+  }
+  .drawer-cta-secondary {
+    display: block; text-align: center;
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.85rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 400; text-decoration: none;
+  }
+
+  /* Mobile section nav */
+  .mobile-section-nav {
+    display: none; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding: 0.75rem 6vw;
+    gap: 0.5rem; border-bottom: 1px solid var(--border2);
+    position: sticky; top: 68px; z-index: 90;
+    background: rgba(11,22,40,0.97); backdrop-filter: blur(12px);
+  }
+  .mobile-section-nav::-webkit-scrollbar { display: none; }
+  .mobile-section-nav a {
+    display: inline-block; white-space: nowrap; flex-shrink: 0;
+    font-size: 0.78rem; padding: 0.35rem 0.85rem;
+    border-radius: 100px; border: 1px solid var(--border2);
+    color: var(--muted); text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .mobile-section-nav a:hover,
+  .mobile-section-nav a.active { border-color: var(--teal); color: var(--teal); }
+
+  @media (max-width: 820px) {
+    .nav-hamburger { display: flex; }
+    .nav-links { display: none; }
+    .nav-ctas { display: none; }
+    .mobile-section-nav { display: flex; }
+    footer { grid-template-columns: 1fr; gap: 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 0.4rem; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+  }
+  @media (max-width: 480px) {
+    section { padding: 60px 5vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect fill="#d4af37" x="8" y="8" width="14" height="14"/>
+      <rect fill="#000" x="12" y="12" width="6" height="6"/>
+      <rect fill="#d4af37" x="8" y="28" width="14" height="14"/>
+      <rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="8" y="48" width="14" height="14"/>
+      <rect fill="#000" x="12" y="52" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="48" width="14" height="14"/>
+      <rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="28" width="14" height="14"/>
+      <rect fill="#000" x="32" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="8" width="14" height="14"/>
+      <rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+      <rect fill="#d4af37" x="48" y="28" width="14" height="14"/>
+      <rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="48" y="48" width="14" height="14"/>
+      <rect fill="#000" x="52" y="52" width="6" height="6"/>
+    </svg>
+    <span class="nav-logo-text">Logic Byte</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#platform">Platform</a></li>
+    <li><a href="index.html#verticals">Solutions</a></li>
+    <li><a href="index.html#modules">Modules</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a class="nav-cta-soft" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="nav-cta" href="contact.html">Book a Demo</a>
+  </div>
+
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <ul class="drawer-links">
+    <li><a href="index.html#platform">Platform</a></li>
+    <li class="drawer-group">
+      <div class="drawer-group-header">
+        <a href="index.html#verticals" class="drawer-group-link">Solutions</a>
+        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Solutions"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="custom.html">Custom Solutions</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#modules">Modules</a></li>
+    <li class="drawer-group">
+      <div class="drawer-group-header">
+        <a href="research.html" class="drawer-group-link">Research</a>
+        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Research"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="research.html">Overview</a></li>
+        <li><a href="research-output.html">Full Output</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="drawer-ctas">
+    <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
+    <a class="drawer-cta-secondary" href="mailto:hello@logicbyte.ai">Say Hello</a>
+  </div>
+</div>
+
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="eyebrow reveal">
+    <span class="eyebrow-line"></span>
+    <span>Our story</span>
+  </div>
+  <h1 class="reveal">Born in a research lab.<br/><em>Hardened</em> in industry.<br/>Built for everyone in between.</h1>
+  <p class="page-hero-lead reveal">
+    Logic Byte exists because the gap between powerful imaging instruments and the insights they contain is wider than it should be — and bridging that gap shouldn't require a PhD in image processing.
+  </p>
+</div>
+
+<!-- STORY -->
+<div class="story">
+  <!-- Sticky side nav -->
+  <nav class="story-nav" aria-label="Story sections">
+    <a class="story-nav-item active" href="#origin">The problem we saw</a>
+    <a class="story-nav-item" href="#how">How we built it</a>
+    <a class="story-nav-item" href="#today">Where we are today</a>
+    <a class="story-nav-item" href="#mission">What drives us</a>
+    <a class="story-nav-item" href="#founder">The Founder</a>
+  </nav>
+
+  <!-- Main content -->
+  <div class="story-content">
+
+    <!-- 1. Origin -->
+    <div class="story-block reveal" id="origin">
+      <div class="story-year">2019</div>
+      <h2>The problem we <em>saw every day</em></h2>
+      <p>
+        The idea for Logic Byte was born in a microscopy lab. During years of research at the National University of Singapore, one pattern kept repeating: <strong>the scientists gathering and using imaging data were world-class in their fields</strong> — cell biology, pathology, materials science, semiconductor fabrication — but they were not experts in image processing, digital signal processing, or programming.
+      </p>
+      <p>
+        They were spending hours on manual analysis, relying on brittle scripts, or accepting lower-quality results simply because better tools were out of reach. Powerful algorithms existed in the research literature, but the gap between a published method and a usable, reproducible workflow was enormous.
+      </p>
+      <div class="pull-quote">
+        <p>"The bottleneck wasn't the instrument. It wasn't even the data. It was the processing pipeline between raw image and real insight."</p>
+      </div>
+      <p>
+        The value of an imaging experiment — and the decisions it enables — is determined almost entirely by how well the images are processed and analysed. That felt like the right problem to solve.
+      </p>
+    </div>
+
+    <!-- 2. How we built it -->
+    <div class="story-block reveal" id="how">
+      <div class="story-year">2021</div>
+      <h2>Logic Byte is <em>founded</em></h2>
+      <p>
+        Logic Byte was founded in 2021 and incorporated in Singapore in 2022, drawing on extensive experience in autonomous microscopy, deep learning, and computer vision built during a PhD and postdoctoral research career.
+      </p>
+      <p>
+        The core idea was straightforward: <strong>build a customisable, visual workflow builder</strong> that puts sophisticated, domain-aware image analytics in the hands of the domain expert — without requiring them to write a single line of code. The platform would handle the domain-aware pipeline; the expert would focus on the science.
+      </p>
+      <p>
+        We started with the fundamentals and added capabilities methodically, each one validated against real imaging problems:
+      </p>
+      <div class="capability-timeline">
+        <div class="cap-item">
+          <span class="cap-dot"></span>
+          <div class="cap-text">
+            <strong>Image enhancement & correction</strong>
+            Dynamic range adjustment, illumination correction, and denoising — the essential first step before any downstream analysis.
+          </div>
+        </div>
+        <div class="cap-item">
+          <span class="cap-dot"></span>
+          <div class="cap-text">
+            <strong>Object detection & segmentation</strong>
+            Automated detection and precise delineation of cells, structures, and defects across diverse imaging modalities.
+          </div>
+        </div>
+        <div class="cap-item">
+          <span class="cap-dot"></span>
+          <div class="cap-text">
+            <strong>Morphological analysis & data extraction</strong>
+            Per-object measurements, population statistics, and structured data export — turning pixels into interpretable numbers.
+          </div>
+        </div>
+        <div class="cap-item">
+          <span class="cap-dot"></span>
+          <div class="cap-text">
+            <strong>Single-cell analysis</strong>
+            High-content analysis of individual cells: classification, phenotypic scoring, spatial mapping, and clustering.
+          </div>
+        </div>
+        <div class="cap-item">
+          <span class="cap-dot"></span>
+          <div class="cap-text">
+            <strong>Defect detection</strong>
+            Supervised and unsupervised inspection modules for semiconductor wafers, PCBs, and industrial surfaces — same platform, different domain.
+          </div>
+        </div>
+        <div class="cap-item">
+          <span class="cap-dot"></span>
+          <div class="cap-text">
+            <strong>Label-free in-silico staining (CytoByte)</strong>
+            Our most recent breakthrough: rendering pseudo-DAPI nuclear staining from standard DIC microscopy images using deep neural networks — no chemicals, no preparation, no additional equipment.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Today -->
+    <div class="story-block reveal" id="today">
+      <div class="story-year">Now</div>
+      <h2>A platform that <em>grows with you</em></h2>
+      <p>
+        Today, <span class="optiflow-badge">OptiFlow</span> is a mature, modular image analytics platform that spans two primary verticals — <strong>Biomedical & Life Sciences</strong> and <strong>Semiconductor & Industrial Inspection</strong> — with a custom solutions track for organisations with unique imaging challenges.
+      </p>
+      <p>
+        The same workflow builder, the same scalable deployment architecture, the same commitment to reproducibility — configured for your domain. A BioPharma team running drug screening assays and a semiconductor fab running wafer inspection are solving very different problems, but they share the same need: <strong>reliable, auditable, scalable image analysis that does not require a dedicated programming team.</strong>
+      </p>
+      <p>
+        <span class="optiflow-badge">OptiFlow</span> workflows run on a single research workstation or deploy at scale across an entire production line. Results are fully reproducible — the same pipeline, the same parameters, the same outputs, every time.
+      </p>
+    </div>
+
+    <!-- 4. Mission -->
+    <div class="story-block reveal" id="mission">
+      <h2>What <em>drives us</em></h2>
+      <p>
+        Every field that relies on imaging — pathology, drug discovery, materials science, semiconductor manufacturing, cell biology — is sitting on a reservoir of untapped insight. The data is there. The instruments are there. What's missing is the analytical layer that makes it accessible.
+      </p>
+      <div class="pull-quote">
+        <p>"From the lab bench to the production floor — analytics built by those who've worked on both."</p>
+      </div>
+      <p>
+        Logic Byte's mission is to close that gap: to make production-grade, research-validated image analytics available to any team with images to analyse, regardless of their programming background. We believe the next wave of discoveries — in medicine, in manufacturing, in science — will come from people who can finally see what their images are telling them.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- FOUNDER -->
+<div class="founder-section" id="founder">
+  <div class="eyebrow reveal">
+    <span class="eyebrow-line"></span>
+    <span>The founder</span>
+  </div>
+
+  <div class="founder-inner reveal">
+    <div class="founder-photo-col">
+      <img
+        class="founder-photo"
+        src="DSC_0167__6_in_x_8_in__square_resized.jpg"
+        alt="Doorgesh Sharma Jokhun, PhD — Founder, Logic Byte"
+      />
+      <div class="founder-photo-overlay"></div>
+    </div>
+    <div class="founder-text-col">
+      <span class="founder-tag">Founder</span>
+      <div class="founder-name">Doorgesh Sharma Jokhun</div>
+      <div class="founder-title">PhD · National University of Singapore | AI & Computer Vision</div>
+
+      <p class="founder-bio">
+        Doorgesh is a computer vision and AI researcher who spent his PhD and postdoctoral years working at the intersection of microscopy, deep learning, and biomedical image analysis. His research at NUS spanned autonomous microscope control, biosensor CNN development, in-silico nuclear staining, and large-scale single-cell analysis — resulting in <strong>over 20 peer-reviewed publications</strong> in signal processing, deep learning, and biomedical imaging.
+      </p>
+      <p class="founder-bio">
+        Beyond the research lab, Doorgesh has accumulated direct professional engineering experience across two very different, image analytics-intensive domains: <strong>complex biomedical image analysis</strong> in clinical and research-grade microscopy environments, and <strong>high-precision semiconductor image analytics</strong> where measurement accuracy and throughput are non-negotiable. This dual-domain background is rare — and it is what gives <span class="optiflow-badge">OptiFlow</span> its unusual breadth without sacrificing domain depth.
+      </p>
+      <p class="founder-bio">
+        The experience of watching domain experts struggle with image processing bottlenecks — in labs and facilities equipped with world-class instruments — was the direct motivation for Logic Byte. He founded the company to translate research-grade imaging AI into tools that working scientists and engineers can actually use.
+      </p>
+
+      <div class="founder-creds">
+        <span class="cred">PhD · NUS</span>
+        <span class="cred">20+ Publications</span>
+        <span class="cred">Computer Vision</span>
+        <span class="cred">Deep Learning</span>
+        <span class="cred">Biomedical Imaging</span>
+        <span class="cred">Autonomous Microscopy</span>
+        <span class="cred">In-silico Staining</span>
+        <span class="cred">Semiconductor Inspection</span>
+        <span class="cred">Signal Processing</span>
+      </div>
+      <div class="founder-links">
+        <a class="founder-link" href="mailto:d.s.jokhun@logicbyte.ai">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          d.s.jokhun@logicbyte.ai
+        </a>
+        <a class="founder-link" href="https://www.linkedin.com/in/dsjokhun/" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="founder-link" href="https://scholar.google.com/citations?user=Sa4nFlYAAAAJ&hl=en" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Google Scholar
+        </a>
+        <a class="founder-link" href="https://blinq.me/uSAjvpnbgGvk?bs=db" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M17 14h3v3M14 17h3v3"/></svg>
+          Digital Card
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a class="footer-logo" href="index.html">
+      <svg width="20" height="20" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/>
+        <rect fill="#000" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/>
+        <rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/>
+        <rect fill="#000" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/>
+        <rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/>
+        <rect fill="#000" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/>
+        <rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/>
+        <rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/>
+        <rect fill="#000" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="footer-logo-text">Logic Byte</span>
+    </a>
+    <div class="footer-tagline">AI-Powered Image Analytics · logicbyte.ai</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+    <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+    <li><a href="custom.html">Custom Solutions</a></li>
+  </ul>
+  <div class="footer-bottom">
+    <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
+    <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Story nav active state on scroll
+  const blocks = document.querySelectorAll('.story-block, .founder-section');
+  const navItems = document.querySelectorAll('.story-nav-item');
+  const scrollSpy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navItems.forEach(n => n.classList.remove('active'));
+        const active = document.querySelector(`.story-nav-item[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  blocks.forEach(b => scrollSpy.observe(b));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.background =
+      window.scrollY > 40 ? 'rgba(11,22,40,0.98)' : 'rgba(11,22,40,0.92)';
+  });
+
+    // Mobile nav drawer
+  function toggleNav(btn) {
+    const isOpen = btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    document.getElementById('nav-drawer').classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function toggleGroup(btn) {
+    btn.closest('.drawer-group').classList.toggle('open');
+  }
+  document.querySelectorAll('.drawer-links > li > a, .drawer-sub a, .drawer-group-link').forEach(a => {
+    a.addEventListener('click', () => {
+      const navBtn = document.querySelector('.nav-hamburger');
+      if (navBtn) { navBtn.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
+      const drawer = document.getElementById('nav-drawer');
+      if (drawer) drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>

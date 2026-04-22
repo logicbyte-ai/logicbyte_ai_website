@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Logic Byte builds custom AI image analytics pipelines for defence, materials science, pharmaceuticals, and domains where off-the-shelf solutions fall short."/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://logicbyte.ai/custom.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Logic Byte"/>
+<meta property="og:url" content="https://logicbyte.ai/custom.html"/>
+<meta property="og:title" content="Custom Solutions — Logic Byte"/>
+<meta property="og:description" content="Logic Byte builds custom AI image analytics pipelines for defence, materials science, pharmaceuticals, and domains where off-the-shelf solutions fall short."/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Custom Solutions — Logic Byte"/>
+<meta name="twitter:description" content="Logic Byte builds custom AI image analytics pipelines for defence, materials science, pharmaceuticals, and domains where off-the-shelf solutions fall short."/>
+<title>Custom Solutions — Logic Byte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0B1628;
+    --navy2:   #112040;
+    --navy3:   #1A3260;
+    --teal:    #1DB89A;
+    --teal3:   #0EDBB8;
+    --teal-glow:  rgba(29,184,154,0.15);
+    --teal-glow2: rgba(29,184,154,0.06);
+    --gold:    #d4af37;
+    --white:   #FFFFFF;
+    --muted:   #8BA0B8;
+    --text:    #C8D8E8;
+    --border:  rgba(29,184,154,0.18);
+    --border2: rgba(255,255,255,0.07);
+    --serif:   'Syne', system-ui, sans-serif;
+    --display: 'Outfit', system-ui, sans-serif;
+    --sans:    'DM Sans', system-ui, sans-serif;
+    --nav-h:   68px;
+    --col-nav: 210px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .optiflow-badge {
+    font-size: 1em; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--teal); white-space: nowrap; font-family: var(--sans);
+  }
+  .optiflow-badge::before {
+    content: ''; display: inline-block;
+    width: 4px; height: 4px; border-radius: 1px;
+    background: var(--teal); opacity: 0.8;
+    margin-right: 0.2em; vertical-align: middle;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: var(--nav-h);
+    background: rgba(11,22,40,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border2);
+    transition: background 0.3s;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+  .nav-logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
+  .nav-logo-text { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a.active { color: var(--teal); }
+  .nav-ctas { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-cta-soft {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 400; text-decoration: none; letter-spacing: 0.03em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .nav-cta-soft:hover { border-color: var(--teal); color: var(--white); transform: translateY(-1px); }
+  .nav-cta {
+    background: var(--teal); color: var(--navy);
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500; text-decoration: none; letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--teal3); transform: translateY(-1px); }
+
+  /* ─── PAGE SHELL ─── */
+  .page-shell {
+    display: grid;
+    grid-template-columns: 1fr var(--col-nav);
+    margin-top: var(--nav-h);
+    min-height: calc(100vh - var(--nav-h));
+    align-items: start;
+  }
+  .page-content { min-width: 0; }
+
+  /* ─── NAVIGATOR ─── */
+  .page-navigator {
+    position: sticky;
+    top: var(--nav-h);
+    height: calc(100vh - var(--nav-h));
+    border-left: 1px solid var(--border2);
+    display: flex; flex-direction: column;
+    padding: 2.8rem 1.4rem 2rem 1.6rem;
+    overflow-y: auto;
+  }
+  .nav-vertical-label { margin-bottom: 1.8rem; }
+  .nav-vertical-super {
+    font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; font-family: var(--sans);
+    display: block; margin-bottom: 0.35rem;
+  }
+  .nav-vertical-name {
+    font-family: var(--serif); font-size: 0.85rem; font-weight: 700;
+    color: var(--white); line-height: 1.35; letter-spacing: -0.01em;
+  }
+  .nav-vertical-desc {
+    font-size: 0.75rem; color: var(--muted); line-height: 1.6;
+    font-weight: 300; margin-bottom: 1.2rem;
+  }
+  .nav-divider { height: 1px; background: var(--border2); margin-bottom: 1.2rem; }
+  .nav-seg-label {
+    font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.6rem; font-family: var(--sans);
+  }
+  .seg-link {
+    display: flex; align-items: center; gap: 0.65rem;
+    padding: 0.55rem 0.7rem; border-radius: 6px;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: background 0.2s, border-color 0.2s, padding-left 0.2s;
+    margin-bottom: 0.1rem;
+  }
+  .seg-link:hover { background: var(--teal-glow2); }
+  .seg-link.active { border-left-color: var(--teal); background: var(--teal-glow2); padding-left: 0.9rem; }
+  .seg-link.active .seg-link-name { color: var(--teal); }
+  .seg-link.active .seg-link-dot { background: var(--teal); opacity: 1; }
+  .seg-link-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--muted); flex-shrink: 0; opacity: 0.45;
+    transition: background 0.2s, opacity 0.2s;
+  }
+  .seg-link-name { font-size: 0.78rem; color: var(--muted); transition: color 0.2s; line-height: 1.3; font-family: var(--sans); }
+  .nav-back {
+    margin-top: auto; padding-top: 1.2rem;
+    border-top: 1px solid var(--border2);
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.72rem; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--teal); }
+  .nav-back-arrow { font-size: 0.8rem; transition: transform 0.2s; }
+  .nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+
+  /* ─── HERO ─── */
+  .page-hero {
+    padding: 4.5rem 5vw 3rem;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 90% 20%, rgba(29,184,154,0.07), transparent 65%),
+      radial-gradient(ellipse 40% 50% at 10% 90%, rgba(26,50,96,0.4), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.025; }
+  .hero-grid svg { width: 100%; height: 100%; }
+
+  .eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; }
+  .eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
+  .eyebrow span { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.15; margin-bottom: 1rem;
+  }
+  h1 em { font-style: normal; color: var(--teal); font-weight: 800; }
+
+  .hero-lead {
+    font-size: 1rem; color: var(--muted);
+    line-height: 1.8; font-weight: 300; margin-bottom: 2rem; max-width: 520px;
+  }
+  .hero-ctas { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    padding: 0.8rem 1.8rem; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal3); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(29,184,154,0.25); }
+  .btn-secondary {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.8rem 1.8rem; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 400; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--white); transform: translateY(-2px); }
+
+  /* ─── WHEN SECTION ─── */
+  .when-section {
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+    padding: 3rem 5vw;
+    background: var(--navy2);
+  }
+  .when-label {
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1.4rem; display: block;
+  }
+  .when-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.8rem;
+  }
+  .when-card {
+    background: var(--navy);
+    border: 1px solid var(--border2);
+    border-radius: 10px; padding: 1.1rem 1.3rem;
+    transition: border-color 0.2s;
+  }
+  .when-card:hover { border-color: rgba(29,184,154,0.25); }
+  .when-icon {
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--teal); opacity: 0.7;
+    margin-bottom: 0.7rem;
+  }
+  .when-text { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+  .when-text strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 0.2rem; }
+
+  /* ─── ENGAGEMENTS ─── */
+  .engagements-section { padding: 3.5rem 5vw 90px; }
+
+  .section-eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
+  .section-eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
+  .section-eyebrow span { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.15; margin-bottom: 0.8rem;
+  }
+  h2 em { font-style: normal; color: var(--teal); font-weight: 800; }
+
+  .section-lead {
+    font-size: 0.95rem; color: var(--muted);
+    max-width: 560px; font-weight: 300; line-height: 1.8; margin-bottom: 2.8rem;
+  }
+
+  .engagement-block {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem;
+    align-items: start; padding: 3.5rem 0;
+    border-top: 1px solid var(--border2);
+    scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+  }
+  .engagement-block:first-of-type { border-top: none; padding-top: 0; }
+
+  .engagement-num {
+    font-family: var(--serif); font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--teal);
+    text-transform: uppercase; margin-bottom: 0.35rem; display: block;
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.15; margin-bottom: 0.3rem;
+  }
+  .engagement-tagline { font-size: 0.86rem; color: var(--teal); font-style: italic; margin-bottom: 1.1rem; }
+  .engagement-desc { font-size: 0.92rem; color: var(--text); line-height: 1.85; font-weight: 300; margin-bottom: 1.6rem; }
+
+  /* What's included */
+  .included-label {
+    font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.55rem;
+  }
+  .included-list { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.4rem; }
+  .included-item {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--navy2); border: 1px solid var(--border2);
+    border-radius: 8px; transition: border-color 0.2s;
+  }
+  .included-item:hover { border-color: var(--border); }
+  .included-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0; opacity: 0.8; margin-top: 5px;
+  }
+  .included-text { font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+
+  /* Suitable for */
+  .suitable-label {
+    font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.55rem;
+  }
+  .suitable-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .suitable-tag {
+    font-size: 0.72rem; padding: 0.25rem 0.75rem;
+    border-radius: 100px; border: 1px solid var(--border2);
+    color: var(--text); background: var(--navy2);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .suitable-tag:hover { border-color: var(--border); color: var(--white); }
+
+  /* Process strip */
+  .process-strip {
+    background: var(--navy2);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+    padding: 3rem 5vw;
+  }
+  .process-label {
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 2rem; display: block;
+  }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative;
+  }
+  .process-steps::before {
+    content: ''; position: absolute;
+    top: 16px; left: 8%; right: 8%; height: 1px;
+    background: linear-gradient(90deg, var(--teal), rgba(29,184,154,0.2));
+    pointer-events: none;
+  }
+  .process-step { text-align: center; padding: 0 1rem; position: relative; }
+  .step-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--navy2); border: 2px solid var(--teal);
+    margin: 0 auto 1rem; position: relative; z-index: 1;
+    transition: background 0.2s;
+  }
+  .process-step:first-child .step-dot { background: var(--teal); }
+  .step-num {
+    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 0.3rem; display: block;
+  }
+  .step-name {
+    font-family: var(--display); font-size: 0.88rem; font-weight: 600;
+    color: var(--white); margin-bottom: 0.3rem;
+  }
+  .step-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    text-align: center; padding: 80px 5vw;
+    background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
+    border-top: 1px solid var(--border2); position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(29,184,154,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-band h2 { margin-bottom: 0.8rem; }
+  .cta-band p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; font-weight: 300; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem 5vw 2rem; border-top: 1px solid var(--border2);
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-bottom: 0.4rem; }
+  .footer-logo-text { font-family: var(--serif); font-size: 1.05rem; color: var(--gold); }
+  .footer-tagline { font-size: 0.8rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom { grid-column: 1/-1; border-top: 1px solid var(--border2); padding-top: 1.2rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); }
+  .footer-bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom a:hover { color: var(--white); }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 1050px) { :root { --col-nav: 180px; } }
+  @media (max-width: 900px) { .process-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; } .process-steps::before { display: none; } }
+  @media (max-width: 820px) {
+    .page-shell { display: block; margin-top: var(--nav-h); }
+    .page-navigator { display: none; }
+    .engagement-block { grid-template-columns: 1fr; gap: 2rem; }
+    .when-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+
+  /* ─── MOBILE NAV ─── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 40px; height: 40px;
+    background: transparent; border: 1px solid var(--border2);
+    border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 18px; height: 1.5px;
+    background: var(--text); border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .nav-drawer {
+    display: none; position: fixed;
+    top: 68px; left: 0; right: 0; bottom: 0;
+    background: rgba(11,22,40,0.98); backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 1.5rem 6vw 2.5rem;
+    z-index: 99; overflow-y: auto;
+    border-top: 1px solid var(--border2);
+  }
+  .nav-drawer.open { display: flex; }
+
+  /* Top-level list */
+  .drawer-links { list-style: none; flex: 1; }
+  .drawer-links > li > a {
+    display: block; font-size: 1.05rem; font-weight: 400;
+    color: var(--text); text-decoration: none;
+    padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
+    letter-spacing: 0.02em; transition: color 0.15s, padding-left 0.15s;
+  }
+  .drawer-links > li:first-child > a { border-top: 1px solid var(--border2); }
+  .drawer-links > li > a:hover { color: var(--white); padding-left: 0.4rem; }
+  .drawer-links > li > a.active { color: var(--teal); }
+
+  /* Expandable group */
+  .drawer-group { border-bottom: 1px solid var(--border2); }
+  .drawer-group-header {
+    display: flex; align-items: center;
+  }
+  .drawer-group-link {
+    flex: 1; font-size: 1.05rem; font-weight: 400;
+    color: var(--text); text-decoration: none;
+    padding: 0.9rem 0; letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .drawer-group-link:hover { color: var(--white); }
+  .drawer-group-link.active { color: var(--teal); }
+  .drawer-group-toggle {
+    flex-shrink: 0; background: none; border: none;
+    padding: 0.9rem 0 0.9rem 1.2rem; cursor: pointer;
+    display: flex; align-items: center; color: var(--muted);
+    transition: color 0.15s;
+  }
+  .drawer-group-toggle:hover { color: var(--text); }
+  .drawer-group-arrow {
+    transition: transform 0.25s ease;
+  }
+  .drawer-group.open .drawer-group-arrow { transform: rotate(90deg); }
+
+  /* Sub-links */
+  .drawer-sub { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
+  .drawer-group.open .drawer-sub { max-height: 300px; }
+  .drawer-sub li a {
+    display: block; font-size: 0.9rem; color: var(--muted);
+    text-decoration: none; padding: 0.6rem 0 0.6rem 1.1rem;
+    border-bottom: 1px solid var(--border2);
+    transition: color 0.15s, padding-left 0.15s;
+  }
+  .drawer-sub li:last-child a { border-bottom: none; }
+  .drawer-sub li a:hover { color: var(--white); padding-left: 1.4rem; }
+  .drawer-sub li a.active { color: var(--teal); }
+
+  /* CTA buttons */
+  .drawer-ctas { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 2rem; }
+  .drawer-cta-primary {
+    display: block; text-align: center;
+    background: var(--teal); color: var(--navy);
+    padding: 0.85rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 500; text-decoration: none;
+  }
+  .drawer-cta-secondary {
+    display: block; text-align: center;
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.85rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 400; text-decoration: none;
+  }
+
+  /* Mobile section nav */
+  .mobile-section-nav {
+    display: none; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding: 0.75rem 6vw;
+    gap: 0.5rem; border-bottom: 1px solid var(--border2);
+    position: sticky; top: 68px; z-index: 90;
+    background: rgba(11,22,40,0.97); backdrop-filter: blur(12px);
+  }
+  .mobile-section-nav::-webkit-scrollbar { display: none; }
+  .mobile-section-nav a {
+    display: inline-block; white-space: nowrap; flex-shrink: 0;
+    font-size: 0.78rem; padding: 0.35rem 0.85rem;
+    border-radius: 100px; border: 1px solid var(--border2);
+    color: var(--muted); text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .mobile-section-nav a:hover,
+  .mobile-section-nav a.active { border-color: var(--teal); color: var(--teal); }
+
+  @media (max-width: 820px) {
+    .nav-hamburger { display: flex; }
+    .nav-links { display: none; }
+    .nav-ctas { display: none; }
+    .mobile-section-nav { display: flex; }
+    footer { grid-template-columns: 1fr; gap: 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 0.4rem; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+  }
+  @media (max-width: 480px) {
+    section { padding: 60px 5vw; }
+  }
+
+  /* ─── PRICING NOTE ─── */
+  .pricing-note {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.78rem; color: var(--muted); margin-top: 2.2rem;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .pricing-note-sep { opacity: 0.3; }
+  .pricing-note a {
+    color: var(--teal); text-decoration: none; font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .pricing-note a:hover { opacity: 0.75; }
+  .engagement-pricing {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.75rem; color: var(--muted);
+    border-top: 1px solid var(--border2); padding-top: 0.8rem; width: 100%;
+  }
+  .engagement-pricing a {
+    color: var(--teal); text-decoration: none; font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .engagement-pricing a:hover { opacity: 0.75; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#000" x="12" y="12" width="6" height="6"/>
+      <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#000" x="12" y="52" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#000" x="32" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+      <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#000" x="52" y="52" width="6" height="6"/>
+    </svg>
+    <span class="nav-logo-text">Logic Byte</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#platform">Platform</a></li>
+    <li><a href="index.html#verticals" class="active">Solutions</a></li>
+    <li><a href="index.html#modules">Modules</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a class="nav-cta-soft" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="nav-cta" href="contact.html">Book a Demo</a>
+  </div>
+
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <ul class="drawer-links">
+    <li><a href="index.html#platform">Platform</a></li>
+    <li class="drawer-group open">
+      <div class="drawer-group-header">
+        <a href="index.html#verticals" class="drawer-group-link active">Solutions</a>
+        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="true" aria-label="Expand Solutions"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="custom.html" class="active">Custom Solutions</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#modules">Modules</a></li>
+    <li class="drawer-group">
+      <div class="drawer-group-header">
+        <a href="research.html" class="drawer-group-link">Research</a>
+        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Research"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="research.html">Overview</a></li>
+        <li><a href="research-output.html">Full Output</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="drawer-ctas">
+    <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
+    <a class="drawer-cta-secondary" href="mailto:hello@logicbyte.ai">Say Hello</a>
+  </div>
+</div>
+
+</div>
+
+<!-- PAGE SHELL -->
+<div class="page-shell">
+
+  <main class="page-content">
+<div class="mobile-section-nav" aria-label="Jump to section">
+  <a href="#scopedproject">Scoped Project</a><a href="#embeddedpartnership">Embedded Partnership</a><a href="#platformadaptation">Platform Adaptation</a><a href="#capabilities">Capabilities</a>
+</div>
+
+
+    <!-- HERO -->
+    <div class="page-hero">
+      <div class="hero-grid" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
+          </pattern></defs>
+          <rect width="100%" height="100%" fill="url(#grid)"/>
+        </svg>
+      </div>
+      <div class="eyebrow reveal"><span class="eyebrow-line"></span><span>Custom Solutions</span></div>
+      <h1 class="reveal">Your imaging challenge.<br/><em>Our starting point.</em></h1>
+      <p class="hero-lead reveal">Not every imaging problem fits a predefined vertical or segment. When your modality, sample type, workflow, or analytical need sits outside the standard, we scope, build, and validate a solution from the ground up — alongside you.</p>
+      <div class="hero-ctas reveal">
+        <a class="btn-primary" href="mailto:hello@logicbyte.ai">Start a Conversation</a>
+        <a class="btn-secondary" href="#engagements">How We Work</a>
+      </div>
+    </div>
+
+    <!-- WHEN TO REACH OUT -->
+    <div class="when-section reveal">
+      <span class="when-label">When to reach out</span>
+      <div class="when-grid">
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Your imaging setup doesn't match any standard platform</strong>A novel instrument, an unusual sample type, or a non-standard acquisition protocol that off-the-shelf tools weren't designed for.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>You need a validated, auditable pipeline</strong>Regulatory submissions, clinical workflows, or quality-critical environments that require full documentation, reproducibility, and traceability of every analytical decision.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>You want the capability in-house but lack the team</strong>The imaging expertise exists — the computer vision and ML engineering to build a production-grade pipeline doesn't. We bridge that gap.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>You have a new modality with no existing tools</strong>Emerging imaging techniques — new contrast mechanisms, novel detectors, unconventional sample preparation — often have no analytical tooling. We build the first one.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGAGEMENTS -->
+    <div class="engagements-section" id="engagements">
+      <div class="section-eyebrow reveal"><span class="section-eyebrow-line"></span><span>Engagement types</span></div>
+      <h2 class="reveal">Three ways we <em>work together</em></h2>
+      <p class="section-lead reveal">Every custom engagement starts with a conversation about your imaging challenge. From there, we scope the right type of collaboration — from a bounded deliverable to a long-term analytical partnership.</p>
+
+      <!-- SCOPED PROJECT -->
+      <div class="engagement-block reveal" id="scopedproject">
+        <div>
+          <span class="engagement-num">Engagement 01</span>
+          <h3>Scoped Project</h3>
+          <div class="engagement-tagline">A defined problem. A delivered solution.</div>
+          <p class="engagement-desc">A scoped project has a clear brief, defined deliverables, and a fixed timeline. We take a specific imaging challenge — a custom segmentation model, a pipeline for a particular assay, a proof of concept for a new modality — and deliver a validated, documented solution. This may mean adapting existing OptiFlow modules or building new analytical capabilities from the ground up. Either way, the deliverable is production-grade and validated against your data.</p>
+          <div class="included-label">What's included</div>
+          <div class="included-list">
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Discovery and scoping session to define requirements, success criteria, and data needs</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Custom model or pipeline development against agreed specifications</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Validation against your imaging data with documented performance metrics</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Delivery as a deployable <span class="optiflow-badge">OptiFlow</span> workflow or standalone module</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Handover documentation and one post-delivery support window</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="suitable-label">Well suited for</div>
+          <div class="suitable-tags">
+            <span class="suitable-tag">Novel assay development</span>
+            <span class="suitable-tag">Proof of concept</span>
+            <span class="suitable-tag">Custom segmentation model</span>
+            <span class="suitable-tag">New modality tooling</span>
+            <span class="suitable-tag">Regulatory submission pipeline</span>
+            <span class="suitable-tag">One-time imaging study</span>
+          </div>
+          <span class="engagement-pricing">Fixed fee per engagement scope. <a href="contact.html">Contact us to discuss.</a></span>
+        </div>
+      </div>
+
+      <!-- EMBEDDED PARTNERSHIP -->
+      <div class="engagement-block reveal" id="embeddedpartnership">
+        <div>
+          <span class="engagement-num">Engagement 02</span>
+          <h3>Embedded Partnership</h3>
+          <div class="engagement-tagline">Long-term capability, built alongside your team.</div>
+          <p class="engagement-desc">An embedded partnership is for organisations building an analytical capability over time — iterating as the science evolves, adding modules as new imaging questions emerge, and integrating deeply with internal workflows and data infrastructure. Logic Byte functions as an extension of your team: attending relevant meetings, understanding your domain deeply, and co-developing rather than just delivering.</p>
+          <div class="included-label">What's included</div>
+          <div class="included-list">
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Ongoing access to Logic Byte's imaging AI expertise across the partnership duration</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Iterative development with regular delivery cycles and review checkpoints</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Integration with your data infrastructure, LIMS, or instrument software stack</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Priority access to new <span class="optiflow-badge">OptiFlow</span> modules as they are released</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Dedicated support channel and quarterly roadmap alignment sessions</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="suitable-label">Well suited for</div>
+          <div class="suitable-tags">
+            <span class="suitable-tag">Growing research programmes</span>
+            <span class="suitable-tag">Platform companies</span>
+            <span class="suitable-tag">Multi-modality imaging labs</span>
+            <span class="suitable-tag">CROs and CDMOs</span>
+            <span class="suitable-tag">Instrument manufacturers</span>
+            <span class="suitable-tag">Long-term clinical studies</span>
+          </div>
+          <span class="engagement-pricing">Monthly retainer — scoped at partnership start. <a href="contact.html">Contact us to discuss.</a></span>
+        </div>
+      </div>
+
+      <!-- PLATFORM ADAPTATION -->
+      <div class="engagement-block reveal" id="platformadaptation">
+        <div>
+          <span class="engagement-num">Engagement 03</span>
+          <h3>Platform Adaptation</h3>
+          <div class="engagement-tagline">OptiFlow, configured for your exact domain.</div>
+          <p class="engagement-desc">Platform adaptation takes <span class="optiflow-badge">OptiFlow</span> and extends or reconfigures it for a specific domain, instrument type, or workflow that isn't covered by the standard verticals. Where existing modules can be adapted, we adapt them. Where they can't — where the imaging physics, sample characteristics, or analytical requirements demand something genuinely new — we build the module from scratch, then integrate it into the platform. The result is the full power of OptiFlow's architecture with analytical capabilities purpose-engineered for your environment.</p>
+          <div class="included-label">What's included</div>
+          <div class="included-list">
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Full <span class="optiflow-badge">OptiFlow</span> platform licence with all core modules</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Custom module development for your domain's specific analytical requirements</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Instrument-specific image acquisition integration and pre-processing pipeline</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Domain-specific UI configuration and workflow templates</span></div>
+            <div class="included-item"><span class="included-dot"></span><span class="included-text">Onboarding, training, and ongoing platform support</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="suitable-label">Well suited for</div>
+          <div class="suitable-tags">
+            <span class="suitable-tag">Emerging imaging modalities</span>
+            <span class="suitable-tag">Instrument OEMs</span>
+            <span class="suitable-tag">Defence & security imaging</span>
+            <span class="suitable-tag">Agricultural inspection</span>
+            <span class="suitable-tag">Materials science</span>
+            <span class="suitable-tag">Non-destructive testing</span>
+          </div>
+          <span class="engagement-pricing">Platform licence + services. <a href="contact.html">Contact us to discuss.</a></span>
+        </div>
+      </div>
+
+    </div><!-- /engagements-section -->
+
+
+    <!-- CAPABILITIES -->
+    <div class="when-section reveal" id="capabilities" style="margin-top:0;">
+      <span class="when-label">Capabilities we bring</span>
+      <p style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:1.8rem;max-width:600px;">Custom engagements may draw on OptiFlow's existing module library — reconfigured and extended for your domain — or require capabilities built entirely from scratch. If the analytical tool you need doesn't exist yet, we build it. Either way, what you receive is production-grade, validated against your imaging data, and yours to deploy.</p>
+      <div class="when-grid">
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Augmented reality capabilities</strong>Real-time AR overlay and in-silico enhancement of live instrument feeds — including generative AI rendering of virtual stains, contrast augmentation, and region-of-interest annotation directly on the acquisition view. Deployed commercially at ETH Zurich.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Detection, segmentation, morphological characterisation & statistics</strong>Precise localisation, boundary delineation, enumeration, and per-object morphological characterisation of features of interest — cells, particles, defects, inclusions — with population-level statistics, texture analysis, and spatial distribution outputs across any imaging modality.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Classification & grading</strong>Supervised deep learning for object-level classification, phenotypic scoring, disease grading, or defect categorisation — trained on your annotated data.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Unsupervised anomaly detection</strong>No labelled defects required. Learns normal appearance from clean reference images and flags deviations automatically — ideal for novel failure modes or new imaging modalities with no defect library.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Real-time & embedded processing</strong>Low-latency inference pipelines designed for live-stream processing and on-device deployment — including embedded systems where computational footprint is constrained.</div>
+        </div>
+        <div class="when-card">
+          <div class="when-icon"></div>
+          <div class="when-text"><strong>Net-new capability development</strong>When no existing tool — ours or anyone else's — does what you need, we design and build it from first principles. New contrast mechanisms, novel detectors, domain-specific architectures, unconventional sample types: we engineer the analytical method alongside the pipeline that delivers it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROCESS STRIP -->
+    <div class="process-strip reveal">
+      <span class="process-label">How every custom engagement starts</span>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <span class="step-num">Step 01</span>
+          <div class="step-name">Conversation</div>
+          <div class="step-desc">Tell us about your imaging challenge — no brief required, no commitment expected.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <span class="step-num">Step 02</span>
+          <div class="step-name">Scoping</div>
+          <div class="step-desc">We review your data, define the analytical problem, and propose the right engagement type.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <span class="step-num">Step 03</span>
+          <div class="step-name">Build & validate</div>
+          <div class="step-desc">We develop and validate against your imaging data, with regular review checkpoints.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <span class="step-num">Step 04</span>
+          <div class="step-name">Deploy</div>
+          <div class="step-desc">Delivered as a deployable workflow — on your infrastructure, at your scale.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA BAND -->
+    <div class="cta-band">
+      <h2 class="reveal">Tell us what you're trying to solve.</h2>
+      <p class="reveal">There's no standard brief required — just a description of your imaging challenge. We'll take it from there, propose the right engagement, and work with you to build what works.</p>
+      <div class="cta-group reveal">
+        <a class="btn-primary" href="mailto:hello@logicbyte.ai">Start a Conversation</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        <a class="footer-logo" href="index.html">
+          <svg width="20" height="20" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#000" x="12" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#000" x="12" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#000" x="32" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#000" x="52" y="52" width="6" height="6"/>
+          </svg>
+          <span class="footer-logo-text">Logic Byte</span>
+        </a>
+        <div class="footer-tagline">AI-Powered Image Analytics · logicbyte.ai</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="custom.html">Custom Solutions</a></li>
+          </ul>
+      <div class="footer-bottom">
+        <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
+        <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- RIGHT: persistent sticky navigator -->
+  <aside class="page-navigator" aria-label="Page navigation">
+    <div class="nav-vertical-label">
+      <span class="nav-vertical-super">Solutions</span>
+      <a class="nav-vertical-name" href="#" style="color:var(--white);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--white)'">Custom<br/>Solutions</a>
+    </div>
+    <p class="nav-vertical-desc">Every imaging challenge is different. We adapt existing capabilities or build new ones from scratch — scoped, validated, and delivered for your domain.</p>
+    <div class="nav-divider"></div>
+    <div class="nav-seg-label">Engagement types</div>
+    <a class="seg-link" href="#scopedproject">
+      <span class="seg-link-dot"></span>
+      <span class="seg-link-name">Scoped Project</span>
+    </a>
+    <a class="seg-link" href="#embeddedpartnership">
+      <span class="seg-link-dot"></span>
+      <span class="seg-link-name">Embedded Partnership</span>
+    </a>
+    <a class="seg-link" href="#platformadaptation">
+      <span class="seg-link-dot"></span>
+      <span class="seg-link-name">Platform Adaptation</span>
+    </a>
+    <div class="nav-seg-label" style="margin-top:0.8rem;">Capabilities</div>
+    <a class="seg-link" href="#capabilities">
+      <span class="seg-link-dot"></span>
+      <span class="seg-link-name">Capabilities we bring</span>
+    </a>
+    <a class="nav-back" href="index.html#verticals">
+      <span class="nav-back-arrow">←</span>
+      Back to Solutions
+    </a>
+  </aside>
+
+</div><!-- /page-shell -->
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  const engBlocks = document.querySelectorAll('.engagement-block, #capabilities');
+  const segLinks = document.querySelectorAll('.seg-link');
+  const segSpy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        segLinks.forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.mobile-section-nav a').forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.seg-link[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+        const mobileActive = document.querySelector(`.mobile-section-nav a[href="#${e.target.id}"]`);
+        if (mobileActive) { mobileActive.classList.add('active'); mobileActive.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      }
+    });
+  }, { rootMargin: '-15% 0px -65% 0px' });
+  engBlocks.forEach(b => segSpy.observe(b));
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.background =
+      window.scrollY > 40 ? 'rgba(11,22,40,0.98)' : 'rgba(11,22,40,0.95)';
+  });
+
+    // Mobile nav drawer
+  function toggleNav(btn) {
+    const isOpen = btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    document.getElementById('nav-drawer').classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function toggleGroup(btn) {
+    btn.closest('.drawer-group').classList.toggle('open');
+  }
+  document.querySelectorAll('.drawer-links > li > a, .drawer-sub a, .drawer-group-link').forEach(a => {
+    a.addEventListener('click', () => {
+      const navBtn = document.querySelector('.nav-hamburger');
+      if (navBtn) { navBtn.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
+      const drawer = document.getElementById('nav-drawer');
+      if (drawer) drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>

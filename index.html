@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Logic Byte delivers AI-powered image analytics for biomedical research and semiconductor inspection. OptiFlow — modular, domain-aware, and production-ready."/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://logicbyte.ai/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Logic Byte"/>
+<meta property="og:url" content="https://logicbyte.ai/"/>
+<meta property="og:title" content="Logic Byte — AI-Powered Image Analytics"/>
+<meta property="og:description" content="Logic Byte delivers AI-powered image analytics for biomedical research and semiconductor inspection. OptiFlow — modular, domain-aware, and production-ready."/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Logic Byte — AI-Powered Image Analytics"/>
+<meta name="twitter:description" content="Logic Byte delivers AI-powered image analytics for biomedical research and semiconductor inspection. OptiFlow — modular, domain-aware, and production-ready."/>
+<title>Logic Byte — AI-Powered Image Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0B1628;
+    --navy2:  #112040;
+    --navy3:  #1A3260;
+    --teal:   #1DB89A;
+    --teal2:  #16997F;
+    --teal3:  #0EDBB8;
+    --teal-glow: rgba(29,184,154,0.15);
+    --teal-glow2: rgba(29,184,154,0.06);
+    --white:  #FFFFFF;
+    --off:    #F0F4F8;
+    --muted:  #8BA0B8;
+    --text:   #C8D8E8;
+    --border: rgba(29,184,154,0.18);
+    --border2: rgba(255,255,255,0.07);
+    --serif:  'Syne', system-ui, sans-serif;
+    --display: 'Outfit', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+    --sans:   'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .optiflow-badge {
+    font-size: 1em; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--teal);
+    white-space: nowrap;
+    font-family: var(--sans);
+  }
+  .optiflow-badge::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 1px;
+    background: var(--teal);
+    opacity: 0.8;
+    margin-right: 0.2em;
+    vertical-align: middle;
+  }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+    background: rgba(11,22,40,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border2);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none;
+  }
+  .nav-logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
+  .nav-logo-text {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #d4af37;
+    letter-spacing: -0.01em;
+  }
+  .nav-links {
+    display: flex; gap: 2.2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a.active { color: var(--teal); }
+  .nav-ctas { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-cta-soft {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .nav-cta-soft:hover { border-color: var(--teal); color: var(--white); transform: translateY(-1px); }
+  .nav-cta {
+    background: var(--teal); color: var(--navy);
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--teal3); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 120px 5vw 80px;
+    position: relative; overflow: hidden;
+  }
+
+  /* background mesh */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(29,184,154,0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(26,50,96,0.7) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* grid lines */
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.04;
+  }
+  .hero-grid svg { width: 100%; height: 100%; }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 1.6rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-eyebrow-line {
+    width: 32px; height: 1px; background: var(--teal);
+  }
+  .hero-eyebrow span {
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    max-width: 680px;
+    margin-bottom: 1.6rem;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  h1 em {
+    font-style: normal; color: var(--teal); font-weight: 500;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.8rem;
+    font-weight: 300;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 0 0 0 rgba(29,184,154,0);
+  }
+  .btn-primary:hover {
+    background: var(--teal3); transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(29,184,154,0.25);
+  }
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text); padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--teal); color: var(--white); transform: translateY(-2px);
+  }
+
+  .hero-trust {
+    margin-top: 2rem;
+    font-size: 0.85rem; color: var(--muted); font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+  .hero-trust strong { color: var(--teal); font-weight: 500; }
+
+  /* floating platform preview */
+  .hero-visual {
+    position: absolute; right: 5vw; top: 50%;
+    transform: translateY(-50%);
+    width: min(46vw, 580px);
+    opacity: 0; animation: fadeLeft 0.9s 0.4s forwards;
+  }
+  .platform-window {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(29,184,154,0.08);
+  }
+  .platform-bar {
+    background: var(--navy3);
+    padding: 0.7rem 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    border-bottom: 1px solid var(--border2);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF6058; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+  .platform-bar-title {
+    margin-left: auto; margin-right: auto;
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em;
+  }
+  .platform-body {
+    display: grid; grid-template-columns: 180px 1fr;
+    min-height: 320px;
+  }
+  .platform-sidebar {
+    background: rgba(17,32,64,0.7);
+    border-right: 1px solid var(--border2);
+    padding: 1rem 0;
+  }
+  .sidebar-section {
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); padding: 0.3rem 1rem 0.15rem;
+  }
+  .sidebar-item {
+    font-size: 0.75rem; padding: 0.38rem 1rem;
+    color: var(--text); display: flex; align-items: center; gap: 0.5rem;
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .sidebar-item:hover { background: var(--teal-glow2); }
+  .sidebar-item.active {
+    background: var(--teal-glow); color: var(--teal);
+    border-left: 2px solid var(--teal);
+  }
+  .sidebar-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--muted); flex-shrink: 0;
+  }
+  .sidebar-item.active .sidebar-dot { background: var(--teal); }
+  .platform-main { padding: 1rem; }
+  .platform-row { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; }
+  .platform-card {
+    background: var(--navy3);
+    border: 1px solid var(--border2);
+    border-radius: 8px; padding: 0.75rem;
+    flex: 1;
+  }
+  .pcard-label { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .pcard-value { font-size: 1.1rem; color: var(--white); font-weight: 500; }
+  .pcard-delta { font-size: 0.65rem; color: var(--teal); }
+  .workflow-strip {
+    background: var(--navy3);
+    border: 1px solid var(--border2);
+    border-radius: 8px; padding: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .workflow-label { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+  .workflow-steps { display: flex; align-items: center; gap: 0.4rem; }
+  .wstep {
+    background: var(--teal-glow); border: 1px solid var(--border);
+    border-radius: 4px; padding: 0.25rem 0.5rem;
+    font-size: 0.62rem; color: var(--teal); white-space: nowrap;
+  }
+  .wstep.done { background: rgba(29,184,154,0.25); }
+  .warrow { font-size: 0.6rem; color: var(--muted); flex-shrink: 0; }
+  .image-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem;
+  }
+  .image-tile {
+    border-radius: 6px; aspect-ratio: 1;
+    background: var(--navy3);
+    border: 1px solid var(--border2);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .image-tile-inner {
+    width: 70%; height: 70%; border-radius: 4px;
+    background: var(--teal-glow);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .image-tile-inner svg { opacity: 0.5; }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 100px 5vw; }
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem;
+  }
+  .section-eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
+  .section-eyebrow span {
+    font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white); line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  h2 em { font-style: normal; color: var(--teal); font-weight: 800; }
+  .section-lead {
+    font-size: 1.05rem; color: var(--muted);
+    max-width: 560px; font-weight: 300; line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ─── PLATFORM FEATURES ─── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+  .feature-card {
+    background: var(--navy2);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 1.8rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .feature-card:hover { border-color: var(--border); transform: translateY(-3px); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--teal-glow); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .feature-icon svg { stroke: var(--teal); }
+  .feature-title {
+    font-size: 0.95rem; font-weight: 500; color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .feature-desc {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.65;
+  }
+
+  /* ─── VERTICALS ─── */
+  .verticals { background: var(--navy2); }
+  .verticals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 0;
+  }
+  .vertical-card {
+    border-radius: 16px;
+    border: 1px solid var(--border2);
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+    cursor: pointer; text-decoration: none;
+    display: block;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .vertical-card.bio {
+    background: linear-gradient(135deg, rgba(17,32,64,0.9) 0%, rgba(11,22,40,0.95) 100%);
+  }
+  .vertical-card.semi {
+    background: linear-gradient(135deg, rgba(17,32,64,0.9) 0%, rgba(11,22,40,0.95) 100%);
+  }
+  .vertical-card::after {
+    content: ''; position: absolute;
+    width: 200px; height: 200px; border-radius: 50%;
+    top: -60px; right: -60px;
+    transition: opacity 0.3s;
+  }
+  .vertical-card.bio::after { background: radial-gradient(circle, rgba(29,184,154,0.12), transparent 70%); }
+  .vertical-card.semi::after { background: radial-gradient(circle, rgba(26,50,96,0.4), transparent 70%); }
+  .vertical-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+  .vertical-tag {
+    display: inline-block;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); border: 1px solid var(--border);
+    padding: 0.25rem 0.7rem; border-radius: 100px;
+    margin-bottom: 1.2rem;
+  }
+  .vertical-card h3 {
+    font-family: var(--display);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 0.4rem; line-height: 1.1;
+  }
+  .vertical-sub {
+    font-size: 0.88rem; letter-spacing: 0.01em;
+    color: var(--teal); font-weight: 400;
+    margin-bottom: 1.1rem; display: block;
+    font-style: italic;
+  }
+  .vertical-card p {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .vertical-segments {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem;
+  }
+  .vseg {
+    font-size: 0.72rem; padding: 0.2rem 0.65rem;
+    border-radius: 100px; border: 1px solid var(--border2);
+    color: var(--text);
+  }
+  .vertical-arrow {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--teal); font-weight: 500;
+  }
+  .vertical-arrow svg { transition: transform 0.2s; }
+  .vertical-card:hover .vertical-arrow svg { transform: translateX(4px); }
+
+  .vertical-card.custom {
+    border-style: dashed;
+    border-color: rgba(29,184,154,0.3);
+    background: transparent;
+  }
+  .vertical-card.custom:hover {
+    border-color: var(--teal);
+    background: var(--teal-glow2);
+  }
+  .vertical-card.custom h3 { color: var(--white); }
+  .custom-card {
+    display: none;
+  }
+
+  /* ─── MODULES ─── */
+  .modules-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .module-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .module-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.2rem; border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  }
+  .module-item:hover, .module-item.active {
+    background: var(--teal-glow2); border-color: var(--border);
+  }
+  .module-item.active { border-color: var(--teal); }
+  .module-num {
+    font-family: var(--serif); font-size: 1.1rem; color: var(--teal);
+    flex-shrink: 0; width: 28px; padding-top: 1px;
+  }
+  .module-name { font-size: 0.9rem; font-weight: 500; color: var(--white); margin-bottom: 0.2rem; }
+  .module-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .module-visual {
+    position: sticky; top: 88px;
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    min-height: 300px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .module-visual-label {
+    font-size: 0.7rem; letter-spacing: 0.12em; color: var(--teal); margin-bottom: 0.8rem;
+  }
+  .module-visual-title {
+    font-family: var(--display); font-size: 1.4rem; color: var(--white); margin-bottom: 0.6rem;
+  }
+  .module-visual-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+  .module-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .mpill {
+    font-size: 0.7rem; padding: 0.2rem 0.7rem; border-radius: 100px;
+    background: var(--teal-glow); border: 1px solid var(--border);
+    color: var(--teal);
+  }
+
+  /* ─── FOUNDER ─── */
+  .founder { background: var(--navy2); border-top: 1px solid var(--border2); }
+  .founder-wrap {
+    display: grid; grid-template-columns: auto 1fr; gap: 4rem; align-items: center;
+  }
+  .founder-photo-wrap {
+    position: relative; width: 260px; flex-shrink: 0;
+  }
+  .founder-photo-wrap::before {
+    content: ''; position: absolute;
+    inset: -12px; border-radius: 20px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+  }
+  .founder-photo-wrap::after {
+    content: ''; position: absolute;
+    inset: -24px; border-radius: 24px;
+    border: 1px solid rgba(29,184,154,0.08);
+    pointer-events: none;
+  }
+  .founder-photo {
+    width: 260px; height: 320px;
+    object-fit: cover; object-position: top center;
+    border-radius: 12px;
+    display: block;
+  }
+  .founder-role {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); border: 1px solid var(--border);
+    padding: 0.25rem 0.7rem; border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+  .founder-name {
+    font-family: var(--display); font-size: 2rem; color: var(--white); margin-bottom: 0.6rem;
+  }
+  .founder-bio {
+    font-size: 0.95rem; color: var(--muted); line-height: 1.8;
+    margin-bottom: 1.5rem; font-weight: 300;
+  }
+  .founder-creds { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .cred {
+    font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 100px;
+    background: var(--navy3); border: 1px solid var(--border2);
+    color: var(--text);
+  }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    text-align: center;
+    background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(29,184,154,0.07), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-band h2 { margin-bottom: 0.8rem; }
+  .cta-band p { color: var(--muted); font-size: 1rem; margin-bottom: 2.2rem; font-weight: 300; }
+  .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem 5vw 2rem;
+    border-top: 1px solid var(--border2);
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+  }
+  .footer-logo {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; margin-bottom: 0.4rem;
+  }
+  .footer-logo-text {
+    font-family: var(--serif); font-size: 1.05rem; color: #d4af37;
+  }
+  .footer-tagline { font-size: 0.8rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    grid-column: 1/-1;
+    border-top: 1px solid var(--border2);
+    padding-top: 1.2rem;
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .footer-bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom a:hover { color: var(--white); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateY(-50%) translateX(30px); }
+    to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    .verticals-grid { grid-template-columns: 1fr 1fr; }
+    .vertical-card.custom { grid-column: 1 / -1; max-width: 560px; margin: 0 auto; width: 100%; }
+  }
+  @media (max-width: 900px) {
+    .hero-visual { display: none; }
+    h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+    .verticals-grid { grid-template-columns: 1fr; }
+    .vertical-card.custom { grid-column: auto; max-width: 100%; }
+    .modules-wrap { grid-template-columns: 1fr; }
+    .module-visual { position: static; }
+    .founder-wrap { grid-template-columns: 1fr; }
+    .founder-photo-wrap { width: 100%; }
+    .founder-photo { width: 100%; height: 280px; }
+    footer { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 70px 6vw; }
+    .stats-strip { flex-direction: column; align-items: center; }
+  }
+
+
+  /* ─── MOBILE NAV ─── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 40px; height: 40px;
+    background: transparent; border: 1px solid var(--border2);
+    border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 18px; height: 1.5px;
+    background: var(--text); border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .nav-drawer {
+    display: none; position: fixed;
+    top: 68px; left: 0; right: 0; bottom: 0;
+    background: rgba(11,22,40,0.98); backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 1.5rem 6vw 2.5rem;
+    z-index: 99; overflow-y: auto;
+    border-top: 1px solid var(--border2);
+  }
+  .nav-drawer.open { display: flex; }
+
+  /* Top-level list */
+  .drawer-links { list-style: none; flex: 1; }
+  .drawer-links > li > a {
+    display: block; font-size: 1.05rem; font-weight: 400;
+    color: var(--text); text-decoration: none;
+    padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
+    letter-spacing: 0.02em; transition: color 0.15s, padding-left 0.15s;
+  }
+  .drawer-links > li:first-child > a { border-top: 1px solid var(--border2); }
+  .drawer-links > li > a:hover { color: var(--white); padding-left: 0.4rem; }
+  .drawer-links > li > a.active { color: var(--teal); }
+
+  /* Expandable group */
+  .drawer-group { border-bottom: 1px solid var(--border2); }
+  .drawer-group-header {
+    display: flex; align-items: center;
+  }
+  .drawer-group-link {
+    flex: 1; font-size: 1.05rem; font-weight: 400;
+    color: var(--text); text-decoration: none;
+    padding: 0.9rem 0; letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .drawer-group-link:hover { color: var(--white); }
+  .drawer-group-link.active { color: var(--teal); }
+  .drawer-group-toggle {
+    flex-shrink: 0; background: none; border: none;
+    padding: 0.9rem 0 0.9rem 1.2rem; cursor: pointer;
+    display: flex; align-items: center; color: var(--muted);
+    transition: color 0.15s;
+  }
+  .drawer-group-toggle:hover { color: var(--text); }
+  .drawer-group-arrow {
+    transition: transform 0.25s ease;
+  }
+  .drawer-group.open .drawer-group-arrow { transform: rotate(90deg); }
+
+  /* Sub-links */
+  .drawer-sub { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
+  .drawer-group.open .drawer-sub { max-height: 300px; }
+  .drawer-sub li a {
+    display: block; font-size: 0.9rem; color: var(--muted);
+    text-decoration: none; padding: 0.6rem 0 0.6rem 1.1rem;
+    border-bottom: 1px solid var(--border2);
+    transition: color 0.15s, padding-left 0.15s;
+  }
+  .drawer-sub li:last-child a { border-bottom: none; }
+  .drawer-sub li a:hover { color: var(--white); padding-left: 1.4rem; }
+  .drawer-sub li a.active { color: var(--teal); }
+
+  /* CTA buttons */
+  .drawer-ctas { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 2rem; }
+  .drawer-cta-primary {
+    display: block; text-align: center;
+    background: var(--teal); color: var(--navy);
+    padding: 0.85rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 500; text-decoration: none;
+  }
+  .drawer-cta-secondary {
+    display: block; text-align: center;
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.85rem; border-radius: 100px;
+    font-size: 0.95rem; font-weight: 400; text-decoration: none;
+  }
+
+  /* Mobile section nav */
+  .mobile-section-nav {
+    display: none; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding: 0.75rem 6vw;
+    gap: 0.5rem; border-bottom: 1px solid var(--border2);
+    position: sticky; top: 68px; z-index: 90;
+    background: rgba(11,22,40,0.97); backdrop-filter: blur(12px);
+  }
+  .mobile-section-nav::-webkit-scrollbar { display: none; }
+  .mobile-section-nav a {
+    display: inline-block; white-space: nowrap; flex-shrink: 0;
+    font-size: 0.78rem; padding: 0.35rem 0.85rem;
+    border-radius: 100px; border: 1px solid var(--border2);
+    color: var(--muted); text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .mobile-section-nav a:hover,
+  .mobile-section-nav a.active { border-color: var(--teal); color: var(--teal); }
+
+  @media (max-width: 820px) {
+    .nav-hamburger { display: flex; }
+    .nav-links { display: none; }
+    .nav-ctas { display: none; }
+    .mobile-section-nav { display: flex; }
+    footer { grid-template-columns: 1fr; gap: 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 0.4rem; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+  }
+  @media (max-width: 480px) {
+    section { padding: 60px 5vw; }
+  }
+
+  /* ─── PRICING NOTE ─── */
+  .pricing-note {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.78rem; color: var(--muted); margin-top: 2.2rem;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .pricing-note-sep { opacity: 0.3; }
+  .pricing-note a {
+    color: var(--teal); text-decoration: none; font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .pricing-note a:hover { opacity: 0.75; }
+  .engagement-pricing {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.75rem; color: var(--muted);
+    border-top: 1px solid var(--border2); padding-top: 0.8rem; width: 100%;
+  }
+  .engagement-pricing a {
+    color: var(--teal); text-decoration: none; font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .engagement-pricing a:hover { opacity: 0.75; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg class="nav-logo-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect fill="#d4af37" x="8" y="8" width="14" height="14"/>
+      <rect fill="#000" x="12" y="12" width="6" height="6"/>
+      <rect fill="#d4af37" x="8" y="28" width="14" height="14"/>
+      <rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="8" y="48" width="14" height="14"/>
+      <rect fill="#000" x="12" y="52" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="48" width="14" height="14"/>
+      <rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="28" width="14" height="14"/>
+      <rect fill="#000" x="32" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="28" y="8" width="14" height="14"/>
+      <rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+      <rect fill="#d4af37" x="48" y="28" width="14" height="14"/>
+      <rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+      <rect fill="#d4af37" x="48" y="48" width="14" height="14"/>
+      <rect fill="#000" x="52" y="52" width="6" height="6"/>
+    </svg>
+    <span class="nav-logo-text">Logic Byte</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#verticals">Solutions</a></li>
+    <li><a href="#modules">Modules</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a class="nav-cta-soft" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="nav-cta" href="contact.html">Book a Demo</a>
+  </div>
+
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <ul class="drawer-links">
+    <li><a href="#platform">Platform</a></li>
+    <li class="drawer-group">
+      <div class="drawer-group-header">
+        <a href="#verticals" class="drawer-group-link">Solutions</a>
+        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Solutions"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="custom.html">Custom Solutions</a></li>
+      </ul>
+    </li>
+    <li><a href="#modules">Modules</a></li>
+    <li class="drawer-group">
+      <div class="drawer-group-header">
+        <a href="research.html" class="drawer-group-link">Research</a>
+        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Research"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="research.html">Overview</a></li>
+        <li><a href="research-output.html">Full Output</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="drawer-ctas">
+    <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
+    <a class="drawer-cta-secondary" href="mailto:hello@logicbyte.ai">Say Hello</a>
+  </div>
+</div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+
+  <div class="hero-eyebrow">
+    <span class="hero-eyebrow-line"></span>
+    <span>AI-Powered Image Analytics</span>
+  </div>
+
+  <h1>See more.<br/><em>Discover faster.</em><br/>Scale with confidence.</h1>
+
+  <p class="hero-sub">
+    <span class="optiflow-badge">OptiFlow</span> is a modular image analytics platform with domain-aware pipelines — scalable from a single workstation to production deployment, customisable to your workflow, and reproducible by design. Built for teams where image data drives decisions.
+  </p>
+
+  <div class="hero-ctas">
+    <a class="btn-primary" href="contact.html">Book a Demo</a>
+    <a class="btn-secondary" href="#verticals">Explore Solutions</a>
+  </div>
+
+  <p class="hero-trust reveal">
+    Research-validated. Industry-tested. Ready for your imaging challenge.
+  </p>
+
+  <!-- Floating platform preview -->
+  <div class="hero-visual" aria-hidden="true">
+    <div class="platform-window">
+      <div class="platform-bar">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="platform-bar-title">OptiFlow · Workflow Builder</span>
+      </div>
+      <div class="platform-body">
+        <div class="platform-sidebar">
+          <div class="sidebar-section">Modules</div>
+          <div class="sidebar-item active">
+            <span class="sidebar-dot"></span>Image Loader
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-dot"></span>Enhancement
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-dot"></span>Segmentation
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-dot"></span>Cell Analysis
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-dot"></span>CytoByte
+          </div>
+          <div class="sidebar-section" style="margin-top:0.8rem;">Output</div>
+          <div class="sidebar-item">
+            <span class="sidebar-dot"></span>PDF Report
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-dot"></span>Excel Export
+          </div>
+        </div>
+        <div class="platform-main">
+          <div class="platform-row">
+            <div class="platform-card">
+              <div class="pcard-label">OBJECTS DETECTED</div>
+              <div class="pcard-value">2,847</div>
+              <div class="pcard-delta">+12.4% vs baseline</div>
+            </div>
+            <div class="platform-card">
+              <div class="pcard-label">ACCURACY</div>
+              <div class="pcard-value">98.3%</div>
+              <div class="pcard-delta">Validated</div>
+            </div>
+          </div>
+          <div class="workflow-strip">
+            <div class="workflow-label">ACTIVE WORKFLOW</div>
+            <div class="workflow-steps">
+              <div class="wstep done">Load</div>
+              <span class="warrow">→</span>
+              <div class="wstep done">Enhance</div>
+              <span class="warrow">→</span>
+              <div class="wstep done">Segment</div>
+              <span class="warrow">→</span>
+              <div class="wstep">Classify</div>
+              <span class="warrow">→</span>
+              <div class="wstep">Report</div>
+            </div>
+          </div>
+          <div class="image-grid">
+            <div class="image-tile"><div class="image-tile-inner">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB89A" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+            </div></div>
+            <div class="image-tile"><div class="image-tile-inner">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB89A" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M4 16l5-5 4 4 3-3 4 4"/></svg>
+            </div></div>
+            <div class="image-tile"><div class="image-tile-inner">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB89A" stroke-width="1.5"><path d="M12 3C8 3 5 7 5 12s3 9 7 9 7-4 7-9-3-9-7-9z"/><path d="M12 8v8M8 12h8"/></svg>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM FEATURES -->
+<section id="platform">
+  <div class="section-eyebrow reveal">
+    <span class="section-eyebrow-line"></span>
+    <span>The Platform</span>
+  </div>
+  <h2 class="reveal">Built for scientists.<br/><em>Engineered for scale.</em></h2>
+  <p class="section-lead reveal">
+    <span class="optiflow-badge">OptiFlow</span> lets you load, preview, and process images through a visual workflow builder — no code required. Deploy the same pipeline from a single workstation to full-scale production.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h7"/><circle cx="17" cy="18" r="3"/><path d="M17 15v3l2 1"/></svg>
+      </div>
+      <div class="feature-title">Visual workflow builder</div>
+      <div class="feature-desc">Drag, connect, and configure processing nodes. Save workflows as templates and re-deploy across datasets in one click.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3M7 6l-3 6 3 6"/><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M17 6l3 6-3 6"/></svg>
+      </div>
+      <div class="feature-title">Image enhancement & correction</div>
+      <div class="feature-desc">Illumination correction, noise reduction, contrast enhancement, and channel normalisation — applied automatically or on demand.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+      </div>
+      <div class="feature-title">Object detection & segmentation</div>
+      <div class="feature-desc">Precision segmentation of cells, defects, and structures. Supports supervised learning and unsupervised anomaly detection.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
+      </div>
+      <div class="feature-title">Morphological analysis & statistics</div>
+      <div class="feature-desc">Automated measurements, population statistics, and interactive charts — from object size distributions to spatial clustering maps.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      </div>
+      <div class="feature-title">PDF & Excel reporting</div>
+      <div class="feature-desc">One-click report generation with annotated images, tables, and charts. Fully customisable templates for regulatory and internal use.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="feature-title">Modular, domain-aware architecture</div>
+      <div class="feature-desc">Start with the core and plug in domain-aware modules built for your field's specific imaging challenges — CytoByte for label-free biological staining, defect classifiers for wafer inspection, and more.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VERTICALS -->
+<section class="verticals" id="verticals">
+  <div class="section-eyebrow reveal">
+    <span class="section-eyebrow-line"></span>
+    <span>Solutions</span>
+  </div>
+  <h2 class="reveal">Choose your <em>vertical</em></h2>
+  <p class="section-lead reveal">
+    Unified platform. Domain-aware engines. Select the world that matches your work.
+  </p>
+
+  <div class="verticals-grid">
+    <a class="vertical-card bio reveal" href="biomedical.html">
+      <h3>Biomedical &amp; Life Sciences</h3>
+      <span class="vertical-sub">From microscope to insight</span>
+      <p>A domain-aware analytics engine built for biological imaging — from fluorescence microscopy to DIC, from single-cell analysis to whole-slide digital pathology. Workflows that understand your imaging modality from the ground up.</p>
+      <div class="vertical-segments">
+        <span class="vseg">BioPharma</span>
+        <span class="vseg">Bio Research</span>
+        <span class="vseg">Drug Screening</span>
+        <span class="vseg">Digital Pathology</span>
+      </div>
+      <div class="vertical-arrow">
+        Explore solutions
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a class="vertical-card semi reveal" href="semiconductor.html">
+      <h3>Semiconductor &amp; Industrial</h3>
+      <span class="vertical-sub">Zero-defect manufacturing starts here</span>
+      <p>A domain-aware analytics engine built for precision inspection — wafer-level defect detection, texture analysis, and inline quality assurance. Pipelines that speak the language of semiconductor imaging natively.</p>
+      <div class="vertical-segments">
+        <span class="vseg">Defect Detection</span>
+        <span class="vseg">Wafer Inspection</span>
+        <span class="vseg">Quality Assurance</span>
+      </div>
+      <div class="vertical-arrow">
+        Explore solutions
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+    <a class="vertical-card custom reveal" href="custom.html">
+      <h3>Custom Solutions</h3>
+      <span class="vertical-sub">Built around your challenge</span>
+      <p>Your imaging problem doesn't fit a predefined vertical? We design and build bespoke analytics pipelines from the ground up — scoped, validated, and delivered.</p>
+      <div class="vertical-segments">
+        <span class="vseg">Any imaging domain</span>
+        <span class="vseg">Bespoke pipeline</span>
+        <span class="vseg">End-to-end delivery</span>
+      </div>
+      <div class="vertical-arrow">
+        Discuss your challenge
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section id="modules">
+  <div class="section-eyebrow reveal">
+    <span class="section-eyebrow-line"></span>
+    <span>Capabilities</span>
+  </div>
+  <h2 class="reveal">Plug in what you need.<br/><em>Leave out what you don't.</em></h2>
+  <p class="section-lead reveal">
+    Every deployment is different. <span class="optiflow-badge">OptiFlow</span>'s module library lets you compose exactly the pipeline your workflow demands.
+  </p>
+
+  <div class="modules-wrap">
+    <div class="module-list reveal">
+      <div class="module-item active" onclick="setModule(this, 0)">
+        <span class="module-num">01</span>
+        <div>
+          <div class="module-name">Label-free microscopy (CytoByte)</div>
+          <div class="module-desc">In-silico staining from DIC images to pseudo-DAPI. Visualise nuclear morphology without chemical stains.</div>
+        </div>
+      </div>
+      <div class="module-item" onclick="setModule(this, 1)">
+        <span class="module-num">02</span>
+        <div>
+          <div class="module-name">Single-cell analysis & counting</div>
+          <div class="module-desc">Automated detection, segmentation, and enumeration of individual cells across large image datasets.</div>
+        </div>
+      </div>
+      <div class="module-item" onclick="setModule(this, 2)">
+        <span class="module-num">03</span>
+        <div>
+          <div class="module-name">Classification & grading</div>
+          <div class="module-desc">Supervised deep learning models for cell type classification, disease grading, and phenotypic scoring.</div>
+        </div>
+      </div>
+      <div class="module-item" onclick="setModule(this, 3)">
+        <span class="module-num">04</span>
+        <div>
+          <div class="module-name">Supervised defect detection</div>
+          <div class="module-desc">Train on your own defect library. Achieve human-expert accuracy on wafer, PCB, and material surface inspection.</div>
+        </div>
+      </div>
+      <div class="module-item" onclick="setModule(this, 4)">
+        <span class="module-num">05</span>
+        <div>
+          <div class="module-name">Unsupervised anomaly detection</div>
+          <div class="module-desc">No labelled defects needed. Detect novel anomalies using learned representations of normal surface appearance.</div>
+        </div>
+      </div>
+      <div class="module-item" onclick="setModule(this, 5)">
+        <span class="module-num">06</span>
+        <div>
+          <div class="module-name">Augmented reality overlay</div>
+          <div class="module-desc">Real-time AR annotation of live microscopy feeds — highlight regions of interest directly on the instrument view.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-visual reveal" id="module-detail">
+      <div class="module-visual-label">FEATURED MODULE</div>
+      <div class="module-visual-title" id="mv-title">CytoByte — Label-free staining</div>
+      <div class="module-visual-text" id="mv-text">
+        CytoByte renders pseudo-DAPI nuclear staining directly from standard DIC microscopy images using a trained deep neural network — no chemical preparation, no photobleaching, no additional equipment. Ideal for live-cell imaging, high-content screening, and time-sensitive assays.
+      </div>
+      <div class="module-pills" id="mv-pills">
+        <span class="mpill">DIC → pseudo-DAPI</span>
+        <span class="mpill">Nuclear segmentation</span>
+        <span class="mpill">Live-cell compatible</span>
+        <span class="mpill">HCS ready</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING NOTE -->
+<div style="text-align:center;padding:0 5vw 3.5rem;">
+  <p class="pricing-note reveal">
+    Modular licensing — base platform + domain modules
+    <span class="pricing-note-sep">·</span>
+    Periodic subscription or usage-based
+    <span class="pricing-note-sep">·</span>
+    <a href="contact.html">Contact us for pricing</a>
+  </p>
+</div>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="contact">
+  <h2 class="reveal">Ready to see it in action?</h2>
+  <p class="reveal">Book a live demo or reach out to discuss your imaging challenge.</p>
+  <div class="cta-group reveal">
+    <a class="btn-primary" href="contact.html">Book a Demo</a>
+    <a class="btn-secondary" href="mailto:hello@logicbyte.ai">Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a class="footer-logo" href="#">
+      <svg width="20" height="20" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/>
+        <rect fill="#000" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/>
+        <rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/>
+        <rect fill="#000" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/>
+        <rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/>
+        <rect fill="#000" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/>
+        <rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/>
+        <rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/>
+        <rect fill="#000" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="footer-logo-text">Logic Byte</span>
+    </a>
+    <div class="footer-tagline">AI-Powered Image Analytics · logicbyte.ai</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+    <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+    <li><a href="custom.html">Custom Solutions</a></li>
+  </ul>
+  <div class="footer-bottom">
+    <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
+    <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        // Stagger siblings
+        const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), idx * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Module selector
+  const modules = [
+    {
+      title: 'CytoByte — Label-free staining',
+      text: 'CytoByte renders pseudo-DAPI nuclear staining directly from standard DIC microscopy images using a trained deep neural network — no chemical preparation, no photobleaching, no additional equipment. Ideal for live-cell imaging, high-content screening, and time-sensitive assays.',
+      pills: ['DIC → pseudo-DAPI', 'Nuclear segmentation', 'Live-cell compatible', 'HCS ready']
+    },
+    {
+      title: 'Single-cell analysis & counting',
+      text: 'Automated detection, segmentation, and enumeration of individual cells across large-scale imaging datasets. Outputs per-cell morphology metrics, population histograms, and spatial distribution maps.',
+      pills: ['Cell detection', 'Morphometry', 'Population stats', 'Batch processing']
+    },
+    {
+      title: 'Classification & grading',
+      text: 'Train supervised deep learning models on your own annotated data. Classify cell types, grade disease severity, or score phenotypic responses — with built-in active learning to minimise labelling effort.',
+      pills: ['Cell type classification', 'Disease grading', 'Active learning', 'Custom training']
+    },
+    {
+      title: 'Supervised defect detection',
+      text: 'Build a defect classifier from your own labelled examples. Achieves human-expert accuracy on wafer surfaces, PCBs, and material substrates. Supports multi-class defect categorisation with confidence scoring.',
+      pills: ['Wafer inspection', 'PCB defects', 'Multi-class', 'Confidence scoring']
+    },
+    {
+      title: 'Unsupervised anomaly detection',
+      text: 'No labelled defects needed. The model learns a representation of normal surface appearance and flags deviations automatically. Ideal for novel defect discovery or low-defect-rate production lines.',
+      pills: ['Zero-label setup', 'Novel defect discovery', 'Texture analysis', 'Production-ready']
+    },
+    {
+      title: 'Augmented reality overlay',
+      text: 'Real-time AR annotation directly on live microscopy or inspection feeds. Highlight objects, annotate regions of interest, and overlay analysis results — all without leaving the instrument view.',
+      pills: ['Live overlay', 'Real-time annotation', 'Instrument integration', 'ROI highlighting']
+    }
+  ];
+
+  function setModule(el, idx) {
+    document.querySelectorAll('.module-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    const m = modules[idx];
+    document.getElementById('mv-title').textContent = m.title;
+    document.getElementById('mv-text').textContent = m.text;
+    const pillsEl = document.getElementById('mv-pills');
+    pillsEl.innerHTML = m.pills.map(p => `<span class="mpill">${p}</span>`).join('');
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.background =
+      window.scrollY > 40 ? 'rgba(11,22,40,0.97)' : 'rgba(11,22,40,0.85)';
+  });
+
+  // Nav active state — highlight the section currently in view
+  const navSections = document.querySelectorAll('#platform, #verticals, #modules');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navSpy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -65% 0px' });
+  navSections.forEach(s => navSpy.observe(s));
+
+    // Mobile nav drawer
+  function toggleNav(btn) {
+    const isOpen = btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    document.getElementById('nav-drawer').classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function toggleGroup(btn) {
+    btn.closest('.drawer-group').classList.toggle('open');
+  }
+  document.querySelectorAll('.drawer-links > li > a, .drawer-sub a, .drawer-group-link').forEach(a => {
+    a.addEventListener('click', () => {
+      const navBtn = document.querySelector('.nav-hamburger');
+      if (navBtn) { navBtn.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
+      const drawer = document.getElementById('nav-drawer');
+      if (drawer) drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>
