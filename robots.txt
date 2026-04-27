@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+Disallow: /*?p=
+Disallow: /*?feed=
+Disallow: /*?cat=
+Disallow: /*?page_id=
+
 Sitemap: https://logicbyte.ai/sitemap.xml
