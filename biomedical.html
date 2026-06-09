@@ -68,7 +68,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5vw; height: var(--nav-h);
+    padding: 0 max(5vw, calc((100% - 1600px) / 2)); height: var(--nav-h);
     background: rgba(11,22,40,0.95);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border2);
@@ -102,7 +102,8 @@
   .page-shell {
     display: grid;
     grid-template-columns: 1fr var(--col-nav);
-    margin-top: var(--nav-h);
+    margin: var(--nav-h) auto 0;
+    max-width: 1600px;
     min-height: calc(100vh - var(--nav-h));
     align-items: start;
   }
@@ -125,7 +126,7 @@
     margin-bottom: 1.8rem;
   }
   .nav-vertical-super {
-    font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--teal); font-weight: 500; font-family: var(--sans);
     display: block; margin-bottom: 0.35rem;
   }
@@ -137,7 +138,7 @@
   .nav-divider { height: 1px; background: var(--border2); margin-bottom: 1.2rem; }
 
   .nav-seg-label {
-    font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); margin-bottom: 0.6rem; font-family: var(--sans);
   }
 
@@ -185,7 +186,7 @@
 
   /* ─── HERO ─── */
   .page-hero {
-    padding: 4.5rem 5vw 3rem;
+    padding: 4.5rem max(5vw, calc((100% - 1600px) / 2)) 3rem;
     position: relative; overflow: hidden;
   }
   .page-hero::before {
@@ -233,7 +234,7 @@
   /* ─── MODALITIES STRIP ─── */
   .modalities-strip {
     border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2);
-    padding: 1rem 5vw; display: flex; align-items: center; gap: 0;
+    padding: 1rem max(5vw, calc((100% - 1600px) / 2)); display: flex; align-items: center; gap: 0;
   }
   .modalities-label {
     font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -246,7 +247,7 @@
   }
 
   /* ─── SEGMENTS ─── */
-  .segments-section { background: var(--navy2); padding: 3rem 5vw 90px; }
+  .segments-section { background: var(--navy2); padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 90px; }
 
   .section-eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
   .section-eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
@@ -335,7 +336,7 @@
     border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem;
   }
   .cytobyte-tag {
-    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--teal); margin-bottom: 0.35rem; display: block;
   }
   .cytobyte-title {
@@ -346,7 +347,7 @@
 
   /* ─── CTA BAND ─── */
   .cta-band {
-    text-align: center; padding: 80px 5vw;
+    text-align: center; padding: 80px max(5vw, calc((100% - 1600px) / 2));
     background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
     border-top: 1px solid var(--border2); position: relative; overflow: hidden;
   }
@@ -361,7 +362,7 @@
 
   /* ─── FOOTER ─── */
   footer {
-    padding: 3rem 5vw 2rem; border-top: 1px solid var(--border2);
+    padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 2rem; border-top: 1px solid var(--border2);
     display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
   }
   .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-bottom: 0.4rem; }
@@ -514,7 +515,7 @@
     .footer-links { flex-wrap: wrap; gap: 1rem; }
   }
   @media (max-width: 480px) {
-    section { padding: 60px 5vw; }
+    section { padding: 60px max(5vw, calc((100% - 1600px) / 2)); }
   }
 
   /* ─── PRICING NOTE ─── */
@@ -539,6 +540,7 @@
     transition: opacity 0.15s;
   }
   .engagement-pricing a:hover { opacity: 0.75; }
+
 </style>
 </head>
 <body>
@@ -567,7 +569,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-ctas">
-    <a class="nav-cta-soft" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="nav-cta-soft" href="contact.html?intent=hello">Say Hello</a>
     <a class="nav-cta" href="contact.html">Book a Demo</a>
   </div>
 
@@ -584,7 +586,7 @@
       </div>
       <ul class="drawer-sub">
         <li><a href="biomedical.html" class="active">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
         <li><a href="custom.html">Custom Solutions</a></li>
       </ul>
     </li>
@@ -604,7 +606,7 @@
   </ul>
   <div class="drawer-ctas">
     <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
-    <a class="drawer-cta-secondary" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="drawer-cta-secondary" href="contact.html?intent=hello">Say Hello</a>
   </div>
 </div>
 
@@ -669,7 +671,7 @@
           <span class="segment-num">Segment 01</span>
           <h3>BioPharma</h3>
           <div class="segment-tagline">Reproducible analysis at the speed of discovery</div>
-          <p class="segment-desc">BioPharma imaging workflows demand precision, reproducibility, and throughput in equal measure. Manual review creates analytical bottlenecks that slow assay cycles; generic tools create scripting dependencies that overload bioinformatics teams. <span class="optiflow-badge">OptiFlow</span> delivers automated, domain-aware pipelines that scale with your screening campaigns — without sacrificing the rigour your regulated environment requires.</p>
+          <p class="segment-desc">Precision, reproducibility, and throughput — in equal measure. Manual review slows assay cycles; generic tools overload bioinformatics teams with scripting. <span class="optiflow-badge">OptiFlow</span> delivers automated, domain-aware pipelines that scale with your screening campaigns — without sacrificing the rigour a regulated environment requires.</p>
           <div class="pain-points">
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Screening throughput bottlenecks.</strong> Manual or semi-automated analysis limits campaign velocity — instrument capacity goes underutilised while analysts queue.</span></div>
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Scalability, consistency and reproducibility.</strong> Lack of standardised pipelines across sites, operators, and timepoints undermines data integrity in regulated environments.</span></div>
@@ -694,7 +696,7 @@
           <span class="segment-num">Segment 02</span>
           <h3>Bio Research</h3>
           <div class="segment-tagline">Let researchers focus on biology, not pipelines</div>
-          <p class="segment-desc">Biology experts are not image processing experts — and they shouldn't need to be. Yet most research labs spend a disproportionate share of experimental time on analysis rather than interpretation. <span class="optiflow-badge">OptiFlow</span>'s visual workflow builder puts robust, reproducible analytics directly in the hands of the researcher — no scripting required, no single point of failure when a lab member moves on.</p>
+          <p class="segment-desc">Biology experts aren't image-processing experts — and shouldn't need to be. Yet labs lose too much experimental time to analysis rather than interpretation. <span class="optiflow-badge">OptiFlow</span>'s visual workflow builder puts robust, reproducible analytics directly in researchers' hands — no scripting, and no single point of failure when a lab member moves on.</p>
           <div class="pain-points">
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Analysis overhead.</strong> Researchers spend a disproportionate amount of time on image processing rather than biological interpretation — the work they were hired for.</span></div>
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Fragile pipelines.</strong> Analysis workflows built by one lab member break when they leave or when imaging conditions change — institutional knowledge walks out the door.</span></div>
@@ -723,7 +725,7 @@
           <span class="segment-num">Segment 03</span>
           <h3>Drug Screening</h3>
           <div class="segment-tagline">Close the gap between instrument and insight</div>
-          <p class="segment-desc">High-content screening generates image data faster than conventional tools can process it. The bottleneck is always downstream of the instrument — in the analysis layer. <span class="optiflow-badge">OptiFlow</span> closes that gap with multi-parametric, domain-aware pipelines that handle the volume, normalise across plates and batches, and reduce false positives before they consume follow-up resources.</p>
+          <p class="segment-desc">High-content screening generates data faster than conventional tools can process it — and the bottleneck is always downstream, in the analysis layer. <span class="optiflow-badge">OptiFlow</span> closes that gap with multi-parametric pipelines that handle the volume, normalise across plates and batches, and cut false positives before they consume follow-up resources.</p>
           <div class="pain-points">
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Analysis throughput.</strong> HCS generates data faster than it can be analysed — the bottleneck is always downstream of the instrument, not at it.</span></div>
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Chemical staining interference.</strong> Staining interferes with cellular biology and limits conclusions from live experiments, especially timepoint and kinetic assays.</span></div>
@@ -753,7 +755,7 @@
           <span class="segment-num">Segment 04</span>
           <h3>Digital Pathology & Cytology</h3>
           <div class="segment-tagline">Precision review at scale</div>
-          <p class="segment-desc">Whole-slide imaging generates data volumes that make exhaustive manual review impractical. <span class="optiflow-badge">OptiFlow</span>'s domain-aware pipelines are built to handle the scale and variability of pathology workflows — from grading consistency across institutions to rare cell detection that no manual screen can reliably achieve.</p>
+          <p class="segment-desc">Whole-slide imaging produces data volumes that make exhaustive manual review impractical. <span class="optiflow-badge">OptiFlow</span>'s domain-aware pipelines handle the scale and variability of pathology workflows — from grading consistency across institutions to rare-cell detection no manual screen can reliably achieve.</p>
           <div class="pain-points">
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Scale of whole-slide review.</strong> WSI files are too large for exhaustive manual analysis — pathologists spend time on low-value scanning rather than high-value diagnosis.</span></div>
             <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Grading subjectivity.</strong> Consistency varies between pathologists and institutions — introducing clinically significant variability into decisions that depend on standardised criteria.</span></div>
@@ -776,12 +778,24 @@
     </div><!-- /segments-section -->
 
     <!-- CTA BAND -->
+    <!-- TRACEABILITY -->
+    <div class="reveal" style="padding:0 2rem;margin:1rem auto 0;max-width:1120px;">
+      <div style="display:flex;gap:1.15rem;align-items:flex-start;padding:1.5rem 1.75rem;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:16px;background:linear-gradient(135deg,rgba(29,184,154,0.07),rgba(0,0,0,0));">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M12 2l8 4v6c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div>
+          <div style="font-family:var(--display);font-weight:600;color:#FFFFFF;font-size:1.08rem;margin-bottom:0.4rem;">Reproducible &amp; auditable by design</div>
+          <p style="font-size:0.95rem;color:var(--muted);line-height:1.7;margin:0;">Every image <span class="optiflow-badge">OptiFlow</span> produces carries the full sequence of operations and parameters applied to the source &mdash; built for record-keeping, audit, and reproducibility.</p>
+        </div>
+      </div>
+    </div>
+
+
     <div class="cta-band">
       <h2 class="reveal">Ready to see it on your images?</h2>
       <p class="reveal">Book a live demo with your own imaging data — we'll show you the most relevant capabilities, and if your workflow needs something we haven't built yet, we'll work with you to build it.</p>
       <div class="cta-group reveal">
         <a class="btn-primary" href="contact.html">Book a Demo</a>
-        <a class="btn-secondary" href="contact.html">Say Hello</a>
+        <a class="btn-secondary" href="contact.html?intent=hello">Say Hello</a>
       </div>
       <p class="pricing-note reveal">Modular licensing — base platform + domain modules<span class="pricing-note-sep">·</span>Subscription or usage-based<span class="pricing-note-sep">·</span><a href="contact.html">Contact us for pricing</a></p>
     </div>
@@ -806,12 +820,12 @@
       </div>
       <ul class="footer-links">
         <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
         <li><a href="custom.html">Custom Solutions</a></li>
           </ul>
       <div class="footer-bottom">
         <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
-        <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+        <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
       </div>
     </footer>
 
@@ -902,6 +916,7 @@
       document.body.style.overflow = '';
     });
   });
+
 </script>
 </body>
 </html>

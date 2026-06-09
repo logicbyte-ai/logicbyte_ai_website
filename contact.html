@@ -56,7 +56,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5vw; height: var(--nav-h);
+    padding: 0 max(5vw, calc((100% - 1600px) / 2)); height: var(--nav-h);
     background: rgba(11,22,40,0.95);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border2);
@@ -85,7 +85,7 @@
 
   /* ─── HERO ─── */
   .contact-hero {
-    padding: 5rem 5vw 3.5rem;
+    padding: 5rem max(5vw, calc((100% - 1600px) / 2)) 3.5rem;
     position: relative; overflow: hidden;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -165,7 +165,7 @@
 
   /* ─── INTENT CARDS ─── */
   .intents-section {
-    padding: 0 5vw 4rem;
+    padding: 0 max(5vw, calc((100% - 1600px) / 2)) 4rem;
     border-top: 1px solid var(--border2);
     padding-top: 3rem;
   }
@@ -226,7 +226,7 @@
 
   /* ─── FORM ─── */
   .form-section {
-    padding: 0 5vw 5rem;
+    padding: 0 max(5vw, calc((100% - 1600px) / 2)) 5rem;
   }
   .form-panel {
     background: var(--navy2);
@@ -306,7 +306,7 @@
 
   /* ─── FOOTER ─── */
   footer {
-    padding: 3rem 5vw 2rem;
+    padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 2rem;
     border-top: 1px solid var(--border2);
     display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
   }
@@ -457,7 +457,7 @@
     .footer-links { flex-wrap: wrap; gap: 1rem; }
   }
   @media (max-width: 480px) {
-    section { padding: 60px 5vw; }
+    section { padding: 60px max(5vw, calc((100% - 1600px) / 2)); }
   }
 </style>
 </head>
@@ -486,7 +486,7 @@
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <div class="nav-ctas">
-    <a class="nav-cta-soft" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="nav-cta-soft" href="contact.html?intent=hello">Say Hello</a>
     <a class="nav-cta" href="contact.html">Book a Demo</a>
   </div>
 
@@ -503,7 +503,7 @@
       </div>
       <ul class="drawer-sub">
         <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
         <li><a href="custom.html">Custom Solutions</a></li>
       </ul>
     </li>
@@ -523,7 +523,7 @@
   </ul>
   <div class="drawer-ctas">
     <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
-    <a class="drawer-cta-secondary" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="drawer-cta-secondary" href="contact.html?intent=hello">Say Hello</a>
   </div>
 </div>
 
@@ -552,7 +552,7 @@
           </div>
         </div>
         <div class="direct-links">
-          <a class="direct-link" href="mailto:hello@logicbyte.ai">
+          <div class="direct-link">
             <div class="direct-link-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </div>
@@ -560,8 +560,8 @@
               <div class="direct-link-label">General enquiries</div>
               <div class="direct-link-value">hello@logicbyte.ai</div>
             </div>
-          </a>
-          <a class="direct-link" href="mailto:d.s.jokhun@logicbyte.ai">
+          </div>
+          <div class="direct-link">
             <div class="direct-link-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
@@ -569,7 +569,7 @@
               <div class="direct-link-label">Founder direct</div>
               <div class="direct-link-value">d.s.jokhun@logicbyte.ai</div>
             </div>
-          </a>
+          </div>
           <a class="direct-link" href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">
             <div class="direct-link-icon">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -661,6 +661,7 @@
             <div class="form-field full">
               <label for="message">Message <span style="color:var(--teal)">*</span></label>
               <textarea id="message" name="message" placeholder="Tell us about your imaging challenge, what you're hoping to achieve, or simply say hello." required></textarea>
+              <p style="margin-top:0.55rem;font-size:0.8rem;color:var(--muted);line-height:1.6;">Sharing images or a dataset? Paste a link (Google Drive, WeTransfer, etc.) in your message, or email it to us directly &mdash; we'll follow up.</p>
             </div>
           </div>
           <p class="form-note">Fields marked <span style="color:var(--teal)">*</span> are required. We won't share your details with anyone.</p>
@@ -701,12 +702,12 @@
     </div>
     <ul class="footer-links">
       <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-      <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+      <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
       <li><a href="custom.html">Custom Solutions</a></li>
       </ul>
     <div class="footer-bottom">
       <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
-      <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+      <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
     </div>
   </footer>
 </div>
@@ -727,7 +728,7 @@
 
   // Intent selection — updates select field and highlights card
   let selectedIntent = null;
-  function selectIntent(intent, card) {
+  function selectIntent(intent, card, scroll = true) {
     document.querySelectorAll('.intent-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
     selectedIntent = intent;
@@ -743,8 +744,18 @@
     msgField.placeholder = placeholders[intent];
 
     // Smooth scroll to form
-    document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (scroll) document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // Pre-select intent from URL (?intent=demo|project|hello)
+  (function () {
+    const p = (new URLSearchParams(location.search).get('intent') || '').toLowerCase();
+    if (!p) return;
+    const idx = { demo: 0, project: 1, hello: 2, other: 2 }[p];
+    const cards = document.querySelectorAll('.intent-card');
+    if (idx == null || !cards[idx]) return;
+    selectIntent(['demo', 'project', 'other'][idx], cards[idx], false);
+  })();
 
   // Form submission — Formspree
   async function submitForm() {

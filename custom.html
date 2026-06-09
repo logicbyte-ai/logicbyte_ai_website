@@ -67,7 +67,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5vw; height: var(--nav-h);
+    padding: 0 max(5vw, calc((100% - 1600px) / 2)); height: var(--nav-h);
     background: rgba(11,22,40,0.95);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border2);
@@ -100,7 +100,8 @@
   .page-shell {
     display: grid;
     grid-template-columns: 1fr var(--col-nav);
-    margin-top: var(--nav-h);
+    margin: var(--nav-h) auto 0;
+    max-width: 1600px;
     min-height: calc(100vh - var(--nav-h));
     align-items: start;
   }
@@ -118,7 +119,7 @@
   }
   .nav-vertical-label { margin-bottom: 1.8rem; }
   .nav-vertical-super {
-    font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--teal); font-weight: 500; font-family: var(--sans);
     display: block; margin-bottom: 0.35rem;
   }
@@ -132,7 +133,7 @@
   }
   .nav-divider { height: 1px; background: var(--border2); margin-bottom: 1.2rem; }
   .nav-seg-label {
-    font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); margin-bottom: 0.6rem; font-family: var(--sans);
   }
   .seg-link {
@@ -166,7 +167,7 @@
 
   /* ─── HERO ─── */
   .page-hero {
-    padding: 4.5rem 5vw 3rem;
+    padding: 4.5rem max(5vw, calc((100% - 1600px) / 2)) 3rem;
     position: relative; overflow: hidden;
   }
   .page-hero::before {
@@ -215,7 +216,7 @@
   .when-section {
     border-top: 1px solid var(--border2);
     border-bottom: 1px solid var(--border2);
-    padding: 3rem 5vw;
+    padding: 3rem max(5vw, calc((100% - 1600px) / 2));
     background: var(--navy2);
   }
   .when-label {
@@ -242,7 +243,7 @@
   .when-text strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 0.2rem; }
 
   /* ─── ENGAGEMENTS ─── */
-  .engagements-section { padding: 3.5rem 5vw 90px; }
+  .engagements-section { padding: 3.5rem max(5vw, calc((100% - 1600px) / 2)) 90px; }
 
   .section-eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
   .section-eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
@@ -321,7 +322,7 @@
     background: var(--navy2);
     border-top: 1px solid var(--border2);
     border-bottom: 1px solid var(--border2);
-    padding: 3rem 5vw;
+    padding: 3rem max(5vw, calc((100% - 1600px) / 2));
   }
   .process-label {
     font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
@@ -345,7 +346,7 @@
   }
   .process-step:first-child .step-dot { background: var(--teal); }
   .step-num {
-    font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--teal); margin-bottom: 0.3rem; display: block;
   }
   .step-name {
@@ -356,7 +357,7 @@
 
   /* ─── CTA BAND ─── */
   .cta-band {
-    text-align: center; padding: 80px 5vw;
+    text-align: center; padding: 80px max(5vw, calc((100% - 1600px) / 2));
     background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
     border-top: 1px solid var(--border2); position: relative; overflow: hidden;
   }
@@ -371,7 +372,7 @@
 
   /* ─── FOOTER ─── */
   footer {
-    padding: 3rem 5vw 2rem; border-top: 1px solid var(--border2);
+    padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 2rem; border-top: 1px solid var(--border2);
     display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
   }
   .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-bottom: 0.4rem; }
@@ -521,7 +522,7 @@
     .footer-links { flex-wrap: wrap; gap: 1rem; }
   }
   @media (max-width: 480px) {
-    section { padding: 60px 5vw; }
+    section { padding: 60px max(5vw, calc((100% - 1600px) / 2)); }
   }
 
   /* ─── PRICING NOTE ─── */
@@ -574,7 +575,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-ctas">
-    <a class="nav-cta-soft" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="nav-cta-soft" href="contact.html?intent=hello">Say Hello</a>
     <a class="nav-cta" href="contact.html">Book a Demo</a>
   </div>
 
@@ -591,7 +592,7 @@
       </div>
       <ul class="drawer-sub">
         <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
         <li><a href="custom.html" class="active">Custom Solutions</a></li>
       </ul>
     </li>
@@ -611,7 +612,7 @@
   </ul>
   <div class="drawer-ctas">
     <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
-    <a class="drawer-cta-secondary" href="mailto:hello@logicbyte.ai">Say Hello</a>
+    <a class="drawer-cta-secondary" href="contact.html?intent=hello">Say Hello</a>
   </div>
 </div>
 
@@ -640,7 +641,7 @@
       <h1 class="reveal">Your imaging challenge.<br/><em>Our starting point.</em></h1>
       <p class="hero-lead reveal">Not every imaging problem fits a predefined vertical or segment. When your modality, sample type, workflow, or analytical need sits outside the standard, we scope, build, and validate a solution from the ground up — alongside you.</p>
       <div class="hero-ctas reveal">
-        <a class="btn-primary" href="mailto:hello@logicbyte.ai">Start a Conversation</a>
+        <a class="btn-primary" href="contact.html">Start a Conversation</a>
         <a class="btn-secondary" href="#engagements">How We Work</a>
       </div>
     </div>
@@ -680,7 +681,7 @@
           <span class="engagement-num">Engagement 01</span>
           <h3>Scoped Project</h3>
           <div class="engagement-tagline">A defined problem. A delivered solution.</div>
-          <p class="engagement-desc">A scoped project has a clear brief, defined deliverables, and a fixed timeline. We take a specific imaging challenge — a custom segmentation model, a pipeline for a particular assay, a proof of concept for a new modality — and deliver a validated, documented solution. This may mean adapting existing OptiFlow modules or building new analytical capabilities from the ground up. Either way, the deliverable is production-grade and validated against your data.</p>
+          <p class="engagement-desc">A scoped project has a clear brief, defined deliverables, and a fixed timeline. We take a specific challenge — a segmentation model, a pipeline for an assay, a proof of concept for a new modality — and deliver a validated, documented solution. Whether we adapt existing OptiFlow modules or build new ones, the deliverable is production-grade and validated against your data.</p>
           <div class="included-label">What's included</div>
           <div class="included-list">
             <div class="included-item"><span class="included-dot"></span><span class="included-text">Discovery and scoping session to define requirements, success criteria, and data needs</span></div>
@@ -710,7 +711,7 @@
           <span class="engagement-num">Engagement 02</span>
           <h3>Embedded Partnership</h3>
           <div class="engagement-tagline">Long-term capability, built alongside your team.</div>
-          <p class="engagement-desc">An embedded partnership is for organisations building an analytical capability over time — iterating as the science evolves, adding modules as new imaging questions emerge, and integrating deeply with internal workflows and data infrastructure. Logic Byte functions as an extension of your team: attending relevant meetings, understanding your domain deeply, and co-developing rather than just delivering.</p>
+          <p class="engagement-desc">An embedded partnership is for organisations building analytical capability over time — iterating as the science evolves, adding modules as new questions emerge, and integrating with your workflows and data infrastructure. Logic Byte acts as an extension of your team: in the meetings, deep in your domain, co-developing rather than just delivering.</p>
           <div class="included-label">What's included</div>
           <div class="included-list">
             <div class="included-item"><span class="included-dot"></span><span class="included-text">Ongoing access to Logic Byte's imaging AI expertise across the partnership duration</span></div>
@@ -740,7 +741,7 @@
           <span class="engagement-num">Engagement 03</span>
           <h3>Platform Adaptation</h3>
           <div class="engagement-tagline">OptiFlow, configured for your exact domain.</div>
-          <p class="engagement-desc">Platform adaptation takes <span class="optiflow-badge">OptiFlow</span> and extends or reconfigures it for a specific domain, instrument type, or workflow that isn't covered by the standard verticals. Where existing modules can be adapted, we adapt them. Where they can't — where the imaging physics, sample characteristics, or analytical requirements demand something genuinely new — we build the module from scratch, then integrate it into the platform. The result is the full power of OptiFlow's architecture with analytical capabilities purpose-engineered for your environment.</p>
+          <p class="engagement-desc">Platform adaptation extends or reconfigures <span class="optiflow-badge">OptiFlow</span> for a domain, instrument, or workflow outside the standard verticals. Where existing modules can be adapted, we adapt them. Where they can't — where the imaging physics, sample, or analytical requirements demand something genuinely new — we build the module from scratch and integrate it. The result: the full power of OptiFlow's architecture, purpose-engineered for your environment.</p>
           <div class="included-label">What's included</div>
           <div class="included-list">
             <div class="included-item"><span class="included-dot"></span><span class="included-text">Full <span class="optiflow-badge">OptiFlow</span> platform licence with all core modules</span></div>
@@ -774,7 +775,7 @@
       <div class="when-grid">
         <div class="when-card">
           <div class="when-icon"></div>
-          <div class="when-text"><strong>Augmented reality capabilities</strong>Real-time AR overlay and in-silico enhancement of live instrument feeds — including generative AI rendering of virtual stains, contrast augmentation, and region-of-interest annotation directly on the acquisition view. Deployed commercially at ETH Zurich.</div>
+          <div class="when-text"><strong>Augmented reality capabilities</strong>Real-time AR overlay and in-silico enhancement of live instrument feeds — including generative AI rendering of virtual stains, contrast augmentation, and region-of-interest annotation directly on the acquisition view. Deployed commercially at ETH Zürich.</div>
         </div>
         <div class="when-card">
           <div class="when-icon"></div>
@@ -835,7 +836,7 @@
       <h2 class="reveal">Tell us what you're trying to solve.</h2>
       <p class="reveal">There's no standard brief required — just a description of your imaging challenge. We'll take it from there, propose the right engagement, and work with you to build what works.</p>
       <div class="cta-group reveal">
-        <a class="btn-primary" href="mailto:hello@logicbyte.ai">Start a Conversation</a>
+        <a class="btn-primary" href="contact.html">Start a Conversation</a>
       </div>
     </div>
 
@@ -859,12 +860,12 @@
       </div>
       <ul class="footer-links">
         <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
         <li><a href="custom.html">Custom Solutions</a></li>
           </ul>
       <div class="footer-bottom">
         <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
-        <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+        <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
       </div>
     </footer>
 
