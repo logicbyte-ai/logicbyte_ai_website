@@ -233,7 +233,7 @@
   .hero-window {
     width: 100%; max-width: 1060px; height: auto; min-height: 430px;
     aspect-ratio: 1060 / 684;
-    border: none; display: block; background: transparent; border-radius: 8px;
+    border: none; display: block; background: transparent;
   }
 
   /* ─── SEE IT IN ACTION ─── */
@@ -244,12 +244,11 @@
   .see-it-demo { flex: 1; min-width: 0; }
   .demo-wrap {
     position: relative; width: 100%; max-width: 880px; margin: 0 auto;
-    border-radius: 12px; overflow: hidden; border: 1px solid var(--border2);
-    background: rgba(8,10,18,0.4); min-height: 360px;
+    border-radius: 12px; min-height: 0;
   }
   .demo-frame {
     width: 100%; border: none; display: block;
-    aspect-ratio: 880 / 723; opacity: 0; transition: opacity 0.7s ease; border-radius: 12px;
+    aspect-ratio: 880 / 723; opacity: 0; transition: opacity 0.7s ease;
   }
   .demo-frame.loaded { opacity: 1; }
   .demo-ph {
@@ -593,6 +592,7 @@
     h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); max-width: 100%; }
     .see-it-layout { flex-direction: column; }
     .see-it-text { width: 100%; max-width: 100%; }
+    .see-it-demo { width: 100%; }
     .platform-layout { flex-direction: column; gap: 2.5rem; }
     .platform-content { width: 100%; flex: none; }
     .platform-demo { position: static; width: 100%; }
@@ -773,10 +773,10 @@
   }
   .repro-heading em { font-style: normal; color: var(--teal); font-weight: 800; }
   .repro-tagline { font-size: 0.52em; font-weight: 400; color: var(--teal); letter-spacing: 0.08em; opacity: 0.85; vertical-align: middle; white-space: nowrap; }
-  .repro-frame-wrap { position: relative; width: 100%; max-width: 880px; min-height: 320px; margin: 0 auto; border-radius: 12px; overflow: hidden; }
-  .repro-frame { width: 100%; border: none; display: block; height: auto; min-height: 320px;
+  .repro-frame-wrap { position: relative; width: 100%; max-width: 880px; min-height: 0; margin: 0 auto; border-radius: 12px; }
+  .repro-frame { width: 100%; border: none; display: block; height: auto;
     aspect-ratio: 880 / 672;
-    opacity: 0; transition: opacity 0.7s ease; border-radius: 12px; }
+    opacity: 0; transition: opacity 0.7s ease; }
   .repro-frame.loaded { opacity: 1; }
   .repro-ph { position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 1rem; color: var(--muted);
