@@ -3,920 +3,1209 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="OptiFlow's biomedical pipeline covers label-free in-silico staining, single-cell analysis, digital pathology, and drug discovery imaging — powered by Logic Byte."/>
+<meta name="description" content="OptiFlow by Logic Byte — domain-aware image analytics for life-science imaging. Label-free CytoByte staining, single-cell and high-content analysis, digital pathology, and image-based biomarkers. Reproducible, auditable, 100% local."/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="canonical" href="https://logicbyte.ai/biomedical.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Logic Byte"/>
 <meta property="og:url" content="https://logicbyte.ai/biomedical.html"/>
 <meta property="og:title" content="Biomedical & Life Sciences — Logic Byte"/>
-<meta property="og:description" content="OptiFlow's biomedical pipeline covers label-free in-silico staining, single-cell analysis, digital pathology, and drug discovery imaging — powered by Logic Byte."/>
+<meta property="og:description" content="Domain-aware image analytics for life-science imaging — label-free staining, single-cell and high-content analysis, digital pathology, and biomarkers. Reproducible, auditable, 100% local."/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Biomedical & Life Sciences — Logic Byte"/>
-<meta name="twitter:description" content="OptiFlow's biomedical pipeline covers label-free in-silico staining, single-cell analysis, digital pathology, and drug discovery imaging — powered by Logic Byte."/>
+<meta name="twitter:description" content="Domain-aware image analytics for life-science imaging — label-free staining, single-cell and high-content analysis, digital pathology, and biomarkers. Reproducible, auditable, 100% local."/>
 <title>Biomedical & Life Sciences — Logic Byte</title>
+
+<script>document.documentElement.classList.add('js');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ============================================================
+   LOGIC BYTE — DESIGN TOKENS  (shared with index.html / platform.html)
+   ============================================================ */
+:root{
+  --navy:#0B1628;
+  --navy-2:#0E1B30;
+  --navy-3:#101F38;
+  --panel:#10203A;
+  --panel-2:#13243F;
+  --teal:#1DB89A;
+  --teal-bright:#22D3AC;
+  --teal-soft:rgba(29,184,154,0.12);
+  --gold:#D4AF37;
+  --steel:#5E8FC9;
+  --white:#FFFFFF;
+  --text:#E8EDF4;
+  --muted:#92A2B8;
+  --muted-2:#6E7F96;
+  --border:rgba(255,255,255,0.10);
+  --border-2:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.16);
 
-  :root {
-    --navy:    #0B1628;
-    --navy2:   #112040;
-    --navy3:   #1A3260;
-    --teal:    #1DB89A;
-    --teal3:   #0EDBB8;
-    --teal-glow:  rgba(29,184,154,0.15);
-    --teal-glow2: rgba(29,184,154,0.06);
-    --gold:    #d4af37;
-    --white:   #FFFFFF;
-    --muted:   #8BA0B8;
-    --text:    #C8D8E8;
-    --border:  rgba(29,184,154,0.18);
-    --border2: rgba(255,255,255,0.07);
-    --serif:   'Syne', system-ui, sans-serif;
-    --display: 'Outfit', system-ui, sans-serif;
-    --sans:    'DM Sans', system-ui, sans-serif;
-    --nav-h:   68px;
-    --col-nav: 210px;
-  }
+  --pad:max(1.25rem, 5vw, calc((100vw - 1500px) / 2));
+  --h1:clamp(1.7rem, calc(3.8vw - 1rem), 2.9rem);
+  --sec:clamp(4rem,8vw,6rem);
+  --radius:14px;
 
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--navy);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+  --f-display:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --f-mono:'DM Mono','SF Mono',ui-monospace,Menlo,monospace;
+  --f-wordmark:'Syne',-apple-system,sans-serif;
+  --f-body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
 
-  /* ─── OPTIFLOW BADGE ─── */
-  .optiflow-badge {
-    font-size: 1em; font-weight: 600; letter-spacing: 0.01em;
-    color: var(--teal); white-space: nowrap; font-family: var(--sans);
-  }
-  .optiflow-badge::before {
-    content: ''; display: inline-block;
-    width: 4px; height: 4px; border-radius: 1px;
-    background: var(--teal); opacity: 0.8;
-    margin-right: 0.2em; vertical-align: middle;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--f-body);
+  background:var(--navy);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg,iframe{display:block;max-width:100%}
+::selection{background:rgba(29,184,154,0.28);color:#fff}
 
-  /* ─── TOP NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 max(5vw, calc((100% - 1600px) / 2)); height: var(--nav-h);
-    background: rgba(11,22,40,0.95);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border2);
-    transition: background 0.3s;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-  .nav-logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
-  .nav-logo-text { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: -0.01em; }
-  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a.active { color: var(--teal); }
-  .nav-ctas { display: flex; align-items: center; gap: 0.5rem; }
-  .nav-cta-soft {
-    border: 1px solid var(--border); color: var(--text);
-    padding: 0.5rem 1.4rem; border-radius: 100px;
-    font-size: 0.875rem; font-weight: 400; text-decoration: none; letter-spacing: 0.03em;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-  .nav-cta-soft:hover { border-color: var(--teal); color: var(--white); transform: translateY(-1px); }
-  .nav-cta {
-    background: var(--teal); color: var(--navy);
-    padding: 0.5rem 1.4rem; border-radius: 100px;
-    font-size: 0.875rem; font-weight: 500; text-decoration: none; letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .nav-cta:hover { background: var(--teal3); transform: translateY(-1px); }
+.wrap{width:100%;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.section{padding-top:var(--sec);padding-bottom:var(--sec)}
 
-  /* ─── PAGE SHELL ─── */
-  /* Full viewport grid: content left, navigator right, from below top nav */
-  .page-shell {
-    display: grid;
-    grid-template-columns: 1fr var(--col-nav);
-    margin: var(--nav-h) auto 0;
-    max-width: 1600px;
-    min-height: calc(100vh - var(--nav-h));
-    align-items: start;
-  }
+/* ---------- Shared type ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:var(--f-mono);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:1.4rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--teal);opacity:0.85;display:inline-block}
+.eyebrow.gold{color:var(--gold)}
+.eyebrow.gold::before{background:var(--gold)}
 
-  /* ─── LEFT: all page content ─── */
-  .page-content { min-width: 0; }
+h2.h2{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(1.85rem,3.7vw,2.95rem);
+  line-height:1.08;letter-spacing:-0.015em;color:var(--white);
+}
+h2.h2 em{font-style:normal;color:var(--teal)}
+h2.h2 em.gold{color:var(--gold)}
+h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1.25}
 
-  /* ─── RIGHT: persistent sticky navigator ─── */
-  .page-navigator {
-    position: sticky;
-    top: var(--nav-h);
-    height: calc(100vh - var(--nav-h));
-    border-left: 1px solid var(--border2);
-    display: flex; flex-direction: column;
-    padding: 2.8rem 1.4rem 2rem 1.6rem;
-    overflow-y: auto;
-  }
+.lead{
+  font-size:clamp(1rem,1.25vw,1.13rem);
+  color:var(--muted);font-weight:400;line-height:1.7;
+  max-width:62ch;margin-top:1.1rem;
+}
+.section-head{max-width:880px}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.section-head.center .lead{margin-left:auto;margin-right:auto}
 
-  .nav-vertical-label {
-    margin-bottom: 1.8rem;
-  }
-  .nav-vertical-super {
-    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--teal); font-weight: 500; font-family: var(--sans);
-    display: block; margin-bottom: 0.35rem;
-  }
-  .nav-vertical-name {
-    font-family: var(--serif); font-size: 0.85rem; font-weight: 700;
-    color: var(--white); line-height: 1.35; letter-spacing: -0.01em;
-  }
+.optiflow{
+  font-family:var(--f-display);font-weight:600;color:var(--white);
+  letter-spacing:0.01em;
+}
 
-  .nav-divider { height: 1px; background: var(--border2); margin-bottom: 1.2rem; }
+.tag-new,.tag-cyto{
+  font-family:var(--f-mono);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--teal);
+  border:1px solid rgba(29,184,154,0.4);border-radius:100px;
+  padding:0.18em 0.6em;vertical-align:middle;white-space:nowrap;
+}
+.tag-cyto{color:var(--gold);border-color:rgba(212,175,55,0.45)}
 
-  .nav-seg-label {
-    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 0.6rem; font-family: var(--sans);
-  }
+/* ============================================================
+   BUTTONS  (shared)
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:0.55rem;
+  font-family:var(--f-body);font-size:0.95rem;font-weight:500;letter-spacing:0.01em;
+  padding:0.85rem 1.9rem;border-radius:100px;cursor:pointer;
+  transition:transform .16s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--teal);color:var(--navy);font-weight:600;border:1px solid var(--teal)}
+.btn-primary:hover{background:var(--teal-bright);transform:translateY(-2px);box-shadow:0 10px 34px rgba(29,184,154,0.28)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-strong)}
+.btn-secondary:hover{border-color:var(--teal);color:var(--white);transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;white-space:nowrap;padding:0;border-radius:0;font-family:var(--f-body);font-size:0.95rem;color:var(--teal);font-weight:500;background:none;cursor:pointer}
+.btn-ghost svg{width:16px;height:16px;flex:none;transition:transform .18s ease}
+.btn-ghost:hover svg{transform:translateX(4px)}
 
-  .seg-link {
-    display: flex; align-items: center; gap: 0.65rem;
-    padding: 0.55rem 0.7rem; border-radius: 6px;
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    transition: background 0.2s, border-color 0.2s, padding-left 0.2s;
-    margin-bottom: 0.1rem;
-  }
-  .seg-link:hover { background: var(--teal-glow2); }
-  .seg-link.active {
-    border-left-color: var(--teal);
-    background: var(--teal-glow2);
-    padding-left: 0.9rem;
-  }
-  .seg-link.active .seg-link-name { color: var(--teal); }
-  .seg-link.active .seg-link-dot { background: var(--teal); opacity: 1; }
-  .seg-link-dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--muted); flex-shrink: 0; opacity: 0.45;
-    transition: background 0.2s, opacity 0.2s;
-  }
-  .seg-link-name {
-    font-size: 0.78rem; color: var(--muted);
-    transition: color 0.2s; line-height: 1.3; font-family: var(--sans);
-  }
+/* ============================================================
+   NAV  (shared)
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(11,22,40,0.82);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--border-2);
+}
+.nav-inner{
+  padding:0 var(--pad);
+  height:74px;display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{display:flex;align-items:center;gap:0.7rem}
+.brand-mark{width:24px;height:24px;flex:0 0 auto}
+.brand-name{font-family:var(--f-wordmark);font-weight:700;font-size:1.18rem;color:var(--white);letter-spacing:0.01em}
 
-  .nav-vertical-desc {
-    font-size: 0.75rem; color: var(--muted); line-height: 1.6;
-    font-weight: 300; margin-bottom: 1.2rem;
-  }
-  .nav-back {
-    margin-top: auto; padding-top: 1.2rem;
-    border-top: 1px solid var(--border2);
-    display: flex; align-items: center; gap: 0.4rem;
-    font-size: 0.72rem; color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-back:hover { color: var(--teal); }
-  .nav-back-arrow { font-size: 0.8rem; transition: transform 0.2s; }
-  .nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+.nav-links{display:flex;align-items:center;gap:0.35rem;list-style:none}
+.nav-links > li{position:relative}
+.nav-link{
+  font-family:var(--f-wordmark);font-weight:600;font-size:0.9rem;color:var(--muted);
+  padding:0.55rem 0.85rem;border-radius:8px;transition:color .18s ease,background .18s ease;
+  display:inline-flex;align-items:center;gap:0.35rem;
+}
+.nav-link:hover{color:var(--white)}
+.nav-link[aria-current="page"]{color:var(--white)}
+.nav-link .caret{width:11px;height:11px;opacity:0.7;transition:transform .2s ease}
+.has-menu:hover .caret{transform:rotate(180deg)}
 
-  /* ─── HERO ─── */
-  .page-hero {
-    padding: 4.5rem max(5vw, calc((100% - 1600px) / 2)) 3rem;
-    position: relative; overflow: hidden;
-  }
-  .page-hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 80% at 90% 10%, rgba(29,184,154,0.07), transparent 65%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.025;
-  }
-  .hero-grid svg { width: 100%; height: 100%; }
+.dropdown{
+  position:absolute;top:calc(100% + 8px);left:0;min-width:268px;
+  background:var(--navy-3);border:1px solid var(--border);border-radius:12px;
+  padding:0.5rem;opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+}
+.has-menu:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{
+  display:block;padding:0.7rem 0.85rem;border-radius:8px;
+  font-size:0.9rem;color:var(--text);transition:background .15s ease,color .15s ease;
+}
+.dropdown a span{display:block;font-size:0.76rem;color:var(--muted-2);margin-top:0.15rem;font-weight:400}
+.dropdown a:hover{background:var(--teal-soft);color:var(--white)}
+.dropdown a[aria-current="page"]{color:var(--teal)}
+.dropdown a[aria-current="page"] span{color:var(--teal);opacity:0.75}
 
-  .eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; }
-  .eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
-  .eyebrow span { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+.nav-cta{margin-left:0.4rem}
+.nav-cta .btn{padding:0.62rem 1.4rem;font-size:0.88rem}
 
-  h1 {
-    font-family: var(--display);
-    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-    font-weight: 700; letter-spacing: -0.02em;
-    color: var(--white); line-height: 1.15; margin-bottom: 1rem;
-  }
-  h1 em { font-style: normal; color: var(--teal); font-weight: 800; }
+.nav-burger{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:0.4rem}
+.nav-burger svg{width:26px;height:26px}
 
-  .hero-lead {
-    font-size: 1rem; color: var(--muted);
-    line-height: 1.8; font-weight: 300; margin-bottom: 2rem; max-width: 520px;
-  }
-  .hero-ctas { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--teal); color: var(--navy);
-    padding: 0.8rem 1.8rem; border-radius: 100px;
-    font-size: 0.9rem; font-weight: 500; text-decoration: none;
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  }
-  .btn-primary:hover { background: var(--teal3); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(29,184,154,0.25); }
-  .btn-secondary {
-    border: 1px solid var(--border); color: var(--text);
-    padding: 0.8rem 1.8rem; border-radius: 100px;
-    font-size: 0.9rem; font-weight: 400; text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-  .btn-secondary:hover { border-color: var(--teal); color: var(--white); transform: translateY(-2px); }
+/* mobile drawer */
+.drawer-scrim{position:fixed;inset:0;background:rgba(5,11,22,0.6);z-index:110;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+.drawer-scrim.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(86vw,360px);z-index:120;
+  background:var(--navy-2);border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding:1.4rem 1.4rem 2rem;overflow-y:auto;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.drawer-close{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.4rem}
+.drawer-close svg{width:24px;height:24px}
+.drawer-nav{list-style:none;display:flex;flex-direction:column;gap:0.15rem}
+.drawer-nav > li > a,.drawer-group-head > a{
+  display:block;padding:0.85rem 0.5rem;font-family:var(--f-wordmark);font-weight:600;
+  font-size:1.02rem;color:var(--text);border-bottom:1px solid var(--border-2);
+}
+.drawer-nav > li > a[aria-current="page"]{color:var(--teal)}
+.drawer-group-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-2)}
+.drawer-group-head > a{border-bottom:none;flex:1}
+.drawer-group-toggle{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.6rem}
+.drawer-group-toggle svg{width:16px;height:16px;transition:transform .2s ease}
+.drawer-group.open .drawer-group-toggle svg{transform:rotate(90deg)}
+.drawer-sub{list-style:none;max-height:0;overflow:hidden;transition:max-height .25s ease}
+.drawer-group.open .drawer-sub{max-height:240px}
+.drawer-sub a{display:block;padding:0.6rem 0.9rem;font-size:0.9rem;color:var(--muted)}
+.drawer-sub a:hover{color:var(--teal)}
+.drawer-sub a[aria-current="page"]{color:var(--teal)}
+.drawer-ctas{margin-top:1.6rem;display:flex;flex-direction:column;gap:0.7rem}
+.drawer-ctas .btn{width:100%;justify-content:center}
 
-  /* ─── MODALITIES STRIP ─── */
-  .modalities-strip {
-    border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2);
-    padding: 1rem max(5vw, calc((100% - 1600px) / 2)); display: flex; align-items: center; gap: 0;
-  }
-  .modalities-label {
-    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); white-space: nowrap; margin-right: 1.5rem; flex-shrink: 0;
-  }
-  .modalities-list { display: flex; flex-wrap: wrap; }
-  .modality {
-    font-size: 0.76rem; color: var(--text); padding: 0.1rem 0.9rem;
-    border-left: 1px solid var(--border2); white-space: nowrap;
-  }
+/* ============================================================
+   HERO  (vertical variant — single column)
+   ============================================================ */
+.hero{position:relative;padding-top:130px;padding-bottom:clamp(3rem,6vw,4.5rem);overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;z-index:0;opacity:0.5;
+  -webkit-mask-image:radial-gradient(120% 90% at 60% 0%,#000 0%,transparent 72%);
+  mask-image:radial-gradient(120% 90% at 60% 0%,#000 0%,transparent 72%);}
+.hero-grid-bg svg{width:100%;height:100%}
+.hero-glow{position:absolute;top:-14%;right:6%;width:46%;height:78%;z-index:0;
+  background:radial-gradient(circle,rgba(29,184,154,0.15),transparent 64%);filter:blur(20px)}
+.hero-copy{position:relative;z-index:2;max-width:820px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:var(--f-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:1.6rem;
+  opacity:0;animation:up .7s .05s forwards;
+}
+.hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--teal)}
+.hero h1{
+  font-family:var(--f-mono);font-weight:500;
+  font-size:var(--h1);line-height:1.06;letter-spacing:-0.02em;color:var(--white);
+  opacity:0;animation:up .7s .15s forwards;
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero-sub{
+  font-size:clamp(1rem,1.25vw,1.16rem);color:var(--muted);max-width:66ch;
+  margin-top:1.5rem;line-height:1.7;opacity:0;animation:up .7s .3s forwards;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:2.1rem;opacity:0;animation:up .7s .45s forwards}
+.hero-ctas .btn{padding:0.8rem 1.5rem;white-space:nowrap;flex:0 1 auto}
 
-  /* ─── SEGMENTS ─── */
-  .segments-section { background: var(--navy2); padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 90px; }
+/* ============================================================
+   SPEC / PROOF BAR  (shared style)
+   ============================================================ */
+.specbar{border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);background:var(--navy-2)}
+.specbar-inner{
+  margin:0 auto;padding:1.15rem var(--pad);
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0.9rem 2.2rem;
+  font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;
+}
+.specbar-inner span{display:inline-flex;align-items:center;gap:0.55rem}
+.specbar-inner b{color:var(--text);font-weight:500}
+.sb-dot{width:5px;height:5px;border-radius:1px;background:var(--gold)}
 
-  .section-eyebrow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
-  .section-eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
-  .section-eyebrow span { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+/* ============================================================
+   THE ANALYSIS GAP
+   ============================================================ */
+.gap{background:var(--navy)}
+.gap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem}
+.gap-card{
+  background:var(--navy-2);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.7rem 1.6rem;transition:border-color .2s ease,transform .2s ease;
+}
+.gap-card:hover{border-color:rgba(29,184,154,0.28);transform:translateY(-3px)}
+.gap-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(94,143,201,0.14);color:var(--steel);margin-bottom:1rem}
+.gap-ic svg{width:19px;height:19px}
+.gap-card h3{font-size:1.04rem;margin-bottom:0.4rem}
+.gap-card p{font-size:0.88rem;color:var(--muted);line-height:1.6}
 
-  h2 {
-    font-family: var(--display);
-    font-size: clamp(1.7rem, 3vw, 2.5rem);
-    font-weight: 700; letter-spacing: -0.02em;
-    color: var(--white); line-height: 1.15; margin-bottom: 0.8rem;
-  }
-  h2 em { font-style: normal; color: var(--teal); font-weight: 800; }
+/* ============================================================
+   WHO WE SERVE
+   ============================================================ */
+.serve-sec{background:var(--navy-2);border-top:1px solid var(--border-2)}
+.serve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem}
+.serve{
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.7rem 1.6rem;display:flex;flex-direction:column;
+  transition:border-color .2s ease,transform .2s ease;
+}
+.serve:hover{border-color:rgba(29,184,154,0.32);transform:translateY(-3px)}
+.serve-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--teal-soft);color:var(--teal);margin-bottom:1.05rem}
+.serve-ic svg{width:20px;height:20px}
+.serve h3{font-size:1.08rem;margin-bottom:0.45rem;letter-spacing:-0.01em}
+.serve-val{font-size:0.9rem;color:var(--text);font-weight:500;line-height:1.5;margin-bottom:1.05rem}
+.serve-apps{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-top:auto}
+.serve-apps li{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.83rem;color:var(--muted);line-height:1.5}
+.serve-apps li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--teal);opacity:0.85;flex:0 0 auto;margin-top:0.55em}
 
-  .section-lead {
-    font-size: 0.95rem; color: var(--muted);
-    max-width: 560px; font-weight: 300; line-height: 1.8; margin-bottom: 2.8rem;
-  }
+/* ============================================================
+   LABEL-FREE SIGNATURE  (the one bold spot — gold accent)
+   ============================================================ */
+.lf{background:var(--navy)}
+.lf-panel{
+  margin-top:3rem;background:linear-gradient(150deg,#0a1424,#0e1d36 55%,#11202f);
+  border:1px solid var(--border);border-radius:18px;
+  padding:clamp(1.8rem,4vw,2.9rem);position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(2rem,4vw,3.4rem);align-items:center;
+}
+.lf-panel::before{content:"";position:absolute;top:-30%;left:-8%;width:50%;height:160%;
+  background:radial-gradient(circle,rgba(212,175,55,0.10),transparent 62%);pointer-events:none}
+.lf-vis{position:relative}
+.lf-flow{display:flex;align-items:center;gap:0.6rem}
+.lf-node{
+  flex:1 1 0;min-width:0;border-radius:12px;padding:1.05rem 0.7rem;text-align:center;
+  background:var(--navy-2);border:1px solid var(--border-strong);
+}
+.lf-node.mid{background:rgba(212,175,55,0.10);border-color:rgba(212,175,55,0.5)}
+.lf-node.out{background:rgba(29,184,154,0.10);border-color:var(--teal)}
+.lf-node .ic{width:34px;height:34px;margin:0 auto 0.6rem;border-radius:9px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);color:var(--muted)}
+.lf-node.mid .ic{background:rgba(212,175,55,0.16);color:var(--gold)}
+.lf-node.out .ic{background:var(--teal-soft);color:var(--teal)}
+.lf-node .ic svg{width:18px;height:18px}
+.lf-node .nm{font-size:0.84rem;font-weight:600;color:var(--white);font-family:var(--f-display)}
+.lf-node .sub{font-family:var(--f-mono);font-size:0.56rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-2);margin-top:0.25rem}
+.lf-arrow{flex:0 0 auto;color:var(--muted-2);display:flex;align-items:center}
+.lf-arrow svg{width:18px;height:18px}
+.lf-cap{margin-top:1rem;text-align:center;font-family:var(--f-mono);font-size:0.66rem;letter-spacing:0.03em;color:var(--muted-2);line-height:1.6}
+.lf-cap b{color:var(--gold);font-weight:500}
+.lf-points{list-style:none;display:flex;flex-direction:column;gap:1.15rem}
+.lf-point{display:flex;gap:0.9rem;align-items:flex-start}
+.lf-point .pic{width:34px;height:34px;flex:0 0 auto;border-radius:9px;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,0.13);color:var(--gold)}
+.lf-point .pic svg{width:18px;height:18px}
+.lf-point h4{font-family:var(--f-display);font-weight:600;font-size:0.98rem;color:var(--white);margin-bottom:0.2rem}
+.lf-point p{font-size:0.85rem;color:var(--muted);line-height:1.55}
+.lf-ar-inline{float:right;width:88px;height:88px;object-fit:cover;border-radius:8px;margin:0.35rem 0 0.4rem 0.75rem;border:1px solid rgba(29,184,154,0.3);flex:none}
+.lf-point-ar{overflow:hidden}/* BFC contains the float */
+.lf-badge{
+  margin-top:1.6rem;display:inline-flex;align-items:center;gap:0.55rem;
+  font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--gold);
+  border:1px solid rgba(212,175,55,0.4);border-radius:100px;padding:0.4em 0.95em;
+}
+.lf-badge svg{width:14px;height:14px}
 
-  .segment-block {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem;
-    align-items: start; padding: 3.5rem 0;
-    border-top: 1px solid var(--border2);
-    scroll-margin-top: calc(var(--nav-h) + 1.5rem);
-  }
-  .segment-block:first-of-type { border-top: none; padding-top: 0; }
+/* before / after comparison slider (real CytoByte result) */
+.ba{position:relative;width:100%;max-width:520px;aspect-ratio:1/1;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--border-strong);background:#04070f;user-select:none}
+.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.ba-top{clip-path:inset(0 calc(100% - var(--p,55%)) 0 0)}
+.ba-divider{position:absolute;top:0;bottom:0;left:var(--p,55%);width:2px;background:rgba(255,255,255,0.92);transform:translateX(-1px);pointer-events:none;box-shadow:0 0 0 1px rgba(11,22,40,0.4)}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:rgba(11,22,40,0.8);border:1.5px solid rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;color:#fff}
+.ba-handle svg{width:17px;height:17px}
+.ba-tag{position:absolute;bottom:11px;font-family:var(--f-mono);font-size:0.58rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.3em 0.62em;border-radius:100px;background:rgba(6,11,22,0.74);pointer-events:none}
+.ba-tag-l{left:11px;color:var(--teal-bright);border:1px solid rgba(34,211,172,0.5)}
+.ba-tag-r{right:11px;color:var(--muted);border:1px solid var(--border-strong)}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;background:transparent;touch-action:pan-y}
+.ba-range::-webkit-slider-thumb{-webkit-appearance:none;width:46px;height:100%;cursor:ew-resize}
+.ba-range::-moz-range-thumb{width:46px;height:100%;border:0;background:transparent;cursor:ew-resize}
+.ba-range:focus{outline:none}
+.ba-range:focus-visible ~ .ba-divider .ba-handle{box-shadow:0 0 0 3px rgba(34,211,172,0.6)}
 
-  .segment-num {
-    font-family: var(--serif); font-size: 0.65rem;
-    letter-spacing: 0.2em; color: var(--teal);
-    text-transform: uppercase; margin-bottom: 0.35rem; display: block;
-  }
-  h3 {
-    font-family: var(--display);
-    font-size: clamp(1.3rem, 2vw, 1.7rem);
-    font-weight: 700; letter-spacing: -0.02em;
-    color: var(--white); line-height: 1.15; margin-bottom: 0.3rem;
-  }
-  .segment-tagline {
-    font-size: 0.86rem; color: var(--teal); font-style: italic; margin-bottom: 1.1rem;
-  }
-  .segment-desc {
-    font-size: 0.92rem; color: var(--text);
-    line-height: 1.85; font-weight: 300; margin-bottom: 1.6rem;
-  }
+/* ============================================================
+   CAPABILITIES / MODULE LIBRARY  (shared cap styles)
+   ============================================================ */
+.capabilities{background:var(--navy-2);border-top:1px solid var(--border-2)}
+.modbar{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:0.5rem 1rem;margin-top:2.2rem;
+  padding-top:1.4rem;border-top:1px solid var(--border-2);
+}
+.modbar-label{font-family:var(--f-mono);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-2);flex:0 0 auto}
+.modlist{display:flex;flex-wrap:wrap;gap:0.35rem 0}
+.modlist span{font-size:0.8rem;color:var(--text);white-space:nowrap}
+.modlist span:not(:last-child)::after{content:"·";color:var(--muted-2);margin:0 0.6rem;opacity:0.7}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.4rem}
+.cap{
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.7rem 1.6rem;transition:border-color .2s ease,transform .2s ease;display:flex;flex-direction:column;
+}
+.cap:hover{border-color:rgba(29,184,154,0.32);transform:translateY(-3px)}
+.cap-head{display:flex;align-items:center;gap:0.7rem;margin-bottom:0.85rem}
+.cap-ic{width:38px;height:38px;flex:0 0 auto;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(29,184,154,0.1);color:var(--teal)}
+.cap-ic svg{width:19px;height:19px}
+.cap-head h3{font-size:1.02rem}
+.cap .sub{font-size:0.86rem;color:var(--text);font-weight:500;margin-bottom:0.5rem}
+.cap p{font-size:0.86rem;color:var(--muted);line-height:1.62}
+.cap p .hl{color:var(--text)}
+.cap .tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.9rem}
+.cap-blocks{
+  grid-column:1 / -1;display:flex;align-items:center;gap:1.3rem;flex-wrap:wrap;
+  background:linear-gradient(110deg,var(--navy-3),var(--panel));border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.5rem 1.6rem;
+}
+.cap-blocks .cb-ic{width:42px;height:42px;flex:0 0 auto;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--teal-soft);color:var(--teal)}
+.cap-blocks .cb-ic svg{width:21px;height:21px}
+.cap-blocks .cb-txt{flex:1;min-width:240px}
+.cap-blocks h3{font-size:1.05rem;margin-bottom:0.3rem}
+.cap-blocks p{font-size:0.88rem;color:var(--muted);line-height:1.55}
+.cap-foot{
+  margin-top:2.4rem;font-size:0.95rem;color:var(--muted);text-align:center;max-width:720px;
+  margin-left:auto;margin-right:auto;line-height:1.6;
+}
+.cap-foot a{color:var(--teal);font-weight:500}
 
-  /* Pain points */
-  .pain-points { display: flex; flex-direction: column; gap: 0.55rem; }
-  .pain-point {
-    display: flex; align-items: flex-start; gap: 0.75rem;
-    padding: 0.8rem 1rem;
-    background: var(--navy); border: 1px solid var(--border2);
-    border-radius: 8px; transition: border-color 0.2s;
-  }
-  .pain-point:hover { border-color: rgba(29,184,154,0.22); }
-  .pain-icon {
-    width: 5px; height: 5px; border-radius: 1px;
-    background: var(--teal); flex-shrink: 0; margin-top: 7px; opacity: 0.7;
-  }
-  .pain-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-  .pain-text strong { color: var(--text); font-weight: 500; }
+/* ============================================================
+   INTEGRITY / REPRODUCIBILITY  (gold accent)
+   ============================================================ */
+.integrity{background:var(--navy)}
+.ig-panel{
+  margin-top:3rem;background:linear-gradient(155deg,#091222,#0C1B33);
+  border:1px solid var(--border);border-radius:18px;
+  padding:clamp(1.8rem,4vw,2.9rem);position:relative;overflow:hidden;
+}
+.ig-panel::before{content:"";position:absolute;top:-30%;right:-10%;width:50%;height:160%;
+  background:radial-gradient(circle,rgba(212,175,55,0.08),transparent 60%);pointer-events:none}
+.ig-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+.ig-pillar{display:flex;flex-direction:column}
+.ig-ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,0.13);color:var(--gold);margin-bottom:1rem}
+.ig-ic svg{width:21px;height:21px}
+.ig-pillar h3{font-size:1.08rem;margin-bottom:0.5rem}
+.ig-pillar .sub{font-size:0.86rem;color:var(--text);font-weight:500;margin-bottom:0.45rem}
+.ig-pillar p{font-size:0.86rem;color:var(--muted);line-height:1.6}
+.ig-pillar p .hl{color:var(--text)}
 
-  /* Modules */
-  .modules-label {
-    font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 0.55rem;
-  }
-  .segment-modules { display: flex; flex-direction: column; gap: 0.4rem; }
-  .module-chip {
-    display: flex; align-items: flex-start; gap: 0.65rem;
-    padding: 0.7rem 0.85rem;
-    background: var(--navy); border: 1px solid var(--border2);
-    border-radius: 8px; transition: border-color 0.2s, background 0.2s;
-  }
-  .module-chip:hover { border-color: var(--border); background: var(--teal-glow2); }
-  .module-chip-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--teal); flex-shrink: 0; opacity: 0.8; margin-top: 5px;
-  }
-  .module-chip-name { font-size: 0.82rem; font-weight: 500; color: var(--white); }
-  .module-chip-desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; line-height: 1.4; }
+.ig-demo-head{max-width:760px;margin:clamp(3rem,6vw,4.2rem) 0 0}
+.ig-demo-head h3{font-size:clamp(1.3rem,2.4vw,1.7rem);letter-spacing:-0.01em;margin-bottom:0.6rem}
+.ig-demo-head h3 em{font-style:normal;color:var(--teal)}
+.ig-demo-head p{font-size:0.98rem;color:var(--muted);line-height:1.65;max-width:64ch}
+.demo-wrap{max-width:924px;margin:2rem 0 0}
+.demo-card{position:relative;width:100%;border-radius:14px;overflow:hidden}
+.demo-frame{width:100%;border:none;background:transparent;display:block}
+.demo-loading{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.9rem;
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:14px;color:var(--muted);font-size:0.85rem;z-index:0;
+}
+.spinner{width:30px;height:30px;border:2px solid var(--border-strong);border-top-color:var(--teal);border-radius:50%;animation:spin .9s linear infinite}
 
-  /* CytoByte callout */
-  .cytobyte-callout {
-    margin-top: 1rem;
-    background: linear-gradient(135deg, rgba(29,184,154,0.07), rgba(26,50,96,0.25));
-    border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem;
-  }
-  .cytobyte-tag {
-    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 0.35rem; display: block;
-  }
-  .cytobyte-title {
-    font-family: var(--display); font-size: 0.92rem; font-weight: 600;
-    color: var(--white); margin-bottom: 0.3rem;
-  }
-  .cytobyte-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+/* ============================================================
+   GROUNDED IN RESEARCH
+   ============================================================ */
+.rsr{background:var(--navy-2);border-top:1px solid var(--border-2)}
+.rsr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem}
+.rsr-card{
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.6rem 1.55rem;transition:border-color .2s ease,transform .2s ease;
+  display:flex;flex-direction:column;
+}
+.rsr-card:hover{border-color:rgba(29,184,154,0.3);transform:translateY(-3px)}
+.rsr-label{font-family:var(--f-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.7rem}
+.rsr-title{font-family:var(--f-display);font-weight:600;font-size:1.02rem;color:var(--white);line-height:1.3;margin-bottom:0.5rem}
+.rsr-desc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.rsr-foot{margin-top:2.4rem;text-align:center}
 
-  /* ─── CTA BAND ─── */
-  .cta-band {
-    text-align: center; padding: 80px max(5vw, calc((100% - 1600px) / 2));
-    background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
-    border-top: 1px solid var(--border2); position: relative; overflow: hidden;
-  }
-  .cta-band::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(29,184,154,0.07), transparent 70%);
-    pointer-events: none;
-  }
-  .cta-band h2 { margin-bottom: 0.8rem; }
-  .cta-band p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; font-weight: 300; max-width: 460px; margin-left: auto; margin-right: auto; }
-  .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+/* ============================================================
+   HOW WE WORK (brief — shared)
+   ============================================================ */
+.work{background:var(--navy)}
+.work-flow{
+  margin-top:2.4rem;display:flex;align-items:center;flex-wrap:wrap;gap:0.7rem;
+  font-family:var(--f-display);font-weight:600;font-size:clamp(1.1rem,2vw,1.45rem);color:var(--white);
+}
+.work-flow .wstep{color:var(--white)}
+.work-flow .warr{color:var(--teal);display:inline-flex;align-items:center}
+.work-flow .warr svg{width:20px;height:20px}
+.work-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.8rem}
+.work-chip{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.85rem;color:var(--text);
+  border:1px solid var(--border);border-radius:100px;padding:0.45em 0.95em;
+}
+.work-chip svg{width:15px;height:15px;color:var(--teal);flex:0 0 auto}
 
-  /* ─── FOOTER ─── */
-  footer {
-    padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 2rem; border-top: 1px solid var(--border2);
-    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
-  }
-  .footer-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-bottom: 0.4rem; }
-  .footer-logo-text { font-family: var(--serif); font-size: 1.05rem; color: var(--gold); }
-  .footer-tagline { font-size: 0.8rem; color: var(--muted); }
-  .footer-links { display: flex; gap: 1.8rem; list-style: none; }
-  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
-  .footer-bottom {
-    grid-column: 1/-1; border-top: 1px solid var(--border2); padding-top: 1.2rem;
-    display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted);
-  }
-  .footer-bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-bottom a:hover { color: var(--white); }
+/* ============================================================
+   CTA  (shared)
+   ============================================================ */
+.cta-section{background:var(--navy-2)}
+.cta{text-align:center;background:linear-gradient(120deg,var(--navy-3),var(--panel-2));
+  border:1px solid var(--border);border-radius:20px;padding:clamp(2.4rem,5vw,3.6rem) var(--pad)}
+.cta h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,3vw,2.3rem);color:var(--white);line-height:1.15;letter-spacing:-0.01em}
+.cta p{color:var(--muted);margin-top:0.9rem;font-size:1.02rem;max-width:56ch;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem}
+.cta-proof{
+  margin-top:2.1rem;padding-top:1.7rem;border-top:1px solid var(--border-2);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0.55rem 1.1rem;
+  font-size:0.82rem;color:var(--muted);line-height:1.5;
+}
+.cta-proof b{color:var(--text);font-weight:600}
+.cta-proof .cp-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:0.8;flex:0 0 auto}
 
-  /* ─── REVEAL ─── */
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* ============================================================
+   FOOTER  (shared)
+   ============================================================ */
+.footer{background:var(--navy-2);border-top:1px solid var(--border-2);padding:3.5rem 0 2.2rem}
+.footer-top{display:flex;gap:2.5rem;justify-content:space-between;flex-wrap:wrap}
+.footer-brand{max-width:300px}
+.footer-brand .brand{margin-bottom:0.9rem}
+.footer-tag{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap}
+.footer-col h5{font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.footer-col a{font-size:0.9rem;color:var(--muted);transition:color .15s ease}
+.footer-col a:hover{color:var(--teal)}
+.footer-bottom{
+  margin-top:2.8rem;padding-top:1.6rem;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:0.82rem;color:var(--muted-2);
+}
+.footer-bottom a{color:var(--muted);}
+.footer-bottom a:hover{color:var(--teal)}
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1050px) { :root { --col-nav: 180px; } }
-  @media (max-width: 820px) {
-    .page-shell { display: block; margin-top: var(--nav-h); }
-    .page-navigator { display: none; }
-    .segment-block { grid-template-columns: 1fr; gap: 2rem; }
-    footer { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-  }
+/* ============================================================
+   REVEAL + KEYFRAMES  (shared)
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-
-  /* ─── MOBILE NAV ─── */
-  .nav-hamburger {
-    display: none;
-    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-    width: 40px; height: 40px;
-    background: transparent; border: 1px solid var(--border2);
-    border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0;
-  }
-  .nav-hamburger span {
-    display: block; width: 18px; height: 1.5px;
-    background: var(--text); border-radius: 2px;
-    transition: transform 0.25s ease, opacity 0.2s ease;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-  .nav-drawer {
-    display: none; position: fixed;
-    top: 68px; left: 0; right: 0; bottom: 0;
-    background: rgba(11,22,40,0.98); backdrop-filter: blur(16px);
-    flex-direction: column;
-    padding: 1.5rem 6vw 2.5rem;
-    z-index: 99; overflow-y: auto;
-    border-top: 1px solid var(--border2);
-  }
-  .nav-drawer.open { display: flex; }
-
-  /* Top-level list */
-  .drawer-links { list-style: none; flex: 1; }
-  .drawer-links > li > a {
-    display: block; font-size: 1.05rem; font-weight: 400;
-    color: var(--text); text-decoration: none;
-    padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
-    letter-spacing: 0.02em; transition: color 0.15s, padding-left 0.15s;
-  }
-  .drawer-links > li:first-child > a { border-top: 1px solid var(--border2); }
-  .drawer-links > li > a:hover { color: var(--white); padding-left: 0.4rem; }
-  .drawer-links > li > a.active { color: var(--teal); }
-
-  /* Expandable group */
-  .drawer-group { border-bottom: 1px solid var(--border2); }
-  .drawer-group-header {
-    display: flex; align-items: center;
-  }
-  .drawer-group-link {
-    flex: 1; font-size: 1.05rem; font-weight: 400;
-    color: var(--text); text-decoration: none;
-    padding: 0.9rem 0; letter-spacing: 0.02em;
-    transition: color 0.15s;
-  }
-  .drawer-group-link:hover { color: var(--white); }
-  .drawer-group-link.active { color: var(--teal); }
-  .drawer-group-toggle {
-    flex-shrink: 0; background: none; border: none;
-    padding: 0.9rem 0 0.9rem 1.2rem; cursor: pointer;
-    display: flex; align-items: center; color: var(--muted);
-    transition: color 0.15s;
-  }
-  .drawer-group-toggle:hover { color: var(--text); }
-  .drawer-group-arrow {
-    transition: transform 0.25s ease;
-  }
-  .drawer-group.open .drawer-group-arrow { transform: rotate(90deg); }
-
-  /* Sub-links */
-  .drawer-sub { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
-  .drawer-group.open .drawer-sub { max-height: 300px; }
-  .drawer-sub li a {
-    display: block; font-size: 0.9rem; color: var(--muted);
-    text-decoration: none; padding: 0.6rem 0 0.6rem 1.1rem;
-    border-bottom: 1px solid var(--border2);
-    transition: color 0.15s, padding-left 0.15s;
-  }
-  .drawer-sub li:last-child a { border-bottom: none; }
-  .drawer-sub li a:hover { color: var(--white); padding-left: 1.4rem; }
-  .drawer-sub li a.active { color: var(--teal); }
-
-  /* CTA buttons */
-  .drawer-ctas { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 2rem; }
-  .drawer-cta-primary {
-    display: block; text-align: center;
-    background: var(--teal); color: var(--navy);
-    padding: 0.85rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 500; text-decoration: none;
-  }
-  .drawer-cta-secondary {
-    display: block; text-align: center;
-    border: 1px solid var(--border); color: var(--text);
-    padding: 0.85rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 400; text-decoration: none;
-  }
-
-  /* Mobile section nav */
-  .mobile-section-nav {
-    display: none; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; padding: 0.75rem 6vw;
-    gap: 0.5rem; border-bottom: 1px solid var(--border2);
-    position: sticky; top: 68px; z-index: 90;
-    background: rgba(11,22,40,0.97); backdrop-filter: blur(12px);
-  }
-  .mobile-section-nav::-webkit-scrollbar { display: none; }
-  .mobile-section-nav a {
-    display: inline-block; white-space: nowrap; flex-shrink: 0;
-    font-size: 0.78rem; padding: 0.35rem 0.85rem;
-    border-radius: 100px; border: 1px solid var(--border2);
-    color: var(--muted); text-decoration: none;
-    transition: border-color 0.15s, color 0.15s;
-  }
-  .mobile-section-nav a:hover,
-  .mobile-section-nav a.active { border-color: var(--teal); color: var(--teal); }
-
-  @media (max-width: 820px) {
-    .nav-hamburger { display: flex; }
-    .nav-links { display: none; }
-    .nav-ctas { display: none; }
-    .mobile-section-nav { display: flex; }
-    footer { grid-template-columns: 1fr; gap: 1.5rem; }
-    .footer-bottom { flex-direction: column; gap: 0.4rem; }
-    .footer-links { flex-wrap: wrap; gap: 1rem; }
-  }
-  @media (max-width: 480px) {
-    section { padding: 60px max(5vw, calc((100% - 1600px) / 2)); }
-  }
-
-  /* ─── PRICING NOTE ─── */
-  .pricing-note {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    font-size: 0.78rem; color: var(--muted); margin-top: 2.2rem;
-    flex-wrap: wrap; justify-content: center;
-  }
-  .pricing-note-sep { opacity: 0.3; }
-  .pricing-note a {
-    color: var(--teal); text-decoration: none; font-weight: 500;
-    transition: opacity 0.15s;
-  }
-  .pricing-note a:hover { opacity: 0.75; }
-  .engagement-pricing {
-    display: inline-block; margin-top: 1rem;
-    font-size: 0.75rem; color: var(--muted);
-    border-top: 1px solid var(--border2); padding-top: 0.8rem; width: 100%;
-  }
-  .engagement-pricing a {
-    color: var(--teal); text-decoration: none; font-weight: 500;
-    transition: opacity 0.15s;
-  }
-  .engagement-pricing a:hover { opacity: 0.75; }
-
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1180px){
+  .cap-grid{grid-template-columns:repeat(2,1fr)}
+  .serve-grid{grid-template-columns:repeat(2,1fr)}
+  .gap-grid{grid-template-columns:repeat(3,1fr)}
+  .rsr-grid{grid-template-columns:repeat(3,1fr)}
+  .ig-grid{grid-template-columns:1fr;gap:1.6rem}
+}
+@media(max-width:1000px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:inline-flex}
+  .lf-panel{grid-template-columns:1fr;gap:2.2rem}
+}
+@media(max-width:860px){
+  .gap-grid{grid-template-columns:1fr}
+  .rsr-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .serve-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  :root{--sec:clamp(3.4rem,12vw,5rem)}
+  .nav-inner{height:64px}
+  .hero{padding-top:104px}
+  .cap-grid{grid-template-columns:1fr}
+  .lf-flow{flex-direction:column}
+  .lf-arrow{transform:rotate(90deg)}
+  .footer-top{flex-direction:column;gap:2rem}
+  .footer-cols{gap:2.2rem}
+  .work-flow{font-size:1.15rem}
+  .cta-proof .cp-dot{display:none}
+  .cta-proof{gap:0.5rem 0;flex-direction:column}
+}
+@media(max-width:430px){
+  .ba-tag{font-size:0.5rem;letter-spacing:0.03em;padding:0.26em 0.5em;bottom:8px}
+  .ba-tag-l{left:8px}.ba-tag-r{right:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+  .hero-eyebrow,.hero h1,.hero-sub,.hero-ctas{opacity:1!important;animation:none!important}
+}
 </style>
 </head>
 <body>
 
-<!-- TOP NAV -->
-<nav>
-  <a class="nav-logo" href="index.html">
-    <svg class="nav-logo-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#000" x="12" y="12" width="6" height="6"/>
-      <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#000" x="12" y="52" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#000" x="32" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
-      <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#000" x="52" y="52" width="6" height="6"/>
-    </svg>
-    <span class="nav-logo-text">Logic Byte</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html#platform">Platform</a></li>
-    <li><a href="index.html#verticals" class="active">Solutions</a></li>
-    <li><a href="index.html#modules">Modules</a></li>
+<!-- ========================= NAV ========================= -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="Logic Byte home">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a class="nav-link" href="platform.html">Platform</a></li>
+      <li class="has-menu">
+        <a class="nav-link" href="index.html#verticals">Solutions
+          <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="biomedical.html" aria-current="page">Biomedical &amp; Life Sciences<span>Single-cell, screening, label-free assays</span></a>
+          <a href="semiconductor.html">Semiconductor &amp; Industrial Imaging<span>Inspection, defect detection, metrology</span></a>
+          <a href="custom.html">Custom Solutions<span>Bespoke pipelines for any domain</span></a>
+        </div>
+      </li>
+      <li><a class="nav-link" href="research.html">Research</a></li>
+      <li><a class="nav-link" href="about.html">About</a></li>
+      <li><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta"><a class="btn btn-primary" href="contact.html">Book a Demo</a></div>
+
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile drawer -->
+<div class="drawer-scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile menu">
+  <div class="drawer-top">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul class="drawer-nav">
+    <li><a href="platform.html">Platform</a></li>
+    <li class="drawer-group open">
+      <div class="drawer-group-head">
+        <a href="index.html#verticals">Solutions</a>
+        <button class="drawer-group-toggle" aria-label="Expand Solutions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="biomedical.html" aria-current="page">Biomedical &amp; Life Sciences</a></li>
+        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
+        <li><a href="custom.html">Custom Solutions</a></li>
+      </ul>
+    </li>
     <li><a href="research.html">Research</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="nav-ctas">
-    <a class="nav-cta-soft" href="contact.html?intent=hello">Say Hello</a>
-    <a class="nav-cta" href="contact.html">Book a Demo</a>
-  </div>
-
-  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
-</nav>
-
-<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <ul class="drawer-links">
-    <li><a href="index.html#platform">Platform</a></li>
-    <li class="drawer-group open">
-      <div class="drawer-group-header">
-        <a href="index.html#verticals" class="drawer-group-link active">Solutions</a>
-        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="true" aria-label="Expand Solutions"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-      <ul class="drawer-sub">
-        <li><a href="biomedical.html" class="active">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
-        <li><a href="custom.html">Custom Solutions</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#modules">Modules</a></li>
-    <li class="drawer-group">
-      <div class="drawer-group-header">
-        <a href="research.html" class="drawer-group-link">Research</a>
-        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Research"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-      <ul class="drawer-sub">
-        <li><a href="research.html">Overview</a></li>
-        <li><a href="research-output.html">Full Output</a></li>
-      </ul>
-    </li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
   <div class="drawer-ctas">
-    <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
-    <a class="drawer-cta-secondary" href="contact.html?intent=hello">Say Hello</a>
+    <a class="btn btn-primary" href="contact.html">Book a Demo</a>
+    <a class="btn btn-secondary" href="contact.html?intent=hello">Say hello</a>
+  </div>
+</aside>
+
+<!-- ========================= HERO ========================= -->
+<header class="hero" id="top">
+  <div class="hero-grid-bg" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="grid" width="58" height="58" patternUnits="userSpaceOnUse">
+        <path d="M 58 0 L 0 0 0 58" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
+      </pattern></defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Biomedical &amp; Life Sciences</div>
+      <h1>Every cell, seen and measured.<br/><em>Every result, traceable and reproducible.</em></h1>
+      <p class="hero-sub"><span class="optiflow">OptiFlow</span> is a domain-aware image-analytics platform for life-science imaging — from light, fluorescence and confocal microscopy to super-resolution and whole-slide pathology. Build the analysis visually, quantify what you see, and run it from a single image to a whole cohort — exporting results that carry the exact method that made them. No code, 100% local.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="contact.html">Book a Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="#integrity">See it in action</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========================= PROOF BAR ========================= -->
+<div class="specbar">
+  <div class="specbar-inner">
+    <span><i class="sb-dot"></i>In production at <b>ETH&nbsp;Z&uuml;rich</b></span>
+    <span><i class="sb-dot"></i><b>CytoByte</b> label-free staining</span>
+    <span><i class="sb-dot"></i><b>20+</b> peer-reviewed publications</span>
+    <span><i class="sb-dot"></i>Featured by <b>CNA</b> &amp; <b>The&nbsp;Straits&nbsp;Times</b></span>
   </div>
 </div>
 
-</div>
+<!-- ========================= THE ANALYSIS GAP ========================= -->
+<section class="gap section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The analysis gap</div>
+      <h2 class="h2">Your images hold the answer.<br/><em>Getting it out — reliably — is the hard part.</em></h2>
+      <p class="lead">Life-science imaging has outpaced the tools used to analyse it. Methods grow so intricate they no longer fit in a paragraph of a methods section; biologists are pushed into scripting they never signed up for; and the volumes from high-content screens and whole-slide scanners are far beyond what anyone can review by hand.</p>
+    </div>
 
-<!-- PAGE SHELL: two-column grid from top -->
-<div class="page-shell">
-
-  <!-- LEFT: all content -->
-  <main class="page-content">
-<div class="mobile-section-nav" aria-label="Jump to section">
-  <a href="#biopharma">BioPharma</a><a href="#bioresearch">Bio Research</a><a href="#drugscreening">Drug Screening</a><a href="#digitalpathology">Digital Pathology</a>
-</div>
-
-
-    <!-- HERO -->
-    <div class="page-hero">
-      <div class="hero-grid" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg">
-          <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
-          </pattern></defs>
-          <rect width="100%" height="100%" fill="url(#grid)"/>
-        </svg>
+    <div class="gap-grid">
+      <div class="gap-card reveal">
+        <div class="gap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><path d="M12 7v5l3 2"/><path d="M3 12H1M23 12h-2"/></svg></div>
+        <h3>Methods you can't reproduce</h3>
+        <p>A multi-step analysis rarely survives the journey from one operator, instrument, or paper to the next — and a result you can't reproduce is a result you can't defend.</p>
       </div>
-      <div class="eyebrow reveal"><span class="eyebrow-line"></span><span>Biomedical & Life Sciences</span></div>
-      <h1 class="reveal">From the microscope.<br/><em>To the insight.</em></h1>
-      <p class="hero-lead reveal">Designed for the complexity, variability, and scale demands of life sciences — from label-free microscopy to whole-slide digital pathology. Domain-aware pipelines that adapt to your workflow, not the other way around.</p>
-      <div class="hero-ctas reveal">
-        <a class="btn-primary" href="contact.html">Book a Demo</a>
-        <a class="btn-secondary" href="#segments">Explore Segments</a>
+      <div class="gap-card reveal">
+        <div class="gap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+        <h3>Experts stuck on plumbing</h3>
+        <p>Researchers lose experimental time to image processing and scripting instead of the biology they were hired for — and pipelines break the moment the person who built them moves on.</p>
+      </div>
+      <div class="gap-card reveal">
+        <div class="gap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Scale beyond manual review</h3>
+        <p>Whole-slide and high-content datasets are too large to inspect exhaustively, yet too important to sample — so the rare, decisive event is the one most easily missed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= WHO WE SERVE ========================= -->
+<section class="serve-sec section" id="who">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Who we serve</div>
+      <h2 class="h2">One platform.<br/><em>Built around your work.</em></h2>
+      <p class="lead">Biomedical imaging spans very different teams with very different goals — but the same need for analysis they can trust, repeat, and defend. <span class="optiflow">OptiFlow</span> adapts to each, rather than forcing your work into a generic mould.</p>
+    </div>
+
+    <div class="serve-grid">
+      <div class="serve reveal">
+        <div class="serve-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></div>
+        <h3>Academic &amp; translational research</h3>
+        <div class="serve-val">Reproducible analytics, in the researcher's hands — no scripting, no single point of failure.</div>
+        <ul class="serve-apps">
+          <li>Single-cell &amp; morphometric profiling</li>
+          <li>Live-cell &amp; time-lapse imaging</li>
+          <li>Methods you can publish and re-run</li>
+        </ul>
+      </div>
+
+      <div class="serve reveal">
+        <div class="serve-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7 14h10"/></svg></div>
+        <h3>Drug discovery &amp; screening</h3>
+        <div class="serve-val">From high-content screens to confident decisions — at the throughput a campaign demands.</div>
+        <ul class="serve-apps">
+          <li>Phenotypic profiling at scale</li>
+          <li>Hit-calling &amp; dose&ndash;response</li>
+          <li>Plate &amp; batch normalisation</li>
+        </ul>
+      </div>
+
+      <div class="serve reveal">
+        <div class="serve-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4c0 1.5.8 2.5.8 2.5L6 14a4 4 0 0 0 3.6 5.7M12 2a4 4 0 0 1 4 4c0 1.5-.8 2.5-.8 2.5L18 14a4 4 0 0 1-3.6 5.7"/><path d="M9.6 19.7a4 4 0 0 0 4.8 0"/><path d="M9 9h6"/></svg></div>
+        <h3>Cell &amp; gene therapy / bioprocessing</h3>
+        <div class="serve-val">Watch your cells — without touching them. Non-invasive readouts throughout the process.</div>
+        <ul class="serve-apps">
+          <li>Label-free viability &amp; differentiation readouts</li>
+          <li>Batch-to-batch &amp; line-to-line consistency</li>
+          <li>Non-perturbative in-process QC</li>
+        </ul>
+      </div>
+
+      <div class="serve reveal">
+        <div class="serve-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/><circle cx="15" cy="15" r="2.4"/></svg></div>
+        <h3>Diagnostics, pathology &amp; cytology</h3>
+        <div class="serve-val">Precision review at whole-slide scale — consistent, exhaustive, and defensible.</div>
+        <ul class="serve-apps">
+          <li>WSI segmentation &amp; grading</li>
+          <li>Rare-cell &amp; mitotic-figure detection</li>
+          <li>Consistent criteria across sites</li>
+        </ul>
+      </div>
+
+      <div class="serve reveal">
+        <div class="serve-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 4-6"/><circle cx="20" cy="7" r="1.4"/></svg></div>
+        <h3>Image-based biomarkers &amp; precision medicine</h3>
+        <div class="serve-val">Turn morphology into a measurable readout — a classifier trained on your own cohort.</div>
+        <ul class="serve-apps">
+          <li>Morphological &amp; textural signatures</li>
+          <li>Models trained on your data</li>
+          <li>Label-free disease classification</li>
+        </ul>
+      </div>
+
+      <div class="serve reveal">
+        <div class="serve-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5 19 19M19 5l-2.5 2.5M7.5 16.5 5 19"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+        <h3>A different problem?</h3>
+        <div class="serve-val">If your imaging challenge isn't here, it's likely still a fit. We build for new domains regularly.</div>
+        <ul class="serve-apps">
+          <li>Bespoke pipelines, scoped to your data</li>
+          <li>New modules built when none exist</li>
+          <li><a class="btn-ghost" href="custom.html" style="font-size:0.83rem">Explore custom solutions
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= LABEL-FREE SIGNATURE ========================= -->
+<section class="lf section" id="label-free">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow gold">Signature capability</div>
+      <h2 class="h2">Visualise, measure, characterise.<br/><em class="gold">No stain required.</em></h2>
+      <p class="lead"><span class="optiflow">OptiFlow</span>'s <span class="tag-cyto">CytoByte</span> engine performs virtual nuclear staining directly from label-free DIC or phase contrast — in real time, with no chemistry and no phototoxicity, revealing native biology undisturbed. Because the cells are never perturbed, live and longitudinal experiments stay clean.</p>
+    </div>
+
+    <div class="lf-panel reveal">
+      <div class="lf-vis">
+        <figure class="ba" id="ba">
+          <img class="ba-img ba-base" src="cytobyte-dic.png" alt="Label-free DIC microscopy — cells visible only as phase rings" draggable="false"/>
+          <img class="ba-img ba-top" id="baTop" src="cytobyte-virtual-nuclei.png" alt="The same field after CytoByte virtual staining — nuclei rendered in high contrast on black" draggable="false"/>
+          <span class="ba-divider" id="baDiv"><span class="ba-handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-4 5 4 5M15 7l4 5-4 5"/></svg></span></span>
+          <span class="ba-tag ba-tag-l">Virtual nuclei · CytoByte</span>
+          <span class="ba-tag ba-tag-r">DIC · label-free</span>
+          <input class="ba-range" id="baRange" type="range" min="0" max="100" value="55" aria-label="Drag to compare label-free DIC with CytoByte virtual nuclear staining"/>
+        </figure>
+        <figcaption class="lf-cap">A real <span class="optiflow" style="font-size:0.95em">CytoByte</span> result — drag to compare. No stain was applied; nuclear structure is computed directly from the label-free DIC image.</figcaption>
+      </div>
+
+      <ul class="lf-points">
+        <li class="lf-point">
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/><path d="M3 21 21 3"/></svg></div>
+          <div><h4>No phototoxicity</h4><p>Image live cells as often as you like, without the photodamage a fluorescent stain introduces.</p></div>
+        </li>
+        <li class="lf-point">
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4l-2 2v3l4 8H7l4-8V9L9 7z"/><path d="M4 21 20 5"/></svg></div>
+          <div><h4>No reagents, no prep</h4><p>No dyes, no incubation, no fixation — skip the staining workflow and its cost and variability entirely.</p></div>
+        </li>
+        <li class="lf-point">
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.6-6.3M3 4v4h4"/><path d="M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/></svg></div>
+          <div><h4>Non-sacrificial by default</h4><p>Image the sample as it is, take your readout, and return it straight to the incubator — nothing is stained, fixed, or consumed.</p></div>
+        </li>
+        <li class="lf-point">
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div><h4>Built on published research</h4><p>The science behind CytoByte is peer-reviewed and proven in the field — not a marketing claim.</p></div>
+        </li>
+        <li class="lf-point">
+          <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><circle cx="12" cy="11" r="3"/></svg></div>
+          <div class="lf-point-ar">
+            <img class="lf-ar-inline" src="cytobyte-ar-overlay.png" alt="Live AR view: cyan virtual nuclei overlaid on the raw DIC microscope feed in real time" loading="lazy"/>
+            <h4>Real-time virtual staining</h4>
+            <p>Stream the virtual staining live as the microscope acquires each frame — overlay the real and virtual channels for an AR view of your structure of interest.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="lf-badge" style="grid-column:1/-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        In production at ETH&nbsp;Z&uuml;rich
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CAPABILITIES ========================= -->
+<section class="capabilities section" id="capabilities">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The biomedical toolkit</div>
+      <h2 class="h2">Every step, from raw frame<br/><em>to the decision.</em></h2>
+      <p class="lead">Compose exactly the pipeline your assay needs from a deep library of domain-aware operations — purpose-built for quantitative microscopy. Preview any of them on your own images, then license only what your work demands.</p>
+    </div>
+
+    <div class="modbar reveal">
+      <span class="modbar-label">Modalities covered</span>
+      <span class="modlist">
+        <span>Light &amp; brightfield</span><span>Multi-channel fluorescence</span><span>Confocal</span><span>Super-resolution</span><span>Phase contrast</span><span>DIC</span><span>3D / z-stack</span><span>Live-cell time-lapse</span><span>Whole-slide (WSI)</span><span>H&amp;E</span><span>EM (TEM/SEM/STEM)</span>
+      </span>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap reveal">
+        <div class="cap-head">
+          <div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l2.4 6.3L22 12l-6.6 2.7L13 21l-2.4-6.3L4 12l6.6-2.7z"/></svg></div>
+          <h3>Restore &amp; enhance</h3>
+        </div>
+        <div class="sub">Recover signal from difficult images.</div>
+        <p>Denoising that is <span class="hl">classical, AI-guided, and hybrid</span> — NLM, bilateral, wavelet, total-variation and BM3D for low-light live-cell and EM data. Illumination and contrast correction, CLAHE, and frequency-domain filtering for clean, comparable inputs.</p>
+        <div class="tags"><span class="tag-new">Expanded</span></div>
+      </div>
+
+      <div class="cap reveal">
+        <div class="cap-head">
+          <div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3>Segment &amp; measure</h3>
+        </div>
+        <div class="sub">Find every cell and structure.</div>
+        <p>Otsu, multi-Otsu and adaptive <span class="hl">thresholding</span>; morphology and connected-component labelling; <span class="hl">ridge filters</span> (Frangi, Sato, Meijering) for vessels, neurites and filaments. Calibrated area, distance and interactive line-intensity profiles — in real units, read from your metadata.</p>
+        <div class="tags"><span class="tag-new">New</span></div>
+      </div>
+
+      <div class="cap reveal">
+        <div class="cap-head">
+          <div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 3 6-8"/><circle cx="3" cy="16" r="1.4" fill="currentColor" stroke="none"/><circle cx="8" cy="11" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="6" r="1.4" fill="currentColor" stroke="none"/><path d="M3 21h18"/></svg></div>
+          <h3>Track &amp; quantify over time</h3>
+        </div>
+        <div class="sub">Quantify dynamics, not just snapshots.</div>
+        <p>Track objects across frames and through z — <span class="hl">motility, migration, division and lineage</span> — turning live-cell time-lapse and 3D series into quantitative kinetic and spatiotemporal readouts.</p>
+        <div class="tags"><span class="tag-new">New</span></div>
+      </div>
+
+      <div class="cap reveal">
+        <div class="cap-head">
+          <div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
+          <h3>Classify &amp; grade</h3>
+        </div>
+        <div class="sub">Decisions trained on your data.</div>
+        <p>Supervised deep learning for <span class="hl">cell type, phenotype, or disease grade</span> — trained on your own annotated images, so the model learns your problem rather than approximating it.</p>
+      </div>
+
+      <div class="cap reveal">
+        <div class="cap-head">
+          <div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></div>
+          <h3>Rare-event &amp; anomaly detection</h3>
+        </div>
+        <div class="sub">Find the needle in the slide.</div>
+        <p>Exhaustive, slide-wide search for low-prevalence targets — <span class="hl">circulating tumour cells, mitotic figures</span> — plus unsupervised anomaly detection that flags the unexpected with no labels required.</p>
+      </div>
+
+      <div class="cap reveal">
+        <div class="cap-head">
+          <div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg></div>
+          <h3>Quantify, profile &amp; report</h3>
+        </div>
+        <div class="sub">From one cell to a whole cohort.</div>
+        <p>Per-cell and population <span class="hl">morphometrics</span>, enumeration and texture analysis with batch normalisation built in — then built-in plotting (histogram, scatter, box-plot, violin, CDF) and automatic export to <span class="hl">Excel</span> and formatted <span class="hl">PDF reports</span>.</p>
+        <div class="tags"><span class="tag-new">New</span></div>
+      </div>
+
+      <div class="cap-blocks reveal">
+        <div class="cb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1"/></svg></div>
+        <div class="cb-txt">
+          <h3>Plus the building blocks every pipeline leans on</h3>
+          <p>Channel and colour operations, lookup tables, geometry and alignment, type conversion, and pixel-wise image maths and compositing — the connective tissue that lets any workflow fit together exactly as your assay requires.</p>
+        </div>
       </div>
     </div>
 
-    <!-- MODALITIES STRIP -->
-    <div class="modalities-strip reveal">
-      <span class="modalities-label">Supported modalities</span>
-      <div class="modalities-list">
-        <span class="modality">Fluorescence</span>
-        <span class="modality">H&amp;E</span>
-        <span class="modality">DIC</span>
-        <span class="modality">Phase contrast</span>
-        <span class="modality">Brightfield</span>
-        <span class="modality">Confocal</span>
-        <span class="modality">TEM</span>
-        <span class="modality">SEM</span>
-        <span class="modality">STEM</span>
-        <span class="modality">Whole-slide (WSI)</span>
-        <span class="modality">Live-imaging</span>
-      </div>
+    <p class="cap-foot reveal">Modular by design — start with what today's work needs and add modules as your assays grow, instrument by instrument and lab by lab. Every operation runs locally, on your own machines. See the full <a href="platform.html">OptiFlow platform</a>.</p>
+  </div>
+</section>
+
+<!-- ========================= INTEGRITY / REPRODUCIBILITY ========================= -->
+<section class="integrity section" id="integrity">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow gold">Reproducible &amp; auditable</div>
+      <h2 class="h2">Results you can defend.<br/><em class="gold">Methods you can hand over.</em></h2>
+      <p class="lead">Modern image analysis has become too complex to write into a methods section. <span class="optiflow">OptiFlow</span> records it for you — so every result is reproducible, every method is portable and submittable as-is, and your data never leaves your control.</p>
     </div>
 
-    <!-- SEGMENTS -->
-    <div class="segments-section" id="segments">
-      <div class="section-eyebrow reveal"><span class="section-eyebrow-line"></span><span>Segments</span></div>
-      <h2 class="reveal">Built for every stage<br/>of the <em>life sciences pipeline</em></h2>
-      <p class="section-lead reveal">Each segment has its own imaging challenges, data volumes, and analytical demands. <span class="optiflow-badge">OptiFlow</span>'s domain-aware engine adapts to each — without forcing your workflow into a generic mould.</p>
-
-      <!-- BIOPHARMA -->
-      <div class="segment-block reveal" id="biopharma">
-        <div>
-          <span class="segment-num">Segment 01</span>
-          <h3>BioPharma</h3>
-          <div class="segment-tagline">Reproducible analysis at the speed of discovery</div>
-          <p class="segment-desc">Precision, reproducibility, and throughput — in equal measure. Manual review slows assay cycles; generic tools overload bioinformatics teams with scripting. <span class="optiflow-badge">OptiFlow</span> delivers automated, domain-aware pipelines that scale with your screening campaigns — without sacrificing the rigour a regulated environment requires.</p>
-          <div class="pain-points">
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Screening throughput bottlenecks.</strong> Manual or semi-automated analysis limits campaign velocity — instrument capacity goes underutilised while analysts queue.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Scalability, consistency and reproducibility.</strong> Lack of standardised pipelines across sites, operators, and timepoints undermines data integrity in regulated environments.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Scripting dependency.</strong> Generic tools require custom code for every new assay — creating bottlenecks on already-stretched bioinformatics teams.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Subtle phenotypic quantification.</strong> Reliable measurement of cell morphology and nuclear markers at scale is beyond what manual review can deliver consistently.</span></div>
-          </div>
+    <div class="ig-panel reveal">
+      <div class="ig-grid">
+        <div class="ig-pillar">
+          <div class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/></svg></div>
+          <h3>Embedded, tamper-evident provenance</h3>
+          <div class="sub">Every result carries its full recipe.</div>
+          <p>The complete pipeline — <span class="hl">every operation, parameter, calibration and operator</span> — is written into the image itself, encrypted and readable only inside OptiFlow. An encrypted, rollback-resistant timestamp guards the record; where it matters, lock it to a password only your team holds.</p>
         </div>
-        <div>
-          <div class="modules-label">Relevant modules</div>
-          <div class="segment-modules">
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Object detection & segmentation</div><div class="module-chip-desc">Precise cell and nuclear boundary detection across assay types and imaging conditions</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Single-cell analysis</div><div class="module-chip-desc">Per-cell morphometric profiling, population statistics, and batch normalisation</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Classification & grading</div><div class="module-chip-desc">Supervised phenotypic classification trained on your assay's specific readouts</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">PDF & Excel reporting</div><div class="module-chip-desc">Audit-ready reports with annotated images, statistics, and reproducible pipeline parameters</div></div></div>
-          </div>
+        <div class="ig-pillar">
+          <div class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></div>
+          <h3>An exportable method, on demand</h3>
+          <div class="sub">Submit it, share it, open-source it.</div>
+          <p>Export the complete pipeline as a standalone file — to <span class="hl">attach to a publication, hand to a collaborator, or release alongside open data</span>. Anyone you give it to can reproduce the exact analysis, down to the parameter.</p>
         </div>
-      </div>
-
-      <!-- BIO RESEARCH -->
-      <div class="segment-block reveal" id="bioresearch">
-        <div>
-          <span class="segment-num">Segment 02</span>
-          <h3>Bio Research</h3>
-          <div class="segment-tagline">Let researchers focus on biology, not pipelines</div>
-          <p class="segment-desc">Biology experts aren't image-processing experts — and shouldn't need to be. Yet labs lose too much experimental time to analysis rather than interpretation. <span class="optiflow-badge">OptiFlow</span>'s visual workflow builder puts robust, reproducible analytics directly in researchers' hands — no scripting, and no single point of failure when a lab member moves on.</p>
-          <div class="pain-points">
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Analysis overhead.</strong> Researchers spend a disproportionate amount of time on image processing rather than biological interpretation — the work they were hired for.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Fragile pipelines.</strong> Analysis workflows built by one lab member break when they leave or when imaging conditions change — institutional knowledge walks out the door.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Reproducibility and collaboration.</strong> No standardised workflow means results are difficult to reproduce, share between collaborators, or defend in peer review.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Staining constraints.</strong> Label-based staining adds preparation time, reagent cost, and phototoxicity concerns — particularly limiting for live-cell experiments.</span></div>
-          </div>
-        </div>
-        <div>
-          <div class="modules-label">Relevant modules</div>
-          <div class="segment-modules">
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Image enhancement & correction</div><div class="module-chip-desc">Illumination correction, denoising, and normalisation — applied consistently across datasets</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Object detection & segmentation</div><div class="module-chip-desc">Robust cell and structure delineation across fluorescence, DIC, and brightfield modalities</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Morphological analysis</div><div class="module-chip-desc">Automated per-object measurements and population statistics — no spreadsheet required</div></div></div>
-          </div>
-          <div class="cytobyte-callout">
-            <span class="cytobyte-tag">Featured capability</span>
-            <div class="cytobyte-title">CytoByte — Label-free in-silico staining</div>
-            <div class="cytobyte-desc">Render pseudo-DAPI nuclear staining directly from DIC images using deep neural networks. No chemical preparation, no phototoxicity, no additional equipment — ideal for live-cell and longitudinal experiments.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DRUG SCREENING -->
-      <div class="segment-block reveal" id="drugscreening">
-        <div>
-          <span class="segment-num">Segment 03</span>
-          <h3>Drug Screening</h3>
-          <div class="segment-tagline">Close the gap between instrument and insight</div>
-          <p class="segment-desc">High-content screening generates data faster than conventional tools can process it — and the bottleneck is always downstream, in the analysis layer. <span class="optiflow-badge">OptiFlow</span> closes that gap with multi-parametric pipelines that handle the volume, normalise across plates and batches, and cut false positives before they consume follow-up resources.</p>
-          <div class="pain-points">
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Analysis throughput.</strong> HCS generates data faster than it can be analysed — the bottleneck is always downstream of the instrument, not at it.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Chemical staining interference.</strong> Staining interferes with cellular biology and limits conclusions from live experiments, especially timepoint and kinetic assays.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Inconsistent phenotypic readouts.</strong> Without automated normalisation, results vary across plates, batches, and operators — introducing noise at the point of decision.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Multi-parametric hit identification.</strong> Morphology + intensity + spatial analysis together — beyond what spreadsheet-based tools can handle reliably.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>False positives from poor segmentation.</strong> Inaccurate cell boundary detection cascades into wasted follow-up resources on non-hits.</span></div>
-          </div>
-        </div>
-        <div>
-          <div class="modules-label">Relevant modules</div>
-          <div class="segment-modules">
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Single-cell analysis & counting</div><div class="module-chip-desc">High-content per-cell profiling across large plate-based datasets with batch normalisation</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Classification & grading</div><div class="module-chip-desc">Multi-parametric phenotypic scoring — morphology, intensity, and spatial features combined</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Statistical analysis & reporting</div><div class="module-chip-desc">Population-level statistics, dose-response curves, and hit ranking with exportable outputs</div></div></div>
-          </div>
-          <div class="cytobyte-callout">
-            <span class="cytobyte-tag">Featured capability</span>
-            <div class="cytobyte-title">CytoByte — Staining-free live assays</div>
-            <div class="cytobyte-desc">Eliminate chemical staining from screening workflows. CytoByte renders nuclear morphology from label-free images — enabling kinetic and longitudinal assays without staining-induced perturbation.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DIGITAL PATHOLOGY -->
-      <div class="segment-block reveal" id="digitalpathology">
-        <div>
-          <span class="segment-num">Segment 04</span>
-          <h3>Digital Pathology & Cytology</h3>
-          <div class="segment-tagline">Precision review at scale</div>
-          <p class="segment-desc">Whole-slide imaging produces data volumes that make exhaustive manual review impractical. <span class="optiflow-badge">OptiFlow</span>'s domain-aware pipelines handle the scale and variability of pathology workflows — from grading consistency across institutions to rare-cell detection no manual screen can reliably achieve.</p>
-          <div class="pain-points">
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Scale of whole-slide review.</strong> WSI files are too large for exhaustive manual analysis — pathologists spend time on low-value scanning rather than high-value diagnosis.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Grading subjectivity.</strong> Consistency varies between pathologists and institutions — introducing clinically significant variability into decisions that depend on standardised criteria.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Digital transition gap.</strong> Moving from glass slides to digital workflows lacks analytical tools that match the precision of experienced manual review.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Rare cell detection.</strong> Finding circulating tumour cells or mitotic figures requires exhaustive search across entire slides — impractical to perform reliably by hand.</span></div>
-            <div class="pain-point"><span class="pain-icon"></span><span class="pain-text"><strong>Domain shift across institutions.</strong> Models trained on one institution's staining protocol fail on slides from another lab — limiting the generalisability of any fixed pipeline.</span></div>
-          </div>
-        </div>
-        <div>
-          <div class="modules-label">Relevant modules</div>
-          <div class="segment-modules">
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Object detection & segmentation</div><div class="module-chip-desc">Precise cell and tissue structure delineation on H&amp;E and IHC stained whole-slide images</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Classification & grading</div><div class="module-chip-desc">Standardised grading models that reduce inter-pathologist variability and cross-site inconsistency</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">Rare cell detection</div><div class="module-chip-desc">Exhaustive slide-level search for CTCs, mitotic figures, and other low-prevalence targets</div></div></div>
-            <div class="module-chip"><span class="module-chip-dot"></span><div><div class="module-chip-name">PDF & Excel reporting</div><div class="module-chip-desc">Structured diagnostic reports with annotated regions, cell counts, and grading outputs</div></div></div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /segments-section -->
-
-    <!-- CTA BAND -->
-    <!-- TRACEABILITY -->
-    <div class="reveal" style="padding:0 2rem;margin:1rem auto 0;max-width:1120px;">
-      <div style="display:flex;gap:1.15rem;align-items:flex-start;padding:1.5rem 1.75rem;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:16px;background:linear-gradient(135deg,rgba(29,184,154,0.07),rgba(0,0,0,0));">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M12 2l8 4v6c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-        <div>
-          <div style="font-family:var(--display);font-weight:600;color:#FFFFFF;font-size:1.08rem;margin-bottom:0.4rem;">Reproducible &amp; auditable by design</div>
-          <p style="font-size:0.95rem;color:var(--muted);line-height:1.7;margin:0;">Every image <span class="optiflow-badge">OptiFlow</span> produces carries the full sequence of operations and parameters applied to the source &mdash; built for record-keeping, audit, and reproducibility.</p>
+        <div class="ig-pillar">
+          <div class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Air-gapped &amp; 100% local</h3>
+          <div class="sub">No image ever leaves the machine.</div>
+          <p>Processing reads and writes your own filesystem directly. <span class="hl">No image data crosses the network</span> — no cloud account, no exceptions — so patient data and unpublished results stay exactly where they belong.</p>
         </div>
       </div>
     </div>
 
-
-    <div class="cta-band">
-      <h2 class="reveal">Ready to see it on your images?</h2>
-      <p class="reveal">Book a live demo with your own imaging data — we'll show you the most relevant capabilities, and if your workflow needs something we haven't built yet, we'll work with you to build it.</p>
-      <div class="cta-group reveal">
-        <a class="btn-primary" href="contact.html">Book a Demo</a>
-        <a class="btn-secondary" href="contact.html?intent=hello">Say Hello</a>
+    <div class="ig-demo-head reveal">
+      <h3>See it: the exact method, <em>recovered from any result.</em></h3>
+      <p>Every result already contains the workflow that made it. So revisiting your own analysis, handing it to a collaborator, satisfying a reviewer, or re-running across a cohort needs nothing rebuilt and nothing re-documented — and the record stays encrypted, readable only inside OptiFlow, and accessible only when you choose.</p>
+    </div>
+    <div class="demo-wrap reveal">
+      <div class="demo-card">
+        <div class="demo-loading" id="ld-wfi"><div class="spinner"></div><span>Preparing live demo&hellip;</span></div>
+        <iframe class="demo-frame" id="demo-wfi" data-src="optiflow-workflow-from-image-embed.html?mode=bio"
+          style="aspect-ratio:880/632;" title="OptiFlow — load a workflow from any result" scrolling="no" loading="lazy"></iframe>
       </div>
-      <p class="pricing-note reveal">Modular licensing — base platform + domain modules<span class="pricing-note-sep">·</span>Subscription or usage-based<span class="pricing-note-sep">·</span><a href="contact.html">Contact us for pricing</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= GROUNDED IN RESEARCH ========================= -->
+<section class="rsr section" id="research">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">From research to production</div>
+      <h2 class="h2">Built on science.<br/><em>Engineered for production.</em></h2>
+      <p class="lead">Logic Byte's biomedical capabilities trace directly to peer-reviewed research and deployed systems — the foundation beneath every module on this page.</p>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-      <div>
-        <a class="footer-logo" href="index.html">
-          <svg width="20" height="20" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#000" x="12" y="12" width="6" height="6"/>
+    <div class="rsr-grid">
+      <div class="rsr-card reveal">
+        <div class="rsr-label">APL Bioengineering · 2021</div>
+        <div class="rsr-title">Label-free single-cell cancer classification</div>
+        <div class="rsr-desc">Machine learning identified cancer cells from label-free imaging of intracellular pH — no fluorescent markers — at 95% accuracy in under 35 minutes. Covered by CNA and The Straits Times.</div>
+      </div>
+      <div class="rsr-card reveal">
+        <div class="rsr-label">Vision generative AI · ETH Z&uuml;rich</div>
+        <div class="rsr-title">In-silico staining from DIC microscopy</div>
+        <div class="rsr-desc">The science behind CytoByte: virtual nuclear staining computed directly from DIC, extending to phase-contrast and transmitted-light inputs. Deployed commercially; manuscript in preparation.</div>
+      </div>
+      <div class="rsr-card reveal">
+        <div class="rsr-label">AI diagnostics · NUS</div>
+        <div class="rsr-title">Image-based biosensor for disease classification</div>
+        <div class="rsr-desc">A deep network trained on morphological and textural cell features to classify disease state on microfluidic platforms — the groundwork for image-based biomarker development.</div>
+      </div>
+    </div>
+
+    <div class="rsr-foot reveal">
+      <a class="btn-ghost" href="research.html">Explore the full research record
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= HOW WE WORK (brief) ========================= -->
+<section class="work section" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How we work</div>
+      <h2 class="h2">Start on your own images.<br/><em>Scale when it earns it.</em></h2>
+      <p class="lead">No rip-and-replace, no leap of faith. Prove the value on your own data first, then grow module by module, lab by lab.</p>
+    </div>
+
+    <div class="work-flow reveal">
+      <span class="wstep">Explore</span>
+      <span class="warr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="wstep">Deploy</span>
+      <span class="warr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="wstep">Expand</span>
+      <span class="warr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="wstep">Embed</span>
+    </div>
+
+    <div class="work-chips reveal">
+      <span class="work-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12s3-7 9-7 9 7 9 7-3 7-9 7-9-7-9-7z"/><circle cx="12" cy="12" r="2.5"/></svg>Preview before you buy</span>
+      <span class="work-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="M22 4l-9.5 9.5L9 10"/></svg>60-day module guarantee</span>
+      <span class="work-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9z"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Priority support, included</span>
+      <span class="work-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Pay only for what you use</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CTA ========================= -->
+<section class="cta-section section">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>See it on your images.</h2>
+      <p>Bring a biomedical imaging problem and your own data — we'll show you exactly what OptiFlow does with them. If your workflow needs something we haven't built yet, we'll build it.</p>
+      <div class="cta-btns">
+        <a class="btn btn-primary" href="contact.html">Book a Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="contact.html?intent=hello">Talk to us first</a>
+      </div>
+      <div class="cta-proof">
+        <span>In production at <b>ETH&nbsp;Z&uuml;rich</b></span>
+        <span class="cp-dot"></span>
+        <span>Ongoing trials at <b>NTU</b></span>
+        <span class="cp-dot"></span>
+        <span><b>20+</b> peer-reviewed publications</span>
+        <span class="cp-dot"></span>
+        <span>Featured by <b>CNA</b> &amp; <b>The Straits Times</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
             <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
-            <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#000" x="12" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
             <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
-            <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#000" x="32" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
             <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
             <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
-            <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#000" x="52" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
           </svg>
-          <span class="footer-logo-text">Logic Byte</span>
+          <span class="brand-name">Logic Byte</span>
         </a>
-        <div class="footer-tagline">AI-Powered Image Analytics · logicbyte.ai</div>
+        <p class="footer-tag">AI-powered image analytics — built visually, run at scale, auditable by design.</p>
       </div>
-      <ul class="footer-links">
-        <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-        <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
-        <li><a href="custom.html">Custom Solutions</a></li>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="platform.html">Platform</a></li>
+            <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+            <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
+            <li><a href="custom.html">Custom Solutions</a></li>
           </ul>
-      <div class="footer-bottom">
-        <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
-        <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="contact.html">Book a Demo</a></li>
+            <li><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a></li>
+            <li><a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
       </div>
-    </footer>
-
-  </main>
-
-  <!-- RIGHT: persistent sticky navigator -->
-  <aside class="page-navigator" aria-label="Page navigation">
-    <div class="nav-vertical-label">
-      <span class="nav-vertical-super">Vertical</span>
-      <a class="nav-vertical-name" href="#" style="color:var(--white);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--white)'">Biomedical &amp;<br/>Life Sciences</a>
     </div>
-    <p class="nav-vertical-desc">A domain-aware analytics engine purpose-built for biological imaging — from single-cell research to biopharma screening.</p>
-    <div class="nav-divider"></div>
-    <div class="nav-seg-label">Segments</div>
-    <a class="seg-link" href="#biopharma">
-      <span class="seg-link-dot"></span>
-      <span class="seg-link-name">BioPharma</span>
-    </a>
-    <a class="seg-link" href="#bioresearch">
-      <span class="seg-link-dot"></span>
-      <span class="seg-link-name">Bio Research</span>
-    </a>
-    <a class="seg-link" href="#drugscreening">
-      <span class="seg-link-dot"></span>
-      <span class="seg-link-name">Drug Screening</span>
-    </a>
-    <a class="seg-link" href="#digitalpathology">
-      <span class="seg-link-dot"></span>
-      <span class="seg-link-name">Digital Pathology</span>
-    </a>
-    <a class="nav-back" href="index.html#verticals">
-      <span class="nav-back-arrow">←</span>
-      Back to Solutions
-    </a>
-  </aside>
-
-</div><!-- /page-shell -->
+    <div class="footer-bottom">
+      <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
+      <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+    </div>
+  </div>
+</footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => revealObs.observe(el));
+(function(){
+  "use strict";
 
-  // Segment navigator active state — highlights as you scroll
-  const segBlocks = document.querySelectorAll('.segment-block');
-  const segLinks = document.querySelectorAll('.seg-link');
-  const segSpy = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        segLinks.forEach(l => l.classList.remove('active'));
-        document.querySelectorAll('.mobile-section-nav a').forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.seg-link[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
-        const mobileActive = document.querySelector(`.mobile-section-nav a[href="#${e.target.id}"]`);
-        if (mobileActive) { mobileActive.classList.add('active'); mobileActive.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
-      }
-    });
-  }, { rootMargin: '-15% 0px -65% 0px' });
-  segBlocks.forEach(b => segSpy.observe(b));
+  /* ---- Nav scrolled state ---- */
+  var nav = document.getElementById('nav');
+  function onScroll(){ if(window.scrollY > 24){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-  // Top nav background on scroll
-  window.addEventListener('scroll', () => {
-    document.querySelector('nav').style.background =
-      window.scrollY > 40 ? 'rgba(11,22,40,0.98)' : 'rgba(11,22,40,0.95)';
+  /* ---- Mobile drawer ---- */
+  var burger=document.getElementById('burger'), drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'), dClose=document.getElementById('drawerClose');
+  function openD(){ drawer.classList.add('open'); scrim.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeD(){ drawer.classList.remove('open'); scrim.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  if(burger){ burger.addEventListener('click',openD); }
+  if(scrim){ scrim.addEventListener('click',closeD); }
+  if(dClose){ dClose.addEventListener('click',closeD); }
+  drawer.querySelectorAll('a[href]').forEach(function(a){ a.addEventListener('click',closeD); });
+  drawer.querySelectorAll('.drawer-group-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){ btn.closest('.drawer-group').classList.toggle('open'); });
   });
 
-    // Mobile nav drawer
-  function toggleNav(btn) {
-    const isOpen = btn.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen);
-    document.getElementById('nav-drawer').classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  /* ---- Scroll reveal ---- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
   }
-  function toggleGroup(btn) {
-    btn.closest('.drawer-group').classList.toggle('open');
-  }
-  document.querySelectorAll('.drawer-links > li > a, .drawer-sub a, .drawer-group-link').forEach(a => {
-    a.addEventListener('click', () => {
-      const navBtn = document.querySelector('.nav-hamburger');
-      if (navBtn) { navBtn.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
-      const drawer = document.getElementById('nav-drawer');
-      if (drawer) drawer.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
 
+  /* ---- Before/after comparison slider ---- */
+  var ba = document.getElementById('ba'), baRange = document.getElementById('baRange');
+  if (ba && baRange) {
+    var setP = function(v){ ba.style.setProperty('--p', v + '%'); };
+    setP(baRange.value);
+    baRange.addEventListener('input', function(){ setP(baRange.value); });
+  }
+
+  /* ---- Lazy-load below-fold demo iframe ---- */
+  var lazyFrames = document.querySelectorAll('iframe[data-src]');
+  function loadFrame(f){ if(f.dataset.src){ f.src=f.dataset.src; delete f.dataset.src; } }
+  if('IntersectionObserver' in window){
+    var lio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ loadFrame(e.target); lio.unobserve(e.target); } });
+    },{rootMargin:'400px 0px'});
+    lazyFrames.forEach(function(f){ lio.observe(f); });
+  } else {
+    lazyFrames.forEach(loadFrame);
+  }
+
+  /* ---- iframe sizing: shared postMessage height contract ---- */
+  var frameMap = {
+    'optiflow-workflow-from-image-embed.html' : {el:document.getElementById('demo-wfi'), loader:document.getElementById('ld-wfi')}
+  };
+  function frameById(win){
+    for(var k in frameMap){ var f=frameMap[k]; if(f.el && f.el.contentWindow===win){ return f; } }
+    return null;
+  }
+  window.addEventListener('message', function(e){
+    var d = e.data; if(!d || typeof d!=='object') return;
+    var h = d.optiflowEmbedHeight || d.optiflowWindowHeight || d.height;
+    if(typeof h !== 'number' || h <= 0) return;
+    var f = frameById(e.source);
+    if(!f || !f.el) return;
+    f.el.style.height = h + 'px';
+    f.el.style.aspectRatio = 'auto';
+    if(f.loader){ f.loader.style.display = 'none'; }
+  }, false);
+})();
 </script>
+
 </body>
 </html>

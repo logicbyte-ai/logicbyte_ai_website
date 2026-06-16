@@ -3,884 +3,684 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="OptiFlow by Logic Byte: a modular, domain-aware image-analytics platform — built visually, run at scale, reproducible by design. Biomedical, semiconductor, and beyond."/>
+<meta name="description" content="OptiFlow by Logic Byte: a modular, domain-aware image-analytics platform — built visually, run at scale, auditable by design. Biomedical, semiconductor, and beyond."/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="canonical" href="https://logicbyte.ai/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Logic Byte"/>
 <meta property="og:url" content="https://logicbyte.ai/"/>
 <meta property="og:title" content="Logic Byte — AI-Powered Image Analytics"/>
-<meta property="og:description" content="OptiFlow by Logic Byte: a modular, domain-aware image-analytics platform — built visually, run at scale, reproducible by design. Biomedical, semiconductor, and beyond."/>
+<meta property="og:description" content="OptiFlow by Logic Byte: a modular, domain-aware image-analytics platform — built visually, run at scale, auditable by design. Biomedical, semiconductor, and beyond."/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Logic Byte — AI-Powered Image Analytics"/>
-<meta name="twitter:description" content="OptiFlow by Logic Byte: a modular, domain-aware image-analytics platform — built visually, run at scale, reproducible by design. Biomedical, semiconductor, and beyond."/>
+<meta name="twitter:description" content="OptiFlow by Logic Byte: a modular, domain-aware image-analytics platform — built visually, run at scale, auditable by design. Biomedical, semiconductor, and beyond."/>
 <title>Logic Byte — AI-Powered Image Analytics</title>
+
+<script>document.documentElement.classList.add('js');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ============================================================
+   LOGIC BYTE — DESIGN TOKENS
+   ============================================================ */
+:root{
+  --navy:#0B1628;
+  --navy-2:#0E1B30;
+  --navy-3:#101F38;
+  --panel:#10203A;
+  --panel-2:#13243F;
+  --teal:#1DB89A;
+  --teal-bright:#22D3AC;
+  --teal-soft:rgba(29,184,154,0.12);
+  --gold:#D4AF37;
+  --steel:#5E8FC9;
+  --white:#FFFFFF;
+  --text:#E8EDF4;
+  --muted:#92A2B8;
+  --muted-2:#6E7F96;
+  --border:rgba(255,255,255,0.10);
+  --border-2:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.16);
 
-  :root {
-    --navy:   #0B1628;
-    --navy2:  #112040;
-    --navy3:  #1A3260;
-    --teal:   #1DB89A;
-    --teal2:  #16997F;
-    --teal3:  #0EDBB8;
-    --teal-glow: rgba(29,184,154,0.15);
-    --teal-glow2: rgba(29,184,154,0.06);
-    --white:  #FFFFFF;
-    --off:    #F0F4F8;
-    --muted:  #8BA0B8;
-    --text:   #C8D8E8;
-    --border: rgba(29,184,154,0.18);
-    --border2: rgba(255,255,255,0.07);
-    --serif:  'Syne', system-ui, sans-serif;
-    --display: 'Outfit', system-ui, sans-serif;
-    --mono: 'DM Mono', monospace;
-    --sans:   'DM Sans', system-ui, sans-serif;
-  }
+  --pad:max(1.25rem, 5vw, calc((100vw - 1500px) / 2));
+  --h1:clamp(1.7rem, calc(3.8vw - 1rem), 2.9rem);
+  --sec:clamp(4rem,8vw,6rem);
+  --radius:14px;
 
-  html { scroll-behavior: smooth; }
+  --f-display:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --f-mono:'DM Mono','SF Mono',ui-monospace,Menlo,monospace;
+  --f-wordmark:'Syne',-apple-system,sans-serif;
+  --f-body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
 
-  body {
-    background: var(--navy);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--f-body);
+  background:var(--navy);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg,iframe{display:block;max-width:100%}
+::selection{background:rgba(29,184,154,0.28);color:#fff}
 
-  .optiflow-badge {
-    font-size: 1em; font-weight: 600; letter-spacing: 0.01em;
-    color: var(--teal);
-    white-space: nowrap;
-    font-family: var(--sans);
-  }
-  .optiflow-badge::before {
-    content: '';
-    display: inline-block;
-    width: 4px; height: 4px;
-    border-radius: 1px;
-    background: var(--teal);
-    opacity: 0.8;
-    margin-right: 0.2em;
-    vertical-align: middle;
-  }
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 max(5vw, calc((100% - 1600px) / 2));
-    height: 68px;
-    background: rgba(11,22,40,0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border2);
-    transition: background 0.3s;
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 0.6rem;
-    text-decoration: none;
-  }
-  .nav-logo-mark { width: 28px; height: 28px; flex-shrink: 0; }
-  .nav-logo-text {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #d4af37;
-    letter-spacing: -0.01em;
-  }
-  .nav-links {
-    display: flex; gap: 2.2rem; list-style: none;
-  }
-  .nav-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a.active { color: var(--teal); }
-  .nav-ctas { display: flex; align-items: center; gap: 0.5rem; }
-  .nav-cta-soft {
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.5rem 1.4rem; border-radius: 100px;
-    font-size: 0.875rem; font-weight: 400;
-    text-decoration: none; letter-spacing: 0.03em;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-  .nav-cta-soft:hover { border-color: var(--teal); color: var(--white); transform: translateY(-1px); }
-  .nav-cta {
-    background: var(--teal); color: var(--navy);
-    padding: 0.5rem 1.4rem; border-radius: 100px;
-    font-size: 0.875rem; font-weight: 500;
-    text-decoration: none; letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .nav-cta:hover { background: var(--teal3); transform: translateY(-1px); }
+.wrap{width:100%;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.section{padding-top:var(--sec);padding-bottom:var(--sec)}
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: flex-start;
-    padding: 120px max(5vw, calc((100% - 1600px) / 2)) 80px;
-    position: relative; overflow: hidden;
-  }
+/* ---------- Shared type ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:var(--f-mono);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:1.4rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--teal);opacity:0.85;display:inline-block}
+.eyebrow.center{justify-content:center}
 
-  /* background mesh */
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(29,184,154,0.09) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(26,50,96,0.7) 0%, transparent 60%);
-    pointer-events: none;
-  }
+h2.h2{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(1.85rem,3.7vw,2.95rem);
+  line-height:1.08;letter-spacing:-0.015em;color:var(--white);
+}
+h2.h2 em{font-style:normal;color:var(--teal)}
+h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1.25}
 
-  /* grid lines */
-  .hero-grid {
-    position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.04;
-  }
-  .hero-grid svg { width: 100%; height: 100%; }
+.lead{
+  font-size:clamp(1rem,1.25vw,1.13rem);
+  color:var(--muted);font-weight:400;line-height:1.7;
+  max-width:60ch;margin-top:1.1rem;
+}
+.section-head{max-width:840px}
+.problem .section-head{max-width:none}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.section-head.center .lead{margin-left:auto;margin-right:auto}
 
-  .hero-eyebrow {
-    display: flex; align-items: center; gap: 0.6rem;
-    margin-bottom: 1.6rem;
-    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
-  }
-  .hero-eyebrow-line {
-    width: 32px; height: 1px; background: var(--teal);
-  }
-  .hero-eyebrow span {
-    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--teal); font-weight: 500;
-  }
+.optiflow{
+  font-family:var(--f-display);font-weight:600;color:var(--white);
+  letter-spacing:0.01em;
+}
 
-  h1 {
-    font-family: var(--mono);
-    font-size: clamp(1.7rem, 2.8vw, 2.4rem);
-    line-height: 1.2;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: var(--white);
-    max-width: 100%;
-    margin-bottom: 1.6rem;
-    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
-  }
-  h1 em {
-    font-style: normal; color: var(--teal); font-weight: 500;
-  }
+.tag-new{
+  font-family:var(--f-mono);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--teal);
+  border:1px solid rgba(29,184,154,0.4);border-radius:100px;
+  padding:0.18em 0.6em;vertical-align:middle;margin-left:0.5rem;white-space:nowrap;
+}
 
-  .hero-sub {
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    color: var(--muted);
-    max-width: 100%;
-    line-height: 1.75;
-    margin-bottom: 2.8rem;
-    font-weight: 300;
-    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
-  }
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:0.55rem;
+  font-family:var(--f-body);font-size:0.95rem;font-weight:500;letter-spacing:0.01em;
+  padding:0.85rem 1.9rem;border-radius:100px;cursor:pointer;
+  transition:transform .16s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--teal);color:var(--navy);font-weight:600;border:1px solid var(--teal)}
+.btn-primary:hover{background:var(--teal-bright);transform:translateY(-2px);box-shadow:0 10px 34px rgba(29,184,154,0.28)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-strong)}
+.btn-secondary:hover{border-color:var(--teal);color:var(--white);transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;white-space:nowrap;padding:0;border-radius:0;font-family:var(--f-body);font-size:0.95rem;color:var(--teal);font-weight:500;background:none;cursor:pointer}
+.btn-ghost svg{width:16px;height:16px;flex:none;transition:transform .18s ease}
+.btn-ghost:hover svg{transform:translateX(4px)}
 
-  .hero-ctas {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
-  }
-  .btn-primary {
-    background: var(--teal); color: var(--navy);
-    padding: 0.85rem 2rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 500;
-    text-decoration: none; letter-spacing: 0.02em;
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 0 0 0 rgba(29,184,154,0);
-  }
-  .btn-primary:hover {
-    background: var(--teal3); transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(29,184,154,0.25);
-  }
-  .btn-secondary {
-    border: 1px solid var(--border);
-    color: var(--text); padding: 0.85rem 2rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 400;
-    text-decoration: none; letter-spacing: 0.02em;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-  .btn-secondary:hover {
-    border-color: var(--teal); color: var(--white); transform: translateY(-2px);
-  }
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(11,22,40,0.82);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--border-2);
+}
+.nav-inner{
+  padding:0 var(--pad);
+  height:74px;display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{display:flex;align-items:center;gap:0.7rem}
+.brand-mark{width:24px;height:24px;flex:0 0 auto}
+.brand-name{font-family:var(--f-wordmark);font-weight:700;font-size:1.18rem;color:var(--white);letter-spacing:0.01em}
 
-  /* ─── HERO PROOF STRIP ─── */
-  .hero-inner { position: relative; z-index: 2; flex: 0 0 auto; width: 44%; max-width: 510px; }
-  .hero-proof {
-    margin-top: 2.4rem;
-    display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 0.9rem;
-    font-size: 0.85rem; color: var(--muted); font-weight: 400;
-    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
-  }
-  .hero-proof-item { white-space: nowrap; }
-  .hero-proof-item strong { color: var(--teal); font-weight: 600; }
-  .hero-proof-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.45; }
+.nav-links{display:flex;align-items:center;gap:0.35rem;list-style:none}
+.nav-links > li{position:relative}
+.nav-link{
+  font-family:var(--f-wordmark);font-weight:600;font-size:0.9rem;color:var(--muted);
+  padding:0.55rem 0.85rem;border-radius:8px;transition:color .18s ease,background .18s ease;
+  display:inline-flex;align-items:center;gap:0.35rem;
+}
+.nav-link:hover{color:var(--white)}
+.nav-link .caret{width:11px;height:11px;opacity:0.7;transition:transform .2s ease}
+.has-menu:hover .caret{transform:rotate(180deg)}
 
-  /* ─── HERO SHOWCASE (live product window) ─── */
-  .hero-layout { display: flex; align-items: center; gap: 3%; width: 100%; }
-  .hero-showcase {
-    position: relative; z-index: 2; flex: 1; min-width: 0; margin: 0;
-    display: flex; justify-content: center;
-    opacity: 0; animation: fadeUp 0.9s 0.55s forwards;
-  }
-  .hero-window {
-    width: 100%; max-width: 1060px; height: auto; min-height: 430px;
-    aspect-ratio: 1060 / 684;
-    border: none; display: block; background: transparent;
-  }
+.dropdown{
+  position:absolute;top:calc(100% + 8px);left:0;min-width:268px;
+  background:var(--navy-3);border:1px solid var(--border);border-radius:12px;
+  padding:0.5rem;opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+}
+.has-menu:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{
+  display:block;padding:0.7rem 0.85rem;border-radius:8px;
+  font-size:0.9rem;color:var(--text);transition:background .15s ease,color .15s ease;
+}
+.dropdown a span{display:block;font-size:0.76rem;color:var(--muted-2);margin-top:0.15rem;font-weight:400}
+.dropdown a:hover{background:var(--teal-soft);color:var(--white)}
 
-  /* ─── SEE IT IN ACTION ─── */
-  .see-it { background: var(--navy2); border-top: 1px solid var(--border2); }
-  .see-it-layout { display: flex; gap: 5%; align-items: flex-start; }
-  .see-it-text { flex: 0 0 auto; width: 40%; max-width: 480px; padding-top: 0.5rem; }
-  .see-it-text .section-lead { margin-bottom: 0; }
-  .see-it-demo { flex: 1; min-width: 0; }
-  .demo-wrap {
-    position: relative; width: 100%; max-width: 880px; margin: 0 auto;
-    border-radius: 12px; min-height: 0;
-  }
-  .demo-frame {
-    width: 100%; border: none; display: block;
-    aspect-ratio: 880 / 723; opacity: 0; transition: opacity 0.7s ease;
-  }
-  .demo-frame.loaded { opacity: 1; }
-  .demo-ph {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 1rem;
-    color: var(--muted); font-size: 0.85rem; letter-spacing: 0.04em;
-    transition: opacity 0.5s ease; pointer-events: none;
-  }
-  .demo-ph.hidden { opacity: 0; }
-  .demo-spinner {
-    width: 30px; height: 30px; border-radius: 50%;
-    border: 2px solid var(--border); border-top-color: var(--teal);
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+.nav-cta{margin-left:0.4rem}
+.nav-cta .btn{padding:0.62rem 1.4rem;font-size:0.88rem}
 
-  /* ─── SECTION COMMON ─── */
-  section { padding: 100px max(5vw, calc((100% - 1600px) / 2)); }
-  .section-eyebrow {
-    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem;
-  }
-  .section-eyebrow-line { width: 24px; height: 1px; background: var(--teal); }
-  .section-eyebrow span {
-    font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--teal); font-weight: 500;
-  }
-  h2 {
-    font-family: var(--display);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--white); line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-  h2 em { font-style: normal; color: var(--teal); font-weight: 800; }
-  .section-lead {
-    font-size: 1.05rem; color: var(--muted);
-    max-width: 560px; font-weight: 300; line-height: 1.8;
-    margin-bottom: 3.5rem;
-  }
+.nav-burger{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:0.4rem}
+.nav-burger svg{width:26px;height:26px}
 
-  /* ─── PLATFORM FEATURES ─── */
-  .platform-layout { display: flex; gap: 3.5rem; align-items: flex-start; }
-  .platform-content { flex: 0 0 38%; min-width: 0; }
-  .platform-demo { flex: 1; min-width: 0; position: sticky; top: 5rem; }
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-  .feature-card {
-    background: var(--navy2);
-    border: 1px solid var(--border2);
-    border-radius: 12px;
-    padding: 1.8rem;
-    position: relative; overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .feature-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--teal), transparent);
-    opacity: 0; transition: opacity 0.25s;
-  }
-  .feature-card:hover { border-color: var(--border); transform: translateY(-3px); }
-  .feature-card:hover::before { opacity: 1; }
-  .feature-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: var(--teal-glow); border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1rem;
-  }
-  .feature-icon svg { stroke: var(--teal); }
-  .feature-title {
-    font-size: 0.95rem; font-weight: 500; color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-  .feature-desc {
-    font-size: 0.85rem; color: var(--muted); line-height: 1.65;
-  }
-  .feature-toggle { display: none; }
+/* mobile drawer */
+.drawer-scrim{position:fixed;inset:0;background:rgba(5,11,22,0.6);z-index:110;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+.drawer-scrim.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(86vw,360px);z-index:120;
+  background:var(--navy-2);border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding:1.4rem 1.4rem 2rem;overflow-y:auto;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.drawer-close{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.4rem}
+.drawer-close svg{width:24px;height:24px}
+.drawer-nav{list-style:none;display:flex;flex-direction:column;gap:0.15rem}
+.drawer-nav > li > a,.drawer-group-head > a{
+  display:block;padding:0.85rem 0.5rem;font-family:var(--f-wordmark);font-weight:600;
+  font-size:1.02rem;color:var(--text);border-bottom:1px solid var(--border-2);
+}
+.drawer-group-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-2)}
+.drawer-group-head > a{border-bottom:none;flex:1}
+.drawer-group-toggle{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.6rem}
+.drawer-group-toggle svg{width:16px;height:16px;transition:transform .2s ease}
+.drawer-group.open .drawer-group-toggle svg{transform:rotate(90deg)}
+.drawer-sub{list-style:none;max-height:0;overflow:hidden;transition:max-height .25s ease}
+.drawer-group.open .drawer-sub{max-height:240px}
+.drawer-sub a{display:block;padding:0.6rem 0.9rem;font-size:0.9rem;color:var(--muted)}
+.drawer-sub a:hover{color:var(--teal)}
+.drawer-ctas{margin-top:1.6rem;display:flex;flex-direction:column;gap:0.7rem}
+.drawer-ctas .btn{width:100%;justify-content:center}
 
-  /* ─── VERTICALS ─── */
-  .verticals { background: var(--navy2); }
-  .verticals-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 0;
-  }
-  .vertical-card {
-    border-radius: 16px;
-    border: 1px solid var(--border2);
-    padding: 2.5rem;
-    position: relative; overflow: hidden;
-    cursor: pointer; text-decoration: none;
-    display: block;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .vertical-card.bio {
-    background: linear-gradient(135deg, rgba(17,32,64,0.9) 0%, rgba(11,22,40,0.95) 100%);
-  }
-  .vertical-card.semi {
-    background: linear-gradient(135deg, rgba(17,32,64,0.9) 0%, rgba(11,22,40,0.95) 100%);
-  }
-  .vertical-card::after {
-    content: ''; position: absolute;
-    width: 200px; height: 200px; border-radius: 50%;
-    top: -60px; right: -60px;
-    transition: opacity 0.3s;
-  }
-  .vertical-card.bio::after { background: radial-gradient(circle, rgba(29,184,154,0.12), transparent 70%); }
-  .vertical-card.semi::after { background: radial-gradient(circle, rgba(26,50,96,0.4), transparent 70%); }
-  .vertical-card:hover { border-color: var(--teal); transform: translateY(-4px); }
-  .vertical-tag {
-    display: inline-block;
-    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--teal); border: 1px solid var(--border);
-    padding: 0.25rem 0.7rem; border-radius: 100px;
-    margin-bottom: 1.2rem;
-  }
-  .vertical-card h3 {
-    font-family: var(--display);
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    font-weight: 700; letter-spacing: -0.02em;
-    color: var(--white);
-    margin-bottom: 0.4rem; line-height: 1.1;
-  }
-  .vertical-sub {
-    font-size: 0.88rem; letter-spacing: 0.01em;
-    color: var(--teal); font-weight: 400;
-    margin-bottom: 1.1rem; display: block;
-    font-style: italic;
-  }
-  .vertical-card p {
-    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-  .vertical-segments {
-    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem;
-  }
-  .vseg {
-    font-size: 0.72rem; padding: 0.2rem 0.65rem;
-    border-radius: 100px; border: 1px solid var(--border2);
-    color: var(--text);
-  }
-  .vertical-arrow {
-    display: flex; align-items: center; gap: 0.4rem;
-    font-size: 0.82rem; color: var(--teal); font-weight: 500;
-  }
-  .vertical-arrow svg { transition: transform 0.2s; }
-  .vertical-card:hover .vertical-arrow svg { transform: translateX(4px); }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;padding-top:130px;padding-bottom:clamp(3.5rem,7vw,6rem);overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;z-index:0;opacity:0.5;
+  -webkit-mask-image:radial-gradient(120% 90% at 70% 0%,#000 0%,transparent 72%);
+  mask-image:radial-gradient(120% 90% at 70% 0%,#000 0%,transparent 72%);}
+.hero-grid-bg svg{width:100%;height:100%}
+.hero-glow{position:absolute;top:-12%;right:-6%;width:46%;height:80%;z-index:0;
+  background:radial-gradient(circle,rgba(29,184,154,0.16),transparent 64%);filter:blur(20px)}
 
-  .vertical-card.custom {
-    border-style: dashed;
-    border-color: rgba(29,184,154,0.3);
-    background: transparent;
-  }
-  .vertical-card.custom:hover {
-    border-color: var(--teal);
-    background: var(--teal-glow2);
-  }
-  .vertical-card.custom h3 { color: var(--white); }
-  .custom-card {
-    display: none;
-  }
+.hero-layout{position:relative;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:2rem}
+.hero-copy{flex:0 1.6 610px;min-width:300px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:var(--f-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:1.6rem;
+  opacity:0;animation:up .7s .05s forwards;
+}
+.hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--teal)}
+.hero h1{
+  font-family:var(--f-mono);font-weight:500;
+  font-size:var(--h1);line-height:1.06;letter-spacing:-0.02em;color:var(--white);
+  opacity:0;animation:up .7s .15s forwards;
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero-sub{
+  font-size:clamp(1rem,1.25vw,1.14rem);color:var(--muted);max-width:100%;
+  margin-top:1.5rem;line-height:1.7;opacity:0;animation:up .7s .3s forwards;
+}
+.hero-ctas{display:flex;flex-wrap:nowrap;gap:0.7rem;margin-top:2.1rem;opacity:0;animation:up .7s .45s forwards}
+.hero-ctas .btn{padding:0.8rem 1.35rem;white-space:nowrap;flex:0 1 auto}
+.hero-proof{
+  margin-top:2.4rem;display:flex;align-items:center;flex-wrap:wrap;gap:0.55rem 0.9rem;
+  font-size:0.85rem;color:var(--muted);opacity:0;animation:up .7s .6s forwards;
+}
+.hero-proof .pf strong{color:var(--teal);font-weight:600}
+.hero-proof .dot{width:3px;height:3px;border-radius:50%;background:var(--muted);opacity:0.5}
 
-  /* ─── MODULES ─── */
-  .modules-wrap {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
-  }
-  .module-list { display: flex; flex-direction: column; gap: 0.8rem; }
-  .module-item {
-    display: flex; align-items: flex-start; gap: 1rem;
-    padding: 1rem 1.2rem; border-radius: 10px;
-    border: 1px solid transparent;
-    cursor: pointer; transition: border-color 0.2s, background 0.2s;
-  }
-  .module-item:hover, .module-item.active {
-    background: var(--teal-glow2); border-color: var(--border);
-  }
-  .module-item.active { border-color: var(--teal); }
-  .module-num {
-    font-family: var(--serif); font-size: 1.1rem; color: var(--teal);
-    flex-shrink: 0; width: 28px; padding-top: 1px;
-  }
-  .module-name { font-size: 0.9rem; font-weight: 500; color: var(--white); margin-bottom: 0.2rem; }
-  .module-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
-  .module-visual {
-    position: sticky; top: 88px;
-    background: var(--navy2);
-    border: 1px solid var(--border);
-    border-radius: 16px; padding: 2rem;
-    min-height: 300px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .module-visual-label {
-    font-size: 0.7rem; letter-spacing: 0.12em; color: var(--teal); margin-bottom: 0.8rem;
-  }
-  .module-visual-title {
-    font-family: var(--display); font-size: 1.4rem; color: var(--white); margin-bottom: 0.6rem;
-  }
-  .module-visual-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
-  .module-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
-  .mpill {
-    font-size: 0.7rem; padding: 0.2rem 0.7rem; border-radius: 100px;
-    background: var(--teal-glow); border: 1px solid var(--border);
-    color: var(--teal);
-  }
+.hero-stage{flex:0 1 810px;min-width:0;display:flex;justify-content:flex-end;opacity:0;animation:up .9s .5s forwards}
+.embed-frame{position:relative;width:100%}
+.hero-window{
+  width:100%;max-width:1060px;height:auto;aspect-ratio:1060/684;
+  border:none;background:transparent;
+}
 
-  /* ─── FOUNDER ─── */
-  .founder { background: var(--navy2); border-top: 1px solid var(--border2); }
-  .founder-wrap {
-    display: grid; grid-template-columns: auto 1fr; gap: 4rem; align-items: center;
-  }
-  .founder-photo-wrap {
-    position: relative; width: 260px; flex-shrink: 0;
-  }
-  .founder-photo-wrap::before {
-    content: ''; position: absolute;
-    inset: -12px; border-radius: 20px;
-    border: 1px solid var(--border);
-    pointer-events: none;
-  }
-  .founder-photo-wrap::after {
-    content: ''; position: absolute;
-    inset: -24px; border-radius: 24px;
-    border: 1px solid rgba(29,184,154,0.08);
-    pointer-events: none;
-  }
-  .founder-photo {
-    width: 260px; height: 320px;
-    object-fit: cover; object-position: top center;
-    border-radius: 12px;
-    display: block;
-  }
-  .founder-role {
-    display: inline-block;
-    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--teal); border: 1px solid var(--border);
-    padding: 0.25rem 0.7rem; border-radius: 100px;
-    margin-bottom: 1rem;
-  }
-  .founder-name {
-    font-family: var(--display); font-size: 2rem; color: var(--white); margin-bottom: 0.6rem;
-  }
-  .founder-bio {
-    font-size: 0.95rem; color: var(--muted); line-height: 1.8;
-    margin-bottom: 1.5rem; font-weight: 300;
-  }
-  .founder-creds { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .cred {
-    font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 100px;
-    background: var(--navy3); border: 1px solid var(--border2);
-    color: var(--text);
-  }
+/* ============================================================
+   MARQUEE / PROOF BAR (thin)
+   ============================================================ */
+.proofbar{border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);background:var(--navy-2)}
+.proofbar-inner{
+  margin:0 auto;padding:1.15rem var(--pad);
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0.9rem 2.4rem;
+  font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;
+}
+.proofbar-inner span{display:inline-flex;align-items:center;gap:0.55rem}
+.proofbar-inner b{color:var(--text);font-weight:500}
+.pb-dot{width:5px;height:5px;border-radius:1px;background:var(--gold)}
 
-  /* ─── CTA BAND ─── */
-  .cta-band {
-    text-align: center;
-    background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
-    border-top: 1px solid var(--border2);
-    border-bottom: 1px solid var(--border2);
-    position: relative; overflow: hidden;
-  }
-  .cta-band::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(29,184,154,0.07), transparent 70%);
-    pointer-events: none;
-  }
-  .cta-band h2 { margin-bottom: 0.8rem; }
-  .cta-band p { color: var(--muted); font-size: 1rem; margin-bottom: 2.2rem; font-weight: 300; }
-  .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+/* ============================================================
+   PROBLEM BAND
+   ============================================================ */
+.problem{background:var(--navy)}
+.problem-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2.8rem;
+}
+.problem-card{
+  border-top:2px solid var(--c,var(--teal));
+  background:var(--navy-2);border-radius:0 0 12px 12px;padding:1.5rem 1.4rem 1.6rem;
+}
+.problem-card .pc-num{font-family:var(--f-mono);font-size:0.78rem;color:var(--c,var(--teal));font-weight:500;letter-spacing:0.06em}
+.problem-card h3{font-size:1.05rem;margin:0.7rem 0 0.6rem}
+.problem-card p{font-size:0.9rem;color:var(--muted);line-height:1.6}
+.problem-close{
+  margin-top:2.6rem;font-family:var(--f-display);font-weight:500;
+  font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.4;color:var(--text);
+}
+.problem-close b{color:var(--teal);font-weight:600}
 
-  /* ─── FOOTER ─── */
-  footer {
-    padding: 3rem max(5vw, calc((100% - 1600px) / 2)) 2rem;
-    border-top: 1px solid var(--border2);
-    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
-  }
-  .footer-logo {
-    display: flex; align-items: center; gap: 0.5rem;
-    text-decoration: none; margin-bottom: 0.4rem;
-  }
-  .footer-logo-text {
-    font-family: var(--serif); font-size: 1.05rem; color: #d4af37;
-  }
-  .footer-tagline { font-size: 0.8rem; color: var(--muted); }
-  .footer-links { display: flex; gap: 1.8rem; list-style: none; }
-  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
-  .footer-bottom {
-    grid-column: 1/-1;
-    border-top: 1px solid var(--border2);
-    padding-top: 1.2rem;
-    display: flex; justify-content: space-between;
-    font-size: 0.75rem; color: var(--muted);
-  }
-  .footer-bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-bottom a:hover { color: var(--white); }
+/* ============================================================
+   SPLIT DEMO SECTIONS (see-it / workflow)
+   ============================================================ */
+.split{display:flex;gap:clamp(2rem,5vw,5rem);align-items:flex-start}
+.split-text{flex:0 1.4 460px;min-width:320px;position:sticky;top:100px}
+.split-demo{flex:0 1 924px;min-width:0}
+.demo-card{position:relative;width:100%;max-width:924px;margin:0 auto;border-radius:14px;overflow:hidden}
+.demo-frame{
+  width:100%;border:none;background:transparent;display:block;
+}
+.demo-loading{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.9rem;
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:14px;color:var(--muted);font-size:0.85rem;z-index:0;
+}
+.spinner{width:30px;height:30px;border:2px solid var(--border-strong);border-top-color:var(--teal);border-radius:50%;animation:spin .9s linear infinite}
+.split-text .feature-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.6rem}
+.chip{
+  font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.05em;color:var(--muted);
+  border:1px solid var(--border);border-radius:100px;padding:0.4em 0.85em;
+}
+.chip b{color:var(--teal);font-weight:500}
 
-  /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeLeft {
-    from { opacity: 0; transform: translateY(-50%) translateX(30px); }
-    to   { opacity: 1; transform: translateY(-50%) translateX(0); }
-  }
+.see-it{background:var(--navy-2);border-top:1px solid var(--border-2)}
 
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* ============================================================
+   PLATFORM PILLARS
+   ============================================================ */
+.platform{background:var(--navy)}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:3rem}
+.pillar{
+  background:var(--navy-2);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.7rem 1.6rem;transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.pillar:hover{transform:translateY(-3px);border-color:var(--border-strong);background:var(--panel)}
+.pillar-ic{
+  width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  background:var(--teal-soft);color:var(--teal);margin-bottom:1.1rem;
+}
+.pillar-ic svg{width:21px;height:21px}
+.pillar h3{font-size:1.1rem;margin-bottom:0.55rem}
+.pillar p{font-size:0.9rem;color:var(--muted);line-height:1.6}
+.pillar.wide{grid-column:span 1}
+.pillar-airgap{
+  grid-column:1 / -1;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;
+  background:linear-gradient(110deg,var(--navy-3),var(--panel));
+  border:1px solid var(--border);
+}
+.pillar-airgap .pillar-ic{margin-bottom:0}
+.pillar-airgap .ag-txt{flex:1;min-width:240px}
+.pillar-airgap h3{font-size:1.05rem;margin-bottom:0.3rem}
+.pillar-airgap p{font-size:0.9rem}
+.platform-explore{margin-top:1.8rem}
+.work-cta{
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;
+  margin-top:3rem;text-align:center;
+}
+.work-cta p{color:var(--muted);font-size:1rem;margin:0}
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1400px) {
-    .hero { padding-left: max(3vw, 24px); padding-right: max(3vw, 24px); }
-    section { padding-left: max(3vw, 24px); padding-right: max(3vw, 24px); }
-    .hero-layout { gap: clamp(1.25rem, 2vw, 2rem); }
-    .hero-showcase { flex: 0 1 680px; margin-left: auto; }
-    .hero-window { max-width: 680px; min-height: 0; }
-    .platform-layout { gap: 2.5rem; }
-  }
-  @media (max-width: 1200px) {
-    .hero { padding-left: 2vw; padding-right: 2vw; }
-    section { padding-left: 2vw; padding-right: 2vw; }
-    .platform-layout { gap: 1.5rem; }
-  }
-  @media (max-width: 1100px) {
-    .verticals-grid { grid-template-columns: 1fr 1fr; }
-    .vertical-card.custom { grid-column: 1 / -1; max-width: 560px; margin: 0 auto; width: 100%; }
-  }
-  @media (max-width: 900px) {
-    .hero-showcase { display: flex; flex: none; width: 100%; max-width: 100%; margin-top: 1.5rem; }
-    .hero-window { min-height: 0; }
-    .hero-mobile { display: none; }
-    .hero-layout { flex-direction: column; gap: 1.5rem; }
-    .hero-inner { width: 100%; max-width: 100%; }
-    h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); max-width: 100%; }
-    .see-it-layout { flex-direction: column; }
-    .see-it-text { width: 100%; max-width: 100%; }
-    .see-it-demo { width: 100%; }
-    .platform-layout { flex-direction: column; gap: 2.5rem; }
-    .platform-content { width: 100%; flex: none; }
-    .platform-demo { position: static; width: 100%; }
-    .verticals-grid { grid-template-columns: 1fr; }
-    .vertical-card.custom { grid-column: auto; max-width: 100%; }
-    .modules-wrap { grid-template-columns: 1fr; }
-    .module-visual { position: static; }
-    .founder-wrap { grid-template-columns: 1fr; }
-    .founder-photo-wrap { width: 100%; }
-    .founder-photo { width: 100%; height: 280px; }
-    footer { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-  }
+/* ============================================================
+   CAPABILITIES GRID
+   ============================================================ */
+.capabilities{background:var(--navy-2);border-top:1px solid var(--border-2)}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem}
+.cap{
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.7rem 1.6rem;transition:border-color .2s ease,transform .2s ease;
+}
+.cap:hover{border-color:rgba(29,184,154,0.32);transform:translateY(-3px)}
+.cap-head{display:flex;align-items:center;justify-content:space-between;gap:0.6rem;margin-bottom:0.9rem}
+.cap-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(29,184,154,0.1);color:var(--teal)}
+.cap-ic svg{width:19px;height:19px}
+.cap h3{font-size:1.04rem;margin-bottom:0.5rem}
+.cap p{font-size:0.875rem;color:var(--muted);line-height:1.62}
+.cap p .hl{color:var(--text)}
+.cap-foot{
+  margin-top:2.4rem;font-size:0.92rem;color:var(--muted);text-align:center;max-width:680px;
+  margin-left:auto;margin-right:auto;
+}
+.cap-foot a{color:var(--teal);font-weight:500}
 
-  @media (max-width: 600px) {
-    section { padding: 70px 6vw; }
-    .features-grid { grid-template-columns: 1fr; }
-    .stats-strip { flex-direction: column; align-items: center; }
+/* ============================================================
+   VERTICALS
+   ============================================================ */
+.verticals{background:var(--navy)}
+.vert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+.vert{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--navy-2);border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:1.9rem 1.8rem 1.7rem;overflow:hidden;
+  transition:transform .22s ease,border-color .22s ease;
+}
+.vert::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,var(--teal))}
+.vert:hover{transform:translateY(-4px);border-color:var(--border-strong)}
+.vert-tag{font-family:var(--f-mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--c,var(--teal));margin-bottom:1rem}
+.vert h3{font-size:1.28rem;line-height:1.2;margin-bottom:0.8rem}
+.vert p{font-size:0.9rem;color:var(--muted);line-height:1.62;flex:1}
+.vert-points{list-style:none;margin:1rem 0 1.3rem;display:flex;flex-direction:column;gap:0.5rem}
+.vert-points li{font-size:0.85rem;color:var(--text);display:flex;gap:0.6rem;align-items:flex-start}
+.vert-points li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c,var(--teal));margin-top:0.55rem;flex:0 0 auto}
+.vert-link{display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;font-size:0.9rem;color:var(--c,var(--teal))}
+.vert-link svg{width:15px;height:15px;transition:transform .18s ease}
+.vert:hover .vert-link svg{transform:translateX(4px)}
 
-    .feature-card-top {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .feature-card-top .feature-icon {
-      margin-bottom: 0;
-      flex-shrink: 0;
-    }
-    .feature-card-top .feature-title {
-      flex: 1;
-      margin-bottom: 0;
-    }
-    .feature-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--teal);
-      font-size: 1.1rem;
-      line-height: 1;
-      cursor: pointer;
-      transition: transform 0.25s ease, border-color 0.2s;
-      padding: 0;
-    }
-    .feature-card.fc-expanded .feature-toggle {
-      transform: rotate(45deg);
-      border-color: var(--teal);
-    }
-    .feature-card .feature-desc {
-      display: none;
-      margin-top: 0.9rem;
-    }
-    .feature-card.fc-expanded .feature-desc {
-      display: block;
-    }
-    .feature-card {
-      padding: 1.2rem;
-    }
-  }
+/* ============================================================
+   TRUST
+   ============================================================ */
+.trust{background:var(--navy-2);border-top:1px solid var(--border-2)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:3rem}
+.trust-card{background:var(--navy-3);border:1px solid var(--border-2);border-radius:var(--radius);padding:1.6rem 1.5rem}
+.trust-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,0.12);color:var(--gold);margin-bottom:1rem}
+.trust-ic svg{width:19px;height:19px}
+.trust-card h3{font-size:1.0rem;margin-bottom:0.5rem}
+.trust-card p{font-size:0.86rem;color:var(--muted);line-height:1.6}
 
+/* ============================================================
+   HOW WE WORK / VALUE
+   ============================================================ */
+.work{background:var(--navy)}
+.arc{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:3rem;position:relative}
+.arc-step{position:relative;padding:1.7rem 1.5rem;background:var(--navy-2);border:1px solid var(--border-2);border-radius:var(--radius)}
+.arc-num{font-family:var(--f-mono);font-size:1.5rem;font-weight:500;color:var(--teal);line-height:1}
+.arc-step h3{font-size:1.08rem;margin:0.7rem 0 0.5rem}
+.arc-step p{font-size:0.86rem;color:var(--muted);line-height:1.6}
+.arc-step .arc-line{display:none}
 
-  /* ─── MOBILE NAV ─── */
-  .nav-hamburger {
-    display: none;
-    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-    width: 40px; height: 40px;
-    background: transparent; border: 1px solid var(--border2);
-    border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0;
-  }
-  .nav-hamburger span {
-    display: block; width: 18px; height: 1.5px;
-    background: var(--text); border-radius: 2px;
-    transition: transform 0.25s ease, opacity 0.2s ease;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.value-strip{
+  margin-top:1.6rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border-2);border:1px solid var(--border-2);border-radius:var(--radius);overflow:hidden;
+}
+.value-cell{background:var(--navy-2);padding:1.5rem 1.4rem;display:flex;flex-direction:column;gap:0.45rem}
+.value-cell .vc-ic{color:var(--teal);width:22px;height:22px}
+.value-cell h4{font-family:var(--f-display);font-size:0.98rem;font-weight:600;color:var(--white)}
+.value-cell p{font-size:0.83rem;color:var(--muted);line-height:1.55}
 
-  .nav-drawer {
-    display: none; position: fixed;
-    top: 68px; left: 0; right: 0; bottom: 0;
-    background: rgba(11,22,40,0.98); backdrop-filter: blur(16px);
-    flex-direction: column;
-    padding: 1.5rem 6vw 2.5rem;
-    z-index: 99; overflow-y: auto;
-    border-top: 1px solid var(--border2);
-  }
-  .nav-drawer.open { display: flex; }
+/* ============================================================
+   VISION
+   ============================================================ */
+.vision{background:var(--navy-2);border-top:1px solid var(--border-2);position:relative;overflow:hidden}
+.vision-rings{position:absolute;top:-30%;right:-12%;width:60%;height:160%;z-index:0;opacity:0.5}
+.vision-rings svg{width:100%;height:100%}
+.vision .wrap{position:relative;z-index:1}
+.vision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:3rem}
+.vcard{
+  background:rgba(16,31,56,0.7);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.8rem 1.7rem;backdrop-filter:blur(4px);
+}
+.vcard .vc-num{font-family:var(--f-mono);font-size:0.82rem;color:var(--c,var(--teal));font-weight:500;letter-spacing:0.06em}
+.vcard h3{font-size:1.14rem;margin:0.8rem 0 0.7rem}
+.vcard p{font-size:0.88rem;color:var(--muted);line-height:1.62}
+.vcard p em{font-style:italic;color:var(--text)}
 
-  /* Top-level list */
-  .drawer-links { list-style: none; flex: 1; }
-  .drawer-links > li > a {
-    display: block; font-size: 1.05rem; font-weight: 400;
-    color: var(--text); text-decoration: none;
-    padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
-    letter-spacing: 0.02em; transition: color 0.15s, padding-left 0.15s;
-  }
-  .drawer-links > li:first-child > a { border-top: 1px solid var(--border2); }
-  .drawer-links > li > a:hover { color: var(--white); padding-left: 0.4rem; }
-  .drawer-links > li > a.active { color: var(--teal); }
+/* ============================================================
+   MISSION + CTA (signature)
+   ============================================================ */
+.mission{background:var(--navy);position:relative}
+.bridge{
+  position:relative;margin:0 auto 3.2rem;max-width:880px;
+  padding-top:46px;
+}
+.bridge-arch{position:absolute;top:0;left:0;right:0;height:120px;z-index:0;pointer-events:none}
+.bridge-arch svg{width:100%;height:100%;overflow:visible}
+.bridge-row{
+  position:relative;z-index:1;display:flex;align-items:stretch;gap:0.5rem;justify-content:center;
+}
+.bridge-node{
+  flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;
+  width:120px;text-align:center;
+}
+.bridge-node .bn-dot{
+  width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--c,var(--teal));background:rgba(29,184,154,0.08);color:var(--c,var(--teal));
+}
+.bridge-node.gold .bn-dot{border-color:var(--gold);background:rgba(212,175,55,0.1);color:var(--gold)}
+.bridge-node .bn-dot svg{width:24px;height:24px}
+.bridge-node .bn-label{font-size:0.78rem;font-weight:600;color:var(--text);line-height:1.25}
+.bridge-deck{
+  flex:1;min-width:0;display:flex;align-self:center;
+  border-radius:10px;overflow:hidden;border:1px solid var(--border);
+  background:var(--navy-2);
+}
+.bridge-cell{
+  flex:1;min-width:0;padding:0.85rem 0.4rem;text-align:center;
+  font-family:var(--f-mono);font-size:0.66rem;letter-spacing:0.02em;color:var(--muted);
+  border-right:1px solid var(--border-2);
+  background:linear-gradient(180deg,transparent,rgba(29,184,154,0.03));
+}
+.bridge-cell:last-child{border-right:none}
+.bridge-keystone{
+  position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:2;
+  width:34px;height:34px;background:var(--navy);border:1px solid var(--border-strong);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+}
+.bridge-keystone svg{width:18px;height:18px}
 
-  /* Expandable group */
-  .drawer-group { border-bottom: 1px solid var(--border2); }
-  .drawer-group-header {
-    display: flex; align-items: center;
-  }
-  .drawer-group-link {
-    flex: 1; font-size: 1.05rem; font-weight: 400;
-    color: var(--text); text-decoration: none;
-    padding: 0.9rem 0; letter-spacing: 0.02em;
-    transition: color 0.15s;
-  }
-  .drawer-group-link:hover { color: var(--white); }
-  .drawer-group-link.active { color: var(--teal); }
-  .drawer-group-toggle {
-    flex-shrink: 0; background: none; border: none;
-    padding: 0.9rem 0 0.9rem 1.2rem; cursor: pointer;
-    display: flex; align-items: center; color: var(--muted);
-    transition: color 0.15s;
-  }
-  .drawer-group-toggle:hover { color: var(--text); }
-  .drawer-group-arrow {
-    transition: transform 0.25s ease;
-  }
-  .drawer-group.open .drawer-group-arrow { transform: rotate(90deg); }
+.mission-row{display:flex;gap:clamp(2.2rem,5vw,4.8rem);align-items:center;max-width:1180px;margin-top:clamp(1.5rem,3vw,2.2rem)}
+.mission-art{flex:0 1 510px;min-width:0}
+.mission-art img{width:100%;height:auto;display:block}
+.mission-statement{flex:1 1 430px;min-width:280px;max-width:552px}
+.mission-quote{
+  font-family:var(--f-display);font-weight:500;font-size:clamp(1.4rem,2.7vw,2.05rem);
+  line-height:1.34;color:var(--white);letter-spacing:-0.01em;
+}
+.mission-tagline{
+  margin-top:1.4rem;font-family:var(--f-mono);font-size:clamp(0.95rem,1.4vw,1.15rem);
+  color:var(--gold);letter-spacing:0.01em;white-space:nowrap;
+}
 
-  /* Sub-links */
-  .drawer-sub { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
-  .drawer-group.open .drawer-sub { max-height: 300px; }
-  .drawer-sub li a {
-    display: block; font-size: 0.9rem; color: var(--muted);
-    text-decoration: none; padding: 0.6rem 0 0.6rem 1.1rem;
-    border-bottom: 1px solid var(--border2);
-    transition: color 0.15s, padding-left 0.15s;
-  }
-  .drawer-sub li:last-child a { border-bottom: none; }
-  .drawer-sub li a:hover { color: var(--white); padding-left: 1.4rem; }
-  .drawer-sub li a.active { color: var(--teal); }
+.cta{margin-top:clamp(3.4rem,6vw,5rem);text-align:center;background:linear-gradient(120deg,var(--navy-3),var(--panel-2));
+  border:1px solid var(--border);border-radius:20px;padding:clamp(2.4rem,5vw,3.6rem) var(--pad)}
+.cta h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,3vw,2.3rem);color:var(--white);line-height:1.15;letter-spacing:-0.01em}
+.cta p{color:var(--muted);margin-top:0.9rem;font-size:1.02rem;max-width:52ch;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem}
 
-  /* CTA buttons */
-  .drawer-ctas { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 2rem; }
-  .drawer-cta-primary {
-    display: block; text-align: center;
-    background: var(--teal); color: var(--navy);
-    padding: 0.85rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 500; text-decoration: none;
-  }
-  .drawer-cta-secondary {
-    display: block; text-align: center;
-    border: 1px solid var(--border); color: var(--text);
-    padding: 0.85rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 400; text-decoration: none;
-  }
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{background:var(--navy-2);border-top:1px solid var(--border-2);padding:3.5rem 0 2.2rem}
+.footer-top{display:flex;gap:2.5rem;justify-content:space-between;flex-wrap:wrap}
+.footer-brand{max-width:300px}
+.footer-brand .brand{margin-bottom:0.9rem}
+.footer-tag{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap}
+.footer-col h5{font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.footer-col a{font-size:0.9rem;color:var(--muted);transition:color .15s ease}
+.footer-col a:hover{color:var(--teal)}
+.footer-bottom{
+  margin-top:2.8rem;padding-top:1.6rem;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:0.82rem;color:var(--muted-2);
+}
+.footer-bottom a{color:var(--muted);}
+.footer-bottom a:hover{color:var(--teal)}
 
-  /* Mobile section nav */
-  .mobile-section-nav {
-    display: none; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; padding: 0.75rem 6vw;
-    gap: 0.5rem; border-bottom: 1px solid var(--border2);
-    position: sticky; top: 68px; z-index: 90;
-    background: rgba(11,22,40,0.97); backdrop-filter: blur(12px);
-  }
-  .mobile-section-nav::-webkit-scrollbar { display: none; }
-  .mobile-section-nav a {
-    display: inline-block; white-space: nowrap; flex-shrink: 0;
-    font-size: 0.78rem; padding: 0.35rem 0.85rem;
-    border-radius: 100px; border: 1px solid var(--border2);
-    color: var(--muted); text-decoration: none;
-    transition: border-color 0.15s, color 0.15s;
-  }
-  .mobile-section-nav a:hover,
-  .mobile-section-nav a.active { border-color: var(--teal); color: var(--teal); }
+/* ============================================================
+   REVEAL + KEYFRAMES
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  @media (max-width: 820px) {
-    .nav-hamburger { display: flex; }
-    .nav-links { display: none; }
-    .nav-ctas { display: none; }
-    .mobile-section-nav { display: flex; }
-    footer { grid-template-columns: 1fr; gap: 1.5rem; }
-    .footer-bottom { flex-direction: column; gap: 0.4rem; }
-    .footer-links { flex-wrap: wrap; gap: 1rem; }
-  }
-  @media (max-width: 480px) {
-    section { padding: 60px 5vw; }
-  }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1249px){
+  /* Below this viewport the available flex space for .mission-statement drops below
+     the tagline's natural single-line width (552px), so let it wrap naturally. */
+  .mission-tagline{white-space:normal}
+}
+@media(max-width:1180px){
+  .pillars,.cap-grid,.vision-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .arc,.value-strip{grid-template-columns:repeat(2,1fr)}
+  .problem-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:1024px){
+  .vert-grid{grid-template-columns:1fr}
+  .vert{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+  .vert > *{width:100%}
+}
+@media(max-width:1000px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:inline-flex}
 
-  /* ─── PRICING NOTE ─── */
-  .pricing-note {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    font-size: 0.78rem; color: var(--muted); margin-top: 2.2rem;
-    flex-wrap: wrap; justify-content: center;
-  }
-  .pricing-note-sep { opacity: 0.3; }
-  .pricing-note a {
-    color: var(--teal); text-decoration: none; font-weight: 500;
-    transition: opacity 0.15s;
-  }
-  .pricing-note a:hover { opacity: 0.75; }
-  .engagement-pricing {
-    display: inline-block; margin-top: 1rem;
-    font-size: 0.75rem; color: var(--muted);
-    border-top: 1px solid var(--border2); padding-top: 0.8rem; width: 100%;
-  }
-  .engagement-pricing a {
-    color: var(--teal); text-decoration: none; font-weight: 500;
-    transition: opacity 0.15s;
-  }
-  .engagement-pricing a:hover { opacity: 0.75; }
+  .hero-layout{flex-direction:column;align-items:stretch;justify-content:normal;gap:2rem}
+  .hero{--h1:clamp(1.95rem,5.2vw,2.6rem)}
+  .hero-copy{flex:none;width:100%;max-width:none;min-width:0}
+  .hero-sub{max-width:600px}
+  .hero-ctas{flex-wrap:wrap}
+  /* Hold the window at its pre-switch width so it doesn't jump larger when the
+     layout stacks; keep it left-aligned (consistent with the two-column view)
+     and let the space on the right squeeze out as we narrow. flex:none stops the
+     basis being read as a height in the now-vertical flex layout. */
+  .hero-stage{flex:none;width:100%;max-width:none;justify-content:flex-start}
+  .hero-stage .embed-frame{max-width:560px;margin:0}
 
-  /* ─── REPRODUCIBILITY DEMO (platform section) ─── */
-  .repro-section { margin-top: 4.5rem; }
-  .repro-heading {
-    font-family: var(--display);
-    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-    font-weight: 700; letter-spacing: -0.02em;
-    color: var(--white); line-height: 1.2;
-    margin-bottom: 1.4rem;
-  }
-  .repro-heading em { font-style: normal; color: var(--teal); font-weight: 800; }
-  .repro-tagline { font-size: 0.52em; font-weight: 400; color: var(--teal); letter-spacing: 0.08em; opacity: 0.85; vertical-align: middle; white-space: nowrap; }
-  .repro-frame-wrap { position: relative; width: 100%; max-width: 880px; min-height: 0; margin: 0 auto; border-radius: 12px; }
-  .repro-frame { width: 100%; border: none; display: block; height: auto;
-    aspect-ratio: 880 / 672;
-    opacity: 0; transition: opacity 0.7s ease; }
-  .repro-frame.loaded { opacity: 1; }
-  .repro-ph { position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 1rem; color: var(--muted);
-    font-size: 0.85rem; transition: opacity 0.5s ease; pointer-events: none; }
-  .repro-ph.hidden { opacity: 0; }
-  .repro-spinner { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border);
-    border-top-color: var(--teal); animation: reprospin 0.8s linear infinite; }
-  @keyframes reprospin { to { transform: rotate(360deg); } }
+  .split{flex-direction:column;gap:2rem}
+  .split-text{flex:none;width:100%;max-width:none;position:static;top:auto}
+  .split-demo{flex:none;width:100%;display:flex;justify-content:flex-start}
+  .demo-card{max-width:531px;margin:0}
+
+  .mission-row{flex-direction:column;align-items:flex-start;gap:2.2rem}
+  .mission-art{flex:none;width:100%;max-width:480px;margin:0}
+  .mission-statement{flex:none;max-width:600px;margin:0;text-align:left}
+}
+@media(max-width:640px){
+  :root{--sec:clamp(3.4rem,12vw,5rem)}
+  .nav-inner{height:64px}
+  .hero{padding-top:104px}
+  .problem-grid{grid-template-columns:1fr}
+  .pillars,.cap-grid,.trust-grid,.arc,.value-strip,.vision-grid{grid-template-columns:1fr}
+  .pillar-airgap{flex-direction:column;align-items:flex-start}
+  .value-strip{gap:1px}
+  .footer-top{flex-direction:column;gap:2rem}
+  .footer-cols{gap:2.2rem}
+
+  /* Bridge → vertical stack on small screens */
+  .bridge{padding-top:0}
+  .bridge-arch,.bridge-keystone{display:none}
+  .bridge-row{flex-direction:column;gap:0.5rem}
+  .bridge-node{width:100%;flex-direction:row;justify-content:flex-start;gap:0.9rem;text-align:left}
+  .bridge-node .bn-label{font-size:0.92rem}
+  .bridge-deck{flex-direction:column}
+  .bridge-cell{text-align:left;padding:0.75rem 1rem;border-right:none;border-bottom:1px solid var(--border-2);font-size:0.78rem}
+  .bridge-cell:last-child{border-bottom:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+  [style*="animation"]{opacity:1!important}
+  .hero-eyebrow,.hero h1,.hero-sub,.hero-ctas,.hero-proof,.hero-stage{opacity:1!important;animation:none!important}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">
-    <svg class="nav-logo-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect fill="#d4af37" x="8" y="8" width="14" height="14"/>
-      <rect fill="#000" x="12" y="12" width="6" height="6"/>
-      <rect fill="#d4af37" x="8" y="28" width="14" height="14"/>
-      <rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="8" y="48" width="14" height="14"/>
-      <rect fill="#000" x="12" y="52" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="48" width="14" height="14"/>
-      <rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="28" width="14" height="14"/>
-      <rect fill="#000" x="32" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="8" width="14" height="14"/>
-      <rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
-      <rect fill="#d4af37" x="48" y="28" width="14" height="14"/>
-      <rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="48" y="48" width="14" height="14"/>
-      <rect fill="#000" x="52" y="52" width="6" height="6"/>
-    </svg>
-    <span class="nav-logo-text">Logic Byte</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#platform">Platform</a></li>
-    <li><a href="#verticals">Solutions</a></li>
-    <li><a href="#modules">Modules</a></li>
-    <li><a href="research.html">Research</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="nav-ctas">
-    <a class="nav-cta-soft" href="contact.html?intent=hello">Say Hello</a>
-    <a class="nav-cta" href="contact.html">Book a Demo</a>
-  </div>
+<!-- ========================= NAV ========================= -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="Logic Byte home">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
 
-  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="platform.html">Platform</a></li>
+      <li class="has-menu">
+        <a class="nav-link" href="#verticals">Solutions
+          <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="biomedical.html">Biomedical &amp; Life Sciences<span>Single-cell, screening, label-free assays</span></a>
+          <a href="semiconductor.html">Semiconductor &amp; Industrial Imaging<span>Inspection, defect detection, metrology</span></a>
+          <a href="custom.html">Custom Solutions<span>Bespoke pipelines for any domain</span></a>
+        </div>
+      </li>
+      <li><a class="nav-link" href="research.html">Research</a></li>
+      <li><a class="nav-link" href="about.html">About</a></li>
+      <li><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta"><a class="btn btn-primary" href="contact.html">Book a Demo</a></div>
+
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
 </nav>
 
-<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <ul class="drawer-links">
-    <li><a href="#platform">Platform</a></li>
+<!-- mobile drawer -->
+<div class="drawer-scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile menu">
+  <div class="drawer-top">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul class="drawer-nav">
+    <li><a href="platform.html">Platform</a></li>
     <li class="drawer-group">
-      <div class="drawer-group-header">
-        <a href="#verticals" class="drawer-group-link">Solutions</a>
-        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Solutions"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="drawer-group-head">
+        <a href="#verticals">Solutions</a>
+        <button class="drawer-group-toggle" aria-label="Expand Solutions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
       <ul class="drawer-sub">
         <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
@@ -888,598 +688,505 @@
         <li><a href="custom.html">Custom Solutions</a></li>
       </ul>
     </li>
-    <li><a href="#modules">Modules</a></li>
-    <li class="drawer-group">
-      <div class="drawer-group-header">
-        <a href="research.html" class="drawer-group-link">Research</a>
-        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Research"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-      <ul class="drawer-sub">
-        <li><a href="research.html">Overview</a></li>
-        <li><a href="research-output.html">Full Output</a></li>
-      </ul>
-    </li>
+    <li><a href="research.html">Research</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="drawer-ctas">
-    <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
-    <a class="drawer-cta-secondary" href="contact.html?intent=hello">Say Hello</a>
+    <a class="btn btn-primary" href="contact.html">Book a Demo</a>
+    <a class="btn btn-secondary" href="contact.html?intent=hello">Say hello</a>
   </div>
-</div>
+</aside>
 
-</div>
-
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-grid" aria-hidden="true">
+<!-- ========================= HERO ========================= -->
+<header class="hero" id="top">
+  <div class="hero-grid-bg" aria-hidden="true">
     <svg xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
-        </pattern>
-      </defs>
+      <defs><pattern id="grid" width="58" height="58" patternUnits="userSpaceOnUse">
+        <path d="M 58 0 L 0 0 0 58" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
+      </pattern></defs>
       <rect width="100%" height="100%" fill="url(#grid)"/>
     </svg>
   </div>
+  <div class="hero-glow" aria-hidden="true"></div>
 
-  <div class="hero-layout">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        <span>AI-Powered Image Analytics</span>
-      </div>
-
-      <h1>See more.<br/><em>Discover faster.</em><br/>Scale with confidence.</h1>
-
-      <p class="hero-sub">
-        <span class="optiflow-badge">OptiFlow</span> turns raw images into decisions &mdash; a modular, domain-aware analytics platform you build visually and run at any scale. No code. Reproducible by design.
-      </p>
-
-      <div class="hero-ctas">
-        <a class="btn-primary" href="contact.html">Book a Demo</a>
-        <a class="btn-secondary" href="#verticals">Explore Solutions</a>
-      </div>
-
-      <div class="hero-proof">
-        <span class="hero-proof-item"><strong>In production</strong> at ETH Z&uuml;rich</span>
-        <span class="hero-proof-dot"></span>
-        <span class="hero-proof-item"><strong>20+</strong> peer-reviewed publications</span>
-        <span class="hero-proof-dot"></span>
-        <span class="hero-proof-item">Featured by <strong>CNA</strong> &amp; <strong>The Straits Times</strong></span>
-      </div>
-    </div>
-
-    <!-- Real OptiFlow window — auto-cycles across two imaging domains -->
-    <div class="hero-showcase">
-      <iframe class="hero-window" id="hero-window-frame" src="optiflow-window-embed.html"
-        title="OptiFlow workflow builder — live preview" scrolling="no" loading="eager"></iframe>
-    </div>
-  </div>
-
-</section>
-
-<!-- SEE IT IN ACTION -->
-<section class="see-it" id="see-it">
-  <div class="see-it-layout">
-    <div class="see-it-text">
-      <div class="section-eyebrow reveal">
-        <span class="section-eyebrow-line"></span>
-        <span>See it in action</span>
-      </div>
-      <h2 class="reveal">One capture in.<br/><em>Reproducible insights out.</em></h2>
-      <p class="section-lead reveal">
-        Watch <span class="optiflow-badge">OptiFlow</span> build and run full pipelines on real images &mdash; Different domains, same platform. The full pipeline + parameters travel with each output.
-      </p>
-    </div>
-    <div class="see-it-demo">
-      <div class="demo-wrap reveal" id="demo-wrap">
-        <div class="demo-ph" id="demo-ph">
-          <div class="demo-spinner"></div>
-          <span>Preparing live demo&hellip;</span>
+  <div class="wrap">
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">AI-Powered Image Analytics</div>
+        <h1>See more.<br/><em>Discover faster.</em><br/>Scale with confidence.</h1>
+        <p class="hero-sub"><span class="optiflow">OptiFlow</span> turns raw images into decisions — a modular, domain-aware analytics platform you build visually and run at any scale. No code. Auditable by design.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="contact.html">Book a Demo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-secondary" href="#see-it">See how it works</a>
         </div>
-        <iframe class="demo-frame" id="demo-frame" data-src="optiflow-pipeline-demo-embed.html"
-          title="OptiFlow pipeline demo — two domains" scrolling="no" loading="lazy"></iframe>
+        <div class="hero-proof">
+          <span class="pf"><strong>In production</strong>&nbsp;at ETH Z&uuml;rich</span>
+          <span class="dot"></span>
+          <span class="pf"><strong>20+</strong>&nbsp;peer-reviewed publications</span>
+          <span class="dot"></span>
+          <span class="pf">Featured by&nbsp;<strong>CNA</strong>&nbsp;&amp;&nbsp;<strong>The Straits Times</strong></span>
+        </div>
+      </div>
+
+      <!-- Real OptiFlow window — auto-cycles across imaging domains (kept from existing site) -->
+      <div class="hero-stage">
+        <div class="embed-frame">
+          <iframe class="hero-window" id="hero-window-frame" src="optiflow-window-embed.html"
+            title="OptiFlow workflow builder — live preview" scrolling="no" loading="eager"></iframe>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</header>
 
-<!-- PLATFORM FEATURES -->
-<section id="platform">
-  <div class="platform-layout">
-    <div class="platform-content">
-      <div class="section-eyebrow reveal">
-        <span class="section-eyebrow-line"></span>
-        <span>The Platform</span>
-      </div>
-      <h2 class="reveal">Built for quality.<br/><em>Engineered for scale.</em></h2>
-      <p class="section-lead reveal">
-        <span class="optiflow-badge">OptiFlow</span> is a modular, modality-agnostic platform for building and deploying domain-aware image-analytics workflows — at any scale.
-      </p>
-
-  <div class="features-grid">
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h7"/><circle cx="17" cy="18" r="3"/><path d="M17 15v3l2 1"/></svg>
-        </div>
-        <div class="feature-title">Visual workflow builder</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">Drag, connect, and configure processing nodes. Save workflows as templates and re-deploy across datasets in one click.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3M7 6l-3 6 3 6"/><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M17 6l3 6-3 6"/></svg>
-        </div>
-        <div class="feature-title">Image enhancement & correction</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">Illumination correction, noise reduction, contrast enhancement, and channel normalisation — applied automatically or on demand.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
-        </div>
-        <div class="feature-title">Object detection & segmentation</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">Precision segmentation of cells, defects, and structures. Supports supervised learning and unsupervised anomaly detection.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
-        </div>
-        <div class="feature-title">Morphological analysis & statistics</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">Automated measurements, population statistics, and interactive charts — from object size distributions to spatial clustering maps.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-        </div>
-        <div class="feature-title">PDF & Excel reporting</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">One-click report generation with annotated images, tables, and charts. Fully customisable templates for regulatory and internal use.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="feature-title">Modular, domain-aware architecture</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">Start with the core and plug in domain-aware modules built for your field's specific imaging challenges — CytoByte for label-free biological staining, defect classifiers for wafer inspection, and more.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-card-top">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-        </div>
-        <div class="feature-title">Reproducible &amp; auditable by design</div>
-        <button class="feature-toggle" aria-expanded="false" aria-label="Expand">+</button>
-      </div>
-      <div class="feature-desc">Every image OptiFlow produces carries the full sequence of operations and parameters applied to the source &mdash; built for record-keeping, audit, and reproducibility.</div>
-    </div>
+<!-- ========================= THIN PROOF BAR ========================= -->
+<div class="proofbar">
+  <div class="proofbar-inner">
+    <span><b>Imaging modality-agnostic</b></span><span class="pb-dot"></span>
+    <span><b>No-code</b> workflow builder</span><span class="pb-dot"></span>
+    <span><b>Tamper-evident</b> audit trail</span><span class="pb-dot"></span>
+    <span><b>Air-gapped</b> by design</span>
   </div>
-
-    </div><!-- .platform-content -->
-
-    <div class="platform-demo">
-      <div class="repro-heading">Every result remembers <em>how it was made.</em><span class="repro-tagline"> &mdash; Reuse, instantly</span></div>
-      <div class="repro-frame-wrap" id="repro-wrap">
-        <div class="repro-ph" id="repro-ph"><div class="repro-spinner"></div><span>Loading demo&hellip;</span></div>
-        <iframe class="repro-frame" id="repro-frame" data-src="optiflow-workflow-from-image-embed.html"
-          title="OptiFlow — drop in a result, get back the exact pipeline that made it"
-          scrolling="no" loading="lazy"></iframe>
-      </div>
-    </div><!-- .platform-demo -->
-  </div><!-- .platform-layout -->
-</section>
-
-<!-- VERTICALS -->
-<section class="verticals" id="verticals">
-  <div class="section-eyebrow reveal">
-    <span class="section-eyebrow-line"></span>
-    <span>Solutions</span>
-  </div>
-  <h2 class="reveal">Choose your <em>vertical</em></h2>
-  <p class="section-lead reveal">
-    Unified platform. Domain-aware engines. Select the world that matches your work.
-  </p>
-
-  <div class="verticals-grid">
-    <a class="vertical-card bio reveal" href="biomedical.html">
-      <h3>Biomedical &amp; Life Sciences</h3>
-      <span class="vertical-sub">From microscope to insight</span>
-      <p>A domain-aware analytics engine built for biological imaging — from fluorescence microscopy to DIC, from single-cell analysis to whole-slide digital pathology. Workflows that understand your imaging modality from the ground up.</p>
-      <div class="vertical-segments">
-        <span class="vseg">BioPharma</span>
-        <span class="vseg">Bio Research</span>
-        <span class="vseg">Drug Screening</span>
-        <span class="vseg">Digital Pathology</span>
-      </div>
-      <div class="vertical-arrow">
-        Explore solutions
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-
-    <a class="vertical-card semi reveal" href="semiconductor.html">
-      <h3>Semiconductor &amp; Industrial Imaging</h3>
-      <span class="vertical-sub">Zero-defect manufacturing starts here</span>
-      <p>A domain-aware analytics engine built for precision inspection — wafer-level defect detection, texture analysis, and inline quality assurance. Pipelines that speak the language of semiconductor imaging natively.</p>
-      <div class="vertical-segments">
-        <span class="vseg">Defect Detection</span>
-        <span class="vseg">Wafer Inspection</span>
-        <span class="vseg">Quality Assurance</span>
-      </div>
-      <div class="vertical-arrow">
-        Explore solutions
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-    <a class="vertical-card custom reveal" href="custom.html">
-      <h3>Custom Solutions</h3>
-      <span class="vertical-sub">Built around your challenge</span>
-      <p>Your imaging problem doesn't fit a predefined vertical? We design and build bespoke analytics pipelines from the ground up — scoped, validated, and delivered.</p>
-      <div class="vertical-segments">
-        <span class="vseg">Any imaging domain</span>
-        <span class="vseg">Bespoke pipeline</span>
-        <span class="vseg">End-to-end delivery</span>
-      </div>
-      <div class="vertical-arrow">
-        Discuss your challenge
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- MODULES -->
-<section id="modules">
-  <div class="section-eyebrow reveal">
-    <span class="section-eyebrow-line"></span>
-    <span>Capabilities</span>
-  </div>
-  <h2 class="reveal">Plug in what you need.<br/><em>Leave out what you don't.</em></h2>
-  <p class="section-lead reveal">
-    Every deployment is different. <span class="optiflow-badge">OptiFlow</span>'s module library lets you compose exactly the pipeline your workflow demands.
-  </p>
-
-  <div class="modules-wrap">
-    <div class="module-list reveal">
-      <div class="module-item active" onclick="setModule(this, 0)">
-        <span class="module-num">01</span>
-        <div>
-          <div class="module-name">Label-free microscopy (CytoByte)</div>
-          <div class="module-desc">In-silico staining from DIC images to pseudo-DAPI. Visualise nuclear morphology without chemical stains.</div>
-        </div>
-      </div>
-      <div class="module-item" onclick="setModule(this, 1)">
-        <span class="module-num">02</span>
-        <div>
-          <div class="module-name">Single-cell analysis & counting</div>
-          <div class="module-desc">Automated detection, segmentation, and enumeration of individual cells across large image datasets.</div>
-        </div>
-      </div>
-      <div class="module-item" onclick="setModule(this, 2)">
-        <span class="module-num">03</span>
-        <div>
-          <div class="module-name">Classification & grading</div>
-          <div class="module-desc">Supervised deep learning models for cell type classification, disease grading, and phenotypic scoring.</div>
-        </div>
-      </div>
-      <div class="module-item" onclick="setModule(this, 3)">
-        <span class="module-num">04</span>
-        <div>
-          <div class="module-name">Supervised defect detection</div>
-          <div class="module-desc">Train on your own defect library. Achieve human-expert accuracy on wafer, PCB, and material surface inspection.</div>
-        </div>
-      </div>
-      <div class="module-item" onclick="setModule(this, 4)">
-        <span class="module-num">05</span>
-        <div>
-          <div class="module-name">Unsupervised anomaly detection</div>
-          <div class="module-desc">No labelled defects needed. Detect novel anomalies using learned representations of normal surface appearance.</div>
-        </div>
-      </div>
-      <div class="module-item" onclick="setModule(this, 5)">
-        <span class="module-num">06</span>
-        <div>
-          <div class="module-name">Augmented reality overlay</div>
-          <div class="module-desc">Real-time AR annotation of live microscopy feeds — highlight regions of interest directly on the instrument view.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="module-visual reveal" id="module-detail">
-      <div class="module-visual-label">FEATURED MODULE</div>
-      <div class="module-visual-title" id="mv-title">CytoByte — Label-free staining</div>
-      <div class="module-visual-text" id="mv-text">
-        CytoByte renders pseudo-DAPI nuclear staining directly from standard DIC microscopy images using a trained deep neural network — no chemical preparation, no photobleaching, no additional equipment. Ideal for live-cell imaging, high-content screening, and time-sensitive assays.
-      </div>
-      <div class="module-pills" id="mv-pills">
-        <span class="mpill">DIC → pseudo-DAPI</span>
-        <span class="mpill">Nuclear segmentation</span>
-        <span class="mpill">Live-cell compatible</span>
-        <span class="mpill">HCS ready</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING NOTE -->
-<div style="text-align:center;padding:0 5vw 3.5rem;">
-  <p class="pricing-note reveal">
-    Modular licensing — base platform + domain modules
-    <span class="pricing-note-sep">·</span>
-    Periodic subscription or usage-based
-    <span class="pricing-note-sep">·</span>
-    <a href="contact.html">Contact us for pricing</a>
-  </p>
 </div>
 
-<!-- CTA BAND -->
-<section class="cta-band" id="contact">
-  <h2 class="reveal">Ready to see it in action?</h2>
-  <p class="reveal">Book a live demo or reach out to discuss your imaging challenge.</p>
-  <div class="cta-group reveal">
-    <a class="btn-primary" href="contact.html">Book a Demo</a>
-    <a class="btn-secondary" href="contact.html">Get in Touch</a>
+<!-- ========================= PROBLEM ========================= -->
+<section class="problem section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The problem</div>
+      <h2 class="h2">Imaging data is exploding.<br/>The bottleneck is <em>everything after the capture.</em></h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal" style="--c:var(--teal)">
+        <div class="pc-num">01</div>
+        <h3>Experts stuck in the weeds</h3>
+        <p>Your most expensive people lose hours to manual groundwork that won't scale — dragging whole projects as the backlog piles up faster than they can clear it.</p>
+      </div>
+      <div class="problem-card reveal" style="--c:var(--gold)">
+        <div class="pc-num">02</div>
+        <h3>Results that can't be defended</h3>
+        <p>When a result can't be traced or reproduced without someone's personal notes, it can't be trusted — or defended in a review, audit, or paper.</p>
+      </div>
+      <div class="problem-card reveal" style="--c:var(--steel)">
+        <div class="pc-num">03</div>
+        <h3>Everything waits on one person</h3>
+        <p>When the one specialist who can build the pipeline can't hand it over, they become the bottleneck — everyone else queues, and work that could run in parallel runs in series.</p>
+      </div>
+      <div class="problem-card reveal" style="--c:#C97A45">
+        <div class="pc-num">04</div>
+        <h3>Generic AI breaks on domain images</h3>
+        <p>Off-the-shelf models fail on sector-specific imaging — the noise alone is nothing like natural photos — so you're handed wrong answers with false confidence.</p>
+      </div>
+    </div>
+    <p class="problem-close reveal">Domain-aware analytics isn't a luxury. It's the baseline — and <b>OptiFlow is built on it.</b></p>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div>
-    <a class="footer-logo" href="#">
-      <svg width="20" height="20" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/>
-        <rect fill="#000" x="12" y="12" width="6" height="6"/>
-        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/>
-        <rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
-        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/>
-        <rect fill="#000" x="12" y="52" width="6" height="6"/>
-        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/>
-        <rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
-        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/>
-        <rect fill="#000" x="32" y="32" width="6" height="6"/>
-        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/>
-        <rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
-        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/>
-        <rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
-        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/>
-        <rect fill="#000" x="52" y="52" width="6" height="6"/>
-      </svg>
-      <span class="footer-logo-text">Logic Byte</span>
-    </a>
-    <div class="footer-tagline">AI-Powered Image Analytics · logicbyte.ai</div>
+<!-- ========================= SEE IT IN ACTION ========================= -->
+<section class="see-it section" id="see-it">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-text reveal">
+        <div class="eyebrow">OptiFlow in action</div>
+        <h2 class="h2">One capture in.<br/><em>Reproducible insights out.</em></h2>
+        <p class="lead">Watch <span class="optiflow">OptiFlow</span> build and run a full pipeline on real images, with no code. Every output encodes the exact operations and parameters that produced it — auditable and reproducible by anyone with access, on any machine.</p>
+        <div class="feature-chips">
+          <span class="chip"><b>Preview</b> any step</span>
+          <span class="chip"><b>Branch</b> &amp; combine</span>
+          <span class="chip"><b>Batch</b> at scale</span>
+          <span class="chip"><b>Export</b> to Excel</span>
+        </div>
+      </div>
+      <div class="split-demo reveal">
+        <div class="demo-card">
+          <div class="demo-loading" id="ld-pipeline"><div class="spinner"></div><span>Preparing live demo…</span></div>
+          <iframe class="demo-frame" id="demo-pipeline" data-src="optiflow-pipeline-demo-embed.html"
+            style="aspect-ratio:880/723;" title="OptiFlow pipeline demo — two domains" scrolling="no" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
   </div>
-  <ul class="footer-links">
-    <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-    <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
-    <li><a href="custom.html">Custom Solutions</a></li>
-  </ul>
-  <div class="footer-bottom">
-    <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
-    <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+</section>
+
+<!-- ========================= PLATFORM PILLARS ========================= -->
+<section class="platform section" id="platform">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The architecture</div>
+      <h2 class="h2">Built for quality.<br/><em>Engineered for scale.</em></h2>
+      <p class="lead"><span class="optiflow">OptiFlow</span> is a modular, imaging modality-agnostic platform for building and deploying domain-aware workflows — from a single image to millions. What follows is a snapshot of what's inside.</p>
+      <a class="btn btn-secondary platform-explore" href="platform.html">Explore the full platform
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>No-code workflow builder</h3>
+        <p>Compose, validate, and deploy complex pipelines visually. Branch, preview any step, and run on batches or live feeds — no code at any stage.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+        <h3>Domain-aware AI</h3>
+        <p>Models trained on domain-specific data — SEM, TEM, optical microscopy, industrial imaging — not generic models repurposed to fit.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h12"/><path d="M12 6l6 6-6 6"/><path d="M16 4v16"/></svg></div>
+        <h3>Built for handoff</h3>
+        <p>A pipeline built by a specialist becomes a portable artefact. Hand it to a domain expert who runs it at scale and reads results in their own language.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Integrity by design</h3>
+        <p>100% local, air-gapped deployment — no image ever leaves the machine. Every output carries a tamper-evident record of the sequence of operations, parameters, and operator that produced it.</p>
+      </div>
+
+      <div class="pillar pillar-airgap reveal">
+        <div class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="ag-txt">
+          <h3>The library. Use only what you need.</h3>
+          <p>Restoration, detection, segmentation, classification, quantification, and reporting — domain-aware modules you can preview, then licence only what your workflow needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= VERTICALS ========================= -->
+<section class="verticals section" id="verticals">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Built for your domain</div>
+      <h2 class="h2">Deep expertise.<br/><em>Built for any field.</em></h2>
+      <p class="lead"><span class="optiflow">OptiFlow</span> runs on any imaging modality, with extensive experience across two of the most demanding domains. Choose the engine built for your field — or have us build one.</p>
+    </div>
+
+    <div class="vert-grid">
+      <a class="vert reveal" href="biomedical.html" style="--c:var(--teal)">
+        <div class="vert-tag">Biomedical &amp; Life Sciences</div>
+        <h3>Insight at the resolution of a single cell.</h3>
+        <p>A domain-aware engine purpose-built for biological imaging — from single-cell research to biopharma screening.</p>
+        <ul class="vert-points">
+          <li>Single-cell analysis, counting &amp; profiling</li>
+          <li>High-content screening at plate scale</li>
+          <li>Label-free, stain-free live assays</li>
+          <li>AI-based grading at clinical resolution</li>
+        </ul>
+        <span class="vert-link">Explore biomedical
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="vert reveal" href="semiconductor.html" style="--c:var(--gold)">
+        <div class="vert-tag">Semiconductor &amp; Industrial Imaging</div>
+        <h3>Zero defects start with zero blind spots.</h3>
+        <p>Engineered for the precision, throughput, and repeatability of the fab — and the factory floor beyond it.</p>
+        <ul class="vert-points">
+          <li>Wafer &amp; PCB inspection</li>
+          <li>Supervised &amp; unsupervised defect detection</li>
+          <li>Hardware assurance &amp; IC trojan detection</li>
+          <li>Texture analysis &amp; reference comparison</li>
+        </ul>
+        <span class="vert-link">Explore semiconductor
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="vert reveal" href="custom.html" style="--c:var(--steel)">
+        <div class="vert-tag">Custom Solutions</div>
+        <h3>Your challenge. Our starting point.</h3>
+        <p>When the problem falls off the standard map, we scope, build, and validate a pipeline — or an entirely new module — for it.</p>
+        <ul class="vert-points">
+          <li>Bespoke pipelines, end to end</li>
+          <li>New modules built from scratch</li>
+          <li>Validated on your own image data</li>
+          <li>Any domain where images drive decisions</li>
+        </ul>
+        <span class="vert-link">Explore custom
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= TRUST ========================= -->
+<section class="trust section" id="trust">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Proven &amp; trusted</div>
+      <h2 class="h2">Grounded in research.<br/><em>Hardened in production.</em></h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7L12 16.9 5.7 20.3 8 13.3 2 8.9h7.6z"/></svg></div>
+        <h3>In production at ETH Z&uuml;rich</h3>
+        <p>CytoByte deployed commercially to develop label-free biomarkers at single-cell resolution.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
+        <h3>20+ peer-reviewed publications</h3>
+        <p>A foundation in machine learning for imaging, computational analysis, and domain-aware pipeline design.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 13z"/><path d="M11.6 16.8a3 3 0 0 1-5.8-1.6"/></svg></div>
+        <h3>Covered by CNA &amp; The Straits Times</h3>
+        <p>Founding research in AI-driven imaging, featured in Singapore's flagship media and specialist AI press.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Secure &amp; compliant by design</h3>
+        <p>Air-gapped local deployment and a tamper-evident audit trail meet the data-governance demands of regulated environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= HOW WE WORK / VALUE ========================= -->
+<section class="work section" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How we work</div>
+      <h2 class="h2">Start small.<br/><em>Scale with confidence.</em></h2>
+      <p class="lead">No rip-and-replace, no leap of faith. Prove the value on your own data first, licence only what you use, and grow at your own pace.</p>
+    </div>
+
+    <div class="arc">
+      <div class="arc-step reveal">
+        <div class="arc-num">01</div>
+        <h3>Explore</h3>
+        <p>Trial or workshop on your own images. Low commitment, defined scope — the platform proves itself before any deployment decision.</p>
+      </div>
+      <div class="arc-step reveal">
+        <div class="arc-num">02</div>
+        <h3>Deploy</h3>
+        <p>Activate the essentials with the advanced modules you need. Audited, reproducible workflows replace manual processes from day one.</p>
+      </div>
+      <div class="arc-step reveal">
+        <div class="arc-num">03</div>
+        <h3>Expand</h3>
+        <p>Add domain-aware modules as use cases broaden. New teams, instruments, and modalities onboard at low marginal cost.</p>
+      </div>
+      <div class="arc-step reveal">
+        <div class="arc-num">04</div>
+        <h3>Embed</h3>
+        <p>Bespoke development woven into your infrastructure — a long-term partnership that compounds in value.</p>
+      </div>
+    </div>
+
+    <div class="value-strip reveal">
+      <div class="value-cell">
+        <svg class="vc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12s3-7 9-7 9 7 9 7-3 7-9 7-9-7-9-7z"/><circle cx="12" cy="12" r="2.5"/></svg>
+        <h4>Preview before you buy</h4>
+        <p>Every Essential and Advanced module is available to evaluate at no cost.</p>
+      </div>
+      <div class="value-cell">
+        <svg class="vc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="M22 4l-9.5 9.5L9 10"/></svg>
+        <h4>60-day module guarantee</h4>
+        <p>Full refund on any module that doesn't meet your requirement — no questions.</p>
+      </div>
+      <div class="value-cell">
+        <svg class="vc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9z"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <h4>Priority support, included</h4>
+        <p>Hands-on technical support through the life of your licence.</p>
+      </div>
+      <div class="value-cell">
+        <svg class="vc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <h4>Pay only for what you use</h4>
+        <p>Modular licensing — scale module by module, instrument by instrument.</p>
+      </div>
+    </div>
+
+    <div class="work-cta reveal">
+      <p>Start with a trial or a workshop on your own images.</p>
+      <a class="btn btn-secondary" href="contact.html">Talk to us
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= VISION ========================= -->
+<section class="vision section" id="vision">
+  <div class="vision-rings" aria-hidden="true">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#1DB89A" stroke-width="1">
+        <circle cx="320" cy="120" r="80"/><circle cx="320" cy="120" r="140"/><circle cx="320" cy="120" r="200"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The vision</div>
+      <h2 class="h2">Today, you build it.<br/><em>Tomorrow, it builds itself.</em></h2>
+      <p class="lead">Today, <span class="optiflow">OptiFlow</span> lets domain experts build professional workflows that reduce and streamline manual, image-related work. Tomorrow, it builds those workflows autonomously — eliminating that work entirely, so experts focus fully on their domain expertise and the value only they can add.</p>
+    </div>
+    <div class="feature-chips reveal" style="margin-top:0.3rem">
+      <span class="chip">Diagnostic agents</span>
+      <span class="chip">Agentic pipeline architect</span>
+      <span class="chip">Natural-language interface</span>
+    </div>
+    <a class="btn-ghost reveal" href="about.html#vision" style="margin-top:1.7rem">See where we're headed
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ========================= MISSION + CTA (signature) ========================= -->
+<section class="mission section" id="mission">
+  <div class="wrap">
+
+    <div class="eyebrow reveal">Our mission</div>
+
+    <div class="mission-row reveal">
+      <div class="mission-art">
+        <img src="mission_arch.png" width="1100" height="906" loading="lazy" decoding="async" alt="From domain experts to imaging insights — OptiFlow spans image processing, analysis, coding, AI/ML, efficient scaling and data security."/>
+      </div>
+      <div class="mission-statement">
+        <p class="mission-quote">Empower domain experts to extract maximum analytical value from their imaging data — with confidence and enterprise-grade reliability.</p>
+        <p class="mission-tagline">OptiFlow — the shortest path from image to value.</p>
+      </div>
+    </div>
+
+    <div class="cta reveal">
+      <h2>Let's find your shortest path.</h2>
+      <p>Bring us a problem and your own images. We'll show you what OptiFlow does with them.</p>
+      <div class="cta-btns">
+        <a class="btn btn-primary" href="contact.html">Book a Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="contact.html?intent=hello">Say hello</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+          </svg>
+          <span class="brand-name">Logic Byte</span>
+        </a>
+        <p class="footer-tag">AI-powered image analytics — built visually, run at scale, auditable by design.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="platform.html">Platform</a></li>
+            <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+            <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
+            <li><a href="custom.html">Custom Solutions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="contact.html">Book a Demo</a></li>
+            <li><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a></li>
+            <li><a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
+      <span><a href="mailto:hello@logicbyte.ai">hello@logicbyte.ai</a> · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+    </div>
   </div>
 </footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        // Stagger siblings
-        const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
-        const idx = siblings.indexOf(e.target);
-        setTimeout(() => e.target.classList.add('visible'), idx * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+(function(){
+  "use strict";
 
-  // Module selector
-  const modules = [
-    {
-      title: 'CytoByte — Label-free staining',
-      text: 'CytoByte renders pseudo-DAPI nuclear staining directly from standard DIC microscopy images using a trained deep neural network — no chemical preparation, no photobleaching, no additional equipment. Ideal for live-cell imaging, high-content screening, and time-sensitive assays.',
-      pills: ['DIC → pseudo-DAPI', 'Nuclear segmentation', 'Live-cell compatible', 'HCS ready']
-    },
-    {
-      title: 'Single-cell analysis & counting',
-      text: 'Automated detection, segmentation, and enumeration of individual cells across large-scale imaging datasets. Outputs per-cell morphology metrics, population histograms, and spatial distribution maps.',
-      pills: ['Cell detection', 'Morphometry', 'Population stats', 'Batch processing']
-    },
-    {
-      title: 'Classification & grading',
-      text: 'Train supervised deep learning models on your own annotated data. Classify cell types, grade disease severity, or score phenotypic responses — with built-in active learning to minimise labelling effort.',
-      pills: ['Cell type classification', 'Disease grading', 'Active learning', 'Custom training']
-    },
-    {
-      title: 'Supervised defect detection',
-      text: 'Build a defect classifier from your own labelled examples. Achieves human-expert accuracy on wafer surfaces, PCBs, and material substrates. Supports multi-class defect categorisation with confidence scoring.',
-      pills: ['Wafer inspection', 'PCB defects', 'Multi-class', 'Confidence scoring']
-    },
-    {
-      title: 'Unsupervised anomaly detection',
-      text: 'No labelled defects needed. The model learns a representation of normal surface appearance and flags deviations automatically. Ideal for novel defect discovery or low-defect-rate production lines.',
-      pills: ['Zero-label setup', 'Novel defect discovery', 'Texture analysis', 'Production-ready']
-    },
-    {
-      title: 'Augmented reality overlay',
-      text: 'Real-time AR annotation directly on live microscopy or inspection feeds. Highlight objects, annotate regions of interest, and overlay analysis results — all without leaving the instrument view.',
-      pills: ['Live overlay', 'Real-time annotation', 'Instrument integration', 'ROI highlighting']
-    }
-  ];
+  /* ---- Nav scrolled state ---- */
+  var nav = document.getElementById('nav');
+  function onScroll(){ if(window.scrollY > 24){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-  function setModule(el, idx) {
-    document.querySelectorAll('.module-item').forEach(i => i.classList.remove('active'));
-    el.classList.add('active');
-    const m = modules[idx];
-    document.getElementById('mv-title').textContent = m.title;
-    document.getElementById('mv-text').textContent = m.text;
-    const pillsEl = document.getElementById('mv-pills');
-    pillsEl.innerHTML = m.pills.map(p => `<span class="mpill">${p}</span>`).join('');
-  }
-
-  // Nav scroll effect
-  window.addEventListener('scroll', () => {
-    document.querySelector('nav').style.background =
-      window.scrollY > 40 ? 'rgba(11,22,40,0.97)' : 'rgba(11,22,40,0.85)';
+  /* ---- Mobile drawer ---- */
+  var burger=document.getElementById('burger'), drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'), dClose=document.getElementById('drawerClose');
+  function openD(){ drawer.classList.add('open'); scrim.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeD(){ drawer.classList.remove('open'); scrim.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  if(burger){ burger.addEventListener('click',openD); }
+  if(scrim){ scrim.addEventListener('click',closeD); }
+  if(dClose){ dClose.addEventListener('click',closeD); }
+  drawer.querySelectorAll('a[href]').forEach(function(a){ a.addEventListener('click',closeD); });
+  drawer.querySelectorAll('.drawer-group-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){ btn.closest('.drawer-group').classList.toggle('open'); });
   });
 
-  // Nav active state — highlight the section currently in view
-  const navSections = document.querySelectorAll('#platform, #verticals, #modules');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const navSpy = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-15% 0px -65% 0px' });
-  navSections.forEach(s => navSpy.observe(s));
-
-    // Mobile nav drawer
-  function toggleNav(btn) {
-    const isOpen = btn.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen);
-    document.getElementById('nav-drawer').classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
-  function toggleGroup(btn) {
-    btn.closest('.drawer-group').classList.toggle('open');
-  }
-  document.querySelectorAll('.drawer-links > li > a, .drawer-sub a, .drawer-group-link').forEach(a => {
-    a.addEventListener('click', () => {
-      const navBtn = document.querySelector('.nav-hamburger');
-      if (navBtn) { navBtn.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
-      const drawer = document.getElementById('nav-drawer');
-      if (drawer) drawer.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
-  // ── Auto-size same-origin demo iframes to their content ──
-  function autosize(frame, buf) {
-    buf = buf || 0;
-    let maxH = 0, lastW = 0;
-    try {
-      const doc = frame.contentWindow.document;
-      const setH = () => {
-        const w = frame.clientWidth;
-        if (w !== lastW) { lastW = w; maxH = 0; }            // width changed -> re-measure
-        const h = (doc.body ? doc.body.scrollHeight : 0) + buf;
-        if (h > maxH) { maxH = h; frame.style.height = maxH + 'px'; }  // grow-only: never clip an animating/cycling demo
-      };
-      setH();
-      [250, 800, 1500, 2500, 4000, 6000, 9000].forEach(t => setTimeout(setH, t));
-      if (window.ResizeObserver) new ResizeObserver(setH).observe(doc.body);
-      window.addEventListener('resize', setH);
-    } catch (e) { /* iframe not ready */ }
-  }
-  const heroFrame = document.getElementById('hero-window-frame');
-  // Hero iframe height is driven purely by postMessage from the embed's fit() function.
-  // (autosize reads unscaled scrollHeight and would fight the postMessage-set height.)
-  // When the hero iframe's CSS width changes (parent resize/reflow), poke the embed to re-fit.
-  if (heroFrame && window.ResizeObserver) {
-    new ResizeObserver(function() {
-      try { heroFrame.contentWindow.dispatchEvent(new Event('resize')); } catch(e) {}
-    }).observe(heroFrame);
+  /* ---- Scroll reveal ---- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
   }
 
-  // ── Pipeline demo: load a few seconds after the page is ready,
-  //    OR the moment the user scrolls near it — whichever comes first ──
-  (function () {
-    const frame = document.getElementById('demo-frame');
-    const wrap  = document.getElementById('demo-wrap');
-    const ph    = document.getElementById('demo-ph');
-    if (!frame) return;
-    let started = false;
-    function startLoad() {
-      if (started) return;
-      started = true;
-      frame.addEventListener('load', () => {
-        frame.classList.add('loaded');
-        if (ph) ph.classList.add('hidden');
-      });
-      frame.src = frame.dataset.src;
-    }
-    window.addEventListener('load', () => setTimeout(startLoad, 2500));
-    if ('IntersectionObserver' in window && wrap) {
-      const io = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) { startLoad(); io.disconnect(); }
-      }, { rootMargin: '800px 0px' });
-      io.observe(wrap);
-    } else {
-      startLoad();
-    }
-  })();
-
-  // ── Feature card collapse on mobile (≤600px, 1-per-row) ──
-  document.querySelectorAll('.feature-card').forEach(function(card) {
-    var btn = card.querySelector('.feature-toggle');
-    if (!btn) return;
-    btn.addEventListener('click', function() {
-      var expanded = card.classList.toggle('fc-expanded');
-      btn.setAttribute('aria-expanded', expanded);
-      btn.setAttribute('aria-label', expanded ? 'Collapse' : 'Expand');
-    });
-  });
-
-  // ── Platform reproducibility demo — lazy-load on approach ──
-  (function () {
-    const frame = document.getElementById('repro-frame');
-    const wrap  = document.getElementById('repro-wrap');
-    const ph    = document.getElementById('repro-ph');
-    if (!frame) return;
-    let started = false;
-    function load() {
-      if (started) return; started = true;
-      frame.addEventListener('load', () => {
-        frame.classList.add('loaded');
-        if (ph) ph.classList.add('hidden');
-      });
-      frame.src = frame.dataset.src;
-    }
-    if ('IntersectionObserver' in window && wrap) {
-      const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: '600px 0px' });
-      io.observe(wrap);
-    } else { load(); }
-  })();
-
-  // ── Receive content heights from in-page demo iframes (robust on file:// and https) ──
-  function applyEmbedMeasurement(source, height, width) {
-    if (!height) return;
-    var frames = document.querySelectorAll('iframe');
-    for (var i = 0; i < frames.length; i++) {
-      if (frames[i].contentWindow === source) {
-        if (width) frames[i].dataset.lw = width;
-        frames[i].style.height = height + 'px';
-        break;
-      }
-    }
+  /* ---- Lazy-load below-fold demo iframes ---- */
+  var lazyFrames = document.querySelectorAll('iframe[data-src]');
+  function loadFrame(f){ if(f.dataset.src){ f.src=f.dataset.src; delete f.dataset.src; } }
+  if('IntersectionObserver' in window){
+    var lio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ loadFrame(e.target); lio.unobserve(e.target); } });
+    },{rootMargin:'400px 0px'});
+    lazyFrames.forEach(function(f){ lio.observe(f); });
+  } else {
+    lazyFrames.forEach(loadFrame);
   }
 
+  /* ---- iframe sizing: shared postMessage height contract (from existing embeds) ---- */
+  var frameMap = {
+    'optiflow-window-embed.html'              : {el:document.getElementById('hero-window-frame'), loader:null},
+    'optiflow-pipeline-demo-embed.html'       : {el:document.getElementById('demo-pipeline'),     loader:document.getElementById('ld-pipeline')}
+  };
+  function frameById(win){
+    for(var k in frameMap){ var f=frameMap[k]; if(f.el && f.el.contentWindow===win){ return f; } }
+    return null;
+  }
   window.addEventListener('message', function(e){
-    var d = e.data; if (!d) return;
-    applyEmbedMeasurement(e.source, d.optiflowEmbedHeight || d.optiflowWindowHeight, d.optiflowEmbedWidth);
-  });
+    var d = e.data; if(!d || typeof d!=='object') return;
+    var h = d.optiflowEmbedHeight || d.optiflowWindowHeight || d.height;
+    if(typeof h !== 'number' || h <= 0) return;
+    var f = frameById(e.source);
+    if(!f || !f.el) return;
+    f.el.style.height = h + 'px';
+    f.el.style.aspectRatio = 'auto';
+    if(f.loader){ f.loader.style.display = 'none'; }
+  }, false);
+})();
 </script>
+
 </body>
 </html>

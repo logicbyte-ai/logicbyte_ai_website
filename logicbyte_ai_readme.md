@@ -1,6 +1,6 @@
 # Logic Byte Website — Handover Brief
 
-*Upload this file at the start of a new Claude conversation to resume work on the site.*
+*Upload this file at the start of a new Claude conversation to resume work on the site. Last updated: 16 Jun 2026 — **`biomedical.html` built & delivered**. Recommended next page: **`semiconductor.html`** (build in a new conversation; the full template is locked — see `LogicByte_Website_Handover.md` §7.3b).*
 
 ---
 
@@ -14,7 +14,7 @@
 
 **Product:** OptiFlow — modular, modality-agnostic, domain-aware, no-code visual workflow builder for image analytics. Targets domain experts who need reproducible, auditable pipelines without a dedicated programming team.
 
-**Key module:** CytoByte — label-free DIC→pseudo-DAPI in-silico staining. Deployed commercially at ETH Zürich. Academic manuscript in preparation.
+**Key module:** CytoByte — label-free in-silico virtual nuclear staining from DIC or phase contrast (no dyes, no fixation, non-sacrificial). Output called "virtual nuclei" / "virtual nuclear stain" — **never "pseudo-DAPI"** (generates unwanted DAPI comparisons). The process is "virtual staining" vs "chemical (dye-based) staining". Deployed commercially at ETH Zürich. Academic manuscript in preparation.
 
 **Primary verticals:** Biomedical & Life Sciences · Semiconductor & Industrial Imaging · Custom Solutions (three equal peers — none dominates).
 
@@ -28,9 +28,10 @@
 
 | File | Purpose |
 |---|---|
-| `index.html` | Homepage — hero, See it in action, Platform section, verticals strip, modules selector, CTA band |
+| `index.html` | Homepage — Hero → proof bar → Problem → See it in action → Platform (snapshot) → Verticals → Proven & Trusted → How we work → Vision → Mission/CTA |
+| `platform.html` | **The platform / product home — ✅ BUILT.** Hero → spec bar → architecture → workflow builder (bespoke fork-and-merge DAG figure, not an iframe) → module library → integrity by design (+ workflow-from-image demo, left-aligned) → deployment & integration → how-we-work (brief) → CTA with proof anchor. Now a second reference page. Full as-built record in `LogicByte_Website_Handover.md` §7.1. |
 | `about.html` | Company story + Founder section with photo, email, LinkedIn, Scholar, Blinq |
-| `biomedical.html` | Biomedical & Life Sciences — 4 segments, modules, traceability callout, sticky right rail |
+| `biomedical.html` | **✅ BUILT (16 Jun 2026).** Biomedical & Life Sciences — 11-section rebuild on the platform.html design system. Hero → proof bar → analysis gap → who we serve (5 sub-sectors + custom card) → label-free signature (CytoByte slider) → capabilities → integrity/reproducibility + workflow-from-image demo → grounded in research → how we work → CTA → footer. See `LogicByte_Website_Handover.md` §7.3b for full as-built record. |
 | `semiconductor.html` | Semiconductor & Industrial Imaging — 3 segments, SEM/STEM proof, traceability callout, sticky right rail |
 | `custom.html` | Custom Solutions — 3 engagement types, capabilities, sticky right rail |
 | `research.html` | Research overview — domain columns, selected collaborations, press coverage, sticky right rail |
@@ -41,9 +42,9 @@
 
 | File | Role in index.html |
 |---|---|
-| `optiflow-window-embed.html` | Hero right column — auto-cycling workflow builder visual (Biomedical ↔ Semiconductor). Canonical desktop frame is 1060px wide, scaled down from the top-left via `transform:scale(...)` only when the iframe is narrower. Posts its current measured height back to the parent on load and resize. Source panel is 190px wide. Window body height is 640px. |
-| `optiflow-pipeline-demo-embed.html` | "See it in action" right column — animated pipeline demo, cycles Biomedical ↔ Semiconductor. Fixed title "OptiFlow — Pipeline in Action". Biomedical/Semiconductor toggle tabs at bottom. Canonical desktop frame is 880px wide, scaled down from the top-left only when needed to fit iframe width. |
-| `optiflow-workflow-from-image-embed.html` | Platform section right column (sticky) — "drop in a result, get the workflow back" demo, cycles Biomedical ↔ Semiconductor. Canonical desktop frame is 880px wide, scaled down from the top-left only when needed to fit iframe width. |
+| `optiflow-window-embed.html` | Hero right column — static workflow builder visual. Has internal `fit()` + `transform:scale` that renders at 1060px and scales to the iframe width. CSS `aspect-ratio` matches the scaled height so the parent needs no JS sizing. |
+| `optiflow-pipeline-demo-embed.html` | "See it in action" right column — animated pipeline demo, cycles Biomedical ↔ Semiconductor. Fixed title "OptiFlow — Pipeline in Action". Biomedical/Semiconductor toggle tabs at bottom. |
+| `optiflow-workflow-from-image-embed.html` | "Drop in a result, get the workflow back" demo. Wired into `platform.html` (Integrity section) and `biomedical.html` (Integrity section, `?mode=bio`). **Updated 16 Jun 2026:** (a) accepts `?mode=bio\|semicon\|both` — biomedical uses `?mode=bio`; semiconductor should use `?mode=semicon`; platform uses no param (both scenes). (b) Respects `prefers-reduced-motion`: renders a static completed state rather than animating. |
 
 **Retired (do not deploy):** `optiflow-build-workflow.html`
 
@@ -51,13 +52,17 @@
 
 | File | Purpose |
 |---|---|
+| `cytobyte-dic.png` | 512×512 label-free DIC microscopy image — base layer of the CytoByte before/after slider on `biomedical.html`. Public-safe; no patient/client-confidential data. |
+| `cytobyte-virtual-nuclei.png` | 512×512 CytoByte virtual nuclear stain output of the same field (white nuclei on black). Top layer of the slider; DIC vs this pairing is the dramatic contrast used. |
+| `cytobyte-ar-overlay.png` | 512×512 live cyan AR overlay on the DIC feed — same field, shows the real-time AR view of the virtual stain on the microscope. Used as a small inline thumbnail (88×88, float-right) next to the "Real-time virtual staining" value point on `biomedical.html`. |
 | `favicon.svg` | Gold pixel-grid mark on navy, 4 black / 4 white inner squares |
 | `logo.svg` | Standalone logo (not used in pages — logo is inline SVG in each nav/footer) |
 | `sitemap.xml` | XML sitemap for search engine indexing |
 | `robots.txt` | Permits all crawlers, references sitemap |
 | `DSC_0167__6_in_x_8_in__square_resized.jpg` | Founder photo (white background headshot) |
-| ~~`hero_m_bio.jpg`~~ | Removed — mobile before/after carousel retired; live hero iframe used instead. |
-| ~~`hero_m_semi.jpg`~~ | Removed — see above. |
+| `hero_m_bio.jpg` | Mobile hero composite — Biomedical before/after (848×420, loaded via JS `matchMedia`) |
+| `hero_m_semi.jpg` | Mobile hero composite — Semiconductor before/after (848×420, loaded via JS `matchMedia`) |
+| `mission_arch.png` | Mission section "arch" graphic (1100×906 RGBA, pngquant'd ≈308 KB) — **transparent background**, plain `<img>` (no `<picture>` — WebP saves only 15 KB, not worth the complexity). Composites seamlessly onto the navy section. Generated from `missionStatement.pptx`. **Must ship in the repo root.** Supersedes `arch_teal.png` (retired). |
 
 ---
 
@@ -69,7 +74,7 @@
 |---|---|
 | Syne | Wordmark and nav links |
 | Outfit | Display headings on secondary pages (h2, h3) |
-| DM Mono | Homepage h1 ("See more. / Discover faster. / Scale with confidence.") |
+| DM Mono | Homepage hero h1, eyebrows, taglines |
 | DM Sans | Body text throughout |
 
 *Note: Google Fonts do not load in Playwright/bash environments. System font fallbacks render with correct layout and brand colours — acceptable for QA screenshots.*
@@ -86,9 +91,7 @@
 
 **Minimum font size:** 10px (0.625rem) everywhere, no exceptions.
 
-**Responsive breakpoints (index.html):** Side-by-side layouts collapse to stacked at ≤900px. Mobile layout at ≤600px. Content capped at 1600px centred on viewports wider than ~1660px. Additional padding-reduction breakpoints at ≤1400px and ≤1200px progressively shrink horizontal padding to maximise graphic size on 13"–14" screens. At ≤1400px the hero showcase is also capped to a 680px frame so the product window does not dominate smaller desktop layouts.
-
-**Mobile behaviour (≤900px):** All three homepage demo iframes stack below their text content (flex column). The hero section shows the live `optiflow-window-embed.html` iframe scaled down via the embed's own `fit()`. The before/after image carousel (`.hero-mobile`) and its associated image files (`hero_m_bio.jpg`, `hero_m_semi.jpg`) have been removed. The embed files themselves have no internal responsive media queries — all size adaptation is handled by the `transform:scale()` approach.
+**Responsive layout (index.html — rebuilt):** Hero and "See it in action" use a **fluid flex layout** (no fixed column breakpoint): the text column shrinks faster than the demo (`flex:0 1.6 610px` vs `flex:0 1 810px`), the inter-column gap caps at ~83px and floors at 32px, and the demo window **shrinks monotonically — no size jumps**. Both stack to a **single column at ≤1000px** (fired just before the hero eyebrow "AI-Powered Image Analytics" (288px) would wrap). At the switch, `flex:none` is set on the columns so the width-axis `flex-basis` is **not** read as a height (this was the cause of large dead vertical space); the window/demo is **held at its pre-switch width** (560px hero / 531px demo), **left-aligned**, and squeezes down as the viewport narrows. **Content capped at 1500px** (raised from 1600 to keep the hero gap tight; align secondary pages on rebuild). The hero headline font (`--h1: clamp(1.7rem, calc(3.8vw - 1rem), 2.9rem)`) shrinks on a steep curve to hold the **3-line** headline down to ~1100px (4 lines only in the narrow 1001–1075px band); single-column restores a larger `--h1`. Finer mobile tuning at ≤640px.
 
 **Secondary pages (with sticky rail):** `.page-shell` grid (`1fr var(--col-nav)`) capped at `max-width: 1600px; margin: auto` so the entire grid — content and rail — centres together on large monitors. Rail hides at ≤820px.
 
@@ -102,54 +105,42 @@
 - **No "research-grade"** — unprofessional; prohibited.
 - **No "co-pilot"** — too Microsoft-associated; prohibited.
 - **Pricing is internal only** — no specific figures on the site or in decks. Consistent with competitor norms in scientific imaging software.
+- **No OptiFlow version numbers on the site** (e.g. "v3.2.1") — rapid releases would date the site. Use "New"/"Expanded" for recency, never a number.
+- **Desktop app is Windows-only — macOS is NOT supported.** Never claim macOS.
+- **"license" (verb) vs "licence" (noun)** — British English distinguishes them; mind it.
 - **"Auditable" preferred over "reproducible" alone** — reinforces the traceability story directly.
 - **OptiFlow is a badge, not a heading** — styled inline (`.optiflow-badge`), never used as an H1 or H2.
 - **Real images only** — no synthetic SVG imagery in public-facing demo assets.
 - **Three verticals are equal peers** — Biomedical & Life Sciences, Semiconductor & Industrial Imaging, Custom Solutions. None dominates or leads.
 - **Vertical name confirmed:** "Semiconductor & Industrial Imaging" — used consistently on the site and LinkedIn.
 - **"Not automation for its own sake — intelligence in service of expertise"** — the preferred framing. Avoid language that implies replacement of the domain expert.
-- **NTU and Borries are internal only** — never mentioned in public-facing copy.
+- **NTU is now public-safe as a proof point** — usable as "Ongoing trials at NTU" (founder-approved, 15 Jun 2026). **Borries, MIT Semiconductor, NTU CHA, and Prof. Gan Chee Lip remain internal only.** Texture analysis is a tested capability shipping before launch — OK to show.
+- **Heading pattern:** section headings are two short fragments in sentence case, the second fragment set in teal (`<em>`); **eyebrows** are DM Mono, uppercase, letter-spaced, prefixed by a short rule.
+- **"Pseudo-DAPI" is banned** — use "virtual nuclear stain" / "virtual nuclei" for the output; "virtual staining" for the process (vs "chemical (dye-based) staining"). CytoByte is the engine brand name. No "CBV" acronym.
 - **Tone:** declarative and confident, not invitational. Short punchy headlines. Semi-formal for known contacts.
 
 ---
 
 ## iframe demo architecture
 
-All three demo embeds now use a **unified width-first postMessage sizing contract**. This is required because `file://` iframes are cross-origin (origin "null"), which blocks the parent from reading `contentWindow.document` directly. postMessage works in both local `file://` testing and on the deployed same-origin site.
+All three demo embeds use a **postMessage height protocol** to size their parent iframes. This is required because `file://` iframes are cross-origin (origin "null"), which blocks the parent from reading `contentWindow.document` via JS. postMessage works in both local `file://` testing and on the deployed same-origin site.
 
-**Parent page (`index.html`):**
+Each embed runs:
+```js
+function rh() {
+  var wrap = document.querySelector('.wrap');
+  var h = wrap ? Math.ceil(wrap.getBoundingClientRect().bottom) + 6 : document.body.scrollHeight;
+  parent.postMessage({ optiflowEmbedHeight: h, optiflowEmbedWidth: window.innerWidth }, '*');
+}
+// Called on: load, resize, ResizeObserver, and at [200, 600, 1200, 2000, 3000, 4500, 6500, 9000]ms
+```
 
-- The homepage owns the outer frame widths: hero capped at 1060px, pipeline and workflow demos capped at 880px, all centred in their columns.
-- The homepage also reserves close-to-final placeholder space before the embeds load: hero `1060 / 684`, pipeline `880 / 723`, workflow `880 / 672`.
-- `applyEmbedMeasurement(source, height, width)` listens for postMessage events and applies the **latest reported height** directly to the matching iframe, rather than keeping a grow-only max-height cache.
-- The hero iframe mask radius on the homepage is intentionally smaller (`8px`) than the inner product window radius so the green bottom corners remain visible on 13-inch-class desktop layouts.
+`index.html` listens and sizes the matching iframe grow-only (resets on width change):
+```js
+window.addEventListener('message', function(e) { ... });
+```
 
-**Hero window (`optiflow-window-embed.html`):**
-
-- Wraps the UI in a 1060px `.scaler` with `transform-origin: top left`.
-- `fit()` calculates `scale = min(window.innerWidth / 1060, 1)`, applies `transform:scale(...)` only when needed, then sets both `body` and `html` height to the scaled height.
-- Posts `{ optiflowEmbedHeight, optiflowEmbedWidth, optiflowWindowHeight }` so the parent can size the iframe through the shared handler while remaining backward-compatible with the hero-specific field.
-- A leftover narrow-screen `body` padding rule was removed in June 2026 after it was found to create top/left gutter and right/bottom clipping inside the iframe at smaller desktop widths.
-
-**Pipeline demo (`optiflow-pipeline-demo-embed.html`):**
-
-- Wraps the UI in `#pd-scaler` at a natural width of 880px with `transform-origin: top left`.
-- Uses width-only downscaling: `scale = min(availW / 880, 1)`.
-- On load, waits 420ms before the first fit so the animated strip has populated and the reported height is stable.
-- The operation-card strip is pinned to a stable loaded height of `106px`, with scrollbar space reserved from the beginning, so adding the fifth card does not change the overall window height.
-- The scaler padding is slightly top-light / bottom-heavy (`2px` top, `8px` bottom) to remove the tiny top gutter and keep the preview visually centred.
-- Footer controls are nudged inward slightly for breathing room: transport buttons offset from the left edge, domain tabs offset from the right edge.
-- Posts `{ optiflowEmbedHeight, optiflowEmbedWidth }` on load, resize, and ResizeObserver updates.
-- **No internal media queries.** A `@media(max-width:640px)` block that previously collapsed the layout on narrow iframe viewports was removed (June 2026); `transform:scale()` handles all size adaptation.
-
-**Workflow-from-image demo (`optiflow-workflow-from-image-embed.html`):**
-
-- Uses an 880px `.wrap` with `transform-origin: top left`.
-- Uses width-only downscaling: `scale = min(availW / 880, 1)`.
-- Sets `body` and `html` height from the current scaled height, then posts `{ optiflowEmbedHeight, optiflowEmbedWidth }`.
-- **No internal media queries.** A `@media(max-width:640px)` block that switched `.top` to `flex-direction:column` (collapsing the two-column image+workflow layout) was removed (June 2026).
-
-**Practical rule:** the embeds preserve a canonical desktop frame and only scale down when space is tighter. The parent page does not stretch them to fill arbitrarily wide columns on large monitors.
+**Hero window exception:** Self-sizes via internal `fit()` + CSS `aspect-ratio`. No postMessage needed.
 
 ---
 
@@ -163,54 +154,7 @@ python3 script.py  # uses playwright.sync_api, --no-sandbox flag
 
 Claude-in-Chrome `save_to_disk` captures return an ID but are not accessible from the bash filesystem. Use Playwright for downloadable QA screenshots.
 
-Audit after changes: check for horizontal overflow at 1280px and 1920px, no fonts below 10px, no "ETH Zurich" (without umlaut), and no internal gutter/clipping mismatch on the three homepage demo iframes.
-
----
-
-## Deployment
-
-Vercel auto-deploys from the `main` branch of the GitHub repo. Pushing to `main` is the only step needed to go live — no build command, no manual Vercel trigger.
-
-### One-time setup (WSL / new machine)
-
-```bash
-# Allow git to operate on the Windows-mounted drive path
-git config --global --add safe.directory '/mnt/i/My Drive/logicbyte_ai'
-```
-
-### Stage, commit, and push
-
-```bash
-cd "/mnt/i/My Drive/logicbyte_ai"
-
-# Stage all site files (pages, embeds, assets, readme)
-# Do NOT add: IssueTracker.xlsx, desktop.ini, sample_data/,
-#             optiflow-pipeline-demo.html, optiflow-product-window.html,
-#             optiflow-workflow-from-image.html  (dev/standalone versions, not deployed)
-git add index.html about.html biomedical.html semiconductor.html \
-        custom.html research.html research-output.html contact.html \
-        optiflow-window-embed.html optiflow-pipeline-demo-embed.html \
-        optiflow-workflow-from-image-embed.html \
-        logicbyte_ai_readme.md logicbyte_readme.md \
-        favicon.svg logo.svg sitemap.xml robots.txt \
-        DSC_0167__6_in_x_8_in__square_resized.jpg
-
-git rm hero_m_bio.jpg hero_m_semi.jpg
-
-git commit -m "Improve mobile/tablet experience: show scaled iframes below text on ≤900px screens"
-
-git push origin main
-```
-
-Vercel will detect the push and deploy within ~30–60 seconds. Check live at **logicbyte.ai**.
-
-### Verify the deploy
-
-1. Open logicbyte.ai on a phone or DevTools mobile emulator (≈390px wide).
-2. Hero section: live OptiFlow window iframe should appear below the headline — not the before/after carousel.
-3. "See it in action": pipeline demo should show the full animated desktop layout, scaled down.
-4. "Platform" section: workflow-from-image demo should show image + workflow side-by-side (two columns), scaled down.
-5. On desktop (>900px): confirm no visible change from previous layout.
+Audit after changes: check for horizontal overflow at 1280px and 1920px, no fonts below 10px, no "ETH Zurich" (without umlaut).
 
 ---
 
@@ -219,28 +163,31 @@ Vercel will detect the push and deploy within ~30–60 seconds. Check live at **
 **Live at:** logicbyte.ai (Vercel)
 
 ### Completed website work
-- Full multi-session overhaul: layout, copy, responsive polish
-- Homepage: side-by-side hero / See it in action / Platform sections (text left, demo/window right)
-- Workflow-from-image demo moved from biomedical.html → Platform section (domain-agnostic proof point)
-- Unified postMessage iframe sizing for all three demo embeds including hero window
-- Content capped at 1600px centred, site-wide (incl. `.page-shell` grid on detail pages)
-- Seventh feature card added: "Reproducible & auditable by design"
-- Traceability callout added to biomedical and semiconductor pages
-- ETH Zürich umlaut corrected site-wide; "research-grade" removed; fabricated hero metrics removed
-- Inc. year corrected to 2023 in about.html
-- **Hero product window (`optiflow-window-embed.html`)**: rebuilt with real bio + semicon images, auto-cycling domains, source panel 190px, window height 640px, `.phdr` fixed-height for line alignment, reduced card spacing, batch button label simplified to "Batch"
-- **Pipeline demo (`optiflow-pipeline-demo-embed.html`)**: op cards widened to 200px with 3-line layout (Op#|IN|OUT / title / group), pvhead condensed to single line "Op title · description", legacy note paragraph removed, left text updated; canonical 880px desktop frame now scales down from the top-left only when space is tighter
-- **Pipeline demo polish**: op-strip height fixed at 106px so the scrollbar appearing at the 5th card no longer changes window height; preview shifted up slightly via scaler padding rebalance; footer controls nudged inward for edge breathing room
-- **Responsive hero**: padding-reduction breakpoints at ≤1400px and ≤1200px so graphics scale maximally on 13"–14" laptops; hero showcase additionally capped to 680px at ≤1400px before the mobile hero takeover at ≤900px
-- **Homepage demo framing**: hero/pipeline/workflow wrappers now use canonical desktop frame widths (1060 / 880 / 880), with tuned placeholder aspect ratios and current-measurement iframe height updates instead of grow-only max-height behaviour
-- **Hero iframe scaling**: fixed overflow-propagation bug (html overflow + window.innerWidth), removed stale narrow-screen body padding inside the hero embed, kept hero iframe height driven entirely by postMessage, and reduced the homepage hero mask radius to keep the inner green corners visible on 13" screens
-- **Mobile demo experience (June 2026)**: on ≤900px screens, all three homepage iframes now appear as scaled-down versions of the desktop layout, stacked below their text content. Hero section now shows the live `optiflow-window-embed.html` iframe (`.hero-mobile` hidden); pipeline and workflow iframes already stacked correctly. Removed `@media(max-width:640px)` blocks from `optiflow-pipeline-demo-embed.html` and `optiflow-workflow-from-image-embed.html` that were triggering on the iframe's own narrow viewport and collapsing the internal layouts before the `transform:scale()` ran.
+- **`biomedical.html` built, QA'd (zero overflow 360–1920px) & delivered** (16 Jun 2026). Full as-built record in `LogicByte_Website_Handover.md` §7.3b.
+- **`platform.html` built, QA'd (zero overflow 360–1920px) & delivered** (15 Jun 2026). Full as-built record in `LogicByte_Website_Handover.md` §7.1.
+- **Homepage fully rebuilt** (multi-session). New narrative flow: Hero → proof bar → Problem → See it in action → Platform (snapshot) → Verticals → Proven & Trusted → How we work → Vision → Mission/CTA.
+- Hero & "See it in action" rebuilt as **fluid, jump-free** responsive layouts (window shrinks monotonically; single-column hold at the 1000px switch; no dead vertical space). Verified no horizontal overflow 375–1920px.
+- Homepage copy refreshed throughout:
+  - **Problem** section (eyebrow "The problem"): four loss-framed cards mapping 1:1 to the platform pillars — *Experts stuck in the weeds · Results that can't be defended · Everything waits on one person · Generic AI breaks on domain images.*
+  - **See it in action** → eyebrow "OptiFlow in action"; output "auditable and reproducible by anyone with access, on any machine".
+  - **Platform** → eyebrow "The architecture"; lead notes it is "a snapshot of what's inside"; prominent "Explore the full platform" CTA after the lead; pillars = No-code workflow builder · Domain-aware AI · Built for handoff · Integrity by design + "The library. Use only what you need."
+  - **Verticals** heading → "Deep expertise. Built for any field." Semiconductor card capabilities updated to **hardware assurance / IC-trojan detection / texture analysis / reference comparison** (NiCE/CHA-aligned; MIT material removed).
+  - **Proven & trusted** heading → "Grounded in research. Hardened in production." — section **moved to directly after the verticals** (trust precedes the commercial/how-we-work section).
+  - **How we work** → "Talk to us" contact CTA added after the value strip.
+  - **Vision** reframed to avoid any "replacing the expert" reading → "Today, you build it. Tomorrow, it builds itself." (OptiFlow automates the *building*; the expert is freed for higher-level domain work).
+  - Proof bar item → "Imaging modality-agnostic".
+  - **Mission section** rebuilt: the "OUR MISSION" eyebrow is now a **top-left section header** (teal rule prefix), consistent with every other section — previously it was buried inside the right text column. Below it, a two-column row: **arch graphic left · mission quote + tagline right** (vertically centred), then the **full-width closing CTA banner**. The graphic is `mission_arch.png` (plain `<img>`) — the wireframe arch from `missionStatement.pptx` with teal "Domain Experts" / gold "Imaging Insights" labels, gold pixel-grid logo mark + "Logic Byte", white arch labels. The slide background was exactly `#0B1628` (brand navy), so it was **knocked out to a true transparent alpha** (soft luminance key) — this removed the hard black box that made the old `arch_teal.png` look like a pasted-in screenshot. **Width fix:** the `.mission .wrap{max-width:1080px}` cap was removed so the section aligns to the page's 1500px frame like every other section (it previously floated narrow and centred on wide monitors); the row is capped at 1180px and left-aligned, the CTA spans full width — all sharing the page's left margin. Stacks to a single column ≤1000px with **all items left-aligned** (`.mission-row{align-items:flex-start}` in the breakpoint). **Tagline sizing:** `.mission-statement{max-width:552px}` is the exact measured natural single-line width of the tagline in DM Mono at 18.4px (49 chars). `white-space:nowrap` on `.mission-tagline` holds it on one line at ≥1250px viewport (where ≥552px of flex space is available); `@media(max-width:1249px)` removes `nowrap` so the tagline wraps gracefully when squeezed. The paragraph (`.mission-quote`) has no own `max-width` and fills the statement container, so both texts share the same right edge. Verified no horizontal overflow 375–1920px.
+  - **Vision** lead refined to the reduce/streamline → eliminate framing ("Today, OptiFlow lets domain experts build professional workflows that reduce and streamline manual, image-related work. Tomorrow, it builds those workflows autonomously — eliminating that work entirely, so experts focus fully on their domain expertise and the value only they can add.").
+- Retained: workflow-from-image demo in the Platform area, postMessage iframe sizing, ETH Zürich umlaut, no fabricated metrics.
+- **Homepage is complete and locked.** Full-page review (June 2026) confirmed every section earns its place; no content cut. Section vertical spacing tightened (`--sec: clamp(4rem,8vw,6rem)`, down from `clamp(4.5rem,9vw,7.5rem)`) — page height ~7,700px at 1440px wide (was ~8,100px). Nav is `position:fixed`, so the persistent "Book a Demo" CTA + escape hatch are always visible. No in-page scroll-nav added (linear narrative, sticky top nav covers the need).
 
 ### Pending
-- Update homepage meta description (current one frames Logic Byte too narrowly)
-- `optiflow-build-workflow.html` retirement decision pending (likely retire)
-
----
+- ~~Build `platform.html`~~ ✅ **done** (15 Jun 2026).
+- ~~Build `biomedical.html`~~ ✅ **done** (16 Jun 2026).
+- **Recommended next: `semiconductor.html`** — build in a new conversation; the template is fully locked. Wire the demo to `?mode=semicon`. Then `custom.html`.
+- **Merge `research.html` + `research-output.html`** into a single Research page (IA decision locked).
+- **Rebuild** `about.html` (add `#vision` section), `contact.html`.
+- Update homepage meta description; push all updated files to GitHub / Vercel.
 
 ## Active commercial engagements (brief)
 

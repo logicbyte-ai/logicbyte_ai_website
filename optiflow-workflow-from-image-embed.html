@@ -91,7 +91,7 @@
         <div class="blist" id="fileList"></div>
       </div>
     </div>
-    <p class="note"><b>No re-building.</b> OptiFlow reads the operation sequence embedded in any output, rebuilds the exact workflow, and re-runs it across a whole folder — the practical pay-off of full traceability.</p>
+    <p class="note"><b>No re-building.</b> OptiFlow reads the workflow embedded in your result, rebuilds the exact pipeline, and re-runs it across a whole folder — encrypted, readable only inside OptiFlow, and reproducible on demand.</p>
   </div>
 
 <script>
@@ -133,9 +133,31 @@
     done.classList.add('on');
     await sleep(2300);
   }
-  async function loop(){ const order=Object.keys(CASES); let i=0;
-    while(true){ await runCase(order[i%order.length]); i++; } }
-  window.addEventListener('load',()=>setTimeout(loop,350));
+  // Render a case in its completed state instantly (no animation) —
+  // used for visitors who prefer reduced motion.
+  function renderStatic(key){
+    const c=CASES[key];
+    cards.innerHTML=''; fileList.innerHTML='';
+    c.workflow.forEach((w,i)=>w.k=i+1);
+    c.workflow.forEach(w=>cards.appendChild(wcard(w)));
+    c.files.forEach(f=>{ const r=frow(f); r.classList.add('ok'); fileList.appendChild(r); });
+    loadedImg.src=IMG[c.img]; loadedImg.classList.add('in');
+    fname.textContent=c.fname; domain.textContent=c.domain;
+    prov.classList.add('on'); extractMsg.classList.remove('on');
+    counter.textContent=c.files.length+' / '+c.files.length;
+    pill.textContent='Ready';
+    done.textContent='Done — '+c.files.length+' / '+c.files.length+' images processed \u2713';
+    done.classList.add('on');
+  }
+  // ?mode=bio | semicon | both (default). Lets one embed serve every page.
+  var _mode=(new URLSearchParams(location.search).get('mode')||'').toLowerCase();
+  var ORDER = _mode==='bio' ? ['bio'] : _mode==='semicon' ? ['semicon'] : Object.keys(CASES);
+  var REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  async function loop(){ let i=0; while(true){ await runCase(ORDER[i%ORDER.length]); i++; } }
+  window.addEventListener('load',function(){
+    if(REDUCE){ renderStatic(ORDER[0]); setTimeout(fit,50); }
+    else { setTimeout(loop,350); }
+  });
 
   // ── Scale the desktop frame down to the available iframe width ──
   var _scaler = document.querySelector('.wrap');
