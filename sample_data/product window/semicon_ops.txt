@@ -1,0 +1,1 @@
+AI Polish -> Auto Threshold (Otsu) [-15] -> Multiply images [Img_1, Img_2] -> Apply LUT (Colormap) [Ocean, All, rescale=True]

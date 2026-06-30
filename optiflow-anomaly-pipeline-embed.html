@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OptiFlow — Reference-free anomaly detection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0B1628;--navy-2:#0E1B30;--navy-3:#101F38;--panel:#10203A;
+  --teal:#1DB89A;--tealb:#22D3AC;--teal-soft:rgba(29,184,154,0.12);
+  --gold:#D4AF37;--orange:#F5A623;--red:#EF3B2D;
+  --text:#E8EDF4;--muted:#92A2B8;--muted-2:#6E7F96;
+  --border:rgba(255,255,255,0.10);--border-2:rgba(255,255,255,0.07);--border-strong:rgba(255,255,255,0.16);
+  --f-d:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --f-m:'DM Mono','SF Mono',ui-monospace,Menlo,monospace;
+  --f-b:'DM Sans',-apple-system,'Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent}
+body{font-family:var(--f-b);color:var(--text);-webkit-font-smoothing:antialiased;overflow:hidden}
+img{display:block;max-width:100%}
+
+.win{
+  background:linear-gradient(160deg,#0c1a2f,#0a1525 60%,#0b1830);
+  border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 60px -28px rgba(0,0,0,0.7);
+}
+/* header */
+.win-bar{
+  display:flex;align-items:center;gap:0.8rem;padding:0.7rem 0.95rem;
+  border-bottom:1px solid var(--border-2);background:rgba(255,255,255,0.018);
+}
+.dots{display:flex;gap:0.4rem;flex:0 0 auto}
+.dots i{width:10px;height:10px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.win-title{font-family:var(--f-d);font-weight:600;font-size:0.82rem;color:#cdd8e6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.win-title b{color:var(--teal);font-weight:600}
+.pill{
+  margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:0.45rem;
+  font-family:var(--f-m);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--tealb);border:1px solid rgba(34,211,172,0.4);border-radius:100px;padding:0.32em 0.7em;white-space:nowrap;
+}
+.pill .led{width:6px;height:6px;border-radius:50%;background:var(--tealb);box-shadow:0 0 0 0 rgba(34,211,172,0.6);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,211,172,0.5)}70%{box-shadow:0 0 0 6px rgba(34,211,172,0)}100%{box-shadow:0 0 0 0 rgba(34,211,172,0)}}
+
+/* body: viewport + readout */
+.win-body{display:flex;gap:0;align-items:stretch}
+.vp-wrap{position:relative;flex:1 1 auto;min-width:0;background:#05080f;border-right:1px solid var(--border-2)}
+.vp{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden}
+.vp-zoom{position:absolute;inset:0;transition:transform 1.1s cubic-bezier(.65,0,.35,1);transform-origin:center;will-change:transform}
+.vp-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
+.vp-sem{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vp-detect,.vp-inst{mix-blend-mode:screen}
+.vp-layer.on{opacity:1}
+/* cover panels (charact / scatter / collage) */
+.vp-panel{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s;background:#0a1424;display:flex;align-items:center;justify-content:center}
+.vp-panel.on{opacity:1;visibility:visible}
+.vp-panel.pad{padding:clamp(0.8rem,3vw,1.6rem)}
+.vp-scatter img,.vp-collage img{width:100%;height:100%;object-fit:contain}
+.vp-collage{flex-direction:column;gap:0.7rem}
+.vp-collage .cl-cap{font-family:var(--f-m);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+
+/* scan line for detect */
+.scan{position:absolute;left:0;right:0;height:2px;top:0;background:linear-gradient(90deg,transparent,var(--tealb),transparent);opacity:0;box-shadow:0 0 14px 2px rgba(34,211,172,0.5);z-index:4}
+body[data-stage="1"] .scan{opacity:0.9;animation:scan 1.5s cubic-bezier(.5,0,.5,1) 1}
+@keyframes scan{0%{top:0}100%{top:100%}}
+
+/* boxes */
+.vp-boxes{position:absolute;inset:0;z-index:3;pointer-events:none}
+.bx{position:absolute;border:2px solid var(--orange);border-radius:2px;opacity:0;transform:scale(1.7);transition:opacity .35s ease,transform .35s ease;box-shadow:0 0 0 1px rgba(0,0,0,0.35)}
+.bx.strong{border-color:var(--red)}
+.bx.strong{box-shadow:0 0 0 1px rgba(0,0,0,0.45),0 0 12px rgba(239,59,45,0.45)}
+.bx{box-shadow:0 0 0 1px rgba(0,0,0,0.45),0 0 10px rgba(245,166,35,0.4)}
+.bx.show{opacity:1;transform:scale(1)}
+
+/* characterise composite */
+.ch{display:flex;align-items:center;justify-content:center;gap:clamp(0.5rem,2vw,1.1rem);width:100%;flex-wrap:nowrap}
+.ch-crop{width:clamp(70px,20%,120px);aspect-ratio:1/1;border-radius:8px;border:1px solid var(--teal);
+  background-repeat:no-repeat;flex:0 0 auto;opacity:0;transform:translateY(8px);transition:all .5s ease;box-shadow:0 0 18px rgba(29,184,154,0.18)}
+.ch-arrow{display:flex;flex-direction:column;align-items:center;gap:0.3rem;color:var(--muted);flex:0 0 auto;opacity:0;transition:opacity .5s ease .15s}
+.ch-arrow .cnn{font-family:var(--f-m);font-size:0.56rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--tealb);border:1px solid rgba(34,211,172,0.4);border-radius:5px;padding:0.18em 0.45em}
+.ch-arrow svg{width:30px;height:14px}
+.ch-arrow .lbl{font-family:var(--f-m);font-size:0.52rem;letter-spacing:0.05em;color:var(--muted-2);text-align:center;max-width:90px;line-height:1.4}
+.ch-mx{flex:0 0 auto;opacity:0;transform:scale(.94);transition:all .55s ease .3s;text-align:center}
+.ch-mx img{width:clamp(120px,42%,210px);border-radius:6px;margin:0 auto}
+.ch-mx .dim{font-family:var(--f-m);font-size:0.6rem;letter-spacing:0.06em;color:var(--text);margin-top:0.4rem}
+.ch-mx .dim b{color:var(--gold)}
+.ch-mx .sub{font-family:var(--f-m);font-size:0.52rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted-2);margin-top:0.15rem}
+body[data-stage="3"] .ch-crop{opacity:1;transform:none}
+body[data-stage="3"] .ch-arrow{opacity:1}
+body[data-stage="3"] .ch-mx{opacity:1;transform:none}
+
+/* readout */
+.readout{flex:0 0 clamp(220px,34%,300px);display:flex;flex-direction:column;padding:1rem 1.05rem;gap:0.85rem;background:rgba(255,255,255,0.014)}
+.ro-step{font-family:var(--f-m);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)}
+.ro-sub{font-family:var(--f-d);font-weight:500;font-size:0.95rem;line-height:1.4;color:var(--text);min-height:2.6em}
+.ro-metrics{display:flex;flex-direction:column;gap:0.55rem;margin-top:0.1rem;border-top:1px solid var(--border-2);padding-top:0.8rem}
+.mrow{display:flex;align-items:baseline;justify-content:space-between;gap:0.6rem;opacity:0.32;transition:opacity .4s ease}
+.mrow.live{opacity:1}
+.mrow .k{font-family:var(--f-m);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.mrow .v{font-family:var(--f-d);font-weight:600;font-size:0.98rem;color:var(--text);font-variant-numeric:tabular-nums}
+.mrow.r-strong .v{color:var(--red)}
+.mrow.r-flag .v{color:var(--orange)}
+.ro-foot{margin-top:auto;font-family:var(--f-m);font-size:0.56rem;letter-spacing:0.05em;color:var(--muted-2);line-height:1.5;border-top:1px solid var(--border-2);padding-top:0.7rem}
+.ro-foot b{color:var(--muted)}
+
+/* stepper */
+.steps{display:flex;align-items:center;gap:0;padding:0.7rem 1rem 0.85rem;border-top:1px solid var(--border-2);background:rgba(0,0,0,0.12)}
+.stp{display:flex;align-items:center;gap:0;flex:1 1 0;min-width:0}
+.stp .dot{width:9px;height:9px;border-radius:50%;background:#26384a;flex:0 0 auto;transition:background .3s,box-shadow .3s;position:relative}
+.stp .nm{font-family:var(--f-m);font-size:0.56rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted-2);margin-left:0.4rem;white-space:nowrap;transition:color .3s}
+.stp .bar{flex:1 1 auto;height:1px;background:#26384a;margin:0 0.45rem;min-width:6px}
+.stp:last-child{flex:0 0 auto}
+.stp:last-child .bar{display:none}
+.stp.done .dot{background:var(--teal)}
+.stp.cur .dot{background:var(--tealb);box-shadow:0 0 0 4px rgba(34,211,172,0.18)}
+.stp.cur .nm{color:var(--text)}
+.stp.done .nm{color:var(--muted)}
+
+@media(max-width:680px){
+  .win-body{flex-direction:column}
+  .vp-wrap{border-right:none;border-bottom:1px solid var(--border-2)}
+  .readout{flex:1 1 auto}
+  .ro-sub{min-height:0}
+  .stp .nm{display:none}
+  .stp .bar{margin:0 0.3rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .vp-zoom,.vp-layer,.vp-panel,.bx,.ch-crop,.ch-arrow,.ch-mx{transition:none!important}
+  .scan{display:none}
+  .pill .led{animation:none}
+}
+</style>
+</head>
+<body data-stage="0">
+<div class="win" id="win">
+  <div class="win-bar">
+    <span class="dots"><i></i><i></i><i></i></span>
+    <span class="win-title">OptiFlow — <b>Reference-free anomaly detection</b></span>
+    <span class="pill"><span class="led"></span><span id="pill">Loading field</span></span>
+  </div>
+
+  <div class="win-body">
+    <div class="vp-wrap">
+      <div class="vp" id="vp">
+        <div class="vp-zoom" id="zoom">
+          <img class="vp-sem" id="sem" src="ap-sem.jpg" alt="Electron-microscope image of the device"/>
+          <img class="vp-layer vp-detect" id="detect" src="ap-detected.png" alt=""/>
+          <img class="vp-layer vp-inst" id="inst" src="ap-instances.png" alt=""/>
+          <div class="vp-boxes" id="boxes"></div>
+        </div>
+        <div class="scan"></div>
+
+        <!-- characterise -->
+        <div class="vp-panel pad" id="p-charact">
+          <div class="ch">
+            <div class="ch-crop" id="chCrop"></div>
+            <div class="ch-arrow">
+              <span class="cnn">CNN</span>
+              <svg viewBox="0 0 30 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h24M21 3l5 4-5 4"/></svg>
+              <span class="lbl">morphometric · textural</span>
+            </div>
+            <div class="ch-mx">
+              <img src="ap-matrix.png" alt="Feature matrix heatmap"/>
+              <div class="dim"><b>713</b> × <b>334</b></div>
+              <div class="sub">latent features</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- scatter -->
+        <div class="vp-panel pad vp-scatter" id="p-scatter">
+          <img src="ap-scatter.png" alt="Dimensionality-reduced feature map with outlier gating"/>
+        </div>
+
+        <!-- collage -->
+        <div class="vp-panel pad vp-collage" id="p-collage">
+          <img src="ap-collage.jpg" alt="Cropped strong-suspect connectors for expert review"/>
+          <span class="cl-cap">10 strong suspects · segmented for review</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="readout">
+      <div class="ro-step" id="step">Input</div>
+      <div class="ro-sub" id="sub">A single electron-microscope image of the device.</div>
+      <div class="ro-metrics">
+        <div class="mrow r-det"><span class="k">Connectors detected</span><span class="v" id="m-det">—</span></div>
+        <div class="mrow r-feat"><span class="k">Features / instance</span><span class="v" id="m-feat">—</span></div>
+        <div class="mrow r-flag"><span class="k">Flagged</span><span class="v" id="m-flag">—</span></div>
+        <div class="mrow r-strong"><span class="k">Strong suspects</span><span class="v" id="m-strong">—</span></div>
+      </div>
+      <div class="ro-foot">No golden reference. No labelled defects.<br/><b>Self-supervised — learned from the field itself.</b></div>
+    </div>
+  </div>
+
+  <div class="steps" id="steps"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var BOXES = [{"tag":"strong","x":0.49048,"y":0.17725,"w":0.0249,"h":0.01025,"cx":0.50293,"cy":0.18237},{"tag":"strong","x":0.67725,"y":0.21753,"w":0.0249,"h":0.00952,"cx":0.6897,"cy":0.22229},{"tag":"strong","x":0.70459,"y":0.21875,"w":0.0249,"h":0.01001,"cx":0.71704,"cy":0.22375},{"tag":"strong","x":0.7019,"y":0.26514,"w":0.01929,"h":0.01001,"cx":0.71155,"cy":0.27014},{"tag":"strong","x":0.94775,"y":0.27466,"w":0.0188,"h":0.00854,"cx":0.95715,"cy":0.27893},{"tag":"strong","x":0.39526,"y":0.38184,"w":0.02856,"h":0.01025,"cx":0.40955,"cy":0.38696},{"tag":"strong","x":0.44385,"y":0.38647,"w":0.0249,"h":0.0105,"cx":0.4563,"cy":0.39172},{"tag":"strong","x":0.36963,"y":0.46118,"w":0.02026,"h":0.01929,"cx":0.37976,"cy":0.47083},{"tag":"strong","x":0.66382,"y":0.50073,"w":0.01953,"h":0.01025,"cx":0.67358,"cy":0.50586},{"tag":"strong","x":0.97485,"y":0.50562,"w":0.02515,"h":0.01001,"cx":0.98743,"cy":0.51062},{"tag":"suspect","x":0.37427,"y":0.16992,"w":0.02026,"h":0.01123,"cx":0.3844,"cy":0.17554},{"tag":"suspect","x":0.46313,"y":0.17578,"w":0.0249,"h":0.01001,"cx":0.47559,"cy":0.18079},{"tag":"suspect","x":0.73145,"y":0.22021,"w":0.02515,"h":0.00977,"cx":0.74402,"cy":0.2251},{"tag":"suspect","x":0.67505,"y":0.23853,"w":0.0249,"h":0.01001,"cx":0.6875,"cy":0.24353},{"tag":"suspect","x":0.96851,"y":0.27466,"w":0.01855,"h":0.00854,"cx":0.97778,"cy":0.27893},{"tag":"suspect","x":0.70239,"y":0.27515,"w":0.01831,"h":0.00806,"cx":0.71155,"cy":0.27917},{"tag":"suspect","x":0.43823,"y":0.43823,"w":0.02539,"h":0.01001,"cx":0.45093,"cy":0.44324},{"tag":"suspect","x":0.70923,"y":0.48975,"w":0.01904,"h":0.01099,"cx":0.71875,"cy":0.49524},{"tag":"suspect","x":0.89624,"y":0.77173,"w":0.01953,"h":0.01025,"cx":0.90601,"cy":0.77686},{"tag":"suspect","x":0.37427,"y":0.43823,"w":0.0188,"h":0.0083,"cx":0.38367,"cy":0.44238}];
+
+  var STEP_NAMES = ["Image","Detect","Segment","Features","Gate","Trace","Review"];
+  var stages = [
+    {step:"Input",        pill:"Loading field",      sub:"A single electron-microscope image of the device.",                         layers:[],                 panel:null,        metrics:{},                                  dwell:2600},
+    {step:"Detect",       pill:"Scanning",           sub:"Every connector of one type is located — automatically.",                   layers:["detect"],         panel:null,        metrics:{det:713},                           dwell:3200, count:true},
+    {step:"Segment",      pill:"Segmenting",         sub:"Each connector is isolated as its own instance.",                           layers:["inst"],           panel:null,        metrics:{det:713},                           dwell:3000},
+    {step:"Characterise", pill:"Extracting features",sub:"A neural network reads morphometric & textural features for every instance.",layers:[],                 panel:"p-charact", metrics:{det:713,feat:"713 × 334"},          dwell:3600},
+    {step:"Gate",         pill:"Gating",             sub:"Features reduce to a map — the typical cluster, and the outliers beyond it.",layers:[],                 panel:"p-scatter", metrics:{det:713,feat:"713 × 334",flag:20},  dwell:4000},
+    {step:"Trace back",   pill:"Tracing back",       sub:"Outliers are traced to the image — orange suspects, red strong suspects.",  layers:["boxes"],          panel:null,        metrics:{det:713,feat:"713 × 334",flag:20,strong:10}, dwell:4400, boxes:true},
+    {step:"Review",       pill:"Ready for review",   sub:"A handful out of hundreds — sent to your expert, not the whole field.",     layers:[],                 panel:"p-collage", metrics:{det:713,feat:"713 × 334",flag:20,strong:10}, dwell:3800}
+  ];
+
+  var $=function(id){return document.getElementById(id);};
+  var body=document.body, vp=$("vp"), zoom=$("zoom"), boxesEl=$("boxes");
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // build boxes
+  BOXES.forEach(function(b){
+    var d=document.createElement("div");
+    d.className="bx "+(b.tag==="strong"?"strong":"");
+    d.style.left=(b.x*100)+"%"; d.style.top=(b.y*100)+"%";
+    d.style.width=(b.w*100)+"%"; d.style.height=(b.h*100)+"%";
+    d.dataset.tag=b.tag;
+    boxesEl.appendChild(d);
+  });
+  var boxDivs=Array.prototype.slice.call(boxesEl.children);
+
+  // build stepper
+  var stepsEl=$("steps");
+  STEP_NAMES.forEach(function(nm,i){
+    var s=document.createElement("div"); s.className="stp";
+    s.innerHTML='<span class="dot"></span><span class="nm">'+nm+'</span>'+(i<STEP_NAMES.length-1?'<span class="bar"></span>':'');
+    stepsEl.appendChild(s);
+  });
+  var stpDivs=Array.prototype.slice.call(stepsEl.children);
+
+  // characterise crop background (use a strong box, zoomed)
+  (function(){
+    var b=BOXES[5]; // a clear strong box
+    var S=2600; // px the full SEM is scaled to inside the crop
+    var crop=$("chCrop");
+    crop.style.backgroundImage="url('ap-sem.jpg')";
+    crop.style.backgroundSize=S+"px "+S+"px";
+    function place(){
+      var c=crop.clientWidth||100;
+      crop.style.backgroundPosition=(-(b.cx*S - c/2))+"px "+(-(b.cy*S - c/2))+"px";
+    }
+    if('ResizeObserver' in window){ new ResizeObserver(place).observe(crop); }
+    setTimeout(place,60); window.addEventListener("resize",place);
+  })();
+
+  function setMetric(el,val,live){
+    var row=el.closest(".mrow");
+    if(val==null){ el.textContent="—"; row.classList.remove("live"); return; }
+    row.classList.add("live"); el.textContent=val;
+  }
+  function tween(el,to,ms){
+    var start=0,t0=null;
+    function f(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/ms);
+      el.textContent=Math.round(start+(to-start)*(1-Math.pow(1-k,3))).toLocaleString();
+      if(k<1) requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+
+  // zoom target: a curated cluster of separated strong+suspect boxes
+  var ZT={cx:0.4257, cy:0.402};
+  var ZSCALE=2.3;
+
+  var idx=-1, timer=null, zoomTimer=null;
+  function show(i){
+    var st=stages[i]; idx=i;
+    body.setAttribute("data-stage", i);
+    $("pill").textContent=st.pill;
+    $("step").textContent=st.step;
+    $("sub").textContent=st.sub;
+
+    // layers
+    $("detect").classList.toggle("on", st.layers.indexOf("detect")>=0);
+    $("inst").classList.toggle("on", st.layers.indexOf("inst")>=0);
+
+    // panels
+    ["p-charact","p-scatter","p-collage"].forEach(function(p){
+      $(p).classList.toggle("on", st.panel===p);
+    });
+
+    // metrics (persist via stage def)
+    var m=st.metrics||{};
+    if(m.det && st.count && !reduce){ $("m-det").closest(".mrow").classList.add("live"); tween($("m-det"), m.det, 1400); }
+    else setMetric($("m-det"), m.det!=null?m.det.toLocaleString():null);
+    setMetric($("m-feat"), m.feat!=null?m.feat:null);
+    setMetric($("m-flag"), m.flag!=null?m.flag:null);
+    setMetric($("m-strong"), m.strong!=null?m.strong:null);
+
+    // stepper
+    stpDivs.forEach(function(s,k){ s.classList.toggle("done",k<i); s.classList.toggle("cur",k===i); });
+
+    // boxes + zoom
+    clearTimeout(zoomTimer);
+    vp.classList.remove("zoomed");
+    if(st.boxes){
+      boxDivs.forEach(function(d){ d.classList.remove("show"); });
+      // reset zoom first
+      zoom.style.transform="none";
+      // stagger suspects then strong
+      var susp=boxDivs.filter(function(d){return d.dataset.tag==="suspect";});
+      var strong=boxDivs.filter(function(d){return d.dataset.tag==="strong";});
+      var t=reduce?0:260;
+      susp.forEach(function(d,k){ setTimeout(function(){d.classList.add("show");}, reduce?0:120+k*55); });
+      strong.forEach(function(d,k){ setTimeout(function(){d.classList.add("show");}, reduce?0:120+susp.length*55+k*70); });
+      // then zoom into a cluster
+      if(!reduce){
+        zoomTimer=setTimeout(function(){
+          var sc=ZSCALE, ox=(0.5-ZT.cx)*100*sc, oy=(0.5-ZT.cy)*100*sc;
+          zoom.style.transform="translate("+ox+"%,"+oy+"%) scale("+sc+")";
+          vp.classList.add("zoomed");
+        }, 120+susp.length*55+strong.length*70+650);
+      } else { vp.classList.add("zoomed"); }
+    } else {
+      zoom.style.transform="none";
+      if(!st.layers.length || st.panel) boxDivs.forEach(function(d){ d.classList.remove("show"); });
+    }
+
+    postHeight();
+    clearTimeout(timer);
+    timer=setTimeout(next, st.dwell);
+  }
+  function next(){ show((idx+1)%stages.length); }
+
+  // ---- height contract with parent ----
+  function postHeight(){
+    var h=document.getElementById("win").offsetHeight + 4;
+    parent.postMessage({optiflowEmbedHeight:h}, "*");
+  }
+  window.addEventListener("resize", postHeight);
+  if('ResizeObserver' in window){ new ResizeObserver(postHeight).observe(document.getElementById("win")); }
+
+  // start after images settle a touch
+  var sem=$("sem");
+  function boot(){ postHeight(); show(0); }
+  if(sem.complete) setTimeout(boot,120); else sem.addEventListener("load",function(){setTimeout(boot,120);});
+  setTimeout(postHeight,400); setTimeout(postHeight,1200);
+})();
+</script>
+</body>
+</html>

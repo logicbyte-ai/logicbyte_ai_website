@@ -1,0 +1,1 @@
+DIC2Nuc -> Edge Detection [Canny, 50, 150] -> Connected Components [8, 0, 0] -> Apply LUT (Colormap) [Jet, All, Rescale=True]
