@@ -3,328 +3,436 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Logic Byte's complete scientific record: 20+ peer-reviewed publications, collaborative projects, conference contributions, and international press coverage."/>
+<meta name="description" content="Logic Byte's complete research record — 20+ peer-reviewed publications, collaborative projects, conference contributions and international press coverage in AI-driven image analytics. Filterable and linked to source."/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="canonical" href="https://logicbyte.ai/research-output.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Logic Byte"/>
 <meta property="og:url" content="https://logicbyte.ai/research-output.html"/>
-<meta property="og:title" content="Research Output — Logic Byte"/>
-<meta property="og:description" content="Logic Byte's complete scientific record: 20+ peer-reviewed publications, collaborative projects, conference contributions, and international press coverage."/>
+<meta property="og:title" content="Full Research Record — Logic Byte"/>
+<meta property="og:description" content="The complete, verifiable record: 20+ peer-reviewed publications, collaborations, conference contributions and press coverage in AI-driven image analytics."/>
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Research Output — Logic Byte"/>
-<meta name="twitter:description" content="Logic Byte's complete scientific record: 20+ peer-reviewed publications, collaborative projects, conference contributions, and international press coverage."/>
-<title>Research Output — Logic Byte</title>
+<meta name="twitter:title" content="Full Research Record — Logic Byte"/>
+<meta name="twitter:description" content="The complete, verifiable record: publications, collaborations, conference contributions and press coverage in AI-driven image analytics."/>
+<title>Full Research Record — Logic Byte</title>
+
+<script>document.documentElement.classList.add('js');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy:#0B1628; --navy2:#112040; --navy3:#1A3260;
-    --teal:#1DB89A; --teal3:#0EDBB8;
-    --teal-glow:rgba(29,184,154,0.15); --teal-glow2:rgba(29,184,154,0.06);
-    --gold:#d4af37; --white:#FFFFFF; --muted:#8BA0B8; --text:#C8D8E8;
-    --border:rgba(29,184,154,0.18); --border2:rgba(255,255,255,0.07);
-    --serif:'Syne',system-ui,sans-serif; --display:'Outfit',system-ui,sans-serif;
-    --sans:'DM Sans',system-ui,sans-serif; --nav-h:68px; --col-nav:210px;
-  }
-  html { scroll-behavior: smooth; }
-  body { background:var(--navy); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.7; overflow-x:hidden; }
+/* ============================================================
+   LOGIC BYTE — DESIGN TOKENS  (shared with index / platform / biomedical)
+   ============================================================ */
+:root{
+  --navy:#0B1628;
+  --navy-2:#0E1B30;
+  --navy-3:#101F38;
+  --panel:#10203A;
+  --panel-2:#13243F;
+  --teal:#1DB89A;
+  --teal-bright:#22D3AC;
+  --teal-soft:rgba(29,184,154,0.12);
+  --gold:#D4AF37;
+  --steel:#5E8FC9;
+  --white:#FFFFFF;
+  --text:#E8EDF4;
+  --muted:#92A2B8;
+  --muted-2:#6E7F96;
+  --border:rgba(255,255,255,0.10);
+  --border-2:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.16);
 
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:200;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:0 max(5vw, calc((100% - 1600px) / 2)); height:var(--nav-h);
-    background:rgba(11,22,40,0.95); backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--border2); transition:background 0.3s;
-  }
-  .nav-logo { display:flex; align-items:center; gap:0.6rem; text-decoration:none; }
-  .nav-logo-mark { width:28px; height:28px; flex-shrink:0; }
-  .nav-logo-text { font-family:var(--serif); font-size:1.2rem; font-weight:700; color:var(--gold); letter-spacing:-0.01em; }
-  .nav-links { display:flex; gap:2.2rem; list-style:none; }
-  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.875rem; font-weight:400; letter-spacing:0.04em; transition:color 0.2s; }
-  .nav-links a:hover { color:var(--white); }
-  .nav-links a.active { color:var(--teal); }
-  .nav-ctas { display:flex; align-items:center; gap:0.5rem; }
-  .nav-cta-soft { border:1px solid var(--border); color:var(--text); padding:0.5rem 1.4rem; border-radius:100px; font-size:0.875rem; font-weight:400; text-decoration:none; letter-spacing:0.03em; transition:border-color 0.2s,color 0.2s,transform 0.15s; }
-  .nav-cta-soft:hover { border-color:var(--teal); color:var(--white); transform:translateY(-1px); }
-  .nav-cta { background:var(--teal); color:var(--navy); padding:0.5rem 1.4rem; border-radius:100px; font-size:0.875rem; font-weight:500; text-decoration:none; letter-spacing:0.03em; transition:background 0.2s,transform 0.15s; }
-  .nav-cta:hover { background:var(--teal3); transform:translateY(-1px); }
+  --pad:max(1.25rem, 5vw, calc((100vw - 1500px) / 2));
+  --h1:clamp(1.7rem, calc(3.8vw - 1rem), 2.9rem);
+  --sec:clamp(4rem,8vw,6rem);
+  --radius:14px;
 
-  .page-shell { display:grid; grid-template-columns:1fr var(--col-nav); margin:var(--nav-h) auto 0; max-width:1600px; min-height:calc(100vh - var(--nav-h)); align-items:start; }
-  .page-content { min-width:0; }
+  --f-display:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --f-mono:'DM Mono','SF Mono',ui-monospace,Menlo,monospace;
+  --f-wordmark:'Syne',-apple-system,sans-serif;
+  --f-body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
 
-  .page-navigator { position:sticky; top:var(--nav-h); height:calc(100vh - var(--nav-h)); border-left:1px solid var(--border2); display:flex; flex-direction:column; padding:2.8rem 1.4rem 2rem 1.6rem; overflow-y:auto; }
-  .nav-vertical-label { margin-bottom:1.8rem; }
-  .nav-vertical-super { font-size: 0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal); font-weight:500; font-family:var(--sans); display:block; margin-bottom:0.35rem; }
-  .nav-vertical-name { font-family:var(--serif); font-size:0.85rem; font-weight:700; color:var(--white); line-height:1.35; letter-spacing:-0.01em; }
-  .nav-vertical-desc { font-size:0.75rem; color:var(--muted); line-height:1.6; font-weight:300; margin-bottom:1.2rem; }
-  .nav-divider { height:1px; background:var(--border2); margin-bottom:1.2rem; }
-  .nav-seg-label { font-size: 0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; font-family:var(--sans); }
-  .seg-link { display:flex; align-items:center; gap:0.65rem; padding:0.55rem 0.7rem; border-radius:6px; text-decoration:none; border-left:2px solid transparent; transition:background 0.2s,border-color 0.2s,padding-left 0.2s; margin-bottom:0.1rem; }
-  .seg-link:hover { background:var(--teal-glow2); }
-  .seg-link.active { border-left-color:var(--teal); background:var(--teal-glow2); padding-left:0.9rem; }
-  .seg-link.active .seg-link-name { color:var(--teal); }
-  .seg-link.active .seg-link-dot { background:var(--teal); opacity:1; }
-  .seg-link-dot { width:4px; height:4px; border-radius:50%; background:var(--muted); flex-shrink:0; opacity:0.45; transition:background 0.2s,opacity 0.2s; }
-  .seg-link-name { font-size:0.78rem; color:var(--muted); transition:color 0.2s; line-height:1.3; font-family:var(--sans); }
-  .nav-back { margin-top:auto; padding-top:1.2rem; border-top:1px solid var(--border2); display:flex; align-items:center; gap:0.4rem; font-size:0.72rem; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .nav-back:hover { color:var(--teal); }
-  .nav-back-arrow { font-size:0.8rem; transition:transform 0.2s; }
-  .nav-back:hover .nav-back-arrow { transform:translateX(-3px); }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--f-body);
+  background:var(--navy);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg,iframe{display:block;max-width:100%}
+::selection{background:rgba(29,184,154,0.28);color:#fff}
 
-  /* ─── HERO ─── */
-  .page-hero { padding:4.5rem max(5vw, calc((100% - 1600px) / 2)) 3rem; position:relative; overflow:hidden; }
-  .page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 70% at 90% 20%, rgba(29,184,154,0.07), transparent 65%); pointer-events:none; }
-  .eyebrow { display:flex; align-items:center; gap:0.6rem; margin-bottom:1.1rem; }
-  .eyebrow-line { width:24px; height:1px; background:var(--teal); }
-  .eyebrow span { font-size:0.75rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); font-weight:500; }
-  h1 { font-family:var(--display); font-size:clamp(2.2rem,3.8vw,3.4rem); font-weight:700; letter-spacing:-0.02em; color:var(--white); line-height:1.15; margin-bottom:1rem; }
-  h1 em { font-style:normal; color:var(--teal); font-weight:800; }
-  .hero-lead { font-size:1rem; color:var(--muted); line-height:1.8; font-weight:300; margin-bottom:1.8rem; max-width:560px; }
-  .hero-stats { display:flex; gap:2.5rem; flex-wrap:wrap; }
-  .hero-stat-num { font-family:var(--display); font-size:1.8rem; font-weight:700; color:var(--white); line-height:1; }
-  .hero-stat-num span { color:var(--teal); }
-  .hero-stat-label { font-size:0.75rem; color:var(--muted); margin-top:0.2rem; }
+.wrap{width:100%;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.section{padding-top:var(--sec);padding-bottom:var(--sec)}
 
-  /* ─── FILTER BAR ─── */
-  .filter-bar { padding:0 max(5vw, calc((100% - 1600px) / 2)) 0; display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2rem; }
-  .filter-btn {
-    font-size:0.75rem; padding:0.35rem 0.9rem; border-radius:100px;
-    border:1px solid var(--border2); color:var(--muted);
-    background:transparent; cursor:pointer;
-    transition:border-color 0.2s, color 0.2s, background 0.2s;
-    font-family:var(--sans);
-  }
-  .filter-btn:hover { border-color:var(--border); color:var(--text); }
-  .filter-btn.active { border-color:var(--teal); color:var(--teal); background:var(--teal-glow2); }
+/* ---------- Shared type ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:var(--f-mono);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:1.4rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--teal);opacity:0.85;display:inline-block}
 
-  /* ─── PUBLICATIONS ─── */
-  .pubs-section { padding:0 max(5vw, calc((100% - 1600px) / 2)) 90px; }
+h2.h2{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(1.85rem,3.7vw,2.95rem);
+  line-height:1.08;letter-spacing:-0.015em;color:var(--white);
+}
+h2.h2 em{font-style:normal;color:var(--teal)}
+h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1.25}
 
-  .year-group { margin-bottom:3rem; scroll-margin-top:calc(var(--nav-h) + 1.5rem); }
-  .year-label {
-    font-family:var(--serif); font-size:2rem; font-weight:700;
-    color:var(--border2); letter-spacing:-0.02em;
-    margin-bottom:1rem; line-height:1;
-    border-bottom:1px solid var(--border2); padding-bottom:0.6rem;
-  }
+.lead{
+  font-size:clamp(1rem,1.25vw,1.13rem);
+  color:var(--muted);font-weight:400;line-height:1.7;
+  max-width:64ch;margin-top:1.1rem;
+}
+.section-head{max-width:880px}
 
-  .pub-card {
-    display:flex; gap:1.2rem; align-items:flex-start;
-    padding:1.1rem 0; border-bottom:1px solid var(--border2);
-    transition:background 0.15s;
-  }
-  .pub-card:last-child { border-bottom:none; }
-  .pub-card:hover { background:var(--teal-glow2); margin:0 -1rem; padding:1.1rem 1rem; border-radius:8px; border-bottom-color:transparent; }
-  .pub-num { font-family:var(--serif); font-size:0.72rem; color:var(--muted); min-width:28px; padding-top:3px; text-align:right; flex-shrink:0; }
-  .pub-body { flex:1; min-width:0; }
-  .pub-title { font-size:0.88rem; font-weight:500; color:var(--white); line-height:1.45; margin-bottom:0.3rem; }
-  .pub-title a { color:inherit; text-decoration:none; transition:color 0.2s; }
-  .pub-title a:hover { color:var(--teal); }
-  .pub-authors { font-size:0.78rem; color:var(--muted); line-height:1.4; margin-bottom:0.3rem; }
-  .pub-authors strong { color:var(--text); font-weight:500; }
-  .pub-meta { display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; }
-  .pub-journal { font-size:0.72rem; color:var(--teal); font-style:italic; }
-  .pub-tags { display:flex; gap:0.35rem; flex-wrap:wrap; margin-top:0.4rem; }
-  .pub-tag {
-    font-size: 0.65rem; padding:0.1rem 0.5rem; border-radius:100px;
-    border:1px solid var(--border2); color:var(--muted);
-  }
-  .pub-tag.featured { border-color:var(--border); color:var(--teal); background:var(--teal-glow2); }
-  .pub-tag.inprep { border-style:dashed; border-color:rgba(29,184,154,0.3); color:var(--muted); }
-  .pub-link { flex-shrink:0; font-size:0.75rem; color:var(--muted); text-decoration:none; padding:0.25rem 0.6rem; border:1px solid var(--border2); border-radius:6px; transition:border-color 0.2s,color 0.2s; align-self:center; }
-  .pub-link:hover { border-color:var(--teal); color:var(--teal); }
+/* ============================================================
+   BUTTONS  (shared)
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:0.55rem;
+  font-family:var(--f-body);font-size:0.95rem;font-weight:500;letter-spacing:0.01em;
+  padding:0.85rem 1.9rem;border-radius:100px;cursor:pointer;
+  transition:transform .16s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--teal);color:var(--navy);font-weight:600;border:1px solid var(--teal)}
+.btn-primary:hover{background:var(--teal-bright);transform:translateY(-2px);box-shadow:0 10px 34px rgba(29,184,154,0.28)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-strong)}
+.btn-secondary:hover{border-color:var(--teal);color:var(--white);transform:translateY(-2px)}
 
-  /* ─── BOOK CHAPTERS ─── */
-  .chapters-section { padding:0 max(5vw, calc((100% - 1600px) / 2)) 60px; scroll-margin-top:calc(var(--nav-h) + 1.5rem); }
-  .section-label { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); margin-bottom:1.2rem; display:block; }
-  h2 { font-family:var(--display); font-size:clamp(1.5rem,2.5vw,2rem); font-weight:700; letter-spacing:-0.02em; color:var(--white); line-height:1.15; margin-bottom:1.5rem; }
+/* ============================================================
+   NAV  (shared)
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(11,22,40,0.82);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--border-2);
+}
+.nav-inner{
+  padding:0 var(--pad);
+  height:74px;display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{display:flex;align-items:center;gap:0.7rem}
+.brand-mark{width:24px;height:24px;flex:0 0 auto}
+.brand-name{font-family:var(--f-wordmark);font-weight:700;font-size:1.18rem;color:var(--white);letter-spacing:0.01em}
 
-  footer { padding:3rem max(5vw, calc((100% - 1600px) / 2)) 2rem; border-top:1px solid var(--border2); display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; }
-  .footer-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; margin-bottom:0.4rem; }
-  .footer-logo-text { font-family:var(--serif); font-size:1.05rem; color:var(--gold); }
-  .footer-tagline { font-size:0.8rem; color:var(--muted); }
-  .footer-links { display:flex; gap:1.8rem; list-style:none; }
-  .footer-links a { font-size:0.82rem; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-  .footer-links a:hover { color:var(--white); }
-  .footer-bottom { grid-column:1/-1; border-top:1px solid var(--border2); padding-top:1.2rem; display:flex; justify-content:space-between; font-size:0.75rem; color:var(--muted); }
-  .footer-bottom a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .footer-bottom a:hover { color: var(--white); }
+.nav-links{display:flex;align-items:center;gap:0.35rem;list-style:none}
+.nav-links > li{position:relative}
+.nav-link{
+  font-family:var(--f-wordmark);font-weight:600;font-size:0.9rem;color:var(--muted);
+  padding:0.55rem 0.85rem;border-radius:8px;transition:color .18s ease,background .18s ease;
+  display:inline-flex;align-items:center;gap:0.35rem;
+}
+.nav-link:hover{color:var(--white)}
+.nav-link[aria-current="page"]{color:var(--white)}
+.nav-link .caret{width:11px;height:11px;opacity:0.7;transition:transform .2s ease}
+.has-menu:hover .caret{transform:rotate(180deg)}
 
-  .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.6s ease,transform 0.6s ease; }
-  .reveal.visible { opacity:1; transform:translateY(0); }
+.dropdown{
+  position:absolute;top:calc(100% + 8px);left:0;min-width:268px;
+  background:var(--navy-3);border:1px solid var(--border);border-radius:12px;
+  padding:0.5rem;opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+}
+.has-menu:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{
+  display:block;padding:0.7rem 0.85rem;border-radius:8px;
+  font-size:0.9rem;color:var(--text);transition:background .15s ease,color .15s ease;
+}
+.dropdown a span{display:block;font-size:0.76rem;color:var(--muted-2);margin-top:0.15rem;font-weight:400}
+.dropdown a:hover{background:var(--teal-soft);color:var(--white)}
 
-  @media (max-width:1050px) { :root { --col-nav:180px; } }
-  @media (max-width:820px) { .page-shell { display:block; margin-top:var(--nav-h); } .page-navigator { display:none; } .filter-bar { padding:0 6vw; } footer { grid-template-columns:1fr; } .nav-links { display:none; } }
+.nav-cta{margin-left:0.4rem}
+.nav-cta .btn{padding:0.62rem 1.4rem;font-size:0.88rem}
 
+.nav-burger{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:0.4rem}
+.nav-burger svg{width:26px;height:26px}
 
-  /* ─── MOBILE NAV ─── */
-  .nav-hamburger {
-    display: none;
-    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-    width: 40px; height: 40px;
-    background: transparent; border: 1px solid var(--border2);
-    border-radius: 8px; cursor: pointer; padding: 0; flex-shrink: 0;
-  }
-  .nav-hamburger span {
-    display: block; width: 18px; height: 1.5px;
-    background: var(--text); border-radius: 2px;
-    transition: transform 0.25s ease, opacity 0.2s ease;
-  }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+/* mobile drawer */
+.drawer-scrim{position:fixed;inset:0;background:rgba(5,11,22,0.6);z-index:110;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+.drawer-scrim.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(86vw,360px);z-index:120;
+  background:var(--navy-2);border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding:1.4rem 1.4rem 2rem;overflow-y:auto;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.drawer-close{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.4rem}
+.drawer-close svg{width:24px;height:24px}
+.drawer-nav{list-style:none;display:flex;flex-direction:column;gap:0.15rem}
+.drawer-nav > li > a,.drawer-group-head > a{
+  display:block;padding:0.85rem 0.5rem;font-family:var(--f-wordmark);font-weight:600;
+  font-size:1.02rem;color:var(--text);border-bottom:1px solid var(--border-2);
+}
+.drawer-nav > li > a[aria-current="page"]{color:var(--teal)}
+.drawer-group-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-2)}
+.drawer-group-head > a{border-bottom:none;flex:1}
+.drawer-group-toggle{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.6rem}
+.drawer-group-toggle svg{width:16px;height:16px;transition:transform .2s ease}
+.drawer-group.open .drawer-group-toggle svg{transform:rotate(90deg)}
+.drawer-sub{list-style:none;max-height:0;overflow:hidden;transition:max-height .25s ease}
+.drawer-group.open .drawer-sub{max-height:240px}
+.drawer-sub a{display:block;padding:0.6rem 0.9rem;font-size:0.9rem;color:var(--muted)}
+.drawer-sub a:hover{color:var(--teal)}
+.drawer-ctas{margin-top:1.6rem;display:flex;flex-direction:column;gap:0.7rem}
+.drawer-ctas .btn{width:100%;justify-content:center}
 
-  .nav-drawer {
-    display: none; position: fixed;
-    top: 68px; left: 0; right: 0; bottom: 0;
-    background: rgba(11,22,40,0.98); backdrop-filter: blur(16px);
-    flex-direction: column;
-    padding: 1.5rem 6vw 2.5rem;
-    z-index: 99; overflow-y: auto;
-    border-top: 1px solid var(--border2);
-  }
-  .nav-drawer.open { display: flex; }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;padding-top:130px;padding-bottom:clamp(2.5rem,5vw,3.5rem);overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;z-index:0;opacity:0.5;
+  -webkit-mask-image:radial-gradient(120% 90% at 60% 0%,#000 0%,transparent 72%);
+  mask-image:radial-gradient(120% 90% at 60% 0%,#000 0%,transparent 72%);}
+.hero-grid-bg svg{width:100%;height:100%}
+.hero-glow{position:absolute;top:-14%;right:6%;width:46%;height:78%;z-index:0;
+  background:radial-gradient(circle,rgba(29,184,154,0.15),transparent 64%);filter:blur(20px)}
+.hero-copy{position:relative;z-index:2;max-width:820px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:var(--f-mono);font-size:0.74rem;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:1.6rem;
+  opacity:0;animation:up .7s .05s forwards;
+}
+.hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--teal)}
+.hero h1{
+  font-family:var(--f-mono);font-weight:500;
+  font-size:var(--h1);line-height:1.06;letter-spacing:-0.02em;color:var(--white);
+  opacity:0;animation:up .7s .15s forwards;
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero-sub{
+  font-size:clamp(1rem,1.25vw,1.16rem);color:var(--muted);max-width:66ch;
+  margin-top:1.5rem;line-height:1.7;opacity:0;animation:up .7s .3s forwards;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:2.1rem;opacity:0;animation:up .7s .45s forwards}
+.hero-ctas .btn{padding:0.8rem 1.5rem;white-space:nowrap;flex:0 1 auto}
 
-  /* Top-level list */
-  .drawer-links { list-style: none; flex: 1; }
-  .drawer-links > li > a {
-    display: block; font-size: 1.05rem; font-weight: 400;
-    color: var(--text); text-decoration: none;
-    padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
-    letter-spacing: 0.02em; transition: color 0.15s, padding-left 0.15s;
-  }
-  .drawer-links > li:first-child > a { border-top: 1px solid var(--border2); }
-  .drawer-links > li > a:hover { color: var(--white); padding-left: 0.4rem; }
-  .drawer-links > li > a.active { color: var(--teal); }
+/* ============================================================
+   SPEC / PROOF BAR
+   ============================================================ */
+.specbar{border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);background:var(--navy-2)}
+.specbar-inner{
+  margin:0 auto;padding:1.15rem var(--pad);
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0.9rem 2.2rem;
+  font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;
+}
+.specbar-inner span{display:inline-flex;align-items:center;gap:0.55rem}
+.specbar-inner b{color:var(--text);font-weight:500}
+.sb-dot{width:5px;height:5px;border-radius:1px;background:var(--gold)}
 
-  /* Expandable group */
-  .drawer-group { border-bottom: 1px solid var(--border2); }
-  .drawer-group-header {
-    display: flex; align-items: center;
-  }
-  .drawer-group-link {
-    flex: 1; font-size: 1.05rem; font-weight: 400;
-    color: var(--text); text-decoration: none;
-    padding: 0.9rem 0; letter-spacing: 0.02em;
-    transition: color 0.15s;
-  }
-  .drawer-group-link:hover { color: var(--white); }
-  .drawer-group-link.active { color: var(--teal); }
-  .drawer-group-toggle {
-    flex-shrink: 0; background: none; border: none;
-    padding: 0.9rem 0 0.9rem 1.2rem; cursor: pointer;
-    display: flex; align-items: center; color: var(--muted);
-    transition: color 0.15s;
-  }
-  .drawer-group-toggle:hover { color: var(--text); }
-  .drawer-group-arrow {
-    transition: transform 0.25s ease;
-  }
-  .drawer-group.open .drawer-group-arrow { transform: rotate(90deg); }
+/* ============================================================
+   RECORD BLOCKS  (o- namespace)
+   ============================================================ */
+.o-block{background:var(--navy)}
+.o-block.alt{background:var(--navy-2);border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2)}
+.o-block-head{max-width:820px;margin-bottom:2rem}
+.o-block-head .eyebrow{margin-bottom:1rem}
+.o-block-head h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,3vw,2.15rem);color:var(--white);line-height:1.12;letter-spacing:-0.01em}
+.o-block-note{font-size:0.9rem;color:var(--muted);line-height:1.65;margin-top:0.9rem;max-width:70ch}
 
-  /* Sub-links */
-  .drawer-sub { list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
-  .drawer-group.open .drawer-sub { max-height: 300px; }
-  .drawer-sub li a {
-    display: block; font-size: 0.9rem; color: var(--muted);
-    text-decoration: none; padding: 0.6rem 0 0.6rem 1.1rem;
-    border-bottom: 1px solid var(--border2);
-    transition: color 0.15s, padding-left 0.15s;
-  }
-  .drawer-sub li:last-child a { border-bottom: none; }
-  .drawer-sub li a:hover { color: var(--white); padding-left: 1.4rem; }
-  .drawer-sub li a.active { color: var(--teal); }
+/* Filter bar */
+.o-filter{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.o-fbtn{
+  font-family:var(--f-body);font-size:0.8rem;padding:0.4rem 0.95rem;border-radius:100px;
+  border:1px solid var(--border-2);color:var(--muted);background:transparent;cursor:pointer;
+  transition:border-color .2s ease,color .2s ease,background .2s ease;
+}
+.o-fbtn:hover{border-color:var(--border-strong);color:var(--text)}
+.o-fbtn.active{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
 
-  /* CTA buttons */
-  .drawer-ctas { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 2rem; }
-  .drawer-cta-primary {
-    display: block; text-align: center;
-    background: var(--teal); color: var(--navy);
-    padding: 0.85rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 500; text-decoration: none;
-  }
-  .drawer-cta-secondary {
-    display: block; text-align: center;
-    border: 1px solid var(--border); color: var(--text);
-    padding: 0.85rem; border-radius: 100px;
-    font-size: 0.95rem; font-weight: 400; text-decoration: none;
-  }
+/* Sub-label within a block */
+.o-sub{
+  font-family:var(--f-mono);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted-2);margin:1.8rem 0 0.7rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border-2);
+}
+.o-sub:first-of-type{margin-top:0}
 
-  /* Mobile section nav */
-  .mobile-section-nav {
-    display: none; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; padding: 0.75rem 6vw;
-    gap: 0.5rem; border-bottom: 1px solid var(--border2);
-    position: sticky; top: 68px; z-index: 90;
-    background: rgba(11,22,40,0.97); backdrop-filter: blur(12px);
-  }
-  .mobile-section-nav::-webkit-scrollbar { display: none; }
-  .mobile-section-nav a {
-    display: inline-block; white-space: nowrap; flex-shrink: 0;
-    font-size: 0.78rem; padding: 0.35rem 0.85rem;
-    border-radius: 100px; border: 1px solid var(--border2);
-    color: var(--muted); text-decoration: none;
-    transition: border-color 0.15s, color 0.15s;
-  }
-  .mobile-section-nav a:hover,
-  .mobile-section-nav a.active { border-color: var(--teal); color: var(--teal); }
+/* Publication / record row */
+.o-list{display:flex;flex-direction:column}
+.o-pub{
+  display:flex;gap:1.1rem;align-items:flex-start;
+  padding:1.1rem 0;border-bottom:1px solid var(--border-2);
+  transition:background .15s ease;
+}
+.o-pub:last-child{border-bottom:none}
+.o-pub:hover{background:var(--teal-soft);border-radius:10px;border-bottom-color:transparent;padding-left:1rem;padding-right:1rem;margin-left:-1rem;margin-right:-1rem}
+.o-num{font-family:var(--f-mono);font-size:0.72rem;color:var(--muted-2);min-width:30px;padding-top:2px;text-align:right;flex-shrink:0}
+.o-body{flex:1;min-width:0}
+.o-ptitle{font-size:0.92rem;font-weight:500;color:var(--white);line-height:1.45;margin-bottom:0.3rem}
+.o-ptitle a{color:inherit;transition:color .18s ease}
+.o-ptitle a:hover{color:var(--teal)}
+.o-authors{font-size:0.8rem;color:var(--muted);line-height:1.45;margin-bottom:0.28rem}
+.o-authors strong{color:var(--text);font-weight:600}
+.o-journal{font-family:var(--f-mono);font-size:0.72rem;color:var(--teal);letter-spacing:0.01em}
+.o-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.5rem}
+.o-tag{
+  font-size:0.66rem;padding:0.14rem 0.55rem;border-radius:100px;
+  border:1px solid var(--border-2);color:var(--muted);white-space:nowrap;
+}
+.o-tag.feat{border-color:rgba(29,184,154,0.4);color:var(--teal);background:var(--teal-soft)}
+.o-tag.prep{border-style:dashed;border-color:rgba(212,175,55,0.45);color:var(--gold)}
+.o-link{
+  flex-shrink:0;align-self:center;font-family:var(--f-mono);font-size:0.72rem;color:var(--muted);
+  text-decoration:none;padding:0.3rem 0.7rem;border:1px solid var(--border-2);border-radius:8px;
+  transition:border-color .2s ease,color .2s ease;
+}
+.o-link:hover{border-color:var(--teal);color:var(--teal)}
 
-  @media (max-width: 820px) {
-    .nav-hamburger { display: flex; }
-    .nav-links { display: none; }
-    .nav-ctas { display: none; }
-    .mobile-section-nav { display: flex; }
-    footer { grid-template-columns: 1fr; gap: 1.5rem; }
-    .footer-bottom { flex-direction: column; gap: 0.4rem; }
-    .footer-links { flex-wrap: wrap; gap: 1rem; }
-  }
-  @media (max-width: 480px) {
-    section { padding: 60px max(5vw, calc((100% - 1600px) / 2)); }
-  }
+/* ============================================================
+   BRIDGE + CTA  (shared)
+   ============================================================ */
+.cta-section{background:var(--navy-2)}
+.cta{text-align:center;background:linear-gradient(120deg,var(--navy-3),var(--panel-2));
+  border:1px solid var(--border);border-radius:20px;padding:clamp(2.4rem,5vw,3.4rem) var(--pad)}
+.cta h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,3vw,2.2rem);color:var(--white);line-height:1.15;letter-spacing:-0.01em}
+.cta p{color:var(--muted);margin-top:0.9rem;font-size:1.02rem;max-width:56ch;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.9rem}
+
+/* ============================================================
+   FOOTER  (shared)
+   ============================================================ */
+.footer{background:var(--navy-2);border-top:1px solid var(--border-2);padding:3.5rem 0 2.2rem}
+.footer-top{display:flex;gap:2.5rem;justify-content:space-between;flex-wrap:wrap}
+.footer-brand{max-width:300px}
+.footer-brand .brand{margin-bottom:0.9rem}
+.footer-tag{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap}
+.footer-col h5{font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.footer-col a{font-size:0.9rem;color:var(--muted);transition:color .15s ease}
+.footer-col a:hover{color:var(--teal)}
+.footer-bottom{
+  margin-top:2.8rem;padding-top:1.6rem;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:0.82rem;color:var(--muted-2);
+}
+.footer-bottom a{color:var(--muted);}
+.footer-bottom a:hover{color:var(--teal)}
+
+/* ============================================================
+   REVEAL + KEYFRAMES
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1000px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:inline-flex}
+}
+@media(max-width:640px){
+  :root{--sec:clamp(3.4rem,12vw,5rem)}
+  .nav-inner{height:64px}
+  .hero{padding-top:104px}
+  .footer-top{flex-direction:column;gap:2rem}
+  .footer-cols{gap:2.2rem}
+  .o-pub{gap:0.8rem}
+  .o-link{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+  .hero-eyebrow,.hero h1,.hero-sub,.hero-ctas{opacity:1!important;animation:none!important}
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">
-    <svg class="nav-logo-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#000" x="12" y="12" width="6" height="6"/>
-      <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#000" x="12" y="52" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#000" x="32" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
-      <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
-      <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#000" x="52" y="52" width="6" height="6"/>
-    </svg>
-    <span class="nav-logo-text">Logic Byte</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html#platform">Platform</a></li>
-    <li><a href="index.html#verticals">Solutions</a></li>
-    <li><a href="index.html#modules">Modules</a></li>
-    <li><a href="research.html" class="active">Research</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="nav-ctas">
-    <a class="nav-cta-soft" href="contact.html?intent=hello">Say Hello</a>
-    <a class="nav-cta" href="contact.html">Book a Demo</a>
-  </div>
+<!-- ========================= NAV ========================= -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Logic Byte home">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
 
-  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="platform.html">Platform</a></li>
+      <li class="has-menu">
+        <a class="nav-link" href="/#verticals">Solutions
+          <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="biomedical.html">Biomedical &amp; Life Sciences<span>Single-cell, screening, label-free assays</span></a>
+          <a href="semiconductor.html">Semiconductor &amp; Industrial Imaging<span>Inspection, defect detection, metrology</span></a>
+          <a href="custom.html">Custom Solutions<span>Bespoke pipelines for any domain</span></a>
+        </div>
+      </li>
+      <li><a class="nav-link" href="research.html" aria-current="page">Research</a></li>
+      <li><a class="nav-link" href="about.html">About</a></li>
+      <li><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta"><a class="btn btn-primary" href="contact.html">Book a Demo</a></div>
+
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
 </nav>
 
-<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <ul class="drawer-links">
-    <li><a href="index.html#platform">Platform</a></li>
-    <li class="drawer-group">
-      <div class="drawer-group-header">
-        <a href="index.html#verticals" class="drawer-group-link">Solutions</a>
-        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="false" aria-label="Expand Solutions"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+<!-- mobile drawer -->
+<div class="drawer-scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile menu">
+  <div class="drawer-top">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul class="drawer-nav">
+    <li><a href="platform.html">Platform</a></li>
+    <li class="drawer-group open">
+      <div class="drawer-group-head">
+        <a href="/#verticals">Solutions</a>
+        <button class="drawer-group-toggle" aria-label="Expand Solutions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
       <ul class="drawer-sub">
         <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
@@ -332,243 +440,311 @@
         <li><a href="custom.html">Custom Solutions</a></li>
       </ul>
     </li>
-    <li><a href="index.html#modules">Modules</a></li>
-    <li class="drawer-group open">
-      <div class="drawer-group-header">
-        <a href="research.html" class="drawer-group-link active">Research</a>
-        <button class="drawer-group-toggle" onclick="toggleGroup(this)" aria-expanded="true" aria-label="Expand Research"><svg class="drawer-group-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-      <ul class="drawer-sub">
-        <li><a href="research.html">Overview</a></li>
-        <li><a href="research-output.html" class="active">Full Output</a></li>
-      </ul>
-    </li>
+    <li><a href="research.html" aria-current="page">Research</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="drawer-ctas">
-    <a class="drawer-cta-primary" href="contact.html">Book a Demo</a>
-    <a class="drawer-cta-secondary" href="contact.html?intent=hello">Say Hello</a>
+    <a class="btn btn-primary" href="contact.html">Book a Demo</a>
+    <a class="btn btn-secondary" href="contact.html?intent=hello">Say hello</a>
   </div>
-</div>
+</aside>
 
-</div>
+<!-- ========================= HERO ========================= -->
+<header class="hero" id="top">
+  <div class="hero-grid-bg" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="grid" width="58" height="58" patternUnits="userSpaceOnUse">
+        <path d="M 58 0 L 0 0 0 58" fill="none" stroke="#1DB89A" stroke-width="0.5"/>
+      </pattern></defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+  <div class="hero-glow" aria-hidden="true"></div>
 
-<div class="page-shell">
-<main class="page-content">
-<div class="mobile-section-nav" aria-label="Jump to section">
-  <a href="#collaborations">Collaborations</a><a href="#conferences">Conferences</a><a href="#media-coverage">Media</a><a href="#peer-reviewed">Publications</a><a href="#book-chapter">Book Chapter</a>
-</div>
-
-
-  <!-- HERO -->
-  <div class="page-hero">
-      <div class="eyebrow reveal"><span class="eyebrow-line"></span><span>Research Output</span></div>
-    <h1 class="reveal">The full <em>research output.</em></h1>
-    <p class="hero-lead reveal">A complete, maintained record of Logic Byte's scientific breadth — peer-reviewed publications, collaborative projects, conference participation, and media coverage.</p>
-    <div class="hero-stats reveal">
-      <div><div class="hero-stat-num">20<span>+</span></div><div class="hero-stat-label">Journal articles</div></div>
-      <div><div class="hero-stat-num">1<span></span></div><div class="hero-stat-label">Book chapter</div></div>
-      <div><div class="hero-stat-num">6<span>+</span></div><div class="hero-stat-label">International conferences</div></div>
-      <div><div class="hero-stat-num">1,091<span>+</span></div><div class="hero-stat-label">Citations</div></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">The full record</div>
+      <h1>The complete<br/><em>research record.</em></h1>
+      <p class="hero-sub">Every peer-reviewed publication, collaboration, conference contribution and press mention behind Logic Byte — laid out in full, filterable by theme and linked to source. This is the record you can read, cite and verify.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="contact.html">Book a Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="research.html">Back to research overview</a>
+      </div>
     </div>
   </div>
+</header>
 
-  <!-- FILTER BAR -->
-
-
-  <!-- COLLABORATIONS -->
-  <div class="chapters-section reveal" id="collaborations" style="padding-top:2rem;">
-    <span class="section-label">Collaborations</span>
-    <h2>Collaborations</h2>
-
-    <p style="font-size:0.82rem;color:var(--muted);font-weight:300;margin-bottom:1.4rem;line-height:1.7;">Collaborative projects spanning commercial deployments and academic research partnerships. Industrial and semiconductor work is listed without institutional attribution where confidentiality agreements apply.</p>
-
-    <div style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border2);">Industry &amp; Commercial</div>
-    <div class="pub-card"><span class="pub-num">C1</span><div class="pub-body"><div class="pub-title">Reinforcement learning for iterative multi-parameter auto-tuning of imaging device</div><div class="pub-meta"><span class="pub-journal">2025</span></div><div class="pub-tags"><span class="pub-tag">Reinforcement Learning</span><span class="pub-tag">Autonomous Systems</span><span class="pub-tag">Industrial</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C2</span><div class="pub-body"><div class="pub-title">Framework for real-time low computational processing of livestreams</div><div class="pub-meta"><span class="pub-journal">2024</span></div><div class="pub-tags"><span class="pub-tag">Real-time Processing</span><span class="pub-tag">Embedded Systems</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C3</span><div class="pub-body"><div class="pub-title">Computer vision-based wafer inspection and defect detection</div><div class="pub-meta"><span class="pub-journal">2023</span></div><div class="pub-tags"><span class="pub-tag">Defect Detection</span><span class="pub-tag">Semiconductor</span><span class="pub-tag">NDT</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C4</span><div class="pub-body"><div class="pub-title">Generative AI for augmented imaging on a commercial optical instrument — ETH Zürich (commercial deployment)</div><div class="pub-meta"><span class="pub-journal">2022</span></div><div class="pub-tags"><span class="pub-tag">Vision Generative AI</span><span class="pub-tag">Commercial Deployment</span><span class="pub-tag">ETH Zürich</span></div></div></div>
-
-    <div style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin:1.4rem 0 0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border2);">Academic Research</div>
-    <div class="pub-card"><span class="pub-num">C5</span><div class="pub-body"><div class="pub-title">Mechano-genomic score as single-cell biomarkers for tumour progression</div><div class="pub-meta"><span class="pub-journal">2021</span></div><div class="pub-tags"><span class="pub-tag">AI & ML</span><span class="pub-tag">Biomarkers</span><span class="pub-tag">Cancer</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C6</span><div class="pub-body"><div class="pub-title">Machine learning-based pH imaging and detection of individual cancer cells</div><div class="pub-meta"><span class="pub-journal">2020</span></div><div class="pub-tags"><span class="pub-tag">AI & ML</span><span class="pub-tag">Cancer diagnostics</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C7</span><div class="pub-body"><div class="pub-title">Single-cell analysis of fibroblast behaviour in engineered 3D tumour microenvironments</div><div class="pub-meta"><span class="pub-journal">2019</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span><span class="pub-tag">Image analysis</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C8</span><div class="pub-body"><div class="pub-title">Localized mechanical stimulation of single cells with engineered spatio-temporal profile</div><div class="pub-meta"><span class="pub-journal">2018</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span><span class="pub-tag">Single-cell</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C9</span><div class="pub-body"><div class="pub-title">Nuclear reprogramming in absence of exogenous biochemical factors by lateral confinement</div><div class="pub-meta"><span class="pub-journal">2018</span></div><div class="pub-tags"><span class="pub-tag">Nuclear mechanics</span><span class="pub-tag">Mechanobiology</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">C10</span><div class="pub-body"><div class="pub-title">Chromatin condensation and shape-dependent transcriptional responses to cell compression</div><div class="pub-meta"><span class="pub-journal">2018</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span><span class="pub-tag">Chromatin organisation</span></div></div></div>
+<!-- ========================= PROOF BAR ========================= -->
+<div class="specbar">
+  <div class="specbar-inner">
+    <span>In production at <b>ETH&nbsp;Z&uuml;rich</b></span>
+    <span class="sb-dot"></span>
+    <span>Ongoing trials at <b>NTU</b></span>
+    <span class="sb-dot"></span>
+    <span><b>20+</b> peer-reviewed publications</span>
+    <span class="sb-dot"></span>
+    <span>Featured by <b>CNA</b> &amp; <b>The Straits Times</b></span>
   </div>
+</div>
 
-  <!-- CONFERENCE PARTICIPATION -->
-  <div class="chapters-section reveal" id="conferences" style="padding-top:2rem;">
-    <span class="section-label">Conference participation</span>
-    <h2>Conference participation</h2>
-    <div class="pub-card"><span class="pub-num">P1</span><div class="pub-body"><div class="pub-title">International Conference on Genomes and AI</div><div class="pub-meta"><span class="pub-journal">Singapore · October 2019</span></div><div class="pub-tags"><span class="pub-tag">Conference</span><span class="pub-tag">Singapore</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">P2</span><div class="pub-body"><div class="pub-title">MBI 10th Anniversary Conference</div><div class="pub-meta"><span class="pub-journal">Singapore · November 2018</span></div><div class="pub-tags"><span class="pub-tag">Conference</span><span class="pub-tag">Singapore</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">P3</span><div class="pub-body"><div class="pub-title">European Molecular Biology Organization (EMBO)</div><div class="pub-meta"><span class="pub-journal">Berlin, Germany · April 2018</span></div><div class="pub-tags"><span class="pub-tag">International</span><span class="pub-tag">EMBO</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">P4</span><div class="pub-body"><div class="pub-title">International Symposium on Mechanobiology (ISMB)</div><div class="pub-meta"><span class="pub-journal">Singapore · December 2017</span></div><div class="pub-tags"><span class="pub-tag">Conference</span><span class="pub-tag">Singapore</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">P5</span><div class="pub-body"><div class="pub-title">Biophysical Society (BPS)</div><div class="pub-meta"><span class="pub-journal">Singapore · September 2016</span></div><div class="pub-tags"><span class="pub-tag">Conference</span><span class="pub-tag">Singapore</span></div></div></div>
-    <div class="pub-card"><span class="pub-num">P6</span><div class="pub-body"><div class="pub-title">European Molecular Biology Organization (EMBO)</div><div class="pub-meta"><span class="pub-journal">Italy · October 2015</span></div><div class="pub-tags"><span class="pub-tag">International</span><span class="pub-tag">EMBO</span></div></div></div>
-  </div>
-
-  <!-- MAINSTREAM MEDIA -->
-  <div class="chapters-section reveal" id="media-coverage" style="padding-top:2rem;">
-    <span class="section-label">Mainstream media</span>
-    <h2>In the press</h2>
-    <div class="pub-card"><span class="pub-num">M1</span><div class="pub-body"><div class="pub-title"><a href="https://www.channelnewsasia.com/watch/becoming-human/unnatural-genius-1514711" target="_blank" rel="noopener">Becoming Human, Episode 2: Unnatural Genius</a></div><div class="pub-meta"><span class="pub-journal">Channel News Asia · Singapore · 2019</span></div><div class="pub-tags"><span class="pub-tag">Broadcast</span><span class="pub-tag">Documentary</span></div></div><a class="pub-link" href="https://www.channelnewsasia.com/watch/becoming-human/unnatural-genius-1514711" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M2</span><div class="pub-body"><div class="pub-title"><a href="https://www.straitstimes.com/singapore/researchers-use-ai-to-identify-the-ph-of-cancer-cells" target="_blank" rel="noopener">Researchers use AI to identify the pH of cancer cells</a></div><div class="pub-meta"><span class="pub-journal">The Straits Times · Singapore · 2021</span></div><div class="pub-tags"><span class="pub-tag">Print / Digital</span></div></div><a class="pub-link" href="https://www.straitstimes.com/singapore/researchers-use-ai-to-identify-the-ph-of-cancer-cells" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M3</span><div class="pub-body"><div class="pub-title"><a href="https://news.nus.edu.sg/nus-researchers-harness-ai-to-identify-cancer-cells-by-their-acidity/" target="_blank" rel="noopener">NUS researchers harness AI to identify cancer cells by their acidity</a></div><div class="pub-meta"><span class="pub-journal">NUS News · Singapore · 2021</span></div><div class="pub-tags"><span class="pub-tag">Institutional</span></div></div><a class="pub-link" href="https://news.nus.edu.sg/nus-researchers-harness-ai-to-identify-cancer-cells-by-their-acidity/" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M4</span><div class="pub-body"><div class="pub-title"><a href="https://www.newswise.com/articles/machine-learning-can-identify-cancerous-cells-by-their-acidity" target="_blank" rel="noopener">Machine learning can identify cancerous cells by their acidity</a></div><div class="pub-meta"><span class="pub-journal">Newswise · USA · 2021</span></div><div class="pub-tags"><span class="pub-tag">Wire / International</span></div></div><a class="pub-link" href="https://www.newswise.com/articles/machine-learning-can-identify-cancerous-cells-by-their-acidity" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M5</span><div class="pub-body"><div class="pub-title"><a href="https://news.cgtn.com/news/2021-04-13/Singapore-researchers-using-AI-to-identify-cancer-cells-by-acidity--ZqRmTp4ZuU/index.html" target="_blank" rel="noopener">Singapore researchers using AI to identify cancer cells by acidity</a></div><div class="pub-meta"><span class="pub-journal">CGTN · China / International · 2021</span></div><div class="pub-tags"><span class="pub-tag">Broadcast / Digital</span></div></div><a class="pub-link" href="https://news.cgtn.com/news/2021-04-13/Singapore-researchers-using-AI-to-identify-cancer-cells-by-acidity--ZqRmTp4ZuU/index.html" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M6</span><div class="pub-body"><div class="pub-title"><a href="https://www.youtube.com/watch?v=QzctAUSFriU" target="_blank" rel="noopener">Diagnosing breast cancer in 35 minutes instead of days</a></div><div class="pub-meta"><span class="pub-journal">LabelFlow · AI Stories · France · 2022</span></div><div class="pub-tags"><span class="pub-tag">Digital · AI Media</span></div></div><a class="pub-link" href="https://www.youtube.com/watch?v=QzctAUSFriU" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M7</span><div class="pub-body"><div class="pub-title"><a href="https://www.lexpress.mu/node/392065" target="_blank" rel="noopener">Winning against cancer is one of the holy grails of medical research</a></div><div class="pub-meta"><span class="pub-journal">L'express · Mauritius · 2021</span></div><div class="pub-tags"><span class="pub-tag">Print / Digital</span></div></div><a class="pub-link" href="https://www.lexpress.mu/node/392065" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M8</span><div class="pub-body"><div class="pub-title"><a href="https://www.tnemag.mu/issues/issue6/index.html" target="_blank" rel="noopener">Synergy between innovation and sustainability</a></div><div class="pub-meta"><span class="pub-journal">The Training and Employment Magazine · Mauritius · 2022</span></div><div class="pub-tags"><span class="pub-tag">Print / Digital</span></div></div><a class="pub-link" href="https://www.tnemag.mu/issues/issue6/index.html" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M9</span><div class="pub-body"><div class="pub-title"><a href="https://www.zaobao.com.sg/news/singapore/story20210317-1131835" target="_blank" rel="noopener">NUS develops new technology: pH to distinguish cancer cells with artificial intelligence</a></div><div class="pub-meta"><span class="pub-journal">Zaobao · China · 2021</span></div><div class="pub-tags"><span class="pub-tag">Print / Digital</span></div></div><a class="pub-link" href="https://www.zaobao.com.sg/news/singapore/story20210317-1131835" target="_blank" rel="noopener">↗ Link</a></div>
-    <div class="pub-card"><span class="pub-num">M10</span><div class="pub-body"><div class="pub-title"><a href="https://www.topfm.mu/2021/04/09/detection-rapide-du-cancer-en-utilisant-lintelligence-artificielle-un-mauricien-a-lhonneur-doorgesh-sharma-jokhun-fait-partie-dune-equipe-de-chercheurs-a-avoir-travail/" target="_blank" rel="noopener">Détection rapide du cancer en utilisant l'intelligence artificielle</a></div><div class="pub-meta"><span class="pub-journal">TopFM · Mauritius · 2021</span></div><div class="pub-tags"><span class="pub-tag">Radio / Digital</span></div></div><a class="pub-link" href="https://www.topfm.mu/2021/04/09/detection-rapide-du-cancer-en-utilisant-lintelligence-artificielle-un-mauricien-a-lhonneur-doorgesh-sharma-jokhun-fait-partie-dune-equipe-de-chercheurs-a-avoir-travail/" target="_blank" rel="noopener">↗ Link</a></div>
-  </div>
-
-  <!-- PEER-REVIEWED PUBLICATIONS (all journals) -->
-  <div class="chapters-section reveal" id="peer-reviewed" style="padding-top:2rem;">
-    <span class="section-label">Peer-reviewed publications</span>
-    <h2>Peer-reviewed publications</h2>
-
-  <div class="filter-bar" style="padding:0 0 1.2rem;">
-    <button class="filter-btn active" onclick="filterPubs('all', this)">All</button>
-    <button class="filter-btn" onclick="filterPubs('ai-ml', this)">AI & Machine Learning</button>
-    <button class="filter-btn" onclick="filterPubs('nuclear', this)">Nuclear Mechanics</button>
-    <button class="filter-btn" onclick="filterPubs('mechano', this)">Cell Mechanics</button>
-    <button class="filter-btn" onclick="filterPubs('staining', this)">Label-free Imaging</button>
-    <button class="filter-btn" onclick="filterPubs('inprep', this)">In preparation</button>
-  </div>
-      <div class="pub-card" data-tags="staining inprep"><span class="pub-num">—</span><div class="pub-body"><div class="pub-title">Augmented reality microscopy: label-free pseudo-DAPI nuclear staining from DIC images using deep neural networks</div><div class="pub-authors"><strong>D.S. Jokhun</strong> et al. — Logic Byte / NUS</div><div class="pub-tags"><span class="pub-tag inprep">Manuscript in preparation</span><span class="pub-tag">Label-free imaging</span><span class="pub-tag">In-silico staining</span></div></div></div>
-    <div class="pub-card" data-tags="mechano"><span class="pub-num">1</span><div class="pub-body"><div class="pub-title"><a href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202301963" target="_blank" rel="noopener">Deleterious mechanical deformation selects mechanoresilient cancer cells with enhanced proliferation and chemoresistance</a></div><div class="pub-authors">K. Jiang, S.B. Lim, J. Xiao, <strong>D.S. Jokhun</strong> et al.</div><div class="pub-meta"><span class="pub-journal">Advanced Science, 2023</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span><span class="pub-tag">Cancer biology</span></div></div><a class="pub-link" href="https://onlinelibrary.wiley.com/doi/10.1002/advs.202301963" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="ai-ml"><span class="pub-num">2</span><div class="pub-body"><div class="pub-title"><a href="https://pubs.aip.org/aip/adv/article/13/1/015228/2870285" target="_blank" rel="noopener">Deep convolutional neural network accurately classifies different types of bladder cancer cells based on their pH fingerprints and morphology</a></div><div class="pub-authors">Y. Belotti, <strong>D.S. Jokhun</strong>, V.L.M. Valerio, T.W. Chong, C.T. Lim</div><div class="pub-meta"><span class="pub-journal">AIP Advances, 2023</span></div><div class="pub-tags"><span class="pub-tag featured">Featured</span><span class="pub-tag">AI & ML</span><span class="pub-tag">Cancer diagnostics</span></div></div><a class="pub-link" href="https://pubs.aip.org/aip/adv/article/13/1/015228/2870285" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="ai-ml"><span class="pub-num">3</span><div class="pub-body"><div class="pub-title"><a href="https://pubs.aip.org/aip/apb/article/5/1/016002/237551" target="_blank" rel="noopener">Machine learning based approach to pH imaging and classification of single cancer cells</a></div><div class="pub-authors"><strong>D.S. Jokhun</strong>, Y. Belotti, C.T. Lim</div><div class="pub-meta"><span class="pub-journal">APL Bioengineering, 2021</span></div><div class="pub-tags"><span class="pub-tag featured">Featured</span><span class="pub-tag">AI & ML</span><span class="pub-tag">Single-cell classification</span></div></div><a class="pub-link" href="https://pubs.aip.org/aip/apb/article/5/1/016002/237551" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="ai-ml"><span class="pub-num">4</span><div class="pub-body"><div class="pub-title"><a href="https://www.nature.com/articles/s42003-021-02857-8" target="_blank" rel="noopener">Single cell imaging-based chromatin biomarkers for tumor progression</a></div><div class="pub-authors">S. Venkatachalapathy, <strong>D.S. Jokhun</strong>, M. Andhari, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">Communications Biology, 2021</span></div><div class="pub-tags"><span class="pub-tag">AI & ML</span><span class="pub-tag">Chromatin biomarkers</span></div></div><a class="pub-link" href="https://www.nature.com/articles/s42003-021-02857-8" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="ai-ml"><span class="pub-num">5</span><div class="pub-body"><div class="pub-title"><a href="https://www.sciencedirect.com/science/article/pii/S0021929021000026" target="_blank" rel="noopener">Microfluidic detection of human diseases: From liquid biopsy to COVID-19 diagnosis</a></div><div class="pub-authors">K. Jiang, <strong>D.S. Jokhun</strong>, C.T. Lim</div><div class="pub-meta"><span class="pub-journal">Journal of Biomechanics, 2021</span></div><div class="pub-tags"><span class="pub-tag">AI & ML</span><span class="pub-tag">Microfluidics</span></div></div><a class="pub-link" href="https://www.sciencedirect.com/science/article/pii/S0021929021000026" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="mechano"><span class="pub-num">6</span><div class="pub-body"><div class="pub-title"><a href="https://www.molbiolcell.org/doi/10.1091/mbc.E19-08-0420" target="_blank" rel="noopener">Multivariate analysis reveals activation-primed fibroblast geometric states in engineered 3D tumor microenvironments</a></div><div class="pub-authors">S. Venkatachalapathy, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">Molecular Biology of the Cell, 2020</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span></div></div><a class="pub-link" href="https://www.molbiolcell.org/doi/10.1091/mbc.E19-08-0420" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="nuclear"><span class="pub-num">7</span><div class="pub-body"><div class="pub-title"><a href="https://www.pnas.org/doi/10.1073/pnas.1902035116" target="_blank" rel="noopener">Regulation of nuclear architecture, mechanics, and nucleocytoplasmic shuttling of epigenetic factors by cell geometric constraints</a></div><div class="pub-authors"><strong>D.S. Jokhun</strong>, F. Alisafaei, G.V. Shivashankar, V.B. Shenoy</div><div class="pub-meta"><span class="pub-journal">PNAS, 2019</span></div><div class="pub-tags"><span class="pub-tag">Nuclear mechanics</span></div></div><a class="pub-link" href="https://www.pnas.org/doi/10.1073/pnas.1902035116" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="ai-ml"><span class="pub-num">8</span><div class="pub-body"><div class="pub-title"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218757" target="_blank" rel="noopener">Nuclear morphometrics and chromatin condensation patterns as disease biomarkers using a mobile microscope</a></div><div class="pub-authors">K. Damodaran, M. Crestani, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">PLoS ONE, 2019</span></div><div class="pub-tags"><span class="pub-tag">AI & ML</span><span class="pub-tag">Disease biomarkers</span></div></div><a class="pub-link" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218757" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="mechano"><span class="pub-num">9</span><div class="pub-body"><div class="pub-title"><a href="https://www.pnas.org/doi/10.1073/pnas.1714770115" target="_blank" rel="noopener">Laterally confined growth of cells induces nuclear reprogramming in the absence of exogenous biochemical factors</a></div><div class="pub-authors"><strong>D.S. Jokhun</strong>, B. Roy, S. Venkatachalapathy et al.</div><div class="pub-meta"><span class="pub-journal">PNAS, 2018</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span></div></div><a class="pub-link" href="https://www.pnas.org/doi/10.1073/pnas.1714770115" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="mechano"><span class="pub-num">10</span><div class="pub-body"><div class="pub-title"><a href="https://www.molbiolcell.org/doi/10.1091/mbc.E18-04-0256" target="_blank" rel="noopener">Compressive force induces reversible chromatin condensation and cell geometry–dependent transcriptional response</a></div><div class="pub-authors">K. Damodaran, S. Venkatachalapathy, F. Alisafaei, <strong>D.S. Jokhun</strong> et al.</div><div class="pub-meta"><span class="pub-journal">Molecular Biology of the Cell, 2018</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span></div></div><a class="pub-link" href="https://www.molbiolcell.org/doi/10.1091/mbc.E18-04-0256" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="mechano"><span class="pub-num">11</span><div class="pub-body"><div class="pub-title"><a href="https://www.cell.com/biophysj/fulltext/S0006-3495(18)30978-2" target="_blank" rel="noopener">Actin dynamics couples extracellular signals to the mobility and molecular stability of telomeres</a></div><div class="pub-authors"><strong>D.S. Jokhun</strong>, Y. Shang, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">Biophysical Journal, 2018</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span></div></div><a class="pub-link" href="https://www.cell.com/biophysj/fulltext/S0006-3495(18)30978-2" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="mechano"><span class="pub-num">12</span><div class="pub-body"><div class="pub-title"><a href="https://pubs.rsc.org/en/content/articlelanding/2018/lc/c8lc00393a" target="_blank" rel="noopener">Localized mechanical stimulation of single cells with engineered spatio-temporal profile</a></div><div class="pub-authors">M. Monticelli, <strong>D.S. Jokhun</strong>, D. Petti, G.V. Shivashankar, R. Bertacco</div><div class="pub-meta"><span class="pub-journal">Lab on a Chip, 2018</span></div><div class="pub-tags"><span class="pub-tag">Cell mechanics</span></div></div><a class="pub-link" href="https://pubs.rsc.org/en/content/articlelanding/2018/lc/c8lc00393a" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="nuclear"><span class="pub-num">13</span><div class="pub-body"><div class="pub-title"><a href="https://www.pnas.org/doi/10.1073/pnas.1618007114" target="_blank" rel="noopener">Cell geometry dictates TNFα-induced genome response</a></div><div class="pub-authors"><strong>D.S. Jokhun</strong>, A. Mitra, S. Venkatachalapathy, P. Ratna, Y. Wang, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">PNAS, 2017</span></div><div class="pub-tags"><span class="pub-tag">Nuclear mechanics</span></div></div><a class="pub-link" href="https://www.pnas.org/doi/10.1073/pnas.1618007114" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="nuclear"><span class="pub-num">14</span><div class="pub-body"><div class="pub-title"><a href="https://www.cell.com/biophysj/fulltext/S0006-3495(17)30348-4" target="_blank" rel="noopener">Nuclear positioning and its translational dynamics are regulated by cell geometry</a></div><div class="pub-authors">A.V. Radhakrishnan, <strong>D.S. Jokhun</strong>, S. Venkatachalapathy, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">Biophysical Journal, 2017</span></div><div class="pub-tags"><span class="pub-tag">Nuclear mechanics</span></div></div><a class="pub-link" href="https://www.cell.com/biophysj/fulltext/S0006-3495(17)30348-4" target="_blank" rel="noopener">↗ DOI</a></div>
-    <div class="pub-card" data-tags="nuclear"><span class="pub-num">15</span><div class="pub-body"><div class="pub-title"><a href="https://www.pnas.org/doi/10.1073/pnas.1513189113" target="_blank" rel="noopener">Nuclear deformability and telomere dynamics are regulated by cell geometric constraints</a></div><div class="pub-authors">E. Makhija, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">PNAS, 2016</span></div><div class="pub-tags"><span class="pub-tag">Nuclear mechanics</span></div></div><a class="pub-link" href="https://www.pnas.org/doi/10.1073/pnas.1513189113" target="_blank" rel="noopener">↗ DOI</a></div>
-  </div>
-
-  <!-- BOOK CHAPTER -->
-  <div class="chapters-section reveal" id="book-chapter" style="padding-top:2rem; padding-bottom:90px;">
-    <span class="section-label">Book chapter</span>
-    <h2>Book chapter</h2>
-    <div class="pub-card" data-tags="nuclear"><span class="pub-num">B1</span><div class="pub-body"><div class="pub-title"><a href="https://www.elsevier.com/books/mechanobiology-in-health-and-disease/verbruggen/978-0-12-812952-4" target="_blank" rel="noopener">Cell geometric control of nuclear dynamics and its implications</a></div><div class="pub-authors">A. Kumar, E. Makhija, A.V. Radhakrishnan, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="pub-meta"><span class="pub-journal">Mechanobiology in Health and Disease, Elsevier, 2018 · pp. 55–76</span></div><div class="pub-tags"><span class="pub-tag">Nuclear mechanics</span><span class="pub-tag">Book chapter</span></div></div><a class="pub-link" href="https://www.elsevier.com/books/mechanobiology-in-health-and-disease/verbruggen/978-0-12-812952-4" target="_blank" rel="noopener">↗ DOI</a></div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <a class="footer-logo" href="index.html">
-        <svg width="20" height="20" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#000" x="12" y="12" width="6" height="6"/>
-          <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
-          <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#000" x="12" y="52" width="6" height="6"/>
-          <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
-          <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#000" x="32" y="32" width="6" height="6"/>
-          <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
-          <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
-          <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#000" x="52" y="52" width="6" height="6"/>
-        </svg>
-        <span class="footer-logo-text">Logic Byte</span>
-      </a>
-      <div class="footer-tagline">AI-Powered Image Analytics · logicbyte.ai</div>
+<!-- ========================= PEER-REVIEWED PUBLICATIONS ========================= -->
+<section class="o-block section" id="peer-reviewed">
+  <div class="wrap">
+    <div class="o-block-head reveal">
+      <div class="eyebrow">Peer-reviewed publications</div>
+      <h2>Published &amp; cited</h2>
+      <p class="o-block-note">Twenty-plus peer-reviewed papers in AI-driven imaging, image-based diagnostics and quantitative cell imaging, cited more than 1,200 times. Filter by theme.</p>
     </div>
-    <ul class="footer-links">
-      <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
-      <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
-      <li><a href="custom.html">Custom Solutions</a></li>
-      </ul>
+
+    <div class="o-filter reveal">
+      <button class="o-fbtn active" onclick="filterPubs('all', this)">All</button>
+      <button class="o-fbtn" onclick="filterPubs('ai-ml', this)">AI &amp; machine learning</button>
+      <button class="o-fbtn" onclick="filterPubs('nuclear', this)">Nuclear mechanics</button>
+      <button class="o-fbtn" onclick="filterPubs('mechano', this)">Cell mechanics</button>
+      <button class="o-fbtn" onclick="filterPubs('staining', this)">Label-free imaging</button>
+      <button class="o-fbtn" onclick="filterPubs('inprep', this)">In preparation</button>
+    </div>
+
+    <div class="o-list" id="pub-list">
+
+      <div class="o-pub" data-tags="staining inprep"><span class="o-num">—</span><div class="o-body"><div class="o-ptitle">Augmented reality microscopy: label-free pseudo-DAPI nuclear staining from DIC images using deep neural networks</div><div class="o-authors"><strong>D.S. Jokhun</strong> et al. — Logic Byte / NUS</div><div class="o-tags"><span class="o-tag prep">Manuscript in preparation</span><span class="o-tag">Label-free imaging</span><span class="o-tag">Virtual staining</span></div></div></div>
+
+      <div class="o-pub" data-tags="mechano"><span class="o-num">1</span><div class="o-body"><div class="o-ptitle"><a href="https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/advs.202201663" target="_blank" rel="noopener">Deleterious mechanical deformation selects mechanoresilient cancer cells with enhanced proliferation and chemoresistance</a></div><div class="o-authors">K. Jiang, S.B. Lim, J. Xiao, <strong>D.S. Jokhun</strong> et al.</div><div class="o-journal">Advanced Science · 2023</div><div class="o-tags"><span class="o-tag">Cell mechanics</span><span class="o-tag">Cancer biology</span></div></div><a class="o-link" href="https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/advs.202201663" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="ai-ml"><span class="o-num">2</span><div class="o-body"><div class="o-ptitle"><a href="https://pubs.aip.org/aip/adv/article/13/1/015228/2870285" target="_blank" rel="noopener">Deep convolutional neural network accurately classifies different types of bladder cancer cells based on their pH fingerprints and morphology</a></div><div class="o-authors">Y. Belotti, <strong>D.S. Jokhun</strong>, V.L.M. Valerio, T.W. Chong, C.T. Lim</div><div class="o-journal">AIP Advances · 2023</div><div class="o-tags"><span class="o-tag feat">Featured</span><span class="o-tag">AI &amp; ML</span><span class="o-tag">Cancer diagnostics</span></div></div><a class="o-link" href="https://pubs.aip.org/aip/adv/article/13/1/015228/2870285" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="ai-ml"><span class="o-num">3</span><div class="o-body"><div class="o-ptitle"><a href="https://pubs.aip.org/aip/apb/article/5/1/016002/237551" target="_blank" rel="noopener">Machine learning based approach to pH imaging and classification of single cancer cells</a></div><div class="o-authors"><strong>D.S. Jokhun</strong>, Y. Belotti, C.T. Lim</div><div class="o-journal">APL Bioengineering · 2021</div><div class="o-tags"><span class="o-tag feat">Featured</span><span class="o-tag">AI &amp; ML</span><span class="o-tag">Single-cell classification</span></div></div><a class="o-link" href="https://pubs.aip.org/aip/apb/article/5/1/016002/237551" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="ai-ml"><span class="o-num">4</span><div class="o-body"><div class="o-ptitle"><a href="https://www.nature.com/articles/s41598-021-02441-6" target="_blank" rel="noopener">Single cell imaging-based chromatin biomarkers for tumor progression</a></div><div class="o-authors">S. Venkatachalapathy, <strong>D.S. Jokhun</strong>, M. Andhari, G.V. Shivashankar</div><div class="o-journal">Scientific Reports · 2021</div><div class="o-tags"><span class="o-tag">AI &amp; ML</span><span class="o-tag">Chromatin biomarkers</span></div></div><a class="o-link" href="https://www.nature.com/articles/s41598-021-02441-6" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="ai-ml"><span class="o-num">5</span><div class="o-body"><div class="o-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S0021929021000026" target="_blank" rel="noopener">Microfluidic detection of human diseases: from liquid biopsy to COVID-19 diagnosis</a></div><div class="o-authors">K. Jiang, <strong>D.S. Jokhun</strong>, C.T. Lim</div><div class="o-journal">Journal of Biomechanics · 2021</div><div class="o-tags"><span class="o-tag">AI &amp; ML</span><span class="o-tag">Microfluidics</span></div></div><a class="o-link" href="https://www.sciencedirect.com/science/article/pii/S0021929021000026" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="mechano"><span class="o-num">6</span><div class="o-body"><div class="o-ptitle"><a href="https://www.molbiolcell.org/doi/10.1091/mbc.E19-08-0420" target="_blank" rel="noopener">Multivariate analysis reveals activation-primed fibroblast geometric states in engineered 3D tumor microenvironments</a></div><div class="o-authors">S. Venkatachalapathy, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="o-journal">Molecular Biology of the Cell · 2020</div><div class="o-tags"><span class="o-tag">Cell mechanics</span></div></div><a class="o-link" href="https://www.molbiolcell.org/doi/10.1091/mbc.E19-08-0420" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="nuclear"><span class="o-num">7</span><div class="o-body"><div class="o-ptitle"><a href="https://www.pnas.org/doi/10.1073/pnas.1902035116" target="_blank" rel="noopener">Regulation of nuclear architecture, mechanics, and nucleocytoplasmic shuttling of epigenetic factors by cell geometric constraints</a></div><div class="o-authors"><strong>D.S. Jokhun</strong>, F. Alisafaei, G.V. Shivashankar, V.B. Shenoy</div><div class="o-journal">PNAS · 2019</div><div class="o-tags"><span class="o-tag">Nuclear mechanics</span></div></div><a class="o-link" href="https://www.pnas.org/doi/10.1073/pnas.1902035116" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="ai-ml"><span class="o-num">8</span><div class="o-body"><div class="o-ptitle"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218757" target="_blank" rel="noopener">Nuclear morphometrics and chromatin condensation patterns as disease biomarkers using a mobile microscope</a></div><div class="o-authors">K. Damodaran, M. Crestani, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="o-journal">PLoS ONE · 2019</div><div class="o-tags"><span class="o-tag">AI &amp; ML</span><span class="o-tag">Disease biomarkers</span></div></div><a class="o-link" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218757" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="mechano"><span class="o-num">9</span><div class="o-body"><div class="o-ptitle"><a href="https://www.pnas.org/doi/10.1073/pnas.1714770115" target="_blank" rel="noopener">Laterally confined growth of cells induces nuclear reprogramming in the absence of exogenous biochemical factors</a></div><div class="o-authors"><strong>D.S. Jokhun</strong>, B. Roy, S. Venkatachalapathy et al.</div><div class="o-journal">PNAS · 2018</div><div class="o-tags"><span class="o-tag">Cell mechanics</span></div></div><a class="o-link" href="https://www.pnas.org/doi/10.1073/pnas.1714770115" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="mechano"><span class="o-num">10</span><div class="o-body"><div class="o-ptitle"><a href="https://www.molbiolcell.org/doi/10.1091/mbc.E18-04-0256" target="_blank" rel="noopener">Compressive force induces reversible chromatin condensation and cell geometry–dependent transcriptional response</a></div><div class="o-authors">K. Damodaran, S. Venkatachalapathy, F. Alisafaei, <strong>D.S. Jokhun</strong> et al.</div><div class="o-journal">Molecular Biology of the Cell · 2018</div><div class="o-tags"><span class="o-tag">Cell mechanics</span></div></div><a class="o-link" href="https://www.molbiolcell.org/doi/10.1091/mbc.E18-04-0256" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="mechano"><span class="o-num">11</span><div class="o-body"><div class="o-ptitle"><a href="https://www.cell.com/biophysj/fulltext/S0006-3495(18)30983-4" target="_blank" rel="noopener">Actin dynamics couples extracellular signals to the mobility and molecular stability of telomeres</a></div><div class="o-authors"><strong>D.S. Jokhun</strong>, Y. Shang, G.V. Shivashankar</div><div class="o-journal">Biophysical Journal · 2018</div><div class="o-tags"><span class="o-tag">Cell mechanics</span></div></div><a class="o-link" href="https://www.cell.com/biophysj/fulltext/S0006-3495(18)30983-4" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="mechano"><span class="o-num">12</span><div class="o-body"><div class="o-ptitle"><a href="https://pubs.rsc.org/en/content/articlelanding/2018/lc/c8lc00393a" target="_blank" rel="noopener">Localized mechanical stimulation of single cells with engineered spatio-temporal profile</a></div><div class="o-authors">M. Monticelli, <strong>D.S. Jokhun</strong>, D. Petti, G.V. Shivashankar, R. Bertacco</div><div class="o-journal">Lab on a Chip · 2018</div><div class="o-tags"><span class="o-tag">Cell mechanics</span></div></div><a class="o-link" href="https://pubs.rsc.org/en/content/articlelanding/2018/lc/c8lc00393a" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="nuclear"><span class="o-num">13</span><div class="o-body"><div class="o-ptitle"><a href="https://www.pnas.org/doi/10.1073/pnas.1618007114" target="_blank" rel="noopener">Cell geometry dictates TNFα-induced genome response</a></div><div class="o-authors"><strong>D.S. Jokhun</strong>, A. Mitra, S. Venkatachalapathy, P. Ratna, Y. Wang, G.V. Shivashankar</div><div class="o-journal">PNAS · 2017</div><div class="o-tags"><span class="o-tag">Nuclear mechanics</span></div></div><a class="o-link" href="https://www.pnas.org/doi/10.1073/pnas.1618007114" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="nuclear"><span class="o-num">14</span><div class="o-body"><div class="o-ptitle"><a href="https://www.cell.com/biophysj/fulltext/S0006-3495(17)30344-2" target="_blank" rel="noopener">Nuclear positioning and its translational dynamics are regulated by cell geometry</a></div><div class="o-authors">A.V. Radhakrishnan, <strong>D.S. Jokhun</strong>, S. Venkatachalapathy, G.V. Shivashankar</div><div class="o-journal">Biophysical Journal · 2017</div><div class="o-tags"><span class="o-tag">Nuclear mechanics</span></div></div><a class="o-link" href="https://www.cell.com/biophysj/fulltext/S0006-3495(17)30344-2" target="_blank" rel="noopener">DOI ↗</a></div>
+
+      <div class="o-pub" data-tags="nuclear"><span class="o-num">15</span><div class="o-body"><div class="o-ptitle"><a href="https://www.pnas.org/doi/10.1073/pnas.1513189113" target="_blank" rel="noopener">Nuclear deformability and telomere dynamics are regulated by cell geometric constraints</a></div><div class="o-authors">E. Makhija, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="o-journal">PNAS · 2016</div><div class="o-tags"><span class="o-tag">Nuclear mechanics</span></div></div><a class="o-link" href="https://www.pnas.org/doi/10.1073/pnas.1513189113" target="_blank" rel="noopener">DOI ↗</a></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================= COLLABORATIONS ========================= -->
+<section class="o-block alt section" id="collaborations">
+  <div class="wrap">
+    <div class="o-block-head reveal">
+      <div class="eyebrow">Collaborations</div>
+      <h2>Projects &amp; partnerships</h2>
+      <p class="o-block-note">Collaborative work spanning commercial deployments and academic research partnerships. Industrial and semiconductor projects are listed without institutional attribution where confidentiality agreements apply.</p>
+    </div>
+
+    <div class="o-list reveal">
+      <div class="o-sub">Industry &amp; commercial</div>
+      <div class="o-pub"><span class="o-num">C1</span><div class="o-body"><div class="o-ptitle">Reinforcement learning for iterative multi-parameter auto-tuning of an imaging device</div><div class="o-journal">2025</div><div class="o-tags"><span class="o-tag">Reinforcement learning</span><span class="o-tag">Autonomous systems</span><span class="o-tag">Industrial</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C2</span><div class="o-body"><div class="o-ptitle">Framework for real-time, low-compute processing of live image streams</div><div class="o-journal">2024</div><div class="o-tags"><span class="o-tag">Real-time processing</span><span class="o-tag">Embedded systems</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C3</span><div class="o-body"><div class="o-ptitle">Computer-vision-based wafer inspection and defect detection</div><div class="o-journal">2023</div><div class="o-tags"><span class="o-tag">Defect detection</span><span class="o-tag">Semiconductor</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C4</span><div class="o-body"><div class="o-ptitle">Generative AI for augmented imaging on a commercial optical instrument — ETH&nbsp;Zürich (commercial deployment)</div><div class="o-journal">2022</div><div class="o-tags"><span class="o-tag">Vision generative AI</span><span class="o-tag">Commercial deployment</span><span class="o-tag">ETH Zürich</span></div></div></div>
+
+      <div class="o-sub">Academic research</div>
+      <div class="o-pub"><span class="o-num">C5</span><div class="o-body"><div class="o-ptitle">Mechano-genomic score as single-cell biomarkers for tumour progression</div><div class="o-journal">2021</div><div class="o-tags"><span class="o-tag">AI &amp; ML</span><span class="o-tag">Biomarkers</span><span class="o-tag">Cancer</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C6</span><div class="o-body"><div class="o-ptitle">Machine-learning-based pH imaging and detection of individual cancer cells</div><div class="o-journal">2020</div><div class="o-tags"><span class="o-tag">AI &amp; ML</span><span class="o-tag">Cancer diagnostics</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C7</span><div class="o-body"><div class="o-ptitle">Single-cell analysis of fibroblast behaviour in engineered 3D tumour microenvironments</div><div class="o-journal">2019</div><div class="o-tags"><span class="o-tag">Cell mechanics</span><span class="o-tag">Image analysis</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C8</span><div class="o-body"><div class="o-ptitle">Localized mechanical stimulation of single cells with engineered spatio-temporal profile</div><div class="o-journal">2018</div><div class="o-tags"><span class="o-tag">Cell mechanics</span><span class="o-tag">Single-cell</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C9</span><div class="o-body"><div class="o-ptitle">Nuclear reprogramming in the absence of exogenous biochemical factors by lateral confinement</div><div class="o-journal">2018</div><div class="o-tags"><span class="o-tag">Nuclear mechanics</span><span class="o-tag">Mechanobiology</span></div></div></div>
+      <div class="o-pub"><span class="o-num">C10</span><div class="o-body"><div class="o-ptitle">Chromatin condensation and shape-dependent transcriptional responses to cell compression</div><div class="o-journal">2018</div><div class="o-tags"><span class="o-tag">Cell mechanics</span><span class="o-tag">Chromatin organisation</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CONFERENCE PARTICIPATION ========================= -->
+<section class="o-block section" id="conferences">
+  <div class="wrap">
+    <div class="o-block-head reveal">
+      <div class="eyebrow">Conference participation</div>
+      <h2>Talks &amp; symposia</h2>
+      <p class="o-block-note">Presentations at international conferences in genomics, AI and mechanobiology across Singapore and Europe.</p>
+    </div>
+    <div class="o-list reveal">
+      <div class="o-pub"><span class="o-num">P1</span><div class="o-body"><div class="o-ptitle">International Conference on Genomes and AI</div><div class="o-journal">Singapore · October 2019</div><div class="o-tags"><span class="o-tag">Conference</span><span class="o-tag">Singapore</span></div></div></div>
+      <div class="o-pub"><span class="o-num">P2</span><div class="o-body"><div class="o-ptitle">MBI 10th Anniversary Conference</div><div class="o-journal">Singapore · November 2018</div><div class="o-tags"><span class="o-tag">Conference</span><span class="o-tag">Singapore</span></div></div></div>
+      <div class="o-pub"><span class="o-num">P3</span><div class="o-body"><div class="o-ptitle">European Molecular Biology Organization (EMBO)</div><div class="o-journal">Berlin, Germany · April 2018</div><div class="o-tags"><span class="o-tag">International</span><span class="o-tag">EMBO</span></div></div></div>
+      <div class="o-pub"><span class="o-num">P4</span><div class="o-body"><div class="o-ptitle">International Symposium on Mechanobiology (ISMB)</div><div class="o-journal">Singapore · December 2017</div><div class="o-tags"><span class="o-tag">Conference</span><span class="o-tag">Singapore</span></div></div></div>
+      <div class="o-pub"><span class="o-num">P5</span><div class="o-body"><div class="o-ptitle">Biophysical Society (BPS)</div><div class="o-journal">Singapore · September 2016</div><div class="o-tags"><span class="o-tag">Conference</span><span class="o-tag">Singapore</span></div></div></div>
+      <div class="o-pub"><span class="o-num">P6</span><div class="o-body"><div class="o-ptitle">European Molecular Biology Organization (EMBO)</div><div class="o-journal">Italy · October 2015</div><div class="o-tags"><span class="o-tag">International</span><span class="o-tag">EMBO</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= MEDIA & PRESS ========================= -->
+<section class="o-block alt section" id="media-coverage">
+  <div class="wrap">
+    <div class="o-block-head reveal">
+      <div class="eyebrow">Media &amp; press</div>
+      <h2>In the press</h2>
+      <p class="o-block-note">Coverage of the founding research in AI-driven imaging — from Singapore's flagship broadcast and print media to specialist AI programmes and international wires.</p>
+    </div>
+    <div class="o-list reveal">
+      <div class="o-pub"><span class="o-num">M1</span><div class="o-body"><div class="o-ptitle"><a href="https://www.channelnewsasia.com/watch/becoming-human/unnatural-genius-1514711" target="_blank" rel="noopener">Becoming Human, Episode 2: Unnatural Genius</a></div><div class="o-journal">Channel News Asia · Singapore · 2019</div><div class="o-tags"><span class="o-tag">Broadcast</span><span class="o-tag">Documentary</span></div></div><a class="o-link" href="https://www.channelnewsasia.com/watch/becoming-human/unnatural-genius-1514711" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M2</span><div class="o-body"><div class="o-ptitle"><a href="https://www.straitstimes.com/singapore/researchers-use-ai-to-identify-the-ph-of-cancer-cells" target="_blank" rel="noopener">Researchers use AI to identify the pH of cancer cells</a></div><div class="o-journal">The Straits Times · Singapore · 2021</div><div class="o-tags"><span class="o-tag">Print / digital</span></div></div><a class="o-link" href="https://www.straitstimes.com/singapore/researchers-use-ai-to-identify-the-ph-of-cancer-cells" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M3</span><div class="o-body"><div class="o-ptitle"><a href="https://news.nus.edu.sg/nus-researchers-harness-ai-to-identify-cancer-cells-by-their-acidity/" target="_blank" rel="noopener">NUS researchers harness AI to identify cancer cells by their acidity</a></div><div class="o-journal">NUS News · Singapore · 2021</div><div class="o-tags"><span class="o-tag">Institutional</span></div></div><a class="o-link" href="https://news.nus.edu.sg/nus-researchers-harness-ai-to-identify-cancer-cells-by-their-acidity/" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M4</span><div class="o-body"><div class="o-ptitle"><a href="https://www.newswise.com/articles/machine-learning-can-identify-cancerous-cells-by-their-acidity" target="_blank" rel="noopener">Machine learning can identify cancerous cells by their acidity</a></div><div class="o-journal">Newswise · USA · 2021</div><div class="o-tags"><span class="o-tag">Wire / international</span></div></div><a class="o-link" href="https://www.newswise.com/articles/machine-learning-can-identify-cancerous-cells-by-their-acidity" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M5</span><div class="o-body"><div class="o-ptitle"><a href="https://news.cgtn.com/news/2021-04-13/Singapore-researchers-using-AI-to-identify-cancer-cells-by-acidity--ZqRmTp4ZuU/index.html" target="_blank" rel="noopener">Singapore researchers using AI to identify cancer cells by acidity</a></div><div class="o-journal">CGTN · International · 2021</div><div class="o-tags"><span class="o-tag">Broadcast / digital</span></div></div><a class="o-link" href="https://news.cgtn.com/news/2021-04-13/Singapore-researchers-using-AI-to-identify-cancer-cells-by-acidity--ZqRmTp4ZuU/index.html" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M6</span><div class="o-body"><div class="o-ptitle"><a href="https://www.youtube.com/watch?v=QzctAUSFriU" target="_blank" rel="noopener">Diagnosing breast cancer in 35 minutes instead of days</a></div><div class="o-journal">LabelFlow · AI Stories · France · 2022</div><div class="o-tags"><span class="o-tag">Interview · AI media</span></div></div><a class="o-link" href="https://www.youtube.com/watch?v=QzctAUSFriU" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M7</span><div class="o-body"><div class="o-ptitle"><a href="https://www.lexpress.mu/node/392065" target="_blank" rel="noopener">Winning against cancer is one of the holy grails of medical research</a></div><div class="o-journal">L'express · Mauritius · 2021</div><div class="o-tags"><span class="o-tag">Print / digital</span></div></div><a class="o-link" href="https://www.lexpress.mu/node/392065" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M8</span><div class="o-body"><div class="o-ptitle"><a href="https://www.tnemag.mu/issues/issue6/index.html" target="_blank" rel="noopener">Synergy between innovation and sustainability</a></div><div class="o-journal">The Training and Employment Magazine · Mauritius · 2022</div><div class="o-tags"><span class="o-tag">Print / digital</span></div></div><a class="o-link" href="https://www.tnemag.mu/issues/issue6/index.html" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M9</span><div class="o-body"><div class="o-ptitle"><a href="https://www.zaobao.com.sg/news/singapore/story20210317-1131835" target="_blank" rel="noopener">NUS develops new technology: using AI and pH to distinguish cancer cells</a></div><div class="o-journal">Lianhe Zaobao · Singapore · 2021</div><div class="o-tags"><span class="o-tag">Print / digital</span></div></div><a class="o-link" href="https://www.zaobao.com.sg/news/singapore/story20210317-1131835" target="_blank" rel="noopener">Link ↗</a></div>
+      <div class="o-pub"><span class="o-num">M10</span><div class="o-body"><div class="o-ptitle"><a href="https://www.topfm.mu/2021/04/09/detection-rapide-du-cancer-en-utilisant-lintelligence-artificielle-un-mauricien-a-lhonneur-doorgesh-sharma-jokhun-fait-partie-dune-equipe-de-chercheurs-a-avoir-travail/" target="_blank" rel="noopener">Détection rapide du cancer en utilisant l'intelligence artificielle</a></div><div class="o-journal">TopFM · Mauritius · 2021</div><div class="o-tags"><span class="o-tag">Radio / digital</span></div></div><a class="o-link" href="https://www.topfm.mu/2021/04/09/detection-rapide-du-cancer-en-utilisant-lintelligence-artificielle-un-mauricien-a-lhonneur-doorgesh-sharma-jokhun-fait-partie-dune-equipe-de-chercheurs-a-avoir-travail/" target="_blank" rel="noopener">Link ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= BOOK CHAPTER ========================= -->
+<section class="o-block section" id="book-chapter">
+  <div class="wrap">
+    <div class="o-block-head reveal">
+      <div class="eyebrow">Book chapter</div>
+      <h2>Book chapter</h2>
+    </div>
+    <div class="o-list reveal">
+      <div class="o-pub"><span class="o-num">B1</span><div class="o-body"><div class="o-ptitle"><a href="https://www.elsevier.com/books/mechanobiology-in-health-and-disease/verbruggen/978-0-12-812952-4" target="_blank" rel="noopener">Cell geometric control of nuclear dynamics and its implications</a></div><div class="o-authors">A. Kumar, E. Makhija, A.V. Radhakrishnan, <strong>D.S. Jokhun</strong>, G.V. Shivashankar</div><div class="o-journal">Mechanobiology in Health and Disease · Elsevier · 2018 · pp. 55–76</div><div class="o-tags"><span class="o-tag">Nuclear mechanics</span><span class="o-tag">Book chapter</span></div></div><a class="o-link" href="https://www.elsevier.com/books/mechanobiology-in-health-and-disease/verbruggen/978-0-12-812952-4" target="_blank" rel="noopener">DOI ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CTA ========================= -->
+<section class="cta-section section">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Put this track record to work on your images.</h2>
+      <p>You've seen the evidence. Bring an imaging problem from any field and we'll show you what OptiFlow does with it.</p>
+      <div class="cta-btns">
+        <a class="btn btn-primary" href="contact.html">Book a Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="research.html">Back to research overview</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+          </svg>
+          <span class="brand-name">Logic Byte</span>
+        </a>
+        <p class="footer-tag">AI-powered image analytics — built visually, run at scale, auditable by design.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="platform.html">Platform</a></li>
+            <li><a href="biomedical.html">Biomedical &amp; Life Sciences</a></li>
+            <li><a href="semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
+            <li><a href="custom.html">Custom Solutions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="research-output.html" aria-current="page">Full research record</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="contact.html">Book a Demo</a></li>
+            <li><span style="color:var(--muted)">hello@logicbyte.ai</span></li>
+            <li><a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="footer-bottom">
       <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
       <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
     </div>
-  </footer>
-
-</main>
-
-<!-- NAVIGATOR -->
-<aside class="page-navigator" aria-label="Page navigation">
-  <div class="nav-vertical-label">
-    <span class="nav-vertical-super">Research</span>
-    <a class="nav-vertical-name" href="#" style="color:var(--white);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--white)'">Research<br/>Output</a>
   </div>
-  <p class="nav-vertical-desc">Logic Byte's scientific record — publications, talks, posters, and more.</p>
-  <div class="nav-divider"></div>
-  <div class="nav-seg-label">Sections</div>
-  <a class="seg-link" href="#collaborations"><span class="seg-link-dot"></span><span class="seg-link-name">Collaborations</span></a>
-  <a class="seg-link" href="#conferences"><span class="seg-link-dot"></span><span class="seg-link-name">Conference participation</span></a>
-  <a class="seg-link" href="#media-coverage"><span class="seg-link-dot"></span><span class="seg-link-name">Mainstream media</span></a>
-  <a class="seg-link" href="#peer-reviewed"><span class="seg-link-dot"></span><span class="seg-link-name">Peer-reviewed publications</span></a>
-  <a class="seg-link" href="#book-chapter"><span class="seg-link-dot"></span><span class="seg-link-name">Book chapter</span></a>
-  <a class="nav-back" href="research.html"><span class="nav-back-arrow">←</span>Back to Research</a>
-</aside>
-
-</div>
+</footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); obs.unobserve(x.target); } }), { threshold:0.06 });
-  reveals.forEach(el => obs.observe(el));
+(function(){
+  "use strict";
 
-  const groups = document.querySelectorAll('.chapters-section');
-  const segLinks = document.querySelectorAll('.seg-link');
-  const spy = new IntersectionObserver(e => {
-    e.forEach(x => {
-      if (x.isIntersecting) {
-        segLinks.forEach(l => l.classList.remove('active'));
-        document.querySelectorAll('.mobile-section-nav a').forEach(l => l.classList.remove('active'));
-        const a = document.querySelector(`.seg-link[href="#${x.target.id}"]`);
-        if (a) a.classList.add('active');
-        const mobileActive = document.querySelector(`.mobile-section-nav a[href="#${x.target.id}"]`);
-        if (mobileActive) { mobileActive.classList.add('active'); mobileActive.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
-      }
-    });
-  }, { rootMargin:'-15% 0px -65% 0px' });
-  groups.forEach(g => spy.observe(g));
+  /* ---- Nav scrolled state ---- */
+  var nav = document.getElementById('nav');
+  function onScroll(){ if(window.scrollY > 24){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-  function filterPubs(tag, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const peerSection = document.getElementById('peer-reviewed');
-    peerSection.querySelectorAll('.pub-card').forEach(card => {
-      const tags = card.dataset.tags || '';
-      card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
-    });
-  }
-
-  window.addEventListener('scroll', () => {
-    document.querySelector('nav').style.background = window.scrollY > 40 ? 'rgba(11,22,40,0.98)' : 'rgba(11,22,40,0.95)';
+  /* ---- Mobile drawer ---- */
+  var burger=document.getElementById('burger'), drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'), dClose=document.getElementById('drawerClose');
+  function openD(){ drawer.classList.add('open'); scrim.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeD(){ drawer.classList.remove('open'); scrim.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  if(burger){ burger.addEventListener('click',openD); }
+  if(scrim){ scrim.addEventListener('click',closeD); }
+  if(dClose){ dClose.addEventListener('click',closeD); }
+  drawer.querySelectorAll('a[href]').forEach(function(a){ a.addEventListener('click',closeD); });
+  drawer.querySelectorAll('.drawer-group-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){ btn.closest('.drawer-group').classList.toggle('open'); });
   });
 
-    // Mobile nav drawer
-  function toggleNav(btn) {
-    const isOpen = btn.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen);
-    document.getElementById('nav-drawer').classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  /* ---- Scroll reveal ---- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
   }
-  function toggleGroup(btn) {
-    btn.closest('.drawer-group').classList.toggle('open');
-  }
-  document.querySelectorAll('.drawer-links > li > a, .drawer-sub a, .drawer-group-link').forEach(a => {
-    a.addEventListener('click', () => {
-      const navBtn = document.querySelector('.nav-hamburger');
-      if (navBtn) { navBtn.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
-      const drawer = document.getElementById('nav-drawer');
-      if (drawer) drawer.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+})();
+
+/* ---- Publication theme filter (peer-reviewed section only) ---- */
+function filterPubs(tag, btn){
+  document.querySelectorAll('.o-fbtn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('#pub-list .o-pub').forEach(function(card){
+    var tags = card.getAttribute('data-tags') || '';
+    card.style.display = (tag === 'all' || tags.indexOf(tag) !== -1) ? '' : 'none';
   });
+}
 </script>
+
 </body>
 </html>

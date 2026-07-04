@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.logicbyte.ai" }],
+      "destination": "https://logicbyte.ai/$1",
+      "permanent": true
+    }
+  ]
+}
