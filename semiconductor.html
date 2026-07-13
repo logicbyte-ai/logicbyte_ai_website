@@ -436,6 +436,7 @@ h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1
 .demo-wrap{max-width:924px;margin:2rem 0 0}
 .demo-card{position:relative;width:100%;border-radius:14px;overflow:hidden}
 .demo-frame{width:100%;border:none;background:transparent;display:block}
+@media(min-width:681px){ .demo-frame{max-height:min(78vh, 680px)} }
 .demo-loading{
   position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.9rem;
   background:var(--navy-3);border:1px solid var(--border-2);border-radius:14px;color:var(--muted);font-size:0.85rem;z-index:0;
@@ -818,7 +819,7 @@ h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1
         <div class="demo-loading" id="ld-anomaly"><div class="spinner"></div><span>Preparing live demo&hellip;</span></div>
         <iframe class="demo-frame" id="demo-anomaly" data-src="optiflow-anomaly-pipeline-embed.html" title="Reference-free anomaly detection &mdash; animated pipeline" loading="lazy" scrolling="no"></iframe>
       </div>
-      <figcaption class="lf-cap" style="margin-top:1.3rem"><b>From your own field</b> &mdash; every connector of one type located, characterised, then gated to a handful of suspects. No golden reference; no labelled defects.</figcaption>
+      <figcaption class="lf-cap" style="margin-top:1.3rem"><b>From your own field</b> &mdash; every component of interest located, characterised, then gated to a handful of suspects. No golden reference; no labelled defects.</figcaption>
 
       <ul class="lf-points grid2" style="margin-top:1.9rem">
         <li class="lf-point">

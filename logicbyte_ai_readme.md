@@ -6,7 +6,7 @@ Marketing site for **Logic Byte Pte. Ltd.** (Singapore deep-tech, incorporated 2
 - **Stack:** Static HTML/CSS/JS — no framework, no build step. Deployed on **Vercel** from this **GitHub** repo. DNS on **Namecheap**. Indexing via **Google Search Console**.
 - **Three equal verticals:** Biomedical & Life Sciences · Semiconductor & Industrial Imaging · Custom Solutions. *Treat them as equals everywhere.*
 
-> Reflects site state at end of **research pages rebuild + about.html founder bio update**. All nine pages are now on the canonical design system. `LogicByte_Website_Handover.md` has been retired — its operational content is merged here.
+> Reflects site state at end of the **anomaly-pipeline embed rebuild** (real pipeline data, live scatter, rectangle trace-back, playback controls, viewport-fit sizing). All nine pages are on the canonical design system. `LogicByte_Website_Handover.md` has been retired — its operational content is merged here.
 
 ---
 
@@ -19,7 +19,7 @@ Marketing site for **Logic Byte Pte. Ltd.** (Singapore deep-tech, incorporated 2
 | `index.html` | ✅ Locked | Home / verticals hub. Canonical design system. `mailto:` removed (footer email plain text). |
 | `platform.html` | ✅ Locked | Full OptiFlow platform. Canonical design system. `mailto:` removed; `pseudo-DAPI` removed. |
 | `biomedical.html` | ✅ Locked | **Design-system reference template.** Build/refresh every other page from this. |
-| `semiconductor.html` | ✅ Publication-ready | Animated reference-free anomaly-detection pipeline embed in signature section. |
+| `semiconductor.html` | ✅ Publication-ready | Animated reference-free anomaly-detection pipeline embed in signature section — rebuilt on real pipeline data, playback controls, `.demo-frame` height-capped so the widget fits on-screen without page scroll. See "The anomaly-pipeline embed". |
 | `custom.html` | ✅ Publication-ready | Any-domain vertical. See "custom.html — final state". |
 | `about.html` | ✅ Publication-ready | Credibility anchor. Rebuilt on canonical system + full editorial pass. See "about.html — final state". Ships with `mission_arch.png` + founder photo. |
 | `contact.html` | ✅ Publication-ready | Conversion endpoint. Formspree back-end. `?intent=` routing intact. See "contact.html — final state". |
@@ -33,7 +33,7 @@ All nine pages are now on the canonical design system. No pages remain on the ol
 | File | Used by | Modes |
 |---|---|---|
 | `optiflow-workflow-from-image-embed.html` | `biomedical`, `semiconductor`, `custom` | `?mode=bio` \| `?mode=semicon` \| `?mode=both` |
-| `optiflow-anomaly-pipeline-embed.html` | `semiconductor` signature | — (self-contained, loops) |
+| `optiflow-anomaly-pipeline-embed.html` | `semiconductor` signature | — (self-contained, loops; prev / play-pause / next + clickable stepper) |
 | `optiflow-pipeline-demo.html` | legacy | — |
 | `optiflow-product-window.html` | legacy | — |
 | `optiflow-build-workflow.html` | legacy | — |
@@ -46,8 +46,9 @@ All nine pages are now on the canonical design system. No pages remain on the ol
 - **Mission graphic:** `mission_arch.png` — ships with `index.html` and `about.html`.
 - **Founder photo:** `DSC_0167__6_in_x_8_in__square_resized.jpg` — ships with `about.html`. Square, 1000×1000, ~41 KB.
 - **CytoByte microscopy:** `cytobyte-dic.png`, `cytobyte-virtual-nuclei.png`, `cytobyte-ar-overlay.png`.
-- **Anomaly-pipeline embed — ship all six alongside the embed HTML:**
-  `ap-sem.jpg`, `ap-detected.png`, `ap-instances.png`, `ap-scatter.png`, `ap-matrix.png`, `ap-collage.jpg`.
+- **Anomaly-pipeline embed — ship all five alongside the embed HTML:**
+  `ap-sem.jpg`, `ap-detected.png` (outline mask, not filled), `ap-instances.png`, `ap-matrix.jpg`, `ap-crops.png`.
+  Retired: `ap-scatter.png` (scatter is a live `<canvas>` now, driven by data inlined in the embed) and `ap-collage.jpg` (superseded by the in-animation segmented-crop strip).
 
 ---
 
@@ -97,11 +98,25 @@ var frameMap = {
 
 ## The anomaly-pipeline embed
 
-Self-contained, looping, dependency-free. Seven cross-faded stages: `Image → Detect → Segment → Characterise → Gate → Trace back → Review`. Responsive (stacks ≤680px), respects `prefers-reduced-motion`, posts its own height.
+Self-contained, looping, dependency-free. Seven stages: `Image → Detect → Segment → Analyse → Gate → Trace → Review`. Responsive (stacks ≤680px), respects `prefers-reduced-motion`, posts its own height. Real pipeline figures throughout — **709 components · 326 features · 12 suspects · 12 strong suspects**.
 
-**Ships with six assets in the same directory:** `ap-sem.jpg`, `ap-detected.png`, `ap-instances.png`, `ap-scatter.png`, `ap-matrix.png`, `ap-collage.jpg`.
+**Stage notes:**
+- **Detect** — outline only (dark halo + teal stroke), not a filled mask; SEM dimmed underneath for contrast. Outlines appear only *after* the scan-line completes its full pass (`SCAN_MS` in the JS) — not while it's still sweeping.
+- **Segment** — per-instance colours from a curated ten-colour brand-adjacent palette. No red/orange in this palette — those are reserved for suspect/strong-suspect later and must not clash. 9 index callouts, staggered.
+- **Analyse** — crops→CNN→matrix strip builds first (crops are genuinely segmented: one object per cell, rest of the cell masked blank via the label map — not just a crop of the raw image), then icons, then the live scatter, each gated behind the previous step's completion (scatter stays blank until the matrix finishes its clip-path reveal).
+- **Gate** — the same live `<canvas>` scatter recolours in place (teal → orange/red) and draws the PC1 ±30 / score 0.55 gate lines.
+- **Trace** — sharp rectangles (not contour outlines), small gap off each component's true boundary, `vector-effect:non-scaling-stroke` so they stay crisp at the 2.6× zoom.
+- **Review** — zooms back out to the full field with all 24 rectangles still visible, so "24 of 709" reads visually. Small gold "Roadmap" note: per-suspect feature attribution — not built, honestly labelled as future work, not faked.
 
-**Regenerating assets** (if source data changes): founder holds originals — `1__SEM_original.jpg`, `2__connectorsDetected.png`, `3__individualConnectors_IDed.png`, `4__feature_matrix.xlsx`, `6__suspectConnectors.jpg`. The generator optimises the SEM, recolours detect/instance masks, runs PCA → 2D scatter (re-rendered from the matrix for brand control), renders the heatmap, extracts 20 box coordinates, crops the strong-suspect collage.
+**Playback:** previous / play-pause / next, plus a clickable stepper. A dwell-progress hairline across the top of the window freezes and resumes exactly in sync with pause, via `animation-play-state` (not an approximation). No hover-pause — the widget fills too much of the frame for that to be usable; controls are the only pause mechanism.
+
+**Fit-to-viewport:** the embed measures its own natural size and scales down (never up) via CSS `transform` to fit whatever box it renders in. This only engages because `semiconductor.html` caps the iframe's own rendered height (`.demo-frame{max-height:min(78vh,680px)}`, desktop only) below the animation's natural size — the two files work together here. Don't change one without re-checking the other still fits; retest at minimum 1920×1080, 1440×900 (historically the tightest real-world case), 1366×768.
+
+**Ships with five assets in the same directory:** `ap-sem.jpg`, `ap-detected.png`, `ap-instances.png`, `ap-matrix.jpg`, `ap-crops.png`.
+
+**Regenerating assets** (if source data changes): founder holds the originals — `AD1__SEM_original.jpg` (SEM), `AD2__connectorsDetected.png` (binary detect mask), `AD3__connectorsDetected_individualID.png` (16-bit per-instance label map — **ground truth** for every crop/box position; row order in AD5/AD6 maps to label id via `label = row + 1`), `AD4__individualConnectors_individualID_LUT.png` (colour-LUT preview of AD3, reference only), `AD5__latentFeatures_rawMatrix.xlsx` (709×326 raw latent features), `AD6__PC1_vs_IsolationForestAnomalyScore.xlsx` (709×2, PC1 + isolation-forest score; gate at PC1 ±30 / score 0.55 — beyond one limit = suspect, beyond both = strong suspect), `AD7__anomalyGating.svg` (reference plot, not used directly), `AD8__suspectConnectors.jpg` (annotated reference render, not used directly — box positions come from AD3, never from parsing this JPEG's drawn annotations).
+
+Generator (Python/PIL/OpenCV/scipy, ad hoc — not shipped in the repo): contrast-stretch the SEM; trace per-instance contours from AD3 for the Detect outline mask (`cv2.findContours` per label, scaled, dark-halo + teal-stroke composite); assign the curated palette to AD3 for the Segment layer; downsample AD5 into a teal-ramped heatmap for the matrix visual; export the AD6 points as inline JSON (`window.__SCATTER__`) for the live canvas — do **not** pre-render the scatter as an image; extract rectangle geometry (AD3 label bboxes, small padding) for the 24 flagged instances into inline JSON (`window.__BOXES__`); crop the 4 segmented single-object cells (masked to that instance only, rest of the cell blank) into `ap-crops.png`.
 
 ---
 
@@ -270,7 +285,7 @@ NiCE · CHA · Prof. Gan Chee Lip · Borries · MIT Semiconductor · all pricing
 ## Deploy
 
 1. Commit to GitHub → Vercel auto-deploys from repo root.
-2. All embed assets must sit in the repo root alongside the HTML. `about.html` requires `mission_arch.png` + `DSC_0167__6_in_x_8_in__square_resized.jpg`. Semiconductor embed requires all six `ap-*` assets.
+2. All embed assets must sit in the repo root alongside the HTML. `about.html` requires `mission_arch.png` + `DSC_0167__6_in_x_8_in__square_resized.jpg`. Anomaly-pipeline embed requires all five `ap-*` assets (`ap-sem.jpg`, `ap-detected.png`, `ap-instances.png`, `ap-matrix.jpg`, `ap-crops.png`).
 3. **Claude never commits directly** — deliverables handed over as files for the founder to commit.
 
 ---
@@ -279,4 +294,4 @@ NiCE · CHA · Prof. Gan Chee Lip · Borries · MIT Semiconductor · all pricing
 
 - **ETH Zürich testimonial** — high-value addition to `about.html` when a real attributed quote is available.
 - **Micro-label fonts** — a few inherited labels (`.rsr-label`, `.tag-new`, `.ba-tag`) on the older canonical pages sit marginally below 10px. Decide whether to bump site-wide.
-- **Reconstruct the `unsupervisedAnomalyDetection` animation** — Python source in `sample_data/unsupervisedAnomalyDetection/single_part_ana.py`.
+- **Per-suspect feature attribution** — the anomaly-pipeline embed's Gate/Trace/Review stages carry a small gold "Roadmap" tag for this ("which of the 326 features drove the score"). No attribution method exists yet — build the tag's content only once one does.
