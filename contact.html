@@ -365,6 +365,16 @@ h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1
 .c-submit-note{font-size:0.8rem;color:var(--muted-2);line-height:1.5;max-width:34ch}
 .c-error{color:#EC8079;font-size:0.85rem;margin-top:0.9rem;line-height:1.55}
 
+/* consent + routing note */
+.c-consent{margin-top:1.4rem;display:flex;flex-direction:column;gap:0.7rem}
+.c-check{display:flex;align-items:flex-start;gap:0.65rem;font-size:0.85rem;color:var(--muted);line-height:1.5;cursor:pointer}
+.c-check input{flex:none;width:18px;height:18px;margin:0.1rem 0 0;accent-color:var(--teal);color-scheme:dark;cursor:pointer}
+.c-check input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.c-check input[aria-invalid="true"]{outline:2px solid #E5645B;outline-offset:2px}
+.c-check-req .c-check-text::after{content:" *";color:var(--teal)}
+.c-routing-note{max-width:none;margin-top:1.1rem}
+.c-routing-note + .c-submit-row{margin-top:1rem}
+
 /* honeypot */
 .c-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 
@@ -543,24 +553,26 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
           <div class="c-chips" role="group" aria-label="What brings you here">
             <button type="button" class="c-chip" data-intent="demo" aria-pressed="false"><span class="c-chip-dot"></span>Book a demo</button>
             <button type="button" class="c-chip" data-intent="project" aria-pressed="false"><span class="c-chip-dot"></span>Scope a project</button>
-            <button type="button" class="c-chip" data-intent="hello" aria-pressed="false"><span class="c-chip-dot"></span>Partner or say hello</button>
+            <button type="button" class="c-chip" data-intent="collaborate" aria-pressed="false"><span class="c-chip-dot"></span>Collaborate</button>
+            <button type="button" class="c-chip" data-intent="interest" aria-pressed="false"><span class="c-chip-dot"></span>Register interest</button>
+            <button type="button" class="c-chip" data-intent="hello" aria-pressed="false"><span class="c-chip-dot"></span>Say hello</button>
           </div>
 
           <div class="c-fields">
             <div class="c-field">
               <label for="name">Name <span class="req">*</span></label>
-              <input class="c-input" type="text" id="name" name="name" autocomplete="name" placeholder="Your name"/>
+              <input class="c-input" type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required/>
             </div>
             <div class="c-field">
               <label for="email">Work email <span class="req">*</span></label>
-              <input class="c-input" type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="you@organisation.com"/>
+              <input class="c-input" type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="you@organisation.com" required/>
             </div>
             <div class="c-field">
               <label for="company">Company / institution</label>
               <input class="c-input" type="text" id="company" name="company" autocomplete="organization" placeholder="Where you&rsquo;re from"/>
             </div>
             <div class="c-field">
-              <label for="domain">Field or interest</label>
+              <label for="domain">Field or interest <span class="req" id="domainReq" hidden>*</span></label>
               <select class="c-select" id="domain" name="domain">
                 <option value="" disabled selected>Select a field or interest</option>
                 <option>Biomedical &amp; Life Sciences</option>
@@ -574,12 +586,12 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
               </select>
             </div>
             <div class="c-field">
-              <label for="subject">Subject <span class="req">*</span></label>
-              <input class="c-input" type="text" id="subject" name="subject" placeholder="e.g. Demo request &mdash; wafer defect review"/>
+              <label for="subject">Subject <span class="req" id="subjectReq">*</span></label>
+              <input class="c-input" type="text" id="subject" name="subject" placeholder="e.g. Demo request &mdash; wafer defect review" required/>
             </div>
             <div class="c-field">
-              <label for="message">Message <span class="req">*</span></label>
-              <textarea class="c-textarea" id="message" name="message" placeholder="Tell us about your imaging challenge, what you&rsquo;re hoping to achieve, or simply say hello."></textarea>
+              <label for="message">Message <span class="req" id="messageReq">*</span></label>
+              <textarea class="c-textarea" id="message" name="message" required placeholder="Tell us about your imaging challenge, what you&rsquo;re hoping to achieve, or simply say hello."></textarea>
               <p class="c-hint">Have images or a dataset to share? Paste a link (Google Drive, Dropbox, and the like) in your message &mdash; we&rsquo;ll follow up.</p>
             </div>
           </div>
@@ -589,11 +601,21 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
             <input type="text" id="company_url" name="_gotcha" tabindex="-1" autocomplete="off"/>
           </div>
 
+          <input type="hidden" id="f_intent" name="intent" value=""/>
+          <input type="hidden" id="f_src" name="src" value=""/>
+
+          <div class="c-consent">
+            <label class="c-check c-check-req"><input type="checkbox" id="consent" name="contact_consent" required/><span class="c-check-text">Logic Byte may contact me about this enquiry.</span></label>
+            <label class="c-check"><input type="checkbox" id="news" name="news_optin"/><span class="c-check-text">Also send me occasional news from Logic Byte. I can unsubscribe at any time.</span></label>
+          </div>
+
+          <p class="c-submit-note c-routing-note">Your details are sent through our form service, Formspree, to Logic Byte Pte. Ltd. by e-mail and kept in Logic Byte&rsquo;s mailbox; Formspree keeps a copy for up to 30 days. They are used only to answer this enquiry and any follow-up you ask for. To see, correct or delete them, write to hello@logicbyte.ai.</p>
+
           <div class="c-submit-row">
             <button type="button" class="c-submit" id="submitBtn"><span class="c-submit-label">Send message</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>
-            <p class="c-submit-note">Fields marked <span style="color:var(--teal)">*</span> are required. We never share your details.</p>
+            <p class="c-submit-note">Fields marked <span style="color:var(--teal)">*</span> are required. We never sell your details or share them for anyone else&rsquo;s use.</p>
           </div>
         </div>
 
@@ -736,30 +758,67 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
   }
 
   /* ---- Contact: intent chips ---- */
-  var selectedIntent = null;
+  var selectedIntent = '';
   var chips = Array.prototype.slice.call(document.querySelectorAll('.c-chip'));
   var msgField = document.getElementById('message');
+  var subjField = document.getElementById('subject');
+  var domainField = document.getElementById('domain');
+  var intentField = document.getElementById('f_intent');
+  var srcField = document.getElementById('f_src');
+  var defaultPlaceholder = msgField ? msgField.getAttribute('placeholder') : '';
   var placeholders = {
     demo:    'Tell us about your imaging setup \u2014 the modality, the kind of images, and what you\'d like to see OptiFlow do with them.',
     project: 'Describe the imaging problem \u2014 what you\'re working with, where current tools fall short, and what a good result looks like.',
     hello:   'Investor, collaborator, researcher, press, or simply curious \u2014 tell us what\'s on your mind.'
   };
+  var subjects = {
+    demo:        'Demo request',
+    project:     'Project scoping',
+    collaborate: 'Collaboration',
+    interest:    'Register interest',
+    hello:       'Hello'
+  };
+  function isIntent(v){ return Object.prototype.hasOwnProperty.call(subjects, v); }
+  var subjectTyped = false;
+  if(subjField){ subjField.addEventListener('input', function(){ subjectTyped = subjField.value.trim() !== ''; }); }
+  function setRequired(el, markId, on){
+    el.required = on;
+    var m = document.getElementById(markId);
+    if(m){ m.hidden = !on; }
+    if(!on){ mark(el, false); }
+  }
   function setIntent(intent){
     selectedIntent = intent;
+    intentField.value = intent;
     chips.forEach(function(c){ c.setAttribute('aria-pressed', String(c.getAttribute('data-intent') === intent)); });
-    if(msgField && placeholders[intent]){ msgField.setAttribute('placeholder', placeholders[intent]); }
+    if(msgField){ msgField.setAttribute('placeholder', placeholders[intent] || defaultPlaceholder); }
+    if(subjects[intent] && !subjectTyped){ subjField.value = subjects[intent]; }
+    var interest = intent === 'interest';
+    setRequired(subjField, 'subjectReq', !interest);
+    setRequired(msgField, 'messageReq', !interest);
+    setRequired(domainField, 'domainReq', interest);
   }
   chips.forEach(function(c){
     c.addEventListener('click', function(){
       var it = c.getAttribute('data-intent');
-      if(it === selectedIntent){ selectedIntent = null; c.setAttribute('aria-pressed','false'); }
-      else { setIntent(it); }
+      setIntent(it === selectedIntent ? '' : it);
     });
   });
+  function topOf(el){ var y = 0; while(el){ y += el.offsetTop; el = el.offsetParent; } return y; }
+  function scrollToForm(){
+    var panel = document.getElementById('contactPanel');
+    if(panel){ window.scrollTo({top: Math.max(0, topOf(panel) - 90), behavior: 'instant'}); }
+  }
   (function(){
-    var p = (new URLSearchParams(location.search).get('intent')||'').toLowerCase();
-    var map = { demo:'demo', project:'project', hello:'hello', other:'hello' };
-    if(map[p]) setIntent(map[p]);
+    var q = new URLSearchParams(location.search);
+    var src = q.get('src') || '';
+    srcField.value = /^[A-Za-z0-9-]{1,32}$/.test(src) ? src : '';
+    var p = (q.get('intent') || '').toLowerCase();
+    if(isIntent(p)){
+      setIntent(p);
+      if(document.readyState === 'complete'){ scrollToForm(); }
+      else { window.addEventListener('load', scrollToForm); }
+    }
   })();
 
   /* ---- Contact: select placeholder state ---- */
@@ -789,17 +848,21 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
   }
   function submitContact(){
     clearErr();
+    var consent = document.getElementById('consent');
     var f = {
       name:    document.getElementById('name'),
       email:   document.getElementById('email'),
-      subject: document.getElementById('subject'),
-      message: document.getElementById('message')
+      domain:  domainField,
+      subject: subjField,
+      message: msgField,
+      consent: consent
     };
     var missing = false, first = null;
     Object.keys(f).forEach(function(k){
-      var bad = !f[k].value.trim();
-      mark(f[k], bad);
-      if(bad){ missing = true; if(!first){ first = f[k]; } f[k].addEventListener('input', function(){ mark(f[k], false); }, {once:true}); }
+      var el = f[k];
+      var bad = el.required && (el.type === 'checkbox' ? !el.checked : !el.value.trim());
+      mark(el, bad);
+      if(bad){ missing = true; if(!first){ first = el; } el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', function(){ mark(el, false); }, {once:true}); }
     });
     if(missing){ showErr('Please complete the required fields so we can reply.'); if(first){ first.focus(); } return; }
     var emailBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim());
@@ -809,9 +872,8 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
 
     var company = document.getElementById('company').value.trim();
     var domain  = document.getElementById('domain').value;
-    var intentLabel = selectedIntent === 'demo' ? 'Book a Demo'
-                    : selectedIntent === 'project' ? 'Scope a Project'
-                    : selectedIntent === 'hello' ? 'Partner / Say Hello' : 'General enquiry';
+    var subj = f.subject.value.trim();
+    var msg  = f.message.value.trim();
 
     if(submitBtn){ submitBtn.disabled = true; } if(submitLabel){ submitLabel.textContent = 'Sending\u2026'; }
     fetch('https://formspree.io/f/mzdyjayk', {
@@ -820,8 +882,10 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
       body: JSON.stringify({
         name: f.name.value.trim(), email: f.email.value.trim(),
         company: company || 'Not specified', domain: domain || 'Not specified',
-        intent: intentLabel, subject: f.subject.value.trim(), message: f.message.value.trim(),
-        _subject: f.subject.value.trim()
+        intent: intentField.value, src: srcField.value,
+        contact_consent: 'Yes', news_optin: document.getElementById('news').checked ? 'Yes' : 'No',
+        subject: subj, message: msg || 'Not specified',
+        _subject: subj || subjects[selectedIntent] || 'Website enquiry'
       })
     }).then(function(r){
       if(r.ok){ succeed(); return; }

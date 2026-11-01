@@ -5,6 +5,25 @@
       "has": [{ "type": "host", "value": "www.logicbyte.ai" }],
       "destination": "https://logicbyte.ai/$1",
       "permanent": true
+    },
+    {
+      "source": "/hello-bio",
+      "destination": "/contact.html?intent=interest&src=bio-poster",
+      "permanent": false
+    },
+    {
+      "source": "/dsj",
+      "destination": "/about.html#founder",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/kamal.vcf",
+      "headers": [
+        { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
+        { "key": "Content-Disposition", "value": "attachment; filename=kamal.vcf" }
+      ]
     }
   ]
 }
