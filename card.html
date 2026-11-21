@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no, email=no"/>
+<meta name="robots" content="noindex"/>
+<meta name="description" content="Save the contact details of Doorgesh S. Jokhun, PhD — Founder &amp; CEO, Logic Byte."/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://logicbyte.ai/dsj"/>
+<title>Doorgesh S. Jokhun, PhD — Logic Byte</title>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
+<style>
+/* ============================================================
+   LOGIC BYTE — DESIGN TOKENS  (shared with index.html / about.html)
+   The site is a single dark theme; there is no light variant.
+   ============================================================ */
+:root{
+  --navy:#0B1628;
+  --navy-2:#0E1B30;
+  --navy-3:#101F38;
+  --panel:#10203A;
+  --panel-2:#13243F;
+  --teal:#1DB89A;
+  --teal-bright:#22D3AC;
+  --teal-soft:rgba(29,184,154,0.12);
+  --gold:#D4AF37;
+  --steel:#5E8FC9;
+  --white:#FFFFFF;
+  --text:#E8EDF4;
+  --muted:#92A2B8;
+  --muted-2:#6E7F96;
+  --border:rgba(255,255,255,0.10);
+  --border-2:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.16);
+
+  --pad:max(1.25rem, 5vw, calc((100vw - 1500px) / 2));
+  --radius:14px;
+
+  --f-display:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --f-mono:'DM Mono','SF Mono',ui-monospace,Menlo,monospace;
+  --f-wordmark:'Syne',-apple-system,sans-serif;
+  --f-body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--f-body);
+  background:var(--navy);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+::selection{background:rgba(29,184,154,0.28);color:#fff}
+
+.wrap{width:100%;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* ---------- Buttons (shared) ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:0.55rem;
+  font-family:var(--f-body);font-size:0.95rem;font-weight:500;letter-spacing:0.01em;
+  padding:0.85rem 1.9rem;border-radius:100px;cursor:pointer;
+  transition:transform .16s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--teal);color:var(--navy);font-weight:600;border:1px solid var(--teal)}
+.btn-primary:hover{background:var(--teal-bright);transform:translateY(-2px);box-shadow:0 10px 34px rgba(29,184,154,0.28)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-strong)}
+.btn-secondary:hover{border-color:var(--teal);color:var(--white);transform:translateY(-2px)}
+
+/* ---------- Nav (shared) ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(11,22,40,0.82);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--border-2);
+}
+.nav-inner{
+  padding:0 var(--pad);
+  height:74px;display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{display:flex;align-items:center;gap:0.7rem}
+.brand-mark{width:24px;height:24px;flex:0 0 auto}
+.brand-name{font-family:var(--f-wordmark);font-weight:700;font-size:1.18rem;color:var(--white);letter-spacing:0.01em}
+
+.nav-links{display:flex;align-items:center;gap:0.35rem;list-style:none}
+.nav-links > li{position:relative}
+.nav-link{
+  font-family:var(--f-wordmark);font-weight:600;font-size:0.9rem;color:var(--muted);
+  padding:0.55rem 0.85rem;border-radius:8px;transition:color .18s ease,background .18s ease;
+  display:inline-flex;align-items:center;gap:0.35rem;
+}
+.nav-link:hover{color:var(--white)}
+.nav-link .caret{width:11px;height:11px;opacity:0.7;transition:transform .2s ease}
+.has-menu:hover .caret{transform:rotate(180deg)}
+
+.dropdown{
+  position:absolute;top:calc(100% + 8px);left:0;min-width:268px;
+  background:var(--navy-3);border:1px solid var(--border);border-radius:12px;
+  padding:0.5rem;opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+}
+.has-menu:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{
+  display:block;padding:0.7rem 0.85rem;border-radius:8px;
+  font-size:0.9rem;color:var(--text);transition:background .15s ease,color .15s ease;
+}
+.dropdown a span{display:block;font-size:0.76rem;color:var(--muted-2);margin-top:0.15rem;font-weight:400}
+.dropdown a:hover{background:var(--teal-soft);color:var(--white)}
+
+.nav-cta{margin-left:0.4rem}
+.nav-cta .btn{padding:0.62rem 1.4rem;font-size:0.88rem}
+
+.nav-burger{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:0.4rem}
+.nav-burger svg{width:26px;height:26px}
+
+/* mobile drawer */
+.drawer-scrim{position:fixed;inset:0;background:rgba(5,11,22,0.6);z-index:110;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+.drawer-scrim.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(86vw,360px);z-index:120;
+  background:var(--navy-2);border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding:1.4rem 1.4rem 2rem;overflow-y:auto;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.drawer-close{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.4rem}
+.drawer-close svg{width:24px;height:24px}
+.drawer-nav{list-style:none;display:flex;flex-direction:column;gap:0.15rem}
+.drawer-nav > li > a,.drawer-group-head > a{
+  display:block;padding:0.85rem 0.5rem;font-family:var(--f-wordmark);font-weight:600;
+  font-size:1.02rem;color:var(--text);border-bottom:1px solid var(--border-2);
+}
+.drawer-group-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-2)}
+.drawer-group-head > a{border-bottom:none;flex:1}
+.drawer-group-toggle{background:none;border:none;color:var(--muted);cursor:pointer;padding:0.6rem}
+.drawer-group-toggle svg{width:16px;height:16px;transition:transform .2s ease}
+.drawer-group.open .drawer-group-toggle svg{transform:rotate(90deg)}
+.drawer-sub{list-style:none;max-height:0;overflow:hidden;transition:max-height .25s ease}
+.drawer-group.open .drawer-sub{max-height:240px}
+.drawer-sub a{display:block;padding:0.6rem 0.9rem;font-size:0.9rem;color:var(--muted)}
+.drawer-sub a:hover{color:var(--teal)}
+.drawer-ctas{margin-top:1.6rem;display:flex;flex-direction:column;gap:0.7rem}
+.drawer-ctas .btn{width:100%;justify-content:center}
+
+/* ---------- Footer (shared) ---------- */
+.footer{background:var(--navy-2);border-top:1px solid var(--border-2);padding:3.5rem 0 2.2rem}
+.footer-top{display:flex;gap:2.5rem;justify-content:space-between;flex-wrap:wrap}
+.footer-brand{max-width:300px}
+.footer-brand .brand{margin-bottom:0.9rem}
+.footer-tag{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.footer-cols{display:flex;gap:3.5rem;flex-wrap:wrap}
+.footer-col h5{font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.footer-col a{font-size:0.9rem;color:var(--muted);transition:color .15s ease}
+.footer-col a:hover{color:var(--teal)}
+.footer-bottom{
+  margin-top:2.8rem;padding-top:1.6rem;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:0.82rem;color:var(--muted-2);
+}
+.footer-bottom a{color:var(--muted);}
+.footer-bottom a:hover{color:var(--teal)}
+
+/* accessibility — visible keyboard focus */
+a:focus-visible,.btn:focus-visible,button:focus-visible{
+  outline:2px solid var(--teal-bright);outline-offset:3px;border-radius:8px}
+
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   FOUNDER CARD — page-specific, mobile-first
+   ============================================================ */
+.card-page{
+  position:relative;overflow:hidden;
+  padding-top:calc(64px + 1.75rem);padding-bottom:3rem;
+  background:
+    radial-gradient(60% 38% at 50% 0%,rgba(29,184,154,0.14),transparent 70%),
+    var(--navy);
+}
+.card{position:relative;max-width:440px;margin:0 auto;text-align:center}
+.card-photo{
+  width:176px;height:176px;margin:0 auto;border-radius:50%;
+  object-fit:cover;object-position:50% 20%;
+  border:1px solid var(--border-strong);box-shadow:0 0 0 6px rgba(29,184,154,0.10);
+  background:var(--navy-3);
+}
+.card-name{
+  margin-top:1.5rem;
+  font-family:var(--f-display);font-weight:600;font-size:1.65rem;line-height:1.2;
+  letter-spacing:-0.01em;color:var(--white);
+}
+.card-role{
+  margin-top:0.4rem;
+  font-family:var(--f-mono);font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--teal);
+}
+.card-tagline{
+  margin-top:1rem;
+  font-family:var(--f-mono);font-size:0.95rem;line-height:1.5;color:var(--gold);
+}
+.card-save{margin-top:1.8rem}
+.card-save .btn{width:100%;justify-content:center;font-size:1.05rem;padding:1rem 1.9rem}
+.card-links{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-top:1.1rem}
+.card-links a{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  min-height:52px;padding:0.8rem 1.15rem;text-align:left;
+  font-size:0.95rem;font-weight:500;color:var(--text);
+  background:var(--navy-3);border:1px solid var(--border-2);border-radius:var(--radius);
+  transition:border-color .18s ease,color .18s ease,transform .16s ease;
+}
+.card-links a:hover{border-color:var(--teal);color:var(--white);transform:translateY(-2px)}
+.card-links svg{width:16px;height:16px;flex:0 0 auto;color:var(--teal)}
+.card-email{
+  margin-top:1.6rem;
+  font-family:var(--f-mono);font-size:0.85rem;letter-spacing:0.02em;color:var(--muted);
+  overflow-wrap:anywhere;
+}
+
+/* header responsive (same breakpoints as the rest of the site) */
+@media(max-width:1000px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:inline-flex}
+}
+@media(max-width:640px){
+  .nav-inner{height:64px}
+  .footer-top{flex-direction:column;gap:2rem}
+  .footer-cols{gap:2.2rem}
+}
+@media(min-width:641px){
+  .card-page{padding-top:calc(74px + 3rem);padding-bottom:4.5rem}
+  .card-photo{width:200px;height:200px}
+  .card-name{font-size:1.9rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Logic Byte home">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a class="nav-link" href="/platform.html">Platform</a></li>
+      <li class="has-menu">
+        <a class="nav-link" href="/#verticals">Solutions
+          <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="/biomedical.html">Biomedical &amp; Life Sciences<span>Single-cell, screening, label-free assays</span></a>
+          <a href="/semiconductor.html">Semiconductor &amp; Industrial Imaging<span>Inspection, defect detection, metrology</span></a>
+          <a href="/custom.html">Custom Solutions<span>Bespoke pipelines for any domain</span></a>
+        </div>
+      </li>
+      <li><a class="nav-link" href="/research.html">Research</a></li>
+      <li><a class="nav-link" href="/about.html">About</a></li>
+      <li><a class="nav-link" href="/contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta"><a class="btn btn-primary" href="/contact.html">Book a Demo</a></div>
+
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer-scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile menu">
+  <div class="drawer-top">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+        <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+      </svg>
+      <span class="brand-name">Logic Byte</span>
+    </a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul class="drawer-nav">
+    <li><a href="/platform.html">Platform</a></li>
+    <li class="drawer-group open">
+      <div class="drawer-group-head">
+        <a href="/#verticals">Solutions</a>
+        <button class="drawer-group-toggle" aria-label="Expand Solutions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <ul class="drawer-sub">
+        <li><a href="/biomedical.html">Biomedical &amp; Life Sciences</a></li>
+        <li><a href="/semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
+        <li><a href="/custom.html">Custom Solutions</a></li>
+      </ul>
+    </li>
+    <li><a href="/research.html">Research</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="drawer-ctas">
+    <a class="btn btn-primary" href="/contact.html">Book a Demo</a>
+    <a class="btn btn-secondary" href="/contact.html?intent=hello">Say hello</a>
+  </div>
+</aside>
+
+<!-- ========================= FOUNDER CARD ========================= -->
+<main class="card-page">
+  <div class="wrap">
+    <div class="card">
+      <img class="card-photo" src="/DSC_0167__6_in_x_8_in__square_resized.jpg" width="1000" height="1000" decoding="async" alt="Doorgesh S. Jokhun, PhD"/>
+      <h1 class="card-name">Doorgesh S. Jokhun, PhD</h1>
+      <p class="card-role">Founder &amp; CEO, Logic Byte</p>
+      <p class="card-tagline">The shortest path from image to value.</p>
+
+      <div class="card-save">
+        <a class="btn btn-primary" href="/doorgesh-jokhun.vcf" download>Save contact</a>
+      </div>
+
+      <ul class="card-links">
+        <li><a href="/contact.html?intent=hello&amp;src=card">Share your details with me
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/dsjokhun/" target="_blank" rel="noopener">Connect on LinkedIn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/logicbyte-ai/" target="_blank" rel="noopener">Follow Logic Byte
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+        <li><a href="/about.html#founder">More about me
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+        <li><a href="/">About Logic Byte
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      </ul>
+
+      <p class="card-email">d.s.jokhun@logicbyte.ai</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="brand-mark" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect fill="#d4af37" x="8" y="8" width="14" height="14"/><rect fill="#0B1628" x="12" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="28" width="14" height="14"/><rect fill="#fefefe" x="12" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="8" y="48" width="14" height="14"/><rect fill="#0B1628" x="12" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="48" width="14" height="14"/><rect fill="#fefefe" x="32" y="52" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="28" width="14" height="14"/><rect fill="#0B1628" x="32" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="28" y="8" width="14" height="14"/><rect fill="#fefefe" x="32" y="12" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="28" width="14" height="14"/><rect fill="#fefefe" x="52" y="32" width="6" height="6"/>
+            <rect fill="#d4af37" x="48" y="48" width="14" height="14"/><rect fill="#0B1628" x="52" y="52" width="6" height="6"/>
+          </svg>
+          <span class="brand-name">Logic Byte</span>
+        </a>
+        <p class="footer-tag">AI-powered image analytics — built visually, run at scale, auditable by design.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="/platform.html">Platform</a></li>
+            <li><a href="/biomedical.html">Biomedical &amp; Life Sciences</a></li>
+            <li><a href="/semiconductor.html">Semiconductor &amp; Industrial Imaging</a></li>
+            <li><a href="/custom.html">Custom Solutions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/research.html">Research</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="/contact.html">Book a Demo</a></li>
+            <li><span style="color:var(--muted)">hello@logicbyte.ai</span></li>
+            <li><a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Logic Byte Pte. Ltd. · Singapore</span>
+      <span>hello@logicbyte.ai · <a href="https://www.linkedin.com/company/logicbyte-ai" target="_blank" rel="noopener">LinkedIn</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* Nav scrolled state */
+  var nav = document.getElementById('nav');
+  function onScroll(){ if(window.scrollY > 24){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* Mobile drawer */
+  var burger=document.getElementById('burger'), drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'), dClose=document.getElementById('drawerClose');
+  function openD(){ drawer.classList.add('open'); scrim.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeD(){ drawer.classList.remove('open'); scrim.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  if(burger){ burger.addEventListener('click',openD); }
+  if(scrim){ scrim.addEventListener('click',closeD); }
+  if(dClose){ dClose.addEventListener('click',closeD); }
+  drawer.querySelectorAll('a[href]').forEach(function(a){ a.addEventListener('click',closeD); });
+  drawer.querySelectorAll('.drawer-group-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){ btn.closest('.drawer-group').classList.toggle('open'); });
+  });
+})();
+</script>
+
+</body>
+</html>

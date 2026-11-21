@@ -12,17 +12,20 @@
       "permanent": false
     },
     {
-      "source": "/dsj",
-      "destination": "/about.html#founder",
-      "permanent": false
+      "source": "/kamal.vcf",
+      "destination": "/doorgesh-jokhun.vcf",
+      "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/dsj", "destination": "/card.html" }
   ],
   "headers": [
     {
-      "source": "/kamal.vcf",
+      "source": "/doorgesh-jokhun.vcf",
       "headers": [
         { "key": "Content-Type", "value": "text/vcard; charset=utf-8" },
-        { "key": "Content-Disposition", "value": "attachment; filename=kamal.vcf" }
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Doorgesh-Jokhun_Logic-Byte.vcf\"" }
       ]
     }
   ]

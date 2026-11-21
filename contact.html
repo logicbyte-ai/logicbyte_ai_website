@@ -531,7 +531,7 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
   <div class="specbar-inner">
     <span><i class="sb-dot"></i>In production at <b>ETH&nbsp;Z&uuml;rich</b></span>
     <span><i class="sb-dot"></i>Ongoing trials at <b>NTU</b></span>
-    <span><i class="sb-dot"></i><b>20+</b> peer-reviewed publications</span>
+    <span><i class="sb-dot"></i><b>20+</b> publications</span>
     <span><i class="sb-dot"></i>Featured by <b>CNA</b> &amp; <b>The&nbsp;Straits&nbsp;Times</b></span>
   </div>
 </div>
@@ -576,7 +576,7 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
               <select class="c-select" id="domain" name="domain">
                 <option value="" disabled selected>Select a field or interest</option>
                 <option>Biomedical &amp; Life Sciences</option>
-                <option>Semiconductor &amp; Electronics</option>
+                <option>Semiconductor &amp; Industrial Imaging</option>
                 <option>Materials Science &amp; Industrial</option>
                 <option>Pharmaceuticals &amp; Drug Discovery</option>
                 <option>Energy, Mining &amp; Resources</option>
@@ -814,6 +814,7 @@ a.c-direct-row:hover .c-direct-v{color:var(--white)}
     var src = q.get('src') || '';
     srcField.value = /^[A-Za-z0-9-]{1,32}$/.test(src) ? src : '';
     var p = (q.get('intent') || '').toLowerCase();
+    if(p === 'other'){ p = 'hello'; }
     if(isIntent(p)){
       setIntent(p);
       if(document.readyState === 'complete'){ scrollToForm(); }

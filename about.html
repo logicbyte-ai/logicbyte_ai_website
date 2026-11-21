@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="keywords" content="digital staining, virtual staining, in silico labelling"/>
 <meta name="description" content="Logic Byte is a Singapore deep-tech company building OptiFlow — no-code, domain-aware image analytics that domain experts run themselves. Research-validated methods, production reliability and an auditable trail — for life sciences, semiconductor and any field where images drive decisions."/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="canonical" href="https://logicbyte.ai/about.html"/>
@@ -567,6 +568,8 @@ h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1
    ABOUT — page-specific (built on the shared canonical system)
    ============================================================ */
 #vision{scroll-margin-top:92px}
+#founder{scroll-margin-top:74px}                   /* = fixed header height; 64px at <=640px, below */
+@media(max-width:640px){#founder{scroll-margin-top:64px}}
 
 /* section backgrounds (navy / navy-2 rhythm) */
 .why{background:var(--navy)}
@@ -670,7 +673,7 @@ h3{font-family:var(--f-display);font-weight:600;color:var(--white);line-height:1
   border:1px solid var(--border-2);border-radius:100px;padding:0.42em 0.9em;transition:border-color .18s ease,color .18s ease}
 .flink:hover{border-color:var(--teal);color:var(--teal)}
 .flink svg{width:14px;height:14px;flex:0 0 auto}
-.founder-save{margin-top:1.4rem}
+.founder-save{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.4rem}
 span.flink{cursor:default}
 span.flink:hover{border-color:var(--border-2);color:var(--muted)}
 
@@ -809,7 +812,7 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
   <div class="specbar-inner">
     <span><i class="sb-dot"></i>In production at <b>ETH&nbsp;Z&uuml;rich</b></span>
     <span><i class="sb-dot"></i>Ongoing trials at <b>NTU</b></span>
-    <span><i class="sb-dot"></i><b>20+</b> peer-reviewed publications</span>
+    <span><i class="sb-dot"></i><b>20+</b> publications</span>
     <span><i class="sb-dot"></i>Featured by <b>CNA</b> &amp; <b>The&nbsp;Straits&nbsp;Times</b></span>
   </div>
 </div>
@@ -876,13 +879,13 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
       </div>
       <div class="tl reveal">
         <div class="tl-year">2021</div>
-        <h3>Logic Byte is founded</h3>
-        <p>Founded to close that gap, drawing on years of research in autonomous microscopy, deep learning and computer vision. The premise was simple: put sophisticated, domain-aware image analytics in the hands of the domain expert — no code required — so the platform handles the pipeline and the expert focuses on the work that matters.</p>
+        <h3>Work on Logic Byte begins</h3>
+        <p>Begun to close that gap, drawing on years of research in autonomous microscopy, deep learning and computer vision. The premise was simple: put sophisticated, domain-aware image analytics in the hands of the domain expert — no code required — so the platform handles the pipeline and the expert focuses on the work that matters.</p>
       </div>
       <div class="tl reveal">
         <div class="tl-year">2023</div>
         <h3>Incorporated in Singapore</h3>
-        <p>Logic Byte Pte. Ltd. is incorporated, and the platform is built out methodically — each capability validated against real imaging problems, from enhancement and segmentation to single-cell analysis, defect detection and label-free virtual staining (<span class="optiflow">CytoByte</span>).</p>
+        <p>Logic Byte Pte. Ltd. is incorporated, and the platform is built out methodically — each capability validated against real imaging problems, from enhancement and segmentation to single-cell analysis, defect detection and label-free digital staining (<span class="optiflow">CytoByte</span>).</p>
       </div>
       <div class="tl now reveal">
         <div class="tl-year">Today</div>
@@ -967,25 +970,25 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
     </div>
     <div class="founder reveal">
       <div class="founder-photo-col">
-        <img class="founder-photo" src="DSC_0167__6_in_x_8_in__square_resized.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Dr. Doorgesh Sharma Jokhun — Founder &amp; CEO, Logic Byte"/>
+        <img class="founder-photo" src="DSC_0167__6_in_x_8_in__square_resized.jpg" width="1000" height="1000" loading="lazy" decoding="async" alt="Doorgesh S. Jokhun, PhD — Founder &amp; CEO, Logic Byte"/>
       </div>
       <div class="founder-text-col">
-        <div class="founder-name">Dr. Doorgesh Sharma Jokhun</div>
-        <div class="founder-role">PhD, National University of Singapore &middot; AI &amp; Computer Vision</div>
+        <div class="founder-name">Doorgesh S. Jokhun, PhD</div>
+        <div class="founder-role">Founder &amp; CEO</div>
         <div class="founder-bio">
-          <p>Doorgesh completed his PhD and postdoctoral research at NUS in computational and biomedical imaging — spanning autonomous microscope control, biosensor CNN development, in-silico (virtual) nuclear staining and large-scale single-cell analysis — resulting in <strong>more than twenty peer-reviewed publications</strong>, cited more than 1,200 times, across signal processing, deep learning and biomedical imaging.</p>
-          <p>He then moved into industry, working directly in <span class="hl">high-precision semiconductor image analytics</span> — where measurement accuracy, throughput and production reliability are non-negotiable. That trajectory — from fundamental research and biomedical imaging through to semiconductor production — is rare, and it is what gives <span class="optiflow">OptiFlow</span> its unusual breadth without sacrificing depth.</p>
+          <p>Doorgesh completed his PhD and postdoctoral research at the National University of Singapore (NUS), developing AI and computer vision for biomedical image analysis — quantitative single-cell analysis, morphometry-based biomarkers, digital pathology, autonomous microscopy, cellular biosensor and in-silico staining. The work produced <strong>20 peer-reviewed journal papers and a book chapter</strong>, cited more than 1,300 times, spanning signal processing, deep learning and biomedical imaging.</p>
+          <p>He then moved into industry, leading AI/CV research and development in <span class="hl">high-precision semiconductor image analytics</span> — where measurement accuracy, throughput and production reliability are non-negotiable. That trajectory — from fundamental research and biomedical imaging through to semiconductor production — is rare, and it is what gives <span class="optiflow">OptiFlow</span> its unusual breadth without sacrificing depth.</p>
           <p>Seeing world-class teams held back by image-processing bottlenecks — not by their instruments, and not by their expertise — was the direct motivation for Logic Byte: to turn research-validated imaging AI into robust tools the experts can actually use.</p>
         </div>
         <div class="creds">
           <span class="cred">PhD &middot; NUS</span>
           <span class="cred">20+ Publications</span>
-          <span class="cred">1,200+ Citations</span>
+          <span class="cred">1,300+ Citations</span>
           <span class="cred">Computer Vision</span>
           <span class="cred">Deep Learning</span>
           <span class="cred">Biomedical Imaging</span>
           <span class="cred">Autonomous Microscopy</span>
-          <span class="cred">Virtual Staining</span>
+          <span class="cred">Digital Staining</span>
           <span class="cred">Semiconductor Inspection</span>
           <span class="cred">Signal Processing</span>
         </div>
@@ -993,9 +996,12 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
           <span class="flink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>d.s.jokhun@logicbyte.ai</span>
           <a class="flink" href="https://www.linkedin.com/in/dsjokhun/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
           <a class="flink" href="https://scholar.google.com/citations?user=Sa4nFlYAAAAJ&hl=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Google Scholar</a>
-          <a class="flink" href="https://blinq.me/uSAjvpnbgGvk?bs=db" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M17 14h3v3M14 17h3v3"/></svg>Digital Card</a>
+          <a class="flink" href="https://www.linkedin.com/company/logicbyte-ai/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>Follow Logic Byte</a>
         </div>
-        <div class="founder-save"><a class="btn btn-secondary" href="/kamal.vcf" download>Save contact</a></div>
+        <div class="founder-save">
+          <a class="btn btn-primary" href="/doorgesh-jokhun.vcf" download>Save contact</a>
+          <a class="btn btn-secondary" href="/contact.html?intent=hello&amp;src=about">Share your details</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1016,7 +1022,7 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
         <span class="cp-dot"></span>
         <span>Ongoing trials at <b>NTU</b></span>
         <span class="cp-dot"></span>
-        <span><b>20+</b> peer-reviewed publications</span>
+        <span><b>20+</b> publications</span>
         <span class="cp-dot"></span>
         <span>Featured by <b>CNA</b> &amp; <b>The Straits Times</b></span>
       </div>
