@@ -741,6 +741,8 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
   </div>
 </nav>
 
+<!-- mobile drawer -->
+<div class="drawer-scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Mobile menu">
   <div class="drawer-top">
     <a class="brand" href="/">
@@ -1116,6 +1118,16 @@ a:focus-visible,.btn:focus-visible,button:focus-visible,.serve:focus-within{
     },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
     reveals.forEach(function(el){ io.observe(el); });
   }
+
+  /* Once, after load: re-scroll to the hash target in case late layout shifts moved it
+     (the browser applies the element's scroll-margin-top). */
+  window.addEventListener('load', function(){
+    if(!location.hash || location.hash.length < 2){ return; }
+    var id = location.hash.slice(1);
+    try { id = decodeURIComponent(id); } catch(e) {}
+    var target = document.getElementById(id);
+    if(target){ target.scrollIntoView(); }
+  }, {once:true});
 })();
 </script>
 
